@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.dto.EsmReply;
 import model.dto.EsmResult;
 import model.dto.User;
 
@@ -64,7 +65,7 @@ public class GetESMResultsAllOfWeekGraph extends HttpServlet {
 		session.setAttribute("isTesting", isTesting);
 		
 		// ESMResults 전체
-		ArrayList<EsmResult> results = (ArrayList<EsmResult>)session.getAttribute("results");
+		ArrayList<EsmReply> results = (ArrayList<EsmReply>)session.getAttribute("results");
 
 		// 조회 기간 및 기간 동안의 positive, negative 값 ArrayList
 		ArrayList<String> daysOfWeek = new ArrayList<String>();
