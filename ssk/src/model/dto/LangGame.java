@@ -12,7 +12,7 @@ public class LangGame {
 	private String langGameHintVoice;
 	private String langGameAnswer;
 	private String langGameAnswerVoice;
-	private Boolean langGameResultInputFlag;
+
 	public int getLangGameId() {
 		return langGameId;
 	}
@@ -79,14 +79,5 @@ public class LangGame {
 	public void setLangGameAnswerVoice(String langGameAnswerVoice) {
 		this.langGameAnswerVoice = langGameAnswerVoice;
 	}
-	public Boolean getLangGameResultInputFlag() {
-		return langGameResultInputFlag;
-	}
-	public void setLangGameResultInputFlag(Boolean langGameResultInputFlag) {
-		this.langGameResultInputFlag = langGameResultInputFlag;
-	}
-	
-	
-	
 
 }

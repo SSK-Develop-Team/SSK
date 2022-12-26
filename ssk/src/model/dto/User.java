@@ -8,13 +8,13 @@ public class User {
 	private String userLoginId;
 	private String userPassword;
 	private String userName;
+	private String userEmail;
+	private String userRole;
+	private Date registrationDate;
 	private String userGender;
 	private Date userBirth;
-	private String userRole;
 	private String userIcon;
-	private int expertId;
-	private int currentAge;
-	
+	private int ageGroupId;
 	public int getUserId() {
 		return userId;
 	}
@@ -39,6 +39,24 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public String getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
 	public String getUserGender() {
 		return userGender;
 	}
@@ -51,29 +69,17 @@ public class User {
 	public void setUserBirth(Date userBirth) {
 		this.userBirth = userBirth;
 	}
-	public String getUserRole() {
-		return userRole;
-	}
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
 	public String getUserIcon() {
 		return userIcon;
 	}
 	public void setUserIcon(String userIcon) {
 		this.userIcon = userIcon;
 	}
-	public int getExpertId() {
-		return expertId;
+	public int getAgeGroupId() {
+		return ageGroupId;
 	}
-	public void setExpertId(int expertId) {
-		this.expertId = expertId;
-	}
-	public int getCurrentAge() {
-		return currentAge;
-	}
-	public void setCurrentAge(int currentAge) {
-		this.currentAge = currentAge;
+	public void setAgeGroupId(int ageGroupId) {
+		this.ageGroupId = ageGroupId;
 	}
 	
 }
