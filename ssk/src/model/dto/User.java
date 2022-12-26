@@ -14,7 +14,7 @@ public class User {
 	private String userGender;
 	private Date userBirth;
 	private String userIcon;
-	private int ageGroupId;
+
 	public int getUserId() {
 		return userId;
 	}
@@ -74,12 +74,6 @@ public class User {
 	}
 	public void setUserIcon(String userIcon) {
 		this.userIcon = userIcon;
-	}
-	public int getAgeGroupId() {
-		return ageGroupId;
-	}
-	public void setAgeGroupId(int ageGroupId) {
-		this.ageGroupId = ageGroupId;
 	}
 	
 }
