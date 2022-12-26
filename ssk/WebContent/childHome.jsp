@@ -1,62 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="model.dto.User" %>
-<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>EWHA SSK WEB</title>
-
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="css/childHome.css" type='text/css' >
-<%
-	User currUser = (User)session.getAttribute("currUser");
-	
-	ArrayList<LangReply> langResultList = (ArrayList<LangReply>)session.getAttribute("langResultList");
-%>
-
-<!-- 모달창 -->
-
+<title>홈</title>
 </head>
-<%@ include file="header.jsp" %>
 <body>
-	<%@ include file="sidebar.jsp" %>
-	<div class = "container">
-		<div class = "menuBox">
-			<video id = "howToUse" src="#" poster = "./image/SSK.jpg" controls></video>
-			<div class="testLine">언어</div>
-			
-			<div class = "langGroup">
-				<table width = "70%">
-					<tr>
-						<td><button onClick="location.href='langtestmain.jsp'">언어 발달 평가</button></td>
-					</tr>
-				</table>
-			</div>
-			
-			<div class="testLine">정서</div>
-			
-			<div class = "sdqGroup">
-				<table width="70%">
-					<tr>
-						<%if(currUser!=null){ %><td><button onClick="javascript:location.href='sdqtestmain.jsp'">정서/행동 발달 검사</button></td>
-						<%}else{ %><td><button onClick="alertLogin();">정서/행동 발달 검사</button></td><%} %>
-					</tr>
-					
-					<tr>
-						<%if(currUser!=null){ %><td><button onClick="javascript:location.href='esmtestmain.jsp'">정서 반복 기록</button></td>
-						<%}else{ %><td><button onClick="alertLogin();">정서 반복 기록</button></td><%} %>
-					</tr>
-					
-					<tr>
-						<%if(currUser!=null){ %><td><button onClick="javascript:location.href='../EwhaSSK/GetEsmRecord';">정서 다이어리</button></td>
-						<%}else{ %><td><button onClick="alertLogin();">정서 다이어리</button></td><%} %>
-					</tr>
-				</table>
-
-			</div>
-		</div>
+<%@ include file = "sidebar.jsp" %>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div class="w3-row">
+	<div class="w3-col s1 m3 l4">&nbsp;</div>
+	<div class="w3-padding w3-col s10 m6 l4">
+		<div style="width:100%;text-align:center;color:grey;">━━━━━━━━언어━━━━━━━━</div>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;" onclick="location.href='langTestMain.jsp'">언어 발달 검사</button>
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
+		<div style="width:100%;text-align:center;color:grey;">━━━━━━━━정서━━━━━━━━</div>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;" onclick="location.href='sdqTestMain.jsp'">정서/행동 발달 검사</button>
+		<div>&nbsp;</div>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;" onclick="location.href='esmTestMain.jsp'">정서 반복 기록</button>
+		<div>&nbsp;</div>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;" onclick="location.href='esmRecord.jsp'">정서 다이어리</button>
 	</div>
-	
+	<div class="w3-col s1 m3 l4">&nbsp;</div>
+</div>
 </body>
 </html>

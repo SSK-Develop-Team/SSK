@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<title>EWHA SSK 로그인</title>
+<title>SSK 로그인</title>
 </head>
 <body>
 <div class="w3-row" style="margin-top:15vh;">
@@ -27,7 +27,7 @@
 						<input type="password" class="w3-input w3-threequarter" name="userpw" placeholder="Password"/><br/>
 					</div>
 					<div class="w3-margin-top w3-row">
-						<input class="w3-button w3-panel w3-third w3-round-large" type="button" value="계정 만들기" style="min-height:40px;color:#1A73E8;background-color:light-gray;" onclick="location='registerExpert.jsp'" />
+						<div class="w3-third">&nbsp;</div>
 						<div class="w3-third">&nbsp;</div>
 						<input class="w3-button w3-panel w3-third w3-round-large" type="submit" value="LOGIN"style="min-height:40px;color:white;background-color:#1A2A3A;" />
 					</div>

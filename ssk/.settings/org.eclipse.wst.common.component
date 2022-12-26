@@ -9,7 +9,7 @@
                         
         
         <property name="java-output-path" value="/ssk/build/classes"/>
-        <property name="context-root" value="ssk"/>
+        <property name="context-root" value="/ssk"/>
                     
     
     </wb-module>

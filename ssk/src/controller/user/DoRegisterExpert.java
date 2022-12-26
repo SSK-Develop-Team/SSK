@@ -112,9 +112,7 @@ public class DoRegisterExpert extends HttpServlet {
 				user.setUserGender(usergender);
 				user.setUserBirth(birth);
 				user.setUserRole(userRole);
-				user.setExpertId(1);// 1은 슈퍼 전문가의 아이디를 의미
 				user.setUserIcon("");
-				user.setCurrentAge(14);
 				
 		boolean join_result = false;
 				

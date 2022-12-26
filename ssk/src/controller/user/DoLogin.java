@@ -32,23 +32,21 @@ public class DoLogin extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String userid = request.getParameter("userid");
 		String userpw = request.getParameter("userpw");
-        System.out.println("(input) ID : " + userid + " / PW : " + userpw);
 		
 		// for DB Connection
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
-
-		boolean isTesting = false;
-		session.setAttribute("isTesting", isTesting);
 		
 		User currUser = new User();
 		currUser = UserDAO.findUser(conn, userid, userpw);
 		if(currUser == null) { //login failed
+			System.out.println("User not found");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('회원 정보를 확인해주세요.'); location.href='../EwhaSSK/login.jsp';</script>");
+			out.println("<script>alert('회원 정보를 확인해주세요.'); location.href='../ssk/login.jsp';</script>");
 			out.flush();
 		}
 		else { //login success
+			System.out.println(currUser.getUserRole());
 			String redirectLocation = "";
 			switch(currUser.getUserRole()) {
 			case "CHILD":
@@ -57,8 +55,8 @@ public class DoLogin extends HttpServlet {
 			case "EXPERT":
 				redirectLocation = "/GetExpertHome"; // 전문가 페이지
 				break;
-			case "SUPER":
-				redirectLocation = "/GetSuperExpertHome"; // 슈퍼 전문가 페이지
+			case "ADMIN":
+				redirectLocation = "/GetAdminHome"; // 슈퍼 전문가 페이지
 				break;
 			}
 			session.setAttribute("currUser", currUser);

@@ -39,7 +39,6 @@ public class LangGameDAO {
 				langGameElement.setLangGameHintVoice(rs.getString(9));
 				langGameElement.setLangGameAnswer(rs.getString(10));
 				langGameElement.setLangGameAnswerVoice(rs.getString(11));
-				langGameElement.setLangGameResultInputFlag(rs.getBoolean(12));
 				langGameList.add(langGameElement);
 			}
 			return langGameList;
