@@ -14,7 +14,7 @@ public class UserDAO {
 	private final static String SQLST_SELECT_USER_BY_LOGIN_ID = "select * from user_profile where user_login_id = ?";
 	private final static String SQLST_SELECT_USER_BY_ID = "select * from user_profile where user_id=?";
 	private final static String SQLST_INSERT_USER = "insert user_profile(user_login_id, user_password, user_name, "
-			+ "user_email, user_role, registration_date, user_gender, user_birth, user_icon) values(?,?,?,?,?,?,?,?,?,?)";
+			+ "user_email, user_role, registration_date, user_gender, user_birth, user_icon) values(?,?,?,?,?,?,?,?,?)";
 	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE = "select * from user_profile where user_role=?";
 	private final static String SQLST_UPDATE_USER_INFO = "update user_profile set user_password=?, user_name=?, user_email=?,"
             + "user_role=?, registration_date=?, user_gender=?, user_birth=?, user_icon=?";

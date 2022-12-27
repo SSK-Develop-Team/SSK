@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import model.dto.EsmRecord;
 
 public class EsmRecordDAO {
-	private final static String SQLST_INSERT_ESM_RECORD ="INSERT user_esm_record(esm_record_text, esm_record_date, esm_record_time, user_id) values(?,?,?,?) ";
-	private final static String SQLST_SELECT_ESM_RECORD_BY_DATE = "SELECT * FROM user_esm_record WHERE user_id = ? AND esm_record_date = ?";
-	private final static String SQLST_SELECT_ESM_RECORD_DATE_GROUP_BY_DATE = "SELECT esm_record_date, COUNT(*) FROM user_esm_record WHERE user_id=? GROUP BY esm_record_date";
+	private final static String SQLST_INSERT_ESM_RECORD ="INSERT esm_record(esm_record_text, esm_record_date, esm_record_time, user_id) values(?,?,?,?) ";
+	private final static String SQLST_SELECT_ESM_RECORD_BY_DATE = "SELECT * FROM esm_record WHERE user_id = ? AND esm_record_date = ?";
+	private final static String SQLST_SELECT_ESM_RECORD_DATE_GROUP_BY_DATE = "SELECT esm_record_date, COUNT(*) FROM esm_record WHERE user_id=? GROUP BY esm_record_date";
 	/*텍스트 기록 삽입*/
 	public static boolean insertEsmRecord(Connection con, String esmRecordText, Date esmRecordDate, Time esmRecordTime, int userId) {
 		try {
