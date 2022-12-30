@@ -13,7 +13,7 @@
 			frm.user_login_id.focus();
 			return;
 		}
-		url = "../EwhaSSK/checkId?id=" + id;
+		url = "../ssk/checkId?id=" + id;
 		window.open(url, "IDCheck", "width=300,height=150");
 	}
 
@@ -23,10 +23,10 @@
 <body onLoad="regFrm.user_login_id.focus()">
  	<div class="header w3-padding-16 w3-center w3-container w3-margin">
  	<c:choose>
-	    <c:when test="${role eq 'EXPERT'}">
+	    <c:when test="${role eq 'expert'}">
 			<h2><b>전문가 계정 생성</b></h2>
 	    </c:when>
-	    <c:when test="${role eq 'CHILD'}">
+	    <c:when test="${role eq 'child'}">
 			<h2><b>아동 계정 생성</b></h2>
 	    </c:when>
 	</c:choose>
@@ -36,45 +36,47 @@
 	<div class="w3-display-container" style="height:100%;, width:100%;">
 		<div class="w3-display-topmiddle w3-padding-large w3-light-gray ">
 		
-		<form name="regFrm" method="post" action="DoRegisterExpert" class="w3-container">
+		<form name="regFrm" method="post" action="DoRegister" class="w3-container">
 			<div class="w3-margin-top">
 				<label>아이디</label>
 				<div class="w3-row">
-					<input type="text" class="reg w3-input w3-threequarter" name="userid" placeholder="ID"> 
+					<input type="text" class="w3-input w3-threequarter" name="userId" placeholder="ID"> 
 					<input type="button" class="w3-quarter w3-input w3-button" style="color:white;background-color:#51459E;" value="중복확인" onClick="idCheck(this.form.userid.value)">
 				</div>
 			</div>
 			<div class="w3-margin-top">
 				<label>패스워드</label>
-				<input type="password" class="reg w3-input" name="userpw" placeholder="Password">
+				<input type="password" class="w3-input" name="userPw" placeholder="Password">
 			</div>
 			<div class="w3-margin-top">
 				<label>패스워드 확인</label>
-				<input type="password" class="reg w3-input" name="userpwchk" placeholder="Password Check">
+				<input type="password" class="w3-input" name="userPwChk" placeholder="Password Check">
 			</div>
 			<div class="w3-margin-top">
 				<c:choose>
-				    <c:when test="${role eq 'EXPERT'}">
-						<h2><b>전문가 이름</b></h2>
+				    <c:when test="${role eq 'expert'}">
+						<label>전문가 이름</label>
+						<input type="hidden" id="userRole" name="userRole" value="EXPERT">
 				    </c:when>
-				    <c:when test="${role eq 'CHILD'}">
-						<h2><b>아동 이름</b></h2>
+				    <c:when test="${role eq 'child'}">
+						<label>아동 이름</label>
+						<input type="hidden" id="userRole" name="userRole" value="CHILD">
 				    </c:when>
 				</c:choose>
-				<input type="text" class="reg w3-input" name="username" placeholder="Name">
+				<input type="text" class="w3-input" name="userName" placeholder="Name">
 			</div>
 			<c:choose>
-			    <c:when test="${role eq 'CHILD'}">
+			    <c:when test="${role eq 'child'}">
 					<div class="w3-margin-top">
 						<div>성별</div>
 						<label>남</label>
-						<input type="radio" class="w3-radio" name="usergender" value="male"> 
+						<input type="radio" class="w3-radio" name="userGender" value="male"> 
 						<label>여</label>
-						<input type="radio" class="w3-radio" name="usergender" value="female">
+						<input type="radio" class="w3-radio" name="userGender" value="female">
 					</div>
 					<div class="w3-margin-top">
 						<label>생년월일</label>
-						<input type="date" class="reg w3-input" name="userbirth"><br />
+						<input type="date" class="w3-input" name="userBirth"><br />
 					</div>
 			    </c:when>
 			    <c:otherwise>
@@ -82,7 +84,7 @@
 			</c:choose>
 			<div class="w3-margin-top">
 				<label>이메일</label>
-				<input type="email" class="reg w3-input" name="userEmail" placeholder="Email">
+				<input type="text" class="w3-input" name="userEmail" placeholder="Email">
 			</div>
 			<div class="w3-margin-top w3-right">
 				<button type="submit" class="w3-button" style="color:white;background-color:#51459E;" > 회원 가입 </button>

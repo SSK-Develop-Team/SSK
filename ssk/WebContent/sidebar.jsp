@@ -15,23 +15,23 @@
 <body>
 <c:set var="user" scope="page" value="${sessionScope.currUser }" />
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none;z-index:5" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none;z-index:5;width:300px;background-color:#D9D9D9;" id="mySidebar">
 	<button class="w3-bar-item w3-button" onclick="w3_close()" style="display: flex;justify-content: right; ">&times;</button>
 	<c:choose>
 		<c:when test="${user.userRole eq 'ADMIN'}">
-			<a href="adminHome.jsp" class="w3-bar-item w3-button sidebar">전문가 계정 관리</a>
-			<a href="adminManageChild.jsp" class="w3-bar-item w3-button sidebar">아동 계정 관리</a>
+			<a href="adminHome.jsp" class="w3-bar-item w3-button sidebar">&nbsp;전문가 계정 관리</a>
+			<a href="adminManageChild.jsp" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
 		</c:when>
 		<c:when test="${user.userRole eq 'EXPERT'}">
-			<a href="expertHome.jsp" class="w3-bar-item w3-button sidebar">아동별 결과 조회</a>
-			<a href="#" class="w3-bar-item w3-button sidebar">아동 계정 관리</a>
+			<a href="expertHome.jsp" class="w3-bar-item w3-button sidebar">&nbsp;아동별 결과 조회</a>
+			<a href="#" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
 		</c:when>
 		<c:when test="${user.userRole eq 'CHILD'}">
-			<a href="childHome.jsp" class="w3-bar-item w3-button sidebar">홈</a>
+			<a href="childHome.jsp" class="w3-bar-item w3-button sidebar"><b>홈</b></a>
 			<a href="langTestMain.jsp" class="w3-bar-item w3-button sidebar">언어 발달 검사</a>
 			<a href="sdqTestMain.jsp" class="w3-bar-item w3-button sidebar">정서/행동 발달 검사</a>
 			<a href="esmTestMain.jsp" class="w3-bar-item w3-button sidebar">정서 반복 기록</a>
-			<a href="#" class="w3-bar-item w3-button sidebar">정서 다이어리</a>
+			<a href="GetEsmRecord" class="w3-bar-item w3-button sidebar">정서 다이어리</a>
 		</c:when>
 		<c:otherwise>
 			<a href="#" class="w3-bar-item w3-button sidebar">로그인이 필요합니다. </a>
@@ -72,7 +72,7 @@
 	  		</c:choose>
 	  		<c:remove var="user" scope="page" />
 	  		<div style="margin-left:25px;margin-right:25px;">
-	  		<div class="logo" style="margin-left:150px;font-weight:bold;margin-top:55px;text-align:center;">SSK</div>
+	  		<div class="logo" style="margin-left:200px;font-weight:bold;margin-top:55px;text-align:center;">SSK</div>
 	  		<hr class="logo" >
 	  		</div>
 		</div>
