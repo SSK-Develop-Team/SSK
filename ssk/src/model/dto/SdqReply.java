@@ -5,7 +5,7 @@ public class SdqReply {
 	private int sdqReplyId;
 	private int sdqTestLogId;
 	private int sdqQuestionId;
-	private String sdqReplyContent;
+	private int sdqReplyContent;
 	
 	public int getSdqReplyId() {
 		return sdqReplyId;
@@ -25,10 +25,10 @@ public class SdqReply {
 	public void setSdqQuestionId(int sdqQuestionId) {
 		this.sdqQuestionId = sdqQuestionId;
 	}
-	public String getSdqReplyContent() {
+	public int getSdqReplyContent() {
 		return sdqReplyContent;
 	}
-	public void setSdqReplyContent(String sdqReplyContent) {
+	public void setSdqReplyContent(int sdqReplyContent) {
 		this.sdqReplyContent = sdqReplyContent;
 	}
 
