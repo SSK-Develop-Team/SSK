@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.dao.SdqReplyDAO;
+import model.dao.SdqTestLogDAO;
 import model.dto.SdqReply;
 import model.dto.SdqTestLog;
 import model.dto.User;
@@ -52,6 +53,7 @@ public class DoSdqTest extends HttpServlet {
 		sdqTestLog.setUserId(currUser.getUserId());
 		sdqTestLog.setSdqTestDate(nowDate);
 		sdqTestLog.setSdqTestTime(nowTime);
+		SdqTestLogDAO.insertSdqTestLog(conn, sdqTestLog);
 		
 		//sdq 응답 기록
 		ArrayList<SdqReply> sdqReplyList = new ArrayList<SdqReply>();
@@ -64,6 +66,7 @@ public class DoSdqTest extends HttpServlet {
 			sdqReplyList.add(sdqReplyElement);
 		}
 		
+		session.setAttribute("sdqTestLog", sdqTestLog);
 	    request.setAttribute("sdqReplyList", sdqReplyList);
 	    
 	    RequestDispatcher rd = request.getRequestDispatcher("/GetSdqResult");

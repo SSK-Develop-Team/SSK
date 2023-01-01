@@ -82,7 +82,6 @@ function addAnswerChat(answerStr, answerNum){
 		document.getElementById("sdqSubmitBtn").style.display = "inline-block";
 	}else{
 		cursor=cursor+1;
-		
 		setTimeout(() => addQuestionChat(), 1000);
 	}
 }
@@ -119,9 +118,7 @@ function ableBtn(){
 	  buttons[i].disabled=false;
 	}
 }
-function submit(){
-	document.getElementById("sdqForm").submit();
-}
+
 </script>
 </head>
 <body>
@@ -132,7 +129,7 @@ function submit(){
 	<div class="w3-container w3-center"><h4><b>정서/행동 발달 검사</b></h4></div>
 	<div class="w3-row" >
 		<div class="w3-col m2 l2">&nbsp;</div>
-		<div class="w3-col s12 m8 l8" id="sdqChat" style="overflow:auto; height:60vh; background-color:#ededed;">
+		<div class="w3-col s12 m8 l8" id="sdqChat" style="overflow:auto; height:55vh; background-color:#ededed;padding-bottom:6px;padding-top:6px;">
 			<form id="sdqForm" method="post" action="DoSdqTest">
 			<%for(int i=0;i<sdqQuestionList.size();i++){ %>
 				<div class="w3-margin w3-padding " id="sdqQuestion<%=i%>" style="border:1px solid #ff6666;border-radius : 0px 10px 10px 10px;clear:both;float:left;background-color:#ff6666;color : white;height:50px;font-size:1em;display:none;align-items : center;"><%=sdqQuestionList.get(i).getSdqQuestionContent() %></div>
@@ -157,7 +154,7 @@ function submit(){
 	<div class="w3-row w3-margin">
 		<div class="w3-col m2 l2">&nbsp;</div>
 		<div class="w3-col w3-row s12 m8 l8">
-			<button class="w3-button w3-col w3-padding" id="sdqSubmitBtn" onclick="backAnswerChat()">제출하기</button>
+			<button class="w3-button w3-col w3-padding" id="sdqSubmitBtn" onclick="document.getElementById('sdqForm').submit();">제출하기</button>
 		</div>
 		<div class="w3-col m2 l2">&nbsp;</div>
 	</div>

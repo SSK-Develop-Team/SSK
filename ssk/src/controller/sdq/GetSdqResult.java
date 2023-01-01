@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.dao.SdqResultAnalysisDAO;
 import model.dto.SdqReply;
+import model.dto.SdqResultAnalysis;
 import model.dto.User;
+import util.process.SdqProcessor;
 
 /**
  * @author Jiwon Lee
@@ -41,6 +45,23 @@ public class GetSdqResult extends HttpServlet {
 		
 		ArrayList<SdqReply> sdqReplyList = (ArrayList<SdqReply>)request.getAttribute("sdqReplyList");
 		
+		// 코드/DB 리팩토링 필요
+		String[] sdqTypeList = {"사회지향행동", "과잉행동","정서증상","품행문제","또래문제"};
+		int[] scoreList = SdqProcessor.getSdqReplyListToSdqResult(sdqReplyList);
+		ArrayList<SdqResultAnalysis> sdqResultAnalysisList = new ArrayList<SdqResultAnalysis>();
+		for(int i=0;i<5;i++) {
+			System.out.println(scoreList[i]);
+		}
+		for(int i=0;i<sdqTypeList.length;i++) {
+			sdqResultAnalysisList.add(SdqResultAnalysisDAO.findSdqResultAnalysisByTypeAndValue(conn, sdqTypeList[i],scoreList[i]));
+			System.out.println(sdqResultAnalysisList.get(i).getSdqType());
+		}
+		
+		request.setAttribute("sdqResultAnalysisList", sdqResultAnalysisList);
+		request.setAttribute("sdqScoreList", scoreList);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/sdqResult.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
