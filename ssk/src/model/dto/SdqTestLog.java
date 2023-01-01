@@ -8,7 +8,7 @@ public class SdqTestLog {
 	private int sdqTestLogId;
 	private int userId;
 	private Date sdqTestDate;
-	private String sdqTestTime;
+	private Time sdqTestTime;
 	
 	public int getSdqTestLogId() {
 		return sdqTestLogId;
@@ -28,10 +28,10 @@ public class SdqTestLog {
 	public void setSdqTestDate(Date sdqTestDate) {
 		this.sdqTestDate = sdqTestDate;
 	}
-	public String getSdqTestTime() {
+	public Time getSdqTestTime() {
 		return sdqTestTime;
 	}
-	public void setSdqTestTime(String timeStr) {
+	public void setSdqTestTime(Time timeStr) {
 		this.sdqTestTime = timeStr;
 	}
 	
