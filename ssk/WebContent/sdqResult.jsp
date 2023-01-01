@@ -79,6 +79,13 @@
 		</div>
 		<div class="w3-col m1 l2">&nbsp;</div>
 	</div>
+	<div class="w3-row w3-margin-top">
+		<div class="w3-col m3 l3">&nbsp;</div>
+		<div class="w3-col w3-row s12 m6 l6">
+			<button class="w3-button w3-col w3-padding" id="sdqPopUpBtn" onclick="sdqPopUp()">검사 결과 설명 보기</button>
+		</div>
+		<div class="w3-col m3 l3">&nbsp;</div>
+	</div>
 	
 </body>
 </html>
