@@ -21,7 +21,7 @@ public class SdqReplyDAO {
 	
 	public static boolean insertSdqReply(Connection con, SdqReply sdqReply) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_INSERT_SDQ_REPLY);
+			PreparedStatement pstmt = con.prepareStatement(SQLST_INSERT_SDQ_REPLY,Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, sdqReply.getSdqTestLogId());
 			pstmt.setInt(2, sdqReply.getSdqQuestionId());
 			pstmt.setInt(3, sdqReply.getSdqReplyContent());

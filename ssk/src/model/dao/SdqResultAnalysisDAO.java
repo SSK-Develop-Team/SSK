@@ -18,6 +18,7 @@ public class SdqResultAnalysisDAO {
 
 	        pstmt.setString(1, sdqType);
 	        pstmt.setInt(2, value);
+	        pstmt.setInt(3, value);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
