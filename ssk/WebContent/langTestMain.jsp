@@ -11,8 +11,8 @@
 <body>
 <%@ include file = "sidebar.jsp" %>
 <% 
-	//User currUser = (User)session.getAttribute("currUser"); 
-	String name = "000";
+	User currUser = (User)session.getAttribute("currUser"); 
+	String name = currUser.getUserName();
 %>
 <div>&nbsp;</div><div>&nbsp;</div>
 <div style="width:100%;background-color:#D9D9D9;">
