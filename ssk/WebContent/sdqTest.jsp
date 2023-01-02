@@ -82,7 +82,7 @@ function addAnswerChat(answerStr, answerNum){
 		document.getElementById("sdqSubmitBtn").style.display = "inline-block";
 	}else{
 		cursor=cursor+1;
-		setTimeout(() => addQuestionChat(), 1000);
+		setTimeout(() => addQuestionChat(), 600);
 	}
 }
 
@@ -143,10 +143,10 @@ function ableBtn(){
 	<div class="w3-row w3-margin">
 		<div class="w3-col m2 l2">&nbsp;</div>
 		<div class="w3-col w3-row s12 m8 l8">
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn w3-center" onclick="addAnswerChat('매우 그렇다', 3)">매우 그렇다</button>
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('그렇다', 2)">그렇다</button>
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('조금 그렇다', 1)">조금 그렇다</button>
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('전혀 아니다', 0)">전혀 아니다</button>
+			<button class="w3-button w3-col w3-padding sdqAnswerBtn w3-center" onclick="addAnswerChat('매우 그렇다', 4)">매우 그렇다</button>
+			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('그렇다', 3)">그렇다</button>
+			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('조금 그렇다', 2)">조금 그렇다</button>
+			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('전혀 아니다', 1)">전혀 아니다</button>
 			<button class="w3-button w3-col w3-padding sdqPreviousBtn" onclick="backAnswerChat()">되돌리기</button>
 		</div>
 		<div class="w3-col m2 l2">&nbsp;</div>
