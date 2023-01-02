@@ -75,17 +75,41 @@
 	<div class="w3-row">
 		<div class="w3-col m1 l2">&nbsp;</div>
 		<div class="w3-col s12 m10 l8">
-			<div id="columnchart_values" style="width:100%;height: 70vh;"></div>
+			<div id="columnchart_values" style="width:100%;height: 60vh;"></div>
 		</div>
 		<div class="w3-col m1 l2">&nbsp;</div>
 	</div>
 	<div class="w3-row w3-margin-top">
-		<div class="w3-col m3 l3">&nbsp;</div>
-		<div class="w3-col w3-row s12 m6 l6">
-			<button class="w3-button w3-col w3-padding" id="sdqPopUpBtn" onclick="sdqPopUp()">검사 결과 설명 보기</button>
+		<div class="w3-col s2 m3 l3">&nbsp;</div>
+		<div class="w3-col w3-row s4 m2 l2">
+			<button class="w3-button w3-col w3-padding" id="sdqPopUpBtn" style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;"onclick="document.getElementById('modal').style.display='block';">검사 결과 설명 보기</button>
 		</div>
-		<div class="w3-col m3 l3">&nbsp;</div>
+		<div class="w3-col s1 m3 l3">&nbsp;</div>
+		<div class="w3-col w3-row s3 m1 l1">
+			<button class="w3-button w3-col w3-padding"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;"onclick="location.href='../ssk/sdqTestMain.jsp';">메인으로</button>
+		</div>
+		<div class="w3-col s2 m3 l3">&nbsp;</div>
 	</div>
-	
+	<div id="modal" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <p class="dsc">
+			<div id="sdqAnalysis" style="text-align:center;">
+				<div style="font-size:1.5em;font-weight:bold;"><%=currUser.getUserName()%>의 SDQ 검사 결과 설명</div>
+				<%for(int i =0;i<sdqResultAnalysisList.size();i++){ %>
+					<p style="font-weight: bold;">[ <%=sdqResultAnalysisList.get(i).getSdqType()%> ]</p>
+					<p>
+						<span style="color:<%=sdqResultAnalysisList.get(i).getColor()%>;"><%=sdqResultAnalysisList.get(i).getSdqAnalysisResult()%></span><br>
+						<%=sdqResultAnalysisList.get(i).getDescription()%>
+					</p>
+					<br>
+				<%} %>
+
+			</div>
+		</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

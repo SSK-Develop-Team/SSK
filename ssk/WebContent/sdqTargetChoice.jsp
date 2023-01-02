@@ -29,6 +29,7 @@ function getSdqTest(target){
 	form.method = "POST";
 	form.action = "GetSdqTest";
 	
+	element.type="hidden";
 	element.name="target";
 	element.value = target;
 	

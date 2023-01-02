@@ -49,12 +49,9 @@ public class GetSdqResult extends HttpServlet {
 		String[] sdqTypeList = {"사회지향행동", "과잉행동","정서증상","품행문제","또래문제"};
 		int[] scoreList = SdqProcessor.getSdqReplyListToSdqResult(sdqReplyList);
 		ArrayList<SdqResultAnalysis> sdqResultAnalysisList = new ArrayList<SdqResultAnalysis>();
-		for(int i=0;i<5;i++) {
-			System.out.println(scoreList[i]);
-		}
+
 		for(int i=0;i<sdqTypeList.length;i++) {
 			sdqResultAnalysisList.add(SdqResultAnalysisDAO.findSdqResultAnalysisByTypeAndValue(conn, sdqTypeList[i],scoreList[i]));
-			System.out.println(sdqResultAnalysisList.get(i).getSdqType());
 		}
 		
 		request.setAttribute("sdqResultAnalysisList", sdqResultAnalysisList);
