@@ -6,6 +6,8 @@ public class SdqResultAnalysis {
 	private String sdqAnalysisResult;
 	private int minValue;
 	private int maxValue;
+	private String color;
+	private String description;
 	
 	public String getSdqType() {
 		return sdqType;
@@ -30,6 +32,18 @@ public class SdqResultAnalysis {
 	}
 	public void setMaxValue(int maxValue) {
 		this.maxValue = maxValue;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
