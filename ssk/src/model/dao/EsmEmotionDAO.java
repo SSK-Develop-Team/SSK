@@ -16,9 +16,8 @@ public class EsmEmotionDAO {
 	public static ArrayList<EsmEmotion> getEsmEmotionListByEsmType(Connection con, EsmType esmType){
 		ArrayList<EsmRecord> esmRecordList = new ArrayList<EsmRecord>();
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_RECORD_BY_DATE);
-			pstmt.setInt(1, userId);
-			pstmt.setDate(2, esmRecordDate);
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_EMOTION );
+			pstmt.setString(1, EsmType.);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
