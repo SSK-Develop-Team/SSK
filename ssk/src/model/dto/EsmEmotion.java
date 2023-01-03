@@ -3,7 +3,7 @@ package model.dto;
 public class EsmEmotion {
 	
 	private int esmEmotionId;
-	private String esmType;
+	private EsmType esmType;
 	private String esmEmotion;
 	private String esmEmotionKr;
 	private String esmEmotionIcon;
@@ -14,10 +14,10 @@ public class EsmEmotion {
 	public void setEsmEmotionId(int esmEmotionId) {
 		this.esmEmotionId = esmEmotionId;
 	}
-	public String getEsmType() {
+	public EsmType getEsmType() {
 		return esmType;
 	}
-	public void setEsmType(String esmType) {
+	public void setEsmType(EsmType esmType) {
 		this.esmType = esmType;
 	}
 	public String getEsmEmotion() {
