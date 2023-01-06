@@ -17,7 +17,7 @@
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 	<div class="w3-padding w3-col s10 m6 l4">
 		<div style="width:100%;text-align:center;color:grey;">━━━━━━━━언어━━━━━━━━</div>
-		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;" onclick="location.href='langTestMain.jsp'">언어 발달 검사</button>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;" onclick="location.href='../ssk/GetUserAgeGroup'">언어 발달 검사</button>
 		<div>&nbsp;</div>
 		<div>&nbsp;</div>
 		<div style="width:100%;text-align:center;color:grey;">━━━━━━━━정서━━━━━━━━</div>
