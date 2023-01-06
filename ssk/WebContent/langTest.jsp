@@ -10,6 +10,27 @@
 	String currNumStr="";
 
 	ArrayList<LangQuestion> currQuestionList = (ArrayList<LangQuestion>)session.getAttribute("currQuestionList");
+	
+	int langProg1 = 0;
+	int langProg2 = 0;
+	int langProg3 = 0;
+	int langProg4 = 0;
+	int langProg5 = 0;
+	
+	if(session.getAttribute("langProg1")!=null) langProg1 = (int)session.getAttribute("langProg1");
+	if(session.getAttribute("langProg2")!=null) langProg2 = (int)session.getAttribute("langProg2");
+	if(session.getAttribute("langProg3")!=null) langProg3 = (int)session.getAttribute("langProg3");
+	if(session.getAttribute("langProg4")!=null) langProg4 = (int)session.getAttribute("langProg4");
+	if(session.getAttribute("langProg5")!=null) langProg5 = (int)session.getAttribute("langProg5");
+
+	int[] langProgList = {langProg1, langProg2, langProg3, langProg4, langProg5};
+	
+	System.out.println("size: " + currQuestionList.size());
+	System.out.println("prog1: " + langProg1);
+	System.out.println("prog2: " + langProg2);
+	System.out.println("prog3: " + langProg3);
+	System.out.println("prog4: " + langProg4);
+	
 %>
 
 <!DOCTYPE html>
@@ -56,7 +77,7 @@
 			<h6>질문에 답하기 어려울 경우, 직접 평가(게임)를 하고 다시 돌아와 결정해주세요.</h6>
 		</div>
 
-		<form method="post" action="DoLangGame" style="width:80%;margin-right:10%;margin-left:10%;">
+		<form method="post" action="ManageLangResult" style="width:80%;margin-right:10%;margin-left:10%;">
 		
 	<% 
 		for(int i=0; i < currQuestionList.size(); i++){
@@ -81,19 +102,23 @@
 			</div> 
 			<div class="w3-row w3-margin">
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1"> 
+					<%if(langProgList[i] == 1){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1" checked="checked">
+					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1"> <%} %>
 					<label>못한다</label>
 				</div>
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2"> 
+					<%if(langProgList[i] == 2){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2" checked="checked">
+					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2"> <%} %>
 					<label>할 수 있다</label>
 				</div>
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3"> 
+					<%if(langProgList[i] == 3){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3" checked="checked">
+					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3"> <%} %>
 					<label>잘한다</label>
 				</div>
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4">
+					<%if(langProgList[i] == 4){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4" checked="checked">
+					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4"> <%} %>
 					<label>매우 잘한다</label>
 				</div>
 			</div>
@@ -109,7 +134,41 @@
 	
 </body>
 
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
 <script>
+
+		var reply1 = "0";
+		var reply2 = "0";
+		var reply3 = "0";
+		var reply4 = "0";
+		var reply5 = "0";
+		
+		$("input[name='reply0']").change(function(){
+			if($("input[name='reply0']:checked")){
+				reply1 = $("input[name='reply0']:checked").val();
+			}
+		});
+		$("input[name='reply1']").change(function(){
+			if($("input[name='reply1']:checked")){
+				reply2 = $("input[name='reply1']:checked").val();
+			}
+		});
+		$("input[name='reply2']").change(function(){
+			if($("input[name='reply2']:checked")){
+				reply3 = $("input[name='reply2']:checked").val();
+			}
+		});
+		$("input[name='reply3']").change(function(){
+			if($("input[name='reply3']:checked")){
+				reply4 = $("input[name='reply3']:checked").val();
+			}
+		});
+		$("input[name='reply4']").change(function(){
+			if($("input[name='reply4']:checked")){
+				reply5 = $("input[name='reply4']:checked").val();
+			}
+		});
+
 
 	function selectGame(param){
 		var form = document.createElement('form');
@@ -121,12 +180,44 @@
 		input.setAttribute('type', 'hidden');
 		input.setAttribute('name', 'langGameID');
 		input.setAttribute('value', param);
+		
+		var inputReply1 = document.createElement('input');
+		inputReply1.setAttribute('type', 'hidden');
+		inputReply1.setAttribute('name', 'langTestProgress1');
+		inputReply1.setAttribute('value', reply1);
+		
+		var inputReply2 = document.createElement('input');
+		inputReply2.setAttribute('type', 'hidden');
+		inputReply2.setAttribute('name', 'langTestProgress2');
+		inputReply2.setAttribute('value', reply2);
+		
+		var inputReply3 = document.createElement('input');
+		inputReply3.setAttribute('type', 'hidden');
+		inputReply3.setAttribute('name', 'langTestProgress3');
+		inputReply3.setAttribute('value', reply3);
+		
+		var inputReply4 = document.createElement('input');
+		inputReply4.setAttribute('type', 'hidden');
+		inputReply4.setAttribute('name', 'langTestProgress4');
+		inputReply4.setAttribute('value', reply4);
+		
+		var inputReply5 = document.createElement('input');
+		inputReply5.setAttribute('type', 'hidden');
+		inputReply5.setAttribute('name', 'langTestProgress5');
+		inputReply5.setAttribute('value', reply5);
+		
 		form.appendChild(input);
+		form.appendChild(inputReply1);
+		form.appendChild(inputReply2);
+		form.appendChild(inputReply3);
+		form.appendChild(inputReply4);
+		form.appendChild(inputReply5);
 
 		document.body.appendChild(form);
-		form.submit(); 
-
-	}
+		form.submit(); 		
+		
+	}	
+	
 
 </script>
 

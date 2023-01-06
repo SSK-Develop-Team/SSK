@@ -12,8 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%
 	User currUser = (User)session.getAttribute("currUser");
-
-	int gameID = (int)session.getAttribute("langGameIndex");
+	int gameID = (int)session.getAttribute("langGameID");
 	
 	ArrayList<LangGame> langGameList = (ArrayList<LangGame>)session.getAttribute("currLangGameList");
 	int i = (int)session.getAttribute("currLangGameIndex");
@@ -40,10 +39,8 @@
 		
 		<div class="w3-container w3-padding-32"><%=langGameContent%></div>
 		<div class="w3-container w3-right">
-		<%if(i>0){%>
-			<button class="w3-button" onclick="getPrevContent(<%=i%>);" style="border:none; background-color:#FFFFFF;"> &lt; 이전</button>
-			<button class="w3-button" onclick="getNextContent(<%=i%>, <%= gameID %>,<%=langGameList.size()%>);" style="border:none; background-color:#FFFFFF;">다음 &gt; </button>
-		<%}%>
+		<%if(i>0){%><button class="w3-button" onclick="getPrevContent(<%=i%>);" style="border:none; background-color:#FFFFFF;"> &lt; 이전</button><%} %>
+		<%if(i<=langGameList.size()-1){ %><button class="w3-button" onclick="getNextContent(<%=i%>, <%= gameID %>,<%=langGameList.size()%>);" style="border:none; background-color:#FFFFFF;">다음 &gt; </button><%}%>
 		</div>
 	</div>
 	<div class="w3-row w3-padding">
@@ -100,7 +97,7 @@ function getPrevContent(i){
 		var prevForm = document.createElement("form");
 		prevForm.setAttribute("charset", "UTF-8");
 		prevForm.setAttribute("method", "post");
-		prevForm.setAttribute("action", "/EwhaSSK/GetLangGamePrevContent"); 
+		prevForm.setAttribute("action", "/ssk/GetLangGamePrevContent"); 
 		document.body.appendChild(prevForm);
 		prevForm.submit();
 	}
@@ -113,31 +110,11 @@ function getNextContent(i,questionNum,gameSize){
 	var nextForm = document.createElement("form");
 	nextForm.setAttribute("charset", "UTF-8");
 	nextForm.setAttribute("method", "post");
-	nextForm.setAttribute("action", "/EwhaSSK/GetLangGameNextContent"); 
+	nextForm.setAttribute("action", "/ssk/GetLangGameNextContent"); 
 	document.body.appendChild(nextForm);
 	nextForm.submit();		
 }
 
-function inputResult(inputValue, i, questionNum, gameSize){
-	if(i>=gameSize-1){
-		if(!confirm(questionNum + "번 문항의 게임을 종료하시겠습니까?")){return;}
-	}
-	var nextForm = document.createElement("form");
-	nextForm.setAttribute("charset", "UTF-8");
-	nextForm.setAttribute("method", "post");
-	nextForm.setAttribute("action", "/EwhaSSK/GetLangGameNextContent");
-	
-	var input = document.createElement('input');
-	input.setAttribute('type','hidden');
-	input.setAttribute('name','langGameResultInput');
-	input.setAttribute('value',inputValue);
-	
-	nextForm.appendChild(input);
-	
-	document.body.appendChild(nextForm);
-	nextForm.submit();		
-	
-}
 
 window.onload = function () {
 	var audio = new Audio();
