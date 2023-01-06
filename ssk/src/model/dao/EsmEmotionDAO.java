@@ -13,28 +13,23 @@ import model.dto.EsmType;
 public class EsmEmotionDAO {
 	private final static String SQLST_SELECT_ESM_EMOTION = "SELECT * FROM esm_emotion WHERE esm_type= ?";
 	
-	public static ArrayList<EsmEmotion> getEsmEmotionListByEsmType(Connection con, EsmType esmType){
-		ArrayList<EsmRecord> esmRecordList = new ArrayList<EsmRecord>();
+	public static ArrayList<EsmEmotion> getEsmEmotionListByEsmType(Connection con, String esmTypeName){
+		ArrayList<EsmEmotion> esmEmotionList = new ArrayList<EsmEmotion>();
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_EMOTION );
-			pstmt.setString(1, EsmType.);
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_EMOTION);
+			pstmt.setString(1, esmTypeName);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				EsmRecord esmRecordElement = new EsmRecord();
-				esmRecordElement.setEsmRecordId(rs.getInt("esm_record_id"));
-				esmRecordElement.setEsmRecordText(rs.getString("esm_record_text"));
-				esmRecordElement.setEsmRecordDate(rs.getDate("esm_record_date"));
-				esmRecordElement.setEsmRecordTime(rs.getTime("esm_record_time"));
-				esmRecordElement.setUserId(rs.getInt("user_id"));
-				esmRecordList.add(esmRecordElement);
-				
+				EsmEmotion esmEmotionElement = new EsmEmotion(
+						rs.getInt("esm_emotion_id"), rs.getString("esm_type"), rs.getString("esm_emotion"), rs.getString("esm_emotion_kr"), rs.getString("esm_emotion_icon"));
+				esmEmotionList.add(esmEmotionElement);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
 		
-		return esmRecordList;
+		return esmEmotionList;
 	}
 
 }

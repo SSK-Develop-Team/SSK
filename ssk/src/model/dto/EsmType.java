@@ -2,8 +2,8 @@ package model.dto;
 import java.util.Arrays;
 
 public enum EsmType {
-	POSITIVE("positive"),
-	NEGATIVE("negative");
+	positive("positive"),
+	negative("negative");
 	
 	final private String typeName;
 	
@@ -15,11 +15,11 @@ public enum EsmType {
 		return type.typeName;
 	}
 	
-	public static EsmType getTypeByName(String typeName) {
+	public static EsmType findByTypeName(String typeName) {
 		return Arrays.stream(EsmType.values())
 				.filter(type -> type.typeName.equals(typeName))
 				.findAny()
-				.orElse(POSITIVE);
+				.orElse(positive);
 	}
 
 }

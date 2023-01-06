@@ -8,17 +8,26 @@ public class EsmEmotion {
 	private String esmEmotionKr;
 	private String esmEmotionIcon;
 	
+	public EsmEmotion(int esmEmotionId, String esmType, String esmEmotion, String esmEmotionKr,
+			String esmEmotionIcon) {
+		super();
+		this.esmEmotionId = esmEmotionId;
+		this.esmType = EsmType.findByTypeName(esmType);
+		this.esmEmotion = esmEmotion;
+		this.esmEmotionKr = esmEmotionKr;
+		this.esmEmotionIcon = esmEmotionIcon;
+	}
 	public int getEsmEmotionId() {
 		return esmEmotionId;
 	}
 	public void setEsmEmotionId(int esmEmotionId) {
 		this.esmEmotionId = esmEmotionId;
 	}
-	public EsmType getEsmType() {
-		return esmType;
+	public String getEsmType() {
+		return esmType.toString();
 	}
-	public void setEsmType(EsmType esmType) {
-		this.esmType = esmType;
+	public void setEsmType(String esmType) {
+		this.esmType = EsmType.findByTypeName(esmType);
 	}
 	public String getEsmEmotion() {
 		return esmEmotion;

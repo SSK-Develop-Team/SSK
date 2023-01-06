@@ -44,12 +44,7 @@ public class CreateEsmRecord extends HttpServlet {
 	 	ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 	 	
-	 	User focusUser = new User();
-	 	if((User)session.getAttribute("selectedChild")==null) {//아동을 선택했을 때
-	 		focusUser = (User)session.getAttribute("currUser");
-	 	}else {//본인일 때
-	 		focusUser=(User)session.getAttribute("selectedChild");
-	 	}
+	 	User currUser = (User)session.getAttribute("currUser");
 
 	 	String esmRecordText = request.getParameter("newRecordText");
 	 	Date esmRecordDate = Date.valueOf(request.getParameter("newRecordDateStr"));
@@ -57,13 +52,13 @@ public class CreateEsmRecord extends HttpServlet {
 	 	Time esmRecordTime = null;
 	 	
 	 	if(esmRecordDate.toString().equals(nowDate.toString())) esmRecordTime = Time.valueOf(LocalTime.now());
-	 	boolean insertEsmRecord = EsmRecordDAO.insertEsmRecord(conn, esmRecordText, esmRecordDate, esmRecordTime, focusUser.getUserId());
+	 	boolean insertEsmRecord = EsmRecordDAO.insertEsmRecord(conn, esmRecordText, esmRecordDate, esmRecordTime, currUser.getUserId());
 	 	
 	 	if(insertEsmRecord==true)System.out.println("EsmRecord 생성");
 	 	else System.out.println("EsmRecord 생성 실패");
 	 	
 	 	/*사용자의 EsmRecord 목록 가져오기 -> session events JSON 객체로 저장*/ 
-		ArrayList<Date> esmRecordDateList = (ArrayList<Date>)EsmRecordDAO.getEsmRecordDateList(conn, focusUser.getUserId());
+		ArrayList<Date> esmRecordDateList = (ArrayList<Date>)EsmRecordDAO.getEsmRecordDateList(conn, currUser.getUserId());
 		JSONObject eventsJsonObject = (JSONObject)EsmRecordProcessor.EsmRecordDateListToJSON(esmRecordDateList);
 		
 		session.setAttribute("eventsJsonObject",eventsJsonObject);

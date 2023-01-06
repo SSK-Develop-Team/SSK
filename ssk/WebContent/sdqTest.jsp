@@ -31,7 +31,7 @@
 	background-color:#ff6666;
 	color : white;
 	height:50px;
-	font-size:0.8em;
+	font-size:0.5em;
 	align-items:center;
 	text-align:center;
 }
