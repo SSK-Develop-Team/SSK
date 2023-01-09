@@ -11,25 +11,13 @@
 
 	ArrayList<LangQuestion> currQuestionList = (ArrayList<LangQuestion>)session.getAttribute("currQuestionList");
 	
-	int langProg1 = 0;
-	int langProg2 = 0;
-	int langProg3 = 0;
-	int langProg4 = 0;
-	int langProg5 = 0;
-	
-	if(session.getAttribute("langProg1")!=null) langProg1 = (int)session.getAttribute("langProg1");
-	if(session.getAttribute("langProg2")!=null) langProg2 = (int)session.getAttribute("langProg2");
-	if(session.getAttribute("langProg3")!=null) langProg3 = (int)session.getAttribute("langProg3");
-	if(session.getAttribute("langProg4")!=null) langProg4 = (int)session.getAttribute("langProg4");
-	if(session.getAttribute("langProg5")!=null) langProg5 = (int)session.getAttribute("langProg5");
-
-	int[] langProgList = {langProg1, langProg2, langProg3, langProg4, langProg5};
-	
-	System.out.println("size: " + currQuestionList.size());
-	System.out.println("prog1: " + langProg1);
-	System.out.println("prog2: " + langProg2);
-	System.out.println("prog3: " + langProg3);
-	System.out.println("prog4: " + langProg4);
+	ArrayList<Integer> langProgList = new ArrayList<Integer>();
+	if(session.getAttribute("langProgList") != null) langProgList = (ArrayList)session.getAttribute("langProgList");
+	else {
+		for(int i=0; i<5; i++){
+			langProgList.add(0);
+		}
+	}
 	
 %>
 
@@ -102,22 +90,22 @@
 			</div> 
 			<div class="w3-row w3-margin">
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<%if(langProgList[i] == 1){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1" checked="checked">
+					<%if(langProgList.get(i) == 1){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1" checked="checked">
 					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1"> <%} %>
 					<label>못한다</label>
 				</div>
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<%if(langProgList[i] == 2){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2" checked="checked">
+					<%if(langProgList.get(i) == 2){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2" checked="checked">
 					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2"> <%} %>
 					<label>할 수 있다</label>
 				</div>
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<%if(langProgList[i] == 3){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3" checked="checked">
+					<%if(langProgList.get(i) == 3){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3" checked="checked">
 					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3"> <%} %>
 					<label>잘한다</label>
 				</div>
 				<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
-					<%if(langProgList[i] == 4){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4" checked="checked">
+					<%if(langProgList.get(i) == 4){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4" checked="checked">
 					<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4"> <%} %>
 					<label>매우 잘한다</label>
 				</div>
