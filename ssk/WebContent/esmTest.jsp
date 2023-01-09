@@ -56,7 +56,7 @@
 		<div class="w3-col m3 l4">&nbsp;</div>
 		<div class="w3-col s12 m6 l4" id="sdqChat" style="padding-bottom:6px;padding-top:10px;">
 			<form id="esmForm" method="post" action="GetEsmTest">
-			<input type="hidden" name="currEsmType" value="<%=esmEmotionList.get(0).getEsmType()%>"/>
+			<input type="hidden" id="currEsmType" name="currEsmType" value="<%=esmEmotionList.get(0).getEsmType()%>"/>
 			<%for(int i=0;i<esmEmotionList.size();i++){ %>
 				<div class="w3-center">
 					<div class=""><%=esmEmotionList.get(i).getEsmEmotionKr() %></div>

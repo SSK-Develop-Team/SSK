@@ -59,9 +59,12 @@ public class DoEsmTest extends HttpServlet {
 	 	ArrayList<EsmReply> esmReplyList = new ArrayList<EsmReply>();
 	 	for(Integer key :esmEmotionRecordMap.keySet()) {
 	 		EsmReply esmReply = new EsmReply(esmTestLog.getEsmTestLogId(), key, esmEmotionRecordMap.get(key));
-	 		EsmReplyDAO.insertESMReply(conn, esmReply);
+	 		EsmReplyDAO.insertEsmReply(conn, esmReply);
 	 		esmReplyList.add(esmReply);
 	 	}
+	 	
+	 	//정서 반복 기록 결과 가공하기
+	 	
 	 	
 		session.removeAttribute("esmEmotionRecordMap");
 		
