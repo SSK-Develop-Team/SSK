@@ -12,9 +12,16 @@
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>정서 반복 기록 결과</title>
+<%
+	int positive = (int)request.getAttribute("positive");
+	int negative = (int)request.getAttribute("negative");
+%>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+$(window).resize(function(){
+	drawChart();
+    });
   google.charts.load('current', {packages:['corechart']});
   google.charts.setOnLoadCallback(drawChart);
 
@@ -45,7 +52,8 @@
     			max : 25,
     			min : 0
     		}
-    	}
+    	},
+    	legend: 'none'
     };
     
     var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
@@ -64,12 +72,12 @@
 		<div class="w3-col m1 l2">&nbsp;</div>
 	</div>
 	<div class="w3-row">
-		<div class="w3-col m1 l2">&nbsp;</div>
-		<div class="w3-col s12 m10 l8">
-			<div id="columnchart_values" style="width:100%;height: 60vh;"></div>
+		<div class="w3-col s1 m3 l4">&nbsp;</div>
+		<div class="w3-col s10 m6 l4">
+			<button class="w3-button w3-col w3-padding"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;"onclick="location.href='../ssk/esmTestMain.jsp';">메인으로</button>
 		</div>
-		<div class="w3-col m1 l2">&nbsp;</div>
+		<div class="w3-col s1 m3 l4">&nbsp;</div>
 	</div>
-	<input type="button"value="메인으로" onClick="location.href='esmTestMain.jsp'">
+	
 </body>
 </html>
