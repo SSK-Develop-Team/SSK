@@ -54,14 +54,24 @@ public class DoEsmTest extends HttpServlet {
 	 	EsmTestLogDAO.insertEsmTestLog(conn, esmTestLog);
 	 	
 	 	//정서 반복 기록 결과 입력하기
-	 	HashMap<Integer, Integer> esmEmotionRecordMap = (HashMap<Integer,Integer>)session.getAttribute("esmEmotionRecordMap");
+	 	@SuppressWarnings("unchecked")
+		HashMap<Integer, Integer> esmEmotionRecordMap = (HashMap<Integer,Integer>)session.getAttribute("esmEmotionRecordMap");
 	 	
 	 	ArrayList<EsmReply> esmReplyList = new ArrayList<EsmReply>();
+	 	int positive = 0, negative = 0;
 	 	for(Integer key :esmEmotionRecordMap.keySet()) {
 	 		EsmReply esmReply = new EsmReply(esmTestLog.getEsmTestLogId(), key, esmEmotionRecordMap.get(key));
-	 		EsmReplyDAO.insertESMReply(conn, esmReply);
+	 		System.out.println(key);
+	 		if(key>=1&&key<=5) positive+=esmEmotionRecordMap.get(key);
+	 		else negative+=esmEmotionRecordMap.get(key);
+	 		EsmReplyDAO.insertEsmReply(conn, esmReply);
 	 		esmReplyList.add(esmReply);
 	 	}
+	 	
+	 	System.out.println(positive + " " + negative);
+	 	
+	 	request.setAttribute("positive",positive);
+	 	request.setAttribute("negative",negative);
 	 	
 		session.removeAttribute("esmEmotionRecordMap");
 		
