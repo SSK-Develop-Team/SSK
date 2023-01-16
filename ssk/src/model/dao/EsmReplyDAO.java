@@ -22,6 +22,8 @@ import model.dto.SdqReply;
 public class EsmReplyDAO {/*REPLY!=RESULT*/
 	private final static String SQLST_INSERT_ESM_REPLY = "insert esm_reply(esm_test_log_id, esm_emotion_id, esm_reply_content) values(?,?,?)";
 	private final static String SQLST_SELECT_ESM_REPLY_LIST_BY_ESM_TEST_LOG_ID = "select * from esm_reply where esm_test_log_id = ?";
+	private final static String SQLST_SELECT_ESM_REPLY_SUM_POSITIVE_BY_ESM_TEST_LOG_ID = "select SUM(esm_reply_content) from esm_reply where esm_test_log_id = ? and esm_emotion_id>=1 and esm_emotion_id<=5";
+	private final static String SQLST_SELECT_ESM_REPLY_SUM_NEGATIVE_BY_ESM_TEST_LOG_ID = "select SUM(esm_reply_content) from esm_reply where esm_test_log_id = ? and esm_emotion_id>=6 and esm_emotion_id<=10";
 	
 	/*정서 반복 기록 응답 삽입*/
 	public static boolean insertEsmReply(Connection con, EsmReply esmReply) {
@@ -65,5 +67,37 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 			return null;
 		}
 	}
-
+	
+	/*정서 반복 기록 positive 값*/
+	public static int getEsmReplyPositiveValueByEsmTestLogId(Connection con, int esmTestLogId){
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_REPLY_SUM_POSITIVE_BY_ESM_TEST_LOG_ID);
+			pstmt.setInt(1, esmTestLogId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return 0;
+	}
+	/*정서 반복 기록 negative 값*/
+	public static int getEsmReplyNegativeValueByEsmTestLogId(Connection con, int esmTestLogId){
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_REPLY_SUM_NEGATIVE_BY_ESM_TEST_LOG_ID);
+			pstmt.setInt(1, esmTestLogId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return 0;
+	}
 }
