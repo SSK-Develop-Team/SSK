@@ -1,6 +1,7 @@
 package controller.lang;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
@@ -60,15 +61,25 @@ public class ManageLangResult extends HttpServlet {
 		//2. 테스트 결과 저장
 		ArrayList<LangReply> langReplyList = new ArrayList<LangReply>();
 		for(int i =0 ; i<5; i++) {
-			LangReply langReply = new LangReply();
-			langReply.setLangTestLogId(langTestLog.getLangTestLogId());
-			langReply.setLangQuestionId(langQuestionList.get(i).getLangQuestionId());
-			langReply.setLangReplyContent(Integer.parseInt(request.getParameter("reply"+i)));
-			if(LangReplyDAO.insertLangReply(conn, langReply)) {
-				System.out.println(i+"번째 응답 삽입 성공");
-				langReplyList.add(langReply);
-			}else {
-				System.out.println(i+"번째 응답 삽입 실패");
+			if(request.getParameter("reply"+i)!= null){
+				LangReply langReply = new LangReply();
+				langReply.setLangTestLogId(langTestLog.getLangTestLogId());
+				langReply.setLangQuestionId(langQuestionList.get(i).getLangQuestionId());
+				langReply.setLangReplyContent(Integer.parseInt(request.getParameter("reply"+i)));
+				if(LangReplyDAO.insertLangReply(conn, langReply)) {
+					System.out.println(i+"번째 응답 삽입 성공");
+					langReplyList.add(langReply);
+				}else {
+					System.out.println(i+"번째 응답 삽입 실패");
+				}
+			} else {
+				response.setContentType("text/html; charset=UTF-8");
+			    PrintWriter out = response.getWriter();
+			    out.println("<script>alert('입력되지 않은 항목이 있습니다.'); history.go(-1);</script>");
+			    out.flush();
+			    response.flushBuffer();
+			    out.close();
+				
 			}
 		}
 		

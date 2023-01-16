@@ -41,35 +41,17 @@ public class GetLangGame extends HttpServlet {
 		User currUser = (User)session.getAttribute("currUser");
 		
 		request.setCharacterEncoding("utf-8");
-		
-		int langProg1 = 0;
-		int langProg2 = 0;
-		int langProg3 = 0;
-		int langProg4 = 0;
-		int langProg5 = 0;
-		
+
 		int gameID = Integer.parseInt(request.getParameter("langGameID"));
 
+		ArrayList<Integer> langProgList = new ArrayList<Integer>();
+		langProgList.add(Integer.parseInt(request.getParameter("langTestProgress1")));
+		langProgList.add(Integer.parseInt(request.getParameter("langTestProgress2")));
+		langProgList.add(Integer.parseInt(request.getParameter("langTestProgress3")));
+		langProgList.add(Integer.parseInt(request.getParameter("langTestProgress4")));
+		langProgList.add(Integer.parseInt(request.getParameter("langTestProgress5")));
 		
-		if(request.getParameter("langTestProgress1")!=null) langProg1 = Integer.parseInt(request.getParameter("langTestProgress1"));
-		if(request.getParameter("langTestProgress2")!=null) langProg2 = Integer.parseInt(request.getParameter("langTestProgress2"));
-		if(request.getParameter("langTestProgress3")!=null) langProg3 = Integer.parseInt(request.getParameter("langTestProgress3"));
-		if(request.getParameter("langTestProgress4")!=null) langProg4 = Integer.parseInt(request.getParameter("langTestProgress4"));
-		if(request.getParameter("langTestProgress5")!=null) langProg5 = Integer.parseInt(request.getParameter("langTestProgress5"));
-		
-		session.setAttribute("langProg1", langProg1);
-		session.setAttribute("langProg2", langProg2);
-		session.setAttribute("langProg3", langProg3);
-		session.setAttribute("langProg4", langProg4);
-		session.setAttribute("langProg5", langProg5);
-		
-		System.out.println("GameID : " + gameID);
-		System.out.println("getLangProg1 : " + langProg1);
-		System.out.println("getLangProg2 : " + langProg2);
-		System.out.println("getLangProg3 : " + langProg3);
-		System.out.println("getLangProg4 : " + langProg4);
-
-		
+		session.setAttribute("langProgList", langProgList);
 		session.setAttribute("langGameID", gameID);
 		
 		ArrayList<LangGame> currLangGameList = LangGameDAO.getLangGameListByLangQuestionId(con, gameID);

@@ -73,7 +73,7 @@
 		        	<p><%=currLangGameElement.getLangGameAnswer() %></p>
 		        <%} %>
 		        <%if(currLangGameElement.getLangGameAnswerVoice()!=null){ %>
-		        	<audio autoplay controls onended="document.getElementById('answer-modal').style.display='none'">
+		        	<audio controls onended="document.getElementById('answer-modal').style.display='none'">
 		        		<source src="<%=currLangGameElement.getLangGameAnswerVoice()%>">
 		        	</audio>
 		        <%} %>

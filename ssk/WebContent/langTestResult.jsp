@@ -10,6 +10,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>언어 발달 평가 결과</title>
 <script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
@@ -179,17 +181,17 @@ ul.tabs li.current{
             },
             
             options: {
-                
     			scales: {
-    				angleLines: {
-    				      display: false
-    				},
     				r: {
-    		            max: 5,
-    		            min: 0,
+    		            min : -2,
+    		            max : 5,
+    		            beginAtZero : true,
+        				angleLines: {
+      				      display: false,
+      					},
     		            ticks: {
-    		            	beginAtZero : true,
-    		                stepSize: 1
+    		            	display: false,
+    		                stepSize: 1,
     		            }
     		        },
    		           'legend' : 'none',
