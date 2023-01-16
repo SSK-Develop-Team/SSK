@@ -8,7 +8,15 @@ public class EsmTestLog {
 	private int esmTestLogId;
 	private int userId;
 	private Date esmTestDate;
-	private String esmTestTime;
+	private Time esmTestTime;
+	
+	
+	public EsmTestLog(int userId, Date esmTestDate, Time esmTestTime) {
+		super();
+		this.userId = userId;
+		this.esmTestDate = esmTestDate;
+		this.esmTestTime = esmTestTime;
+	}
 	
 	public int getEsmTestLogId() {
 		return esmTestLogId;
@@ -28,10 +36,10 @@ public class EsmTestLog {
 	public void setEsmTestDate(Date esmTestDate) {
 		this.esmTestDate = esmTestDate;
 	}
-	public String getEsmTestTime() {
+	public Time getEsmTestTime() {
 		return esmTestTime;
 	}
-	public void setEsmTestTime(String esmTestTime) {
+	public void setEsmTestTime(Time esmTestTime) {
 		this.esmTestTime = esmTestTime;
 	}
 	

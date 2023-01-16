@@ -34,6 +34,7 @@ public class LangTestLogDAO {
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if(rs.next()) {
 				langTestLog.setLangTestLogId(rs.getInt(1));
+				return true;
 			}
 			
 		} catch (SQLException e) {

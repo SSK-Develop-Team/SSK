@@ -3,11 +3,20 @@ package model.dto;
 public class EsmEmotion {
 	
 	private int esmEmotionId;
-	private String esmType;
+	private EsmType esmType;
 	private String esmEmotion;
 	private String esmEmotionKr;
 	private String esmEmotionIcon;
 	
+	public EsmEmotion(int esmEmotionId, String esmType, String esmEmotion, String esmEmotionKr,
+			String esmEmotionIcon) {
+		super();
+		this.esmEmotionId = esmEmotionId;
+		this.esmType = EsmType.findByTypeName(esmType);
+		this.esmEmotion = esmEmotion;
+		this.esmEmotionKr = esmEmotionKr;
+		this.esmEmotionIcon = esmEmotionIcon;
+	}
 	public int getEsmEmotionId() {
 		return esmEmotionId;
 	}
@@ -15,10 +24,10 @@ public class EsmEmotion {
 		this.esmEmotionId = esmEmotionId;
 	}
 	public String getEsmType() {
-		return esmType;
+		return esmType.toString();
 	}
 	public void setEsmType(String esmType) {
-		this.esmType = esmType;
+		this.esmType = EsmType.findByTypeName(esmType);
 	}
 	public String getEsmEmotion() {
 		return esmEmotion;

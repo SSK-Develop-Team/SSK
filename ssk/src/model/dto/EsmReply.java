@@ -7,6 +7,13 @@ public class EsmReply {
 	private int esmEmotionId;
 	private int esmReplyContent;
 	
+	public EsmReply(int esmTestLogId, int esmEmotionId, int esmReplyContent) {
+		super();
+		this.esmTestLogId = esmTestLogId;
+		this.esmEmotionId = esmEmotionId;
+		this.esmReplyContent = esmReplyContent;
+	}
+	
 	public int getEsmReplyId() {
 		return esmReplyId;
 	}
