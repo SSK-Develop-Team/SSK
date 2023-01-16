@@ -18,7 +18,6 @@
 			langProgList.add(0);
 		}
 	}
-	
 %>
 
 <!DOCTYPE html>
@@ -51,6 +50,10 @@
       height : 50px;
       width : 150px;
    }
+   
+.textBox{
+	font-size : 1.3em;
+}
    
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -125,11 +128,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
 <script>
 
-		var reply1 = "0";
-		var reply2 = "0";
-		var reply3 = "0";
-		var reply4 = "0";
-		var reply5 = "0";
+		
+		var reply1 = "<%=langProgList.get(0)%>";
+		var reply2 = "<%=langProgList.get(1)%>";
+		var reply3 = "<%=langProgList.get(2)%>";
+		var reply4 = "<%=langProgList.get(3)%>";
+		var reply5 = "<%=langProgList.get(4)%>";
 		
 		$("input[name='reply0']").change(function(){
 			if($("input[name='reply0']:checked")){
