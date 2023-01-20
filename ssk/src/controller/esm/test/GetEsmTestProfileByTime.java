@@ -45,16 +45,16 @@ public class GetEsmTestProfileByTime extends HttpServlet {
 	 	User currUser = (User)session.getAttribute("currUser");
 	 	
 		// reply 날짜 데이터
-		ArrayList<Date> esmTestDateList = EsmTestLogDAO.getEsmTestLogByUserIdGroupByDate(conn, currUser.getUserId());
+		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, currUser.getUserId());
 	 	ArrayList<EsmTestLog> selectedDateEsmTestLogList = new ArrayList<EsmTestLog>();
 
 		String selectedDateStr = request.getParameter("date");
 		
 		if(selectedDateStr.equals("0")) {
-			selectedDateEsmTestLogList = EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, currUser.getUserId(), esmTestDateList.stream().map(i->i).max(Date::compareTo).get());
+			selectedDateEsmTestLogList = (ArrayList<EsmTestLog>) EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, currUser.getUserId(), esmTestDateList.stream().map(i->i).max(Date::compareTo).get());
 		}else {
             Date selectedDate = Date.valueOf(selectedDateStr);
-            selectedDateEsmTestLogList = EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, currUser.getUserId(), selectedDate);
+            selectedDateEsmTestLogList = (ArrayList<EsmTestLog>) EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, currUser.getUserId(), selectedDate);
 		}
 		int selectedIndexOfEsmTestDateList = esmTestDateList.indexOf(selectedDateEsmTestLogList.get(0).getEsmTestDate());
 		
