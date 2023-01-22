@@ -23,6 +23,10 @@
 	ArrayList<Date> sDateListOfWeek = (ArrayList<Date>)request.getAttribute("sDateListOfWeek");
 	ArrayList<EsmReplyOfDay> esmReplyOfDayList = (ArrayList<EsmReplyOfDay>)request.getAttribute("esmReplyOfDayList");
 	
+	System.out.println("dateWeekList : "+dateWeekList.size());
+	System.out.println("sDateListOfWeek : "+sDateListOfWeek.size());
+	System.out.println("esmReplyOfDayList : "+esmReplyOfDayList.size());
+	
 	LocalDate sdate = sDateListOfWeek.get(0).toLocalDate();
 	LocalDate edate = sDateListOfWeek.get(6).toLocalDate();
 	
@@ -47,12 +51,16 @@
            for(EsmReplyOfDay x : esmReplyOfDayList){
         	   LocalDate date = x.getDate().toLocalDate();
 	        %>
-	        [[<%=date.getYear()%>,<%=date.getMonth()%>,<%=date.getDayOfMonth()%>],<%=x.getPositiveAvg()%>,<%=x.getNegativeAvg()%>],
+	        [new Date(<%=date.getYear()%>, <%=date.getMonthValue()-1%>, <%=date.getDayOfMonth()%>),<%=x.getPositiveAvg()%>,<%=x.getNegativeAvg()%>],
 	       <%   
 	           }
 	        %>
        ]);
-      
+       
+	const minDate = new Date(<%=sdate.getYear()%>, <%=sdate.getMonthValue()-1%>, <%=sdate.getDayOfMonth()%>);
+    const maxDate = new Date(<%=edate.getYear()%>, <%=edate.getMonthValue()-1%>, <%=edate.getDayOfMonth()%>);
+    minDate.setDate(minDate.getDate()-1);
+    maxDate.setDate(maxDate.getDate()+1);
    
     var options = {
 		annotations : {
@@ -66,16 +74,17 @@
         },
         hAxis: {
         	viewWindow: {
-               min: new Date(<%=sdate.getYear()%>, <%=sdate.getMonth()%>, <%=sdate.getDayOfMonth()%>),
-               max: new Date(<%=edate.getYear()%>, <%=edate.getMonth()%>, <%=edate.getDayOfMonth()%>)
+               min: minDate,
+               max: maxDate
             },
-        	format: 'yy-MM-dd',
+        	format: 'MM/dd',
         	ticks: [
         		<% for(Date x : sDateListOfWeek){
-        			LocalDate date = x.toLocalDate();%>
-        			new Date(<%=date.getYear()%>, <%=date.getMonth()%>, <%=date.getDayOfMonth()%>),
+        			LocalDate date = x.toLocalDate();
+        		%>
+        			new Date(<%=date.getYear()%>, <%=date.getMonthValue()-1%>, <%=date.getDayOfMonth()%>),
         		<%}%>],
-        	gridlines: {count: 7}
+        	gridlines:{count:7},
         },
         'legend' : 'none',
          series : {
@@ -102,7 +111,7 @@
    <!-- 날짜 선택 -->
    <div class="w3-row">
 		<div class="w3-col s1 m2 l4">&nbsp;</div>
-		<c:set var="selectedIndex" scope="page" value="${indexOfDate}" />
+		<c:set var="selectedIndex" scope="page"><%=indexOfDate%></c:set>
 		<c:choose>
 		<c:when test="${selectedIndex eq 0}">
 			<div class="w3-col s1 m1 l1 w3-center"onclick="alert('이전 기록이 없습니다.');"><img src="./image/left-arrow.png" style="width:2.5em; opacity: 0.5;"/></div>
@@ -122,7 +131,7 @@
 		    </div>
 		</div>
 		<c:choose>
-		<c:when test="${selectedIndex eq esmTestDateList.size()-1}">
+		<c:when test="${selectedIndex eq dateWeekList.size()-1}">
 			<div class="w3-col s1 m1 l1 w3-center"onclick="alert('다음 기록이 없습니다.');"><img src="./image/right-arrow.png" style="width:2.5em; opacity: 0.5;"/></div>
 		</c:when>
 		<c:otherwise>

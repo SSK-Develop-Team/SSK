@@ -30,6 +30,6 @@ public class EsmDateWeekType {
 	
 	@Override
 	public boolean equals(Object o){
-		return ( date.equals(((EsmDateWeekType)o).date) && weekStr == ((EsmDateWeekType)o).weekStr );
+		return ( date.equals(((EsmDateWeekType)o).date) && weekStr.equals(((EsmDateWeekType)o).weekStr));
 	}
 }
