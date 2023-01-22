@@ -90,7 +90,7 @@ public class EsmTestLogDAO {
 	}
 	
 	/*사용자별 정서 발달 기록 일자 조회*/
-	public static ArrayList<Date> getEsmTestLogByUserIdGroupByDate(Connection con, int userId){
+	public static ArrayList<Date> getEsmTestLogDateByUserIdGroupByDate(Connection con, int userId){
 		ArrayList<Date> esmTestDateList = new ArrayList<Date>();
 		try {
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_DATE_BY_USER_GROUP_BY_DATE);
