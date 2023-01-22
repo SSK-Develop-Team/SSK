@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.dto.EsmReply;
+import model.dto.EsmReplyOfDay;
 import model.dto.EsmTestLog;
 import model.dto.SdqReply;
 
@@ -24,6 +25,21 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 	private final static String SQLST_SELECT_ESM_REPLY_LIST_BY_ESM_TEST_LOG_ID = "select * from esm_reply where esm_test_log_id = ?";
 	private final static String SQLST_SELECT_ESM_REPLY_SUM_POSITIVE_BY_ESM_TEST_LOG_ID = "select SUM(esm_reply_content) from esm_reply where esm_test_log_id = ? and esm_emotion_id>=1 and esm_emotion_id<=5";
 	private final static String SQLST_SELECT_ESM_REPLY_SUM_NEGATIVE_BY_ESM_TEST_LOG_ID = "select SUM(esm_reply_content) from esm_reply where esm_test_log_id = ? and esm_emotion_id>=6 and esm_emotion_id<=10";
+	private final static String SQLST_SELECT_ESM_REPLY_AVG_POSITIVE_LIST_OF_WEEK = "select stbl.esm_test_date, SUM(stbl.reply_sum)/COUNT(*) 'positive' \r\n" + 
+			"	FROM (select ptbl.esm_test_date, ptbl.esm_test_time, SUM(ptbl.esm_reply_content) 'reply_sum'\r\n" + 
+			"		FROM (SELECT * FROM esm_test_log \r\n" + 
+			"			NATURAL JOIN esm_reply\r\n" + 
+			"			WHERE user_id = ? AND esm_emotion_id >=1 AND esm_emotion_id<=5 AND esm_test_date>=? AND esm_test_date<=?) ptbl\r\n" + 
+			"		GROUP BY ptbl.esm_test_date, ptbl.esm_test_time) stbl \r\n" + 
+			"	GROUP BY stbl.esm_test_date;";
+	private final static String SQLST_SELECT_ESM_REPLY_AVG_NEGATIVE_LIST_OF_WEEK = "select stbl.esm_test_date, SUM(stbl.reply_sum)/COUNT(*) 'positive' \r\n" + 
+			"	FROM (select ptbl.esm_test_date, ptbl.esm_test_time, SUM(ptbl.esm_reply_content) 'reply_sum'\r\n" + 
+			"		FROM (SELECT * FROM esm_test_log \r\n" + 
+			"			NATURAL JOIN esm_reply\r\n" + 
+			"			WHERE user_id = ? AND esm_emotion_id >=6 AND esm_emotion_id<=10 AND esm_test_date>=? AND esm_test_date<=?) ptbl\r\n" + 
+			"		GROUP BY ptbl.esm_test_date, ptbl.esm_test_time) stbl \r\n" + 
+			"	GROUP BY stbl.esm_test_date;";
+	
 	
 	/*정서 반복 기록 응답 삽입*/
 	public static boolean insertEsmReply(Connection con, EsmReply esmReply) {
@@ -84,6 +100,7 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 		
 		return 0;
 	}
+	
 	/*정서 반복 기록 negative 값*/
 	public static int getEsmReplyNegativeValueByEsmTestLogId(Connection con, int esmTestLogId){
 		try {
@@ -99,5 +116,35 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 		} 
 		
 		return 0;
+	}
+
+	public static ArrayList<EsmReplyOfDay> getEsmReplyListByWeek(Connection con, int userId, Date startDate, Date endDate){
+		ArrayList<EsmReplyOfDay> EsmReplyOfDayList = new ArrayList<EsmReplyOfDay>();
+		try {
+			PreparedStatement pstmtP = con.prepareStatement(SQLST_SELECT_ESM_REPLY_AVG_POSITIVE_LIST_OF_WEEK);
+			pstmtP.setInt(1, userId);
+			pstmtP.setDate(2, startDate);
+			pstmtP.setDate(3, endDate);
+			ResultSet rsP = pstmtP.executeQuery();
+			
+			while(rsP.next()) {
+				EsmReplyOfDayList.add(new EsmReplyOfDay(rsP.getDate(1),rsP.getFloat(2),0));
+			}
+			
+			PreparedStatement pstmtN = con.prepareStatement(SQLST_SELECT_ESM_REPLY_AVG_NEGATIVE_LIST_OF_WEEK);
+			pstmtN.setInt(1, userId);
+			pstmtN.setDate(2, startDate);
+			pstmtN.setDate(3, endDate);
+			ResultSet rsN = pstmtN.executeQuery();
+			int i=0;
+			while(rsN.next()) {
+				EsmReplyOfDayList.get(i).setNegativeAvg(rsN.getFloat(2));
+				System.out.println(EsmReplyOfDayList.get(i).getDate().toString()+" : "+EsmReplyOfDayList.get(i).getPositiveAvg()+" "+EsmReplyOfDayList.get(i).getNegativeAvg());
+				i++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return EsmReplyOfDayList;
 	}
 }
