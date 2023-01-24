@@ -40,9 +40,9 @@
 <div class="w3-row">
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 	<div class="w3-padding w3-col s10 m6 l4">
-		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;" onclick="modalOpen()">검사하기</button>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;font-size:1.3em;" onclick="modalOpen()">검사하기</button>
 		<div>&nbsp;</div>
-		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;" onclick="location.href='GetLangTestResult'">결과보기</button>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;font-size:1.3em;" onclick="location.href='GetLangTestResult'">결과보기</button>
 	</div>
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 </div>
