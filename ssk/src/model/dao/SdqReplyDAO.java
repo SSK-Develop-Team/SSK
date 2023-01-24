@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.dto.SdqReply;
+import model.dto.SdqResultOfType;
 import model.dto.SdqTestLog;
 
 /**
@@ -20,6 +21,10 @@ public class SdqReplyDAO {
 	
 	private final static String SQLST_INSERT_SDQ_REPLY = "insert sdq_reply(sdq_test_log_id, sdq_question_id, sdq_reply_content) values (?,?,?)";
 	private final static String SQLST_SELECT_SDQ_REPLY_LIST_BY_SDQ_TEST_LOG_ID = "select * from sdq_reply where sdq_test_log_id = ?";
+	private final static String SQLST_SELECT_SDQ_REPLY_SUM_BY_TEST_LOG_ID_GROUP_BY_SDQ_TYPE = "SELECT sdq_type, SUM(CASE WHEN sdq_scoring_type=\"forward\" THEN sdq_reply_content-1 \r\n" + 
+			"					WHEN sdq_scoring_type=\"reverse\" THEN 3-sdq_reply_content END) as 'resultOfType' FROM sdq_reply \r\n" + 
+			"LEFT JOIN sdq_question on sdq_reply.sdq_question_id = sdq_question.sdq_question_id \r\n" + 
+			"WHERE sdq_test_log_id=? GROUP BY sdq_type";
 	
 	public static boolean insertSdqReply(Connection con, SdqReply sdqReply) {
 		try {
@@ -64,5 +69,20 @@ public class SdqReplyDAO {
 			return null;
 		}
 	}
-
+	public static ArrayList<SdqResultOfType> getSdqResultOfTypesBySdqTestLogId(Connection con, int sdqTestLogId){
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_SDQ_REPLY_SUM_BY_TEST_LOG_ID_GROUP_BY_SDQ_TYPE);
+			pstmt.setInt(1, sdqTestLogId);
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<SdqResultOfType> sdqResultOfTypeList = new ArrayList<SdqResultOfType>();
+			while(rs.next()) {
+				sdqResultOfTypeList.add(new SdqResultOfType(rs.getString("sdq_type"),rs.getInt("resultOfType")));
+			}
+			return sdqResultOfTypeList;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

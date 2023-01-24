@@ -3,7 +3,7 @@ package model.dto;
 public class SdqQuestion {
 	
 	private int sdqQuestionId;
-	private String sdqType;
+	private SdqType sdqType;
 	private String sdqQuestionContent;
 	private String sdqScoringType;
 	private String sdqTarget;
@@ -15,10 +15,10 @@ public class SdqQuestion {
 		this.sdqQuestionId = sdqQuestionId;
 	}
 	public String getSdqType() {
-		return sdqType;
+		return SdqType.getTypeName(sdqType);
 	}
 	public void setSdqType(String sdqType) {
-		this.sdqType = sdqType;
+		this.sdqType = SdqType.findByTypeName(sdqType);
 	}
 	public String getSdqQuestionContent() {
 		return sdqQuestionContent;

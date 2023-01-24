@@ -68,12 +68,8 @@ public class DoSdqTest extends HttpServlet {
 			SdqReplyDAO.insertSdqReply(conn, sdqReplyElement);
 			sdqReplyList.add(sdqReplyElement);
 		}
-		
-		session.setAttribute("sdqTestLog", sdqTestLog);
-	    request.setAttribute("sdqReplyList", sdqReplyList);
 	    
-	    RequestDispatcher rd = request.getRequestDispatcher("/GetSdqResult");
-		rd.forward(request, response);
+	    response.sendRedirect(getServletContext().getContextPath()+"/GetSdqResultAll?sdqTestLogId=0");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
