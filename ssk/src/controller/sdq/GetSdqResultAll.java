@@ -2,7 +2,11 @@ package controller.sdq;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -18,6 +22,7 @@ import model.dao.SdqResultAnalysisDAO;
 import model.dao.SdqTestLogDAO;
 import model.dto.SdqReply;
 import model.dto.SdqResultAnalysis;
+import model.dto.SdqResultOfType;
 import model.dto.SdqTestLog;
 import model.dto.User;
 import util.process.SdqProcessor;
@@ -45,39 +50,38 @@ public class GetSdqResultAll extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
 		
-		User currUser = (User)session.getAttribute("currUser");
+		User focusUser = (User)session.getAttribute("currUser");
 		
-		/*해당 회원의 모든 SDQ 검사 기록 가져오기*/
-		ArrayList<SdqTestLog> sdqTestLogList = SdqTestLogDAO.getSdqTestLogAllByUserId(conn, currUser.getUserId());
-		
-		int selectedSdqTestLogId = Integer.parseInt(request.getParameter("selectedSdqTestLogId"));
+		//모든 SdqTestLog
+		ArrayList<SdqTestLog> sdqTestLogList = SdqTestLogDAO.getSdqTestLogAllByUserId(conn, focusUser.getUserId());
 		SdqTestLog selectedSdqTestLog = null;
-		ArrayList<SdqReply> sdqReplyList = new ArrayList<SdqReply>();
 		
-		if(selectedSdqTestLogId==0) {
-			selectedSdqTestLog = sdqTestLogList.get(sdqTestLogList.size()-1);
-			sdqReplyList = SdqReplyDAO.getSdqReplyListBySdqTestLogId(conn, selectedSdqTestLog.getSdqTestLogId());
+		//선택한 테스트 로그 정보 가져오기
+		if((request.getParameter("sdqTestLogId")).equals("0")) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
+			Comparator<SdqTestLog> comparatorById = Comparator.comparingInt(SdqTestLog::getSdqTestLogId);
+			selectedSdqTestLog = sdqTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
 		}else {
-			sdqReplyList = SdqReplyDAO.getSdqReplyListBySdqTestLogId(conn, selectedSdqTestLogId);
+			selectedSdqTestLog = SdqTestLogDAO.getSdqTestLogById(conn, Integer.parseInt(request.getParameter("sdqTestLogId")));
 		}
 		
-		// 코드/DB 리팩토링 필요
-		String[] sdqTypeList = {"사회지향행동", "과잉행동","정서증상","품행문제","또래문제"};
-		int[] scoreList = SdqProcessor.getSdqReplyListToSdqResult(sdqReplyList);
+		//선택한 테스트 로그에 대한 응답값을 기준으로 결과 값 가져오기
+		ArrayList<SdqResultOfType> sdqResult = (ArrayList<SdqResultOfType>)SdqReplyDAO.getSdqResultOfTypesBySdqTestLogId(conn, selectedSdqTestLog.getSdqTestLogId());
+		
+		//결과 분석
 		ArrayList<SdqResultAnalysis> sdqResultAnalysisList = new ArrayList<SdqResultAnalysis>();
 
-		for(int i=0;i<sdqTypeList.length;i++) {
-			sdqResultAnalysisList.add(SdqResultAnalysisDAO.findSdqResultAnalysisByTypeAndValue(conn, sdqTypeList[i],scoreList[i]));
+		for(int i=0;i<sdqResult.size();i++) {
+			sdqResultAnalysisList.add(SdqResultAnalysisDAO.findSdqResultAnalysisByTypeAndValue(conn, sdqResult.get(i).getSdqType(),sdqResult.get(i).getResult()));
 		}
 		
-		request.setAttribute("sdqResultAnalysisList", sdqResultAnalysisList);
-		request.setAttribute("sdqScoreList", scoreList);
+		request.setAttribute("focusUser", focusUser);
 		request.setAttribute("sdqTestLogList", sdqTestLogList);
+		request.setAttribute("selectedSdqTestLog", selectedSdqTestLog);
+		request.setAttribute("sdqResult", sdqResult);
+		request.setAttribute("sdqResultAnalysisList",sdqResultAnalysisList);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/sdqResultAll.jsp");
 		rd.forward(request, response);
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

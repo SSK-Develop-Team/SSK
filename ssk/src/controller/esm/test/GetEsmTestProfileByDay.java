@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import model.dao.EsmReplyDAO;
 import model.dao.EsmTestLogDAO;
 import model.dto.EsmDateWeekType;
-import model.dto.EsmReplyOfDay;
+import model.dto.EsmResultWithDate;
 import model.dto.User;
 import util.process.EsmProcessor;
 
@@ -60,14 +60,11 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  		
 	 	/*선택한 일자에 해당하는 주의 날짜 리스트(그래프 X축)*/
  		ArrayList<Date> sDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(sdate);
- 		System.out.println(sDateListOfWeek.size());
- 		System.out.println("start_date : "+sDateListOfWeek.get(0).toString());
- 		System.out.println("end_date : "+sDateListOfWeek.get(6).toString());
  		EsmDateWeekType selectedDateWeek = new EsmDateWeekType(sdate,sDateListOfWeek.get(0), sDateListOfWeek.get(6));
  		
  		/*해당 주의 모든 기록 - 일별 평균 응답*/
- 		ArrayList<EsmReplyOfDay> esmReplyOfDayList = EsmReplyDAO.getEsmReplyListByWeek(conn, currUser.getUserId(), sDateListOfWeek.get(0), sDateListOfWeek.get(6));
- 		System.out.println("esnReplyOfDayListSize : "+esmReplyOfDayList.size());
+ 		ArrayList<EsmResultWithDate> esmReplyOfDayList = EsmReplyDAO.getEsmReplyListByWeek(conn, currUser.getUserId(), sDateListOfWeek.get(0), sDateListOfWeek.get(6));
+
  		/**
  		 * all week -> drop down data
  		 * */
@@ -84,7 +81,6 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  			}
  		}
  		
- 		System.out.println("index : "+dateWeekList.indexOf(selectedDateWeek));
  		request.setAttribute("esmTestDateList", esmTestDateList);//전체 기록
  		request.setAttribute("selectedDateWeek", selectedDateWeek);
  		request.setAttribute("dateWeekList", dateWeekList);//drop down에 표시할 기간 데이터

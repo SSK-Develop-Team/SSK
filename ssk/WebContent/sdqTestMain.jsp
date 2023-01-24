@@ -10,10 +10,6 @@
 </head>
 <body>
 <%@ include file = "sidebar.jsp" %>
-<% 
-	//User currUser = (User)session.getAttribute("currUser"); 
-	String name = "000";
-%>
 <div>&nbsp;</div><div>&nbsp;</div>
 <div style="width:100%;background-color:#FFDDDD;">
 <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
@@ -30,7 +26,7 @@
 	<div class="w3-padding w3-col s10 m6 l4">
 		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;" onclick="location.href='sdqTargetChoice.jsp'">검사하기</button>
 		<div>&nbsp;</div>
-		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;" onclick="location.href='GetSdqResultAll?selectedSdqTestLogId=0'">결과보기</button>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;" onclick="location.href='GetSdqResultAll?sdqTestLogId=0'">결과보기</button>
 	</div>
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 </div>

@@ -8,7 +8,7 @@
 <%@ page import="java.util.Vector" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.dto.EsmReply" %>
-<%@ page import="model.dto.EsmReplyOfDay" %>
+<%@ page import="model.dto.EsmResultWithDate" %>
 <%@ page import="model.dto.EsmDateWeekType" %>
 
 <!DOCTYPE html>
@@ -21,11 +21,7 @@
 	EsmDateWeekType selectedDateWeek = (EsmDateWeekType)request.getAttribute("selectedDateWeek");
 	ArrayList<EsmDateWeekType> dateWeekList = (ArrayList<EsmDateWeekType>)request.getAttribute("dateWeekList");
 	ArrayList<Date> sDateListOfWeek = (ArrayList<Date>)request.getAttribute("sDateListOfWeek");
-	ArrayList<EsmReplyOfDay> esmReplyOfDayList = (ArrayList<EsmReplyOfDay>)request.getAttribute("esmReplyOfDayList");
-	
-	System.out.println("dateWeekList : "+dateWeekList.size());
-	System.out.println("sDateListOfWeek : "+sDateListOfWeek.size());
-	System.out.println("esmReplyOfDayList : "+esmReplyOfDayList.size());
+	ArrayList<EsmResultWithDate> esmReplyOfDayList = (ArrayList<EsmResultWithDate>)request.getAttribute("esmReplyOfDayList");
 	
 	LocalDate sdate = sDateListOfWeek.get(0).toLocalDate();
 	LocalDate edate = sDateListOfWeek.get(6).toLocalDate();
@@ -47,10 +43,8 @@
        data.addColumn('number', '긍정 감정');
        data.addColumn('number', '부정 감정');
        data.addRows([
-    	   <% 
-           for(EsmReplyOfDay x : esmReplyOfDayList){
-        	   LocalDate date = x.getDate().toLocalDate();
-	        %>
+    	   <%for(EsmResultWithDate x : esmReplyOfDayList){
+        	   LocalDate date = x.getDate().toLocalDate();%>
 	        [new Date(<%=date.getYear()%>, <%=date.getMonthValue()-1%>, <%=date.getDayOfMonth()%>),<%=x.getPositiveAvg()%>,<%=x.getNegativeAvg()%>],
 	       <%   
 	           }

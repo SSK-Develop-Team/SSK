@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.dto.EsmReply;
-import model.dto.EsmReplyOfDay;
+import model.dto.EsmResultWithDate;
 import model.dto.EsmTestLog;
 import model.dto.SdqReply;
 
@@ -118,8 +118,8 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 		return 0;
 	}
 
-	public static ArrayList<EsmReplyOfDay> getEsmReplyListByWeek(Connection con, int userId, Date startDate, Date endDate){
-		ArrayList<EsmReplyOfDay> EsmReplyOfDayList = new ArrayList<EsmReplyOfDay>();
+	public static ArrayList<EsmResultWithDate> getEsmReplyListByWeek(Connection con, int userId, Date startDate, Date endDate){
+		ArrayList<EsmResultWithDate> EsmReplyOfDayList = new ArrayList<EsmResultWithDate>();
 		try {
 			PreparedStatement pstmtP = con.prepareStatement(SQLST_SELECT_ESM_REPLY_AVG_POSITIVE_LIST_OF_WEEK);
 			pstmtP.setInt(1, userId);
@@ -128,7 +128,7 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 			ResultSet rsP = pstmtP.executeQuery();
 			
 			while(rsP.next()) {
-				EsmReplyOfDayList.add(new EsmReplyOfDay(rsP.getDate(1),rsP.getFloat(2),0));
+				EsmReplyOfDayList.add(new EsmResultWithDate(rsP.getDate(1),rsP.getFloat(2),0));
 			}
 			
 			PreparedStatement pstmtN = con.prepareStatement(SQLST_SELECT_ESM_REPLY_AVG_NEGATIVE_LIST_OF_WEEK);

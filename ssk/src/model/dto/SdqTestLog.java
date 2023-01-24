@@ -35,5 +35,9 @@ public class SdqTestLog {
 		this.sdqTestTime = timeStr;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		return ((sdqTestLogId==((SdqTestLog)o).sdqTestLogId)&&(userId==((SdqTestLog)o).userId)&&(sdqTestDate.equals(((SdqTestLog)o).sdqTestDate))&&(sdqTestTime.equals(((SdqTestLog)o).sdqTestTime)));
+	}
 }
 

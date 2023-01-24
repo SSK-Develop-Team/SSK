@@ -1,10 +1,12 @@
 package model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import model.dto.SdqTestLog;
@@ -12,6 +14,7 @@ import model.dto.SdqTestLog;
 public class SdqTestLogDAO {
 	private final static String SQLST_INSERT_SDQ_TEST_LOG = "insert sdq_test_log(user_id, sdq_test_date, sdq_test_time) values (?,?,?)";
 	private final static String SQLST_SELECT_SDQ_TEST_LOG_BY_USER_ID = "select * from sdq_test_log where user_id = ?";
+	private final static String SQLST_SELECT_SDQ_TEST_LOG_BY_SDQ_TEST_LOG_ID= "select * from sdq_test_log where sdq_test_log_id=?";
 	
 	public static boolean insertSdqTestLog(Connection con, SdqTestLog sdqTestLog) {
 		try {
@@ -56,5 +59,27 @@ public class SdqTestLogDAO {
 			return null;
 		}
 	}
+	
+	public static SdqTestLog getSdqTestLogById(Connection con, int sdqTestLogId) {
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_SDQ_TEST_LOG_BY_SDQ_TEST_LOG_ID);
+			pstmt.setInt(1, sdqTestLogId);
+			ResultSet rs = pstmt.executeQuery();
+			SdqTestLog sdqTestLog = new SdqTestLog();
+			while(rs.next()) {
+				sdqTestLog.setSdqTestLogId(rs.getInt(1));
+				sdqTestLog.setUserId(rs.getInt(2));
+				sdqTestLog.setSdqTestDate(rs.getDate(3));
+				sdqTestLog.setSdqTestTime(rs.getTime(4));
+			}
+			return sdqTestLog;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 
 }
