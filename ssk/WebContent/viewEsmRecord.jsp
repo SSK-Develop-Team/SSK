@@ -77,7 +77,7 @@
 	<div class="w3-row">
 		<div class="w3-col s1 m1 l1">&nbsp;</div>
 		<div class="w3-col s10 m10 l10">
-			<div>&nbsp;</div>
+			<div class="w3-hide-medium w3-hide-large">&nbsp;</div>
 			<div style="font-size:1.3em;"><b>정서 다이어리 조회하기</b></div>
 			<div>&nbsp;</div>
 		 	<div class="w3-row">

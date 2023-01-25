@@ -49,30 +49,30 @@
 		<button class="w3-button w3-xxlarge w3-left" onclick="w3_open()">&#9776;</button>
 	  		<c:choose>
 	  			<c:when test="${user eq null }">
-					<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1.2rem;margin-right:20px;" onclick="location.href='login.jsp';">로그인</button>				
+					<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:20px;" onclick="location.href='login.jsp';">로그인</button>				
 				</c:when>
 				<c:when test="${user.userRole eq 'CHILD'}">
 		  			<form id="f" name = "post" action = "logout">
-			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1.2rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.5rem;" onclick="location.href='../ssk/childHome.jsp'">아동 ${user.userName}&nbsp;님</a>				
+			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
+		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.2rem;" onclick="location.href='../ssk/childHome.jsp'">아동 ${user.userName}&nbsp;님</a>				
 		  			</form>				
 				</c:when>
 				<c:when test="${user.userRole eq 'EXPERT'}">
 		  			<form id="f" name = "post" action = "logout">
-			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1.2rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.5rem;" onclick="location.href='../ssk/GetExpertHome'">전문가 ${user.userName}&nbsp;님</a>				
+			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
+		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.2rem;" onclick="location.href='../ssk/GetExpertHome'">전문가 ${user.userName}&nbsp;님</a>				
 		  			</form>				
 				</c:when>
 	  			<c:otherwise>
 		  			<form id="f" name = "post" action = "logout">
-			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1.2rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.5rem;" onclick="location.href='../ssk/GetAdminHome'">${user.userName}&nbsp;님</a>				
+			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
+		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.2rem;" onclick="location.href='../ssk/GetAdminHome'">${user.userName}&nbsp;님</a>				
 		  			</form>
 	  			</c:otherwise>
 	  		</c:choose>
 	  		<c:remove var="user" scope="page" />
 	  		<div style="margin-left:25px;margin-right:25px;">
-	  		<div class="logo" style="margin-left:200px;font-weight:bold;margin-top:55px;text-align:center;">SSK</div>
+	  		<div class="logo" style="margin-left:17vw;font-weight:bold;margin-top:55px;text-align:center;font-size:1.2rem;">SSK</div>
 	  		<hr class="logo" >
 	  		</div>
 		</div>
