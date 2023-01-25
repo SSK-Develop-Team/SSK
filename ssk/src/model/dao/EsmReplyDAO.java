@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.dto.EsmReply;
+import model.dto.EsmResultOfType;
 import model.dto.EsmResultWithDate;
 import model.dto.EsmTestLog;
 import model.dto.SdqReply;
@@ -39,7 +40,9 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 			"			WHERE user_id = ? AND esm_emotion_id >=6 AND esm_emotion_id<=10 AND esm_test_date>=? AND esm_test_date<=?) ptbl\r\n" + 
 			"		GROUP BY ptbl.esm_test_date, ptbl.esm_test_time) stbl \r\n" + 
 			"	GROUP BY stbl.esm_test_date;";
-	
+	private final static String SQLST_SELECT_ESM_RESULT_BY_ESM_TEST_LOG_ID = "SELECT esm_type, SUM(esm_reply_content) as 'result' FROM esm_reply \r\n" + 
+			"LEFT JOIN esm_emotion on esm_reply.esm_emotion_id = esm_emotion.esm_emotion_id \r\n" + 
+			"WHERE esm_test_log_id=? GROUP BY esm_type";
 	
 	/*정서 반복 기록 응답 삽입*/
 	public static boolean insertEsmReply(Connection con, EsmReply esmReply) {
@@ -64,7 +67,7 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 		return false;
 	}
 	
-	/*정서 반복 기록 응답 조회*/
+	/*정서 반복 기록 응답(reply) 조회*/
 	public static ArrayList<EsmReply> getEsmReplyListByEsmTestLogId(Connection con, int esmTestLogId){
 		try {
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_REPLY_LIST_BY_ESM_TEST_LOG_ID);
@@ -77,6 +80,25 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 				esmReplyList.add(esmReply);
 			}
 			return esmReplyList;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/*정서 반복 기록 결과(result) 조회*/
+	public static ArrayList<EsmResultOfType> getEsmResultByEsmTestLogId(Connection con, int esmTestLogId){
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_RESULT_BY_ESM_TEST_LOG_ID );
+			pstmt.setInt(1, esmTestLogId);
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<EsmResultOfType> esmResultOfTypeList = new ArrayList<EsmResultOfType>();
+			while(rs.next()) {
+				EsmResultOfType esmResultOfType = new EsmResultOfType(rs.getString(1),rs.getInt(2));
+				esmResultOfTypeList.add(esmResultOfType);
+			}
+			return esmResultOfTypeList;
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
