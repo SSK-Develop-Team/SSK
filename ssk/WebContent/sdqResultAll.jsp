@@ -72,7 +72,7 @@
 <body>
 	<%@ include file="sidebar.jsp"%>
 	<!-- page title -->
-   <div style="text-align:center;font-weight:bold;font-size:1.5em;margin-top:0.5em">정서 반복 기록 - 일 별 그래프</div>
+   <div style="text-align:center;font-weight:bold;font-size:1.3em;margin-top:0.5em">정서 발달 검사 결과</div>
    <div>&nbsp;</div>
    <div>&nbsp;</div>
    
