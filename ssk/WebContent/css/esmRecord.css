@@ -1,16 +1,5 @@
 @charset "UTF-8";
 
-#calendar-view{
-	height:100%;
-	padding-left:3em;
-	padding-right:3em;
-	padding-top:5em;
-	padding-bottom:5em;
-}
-#record-view{
-	padding-left:3em;
-	padding-right:3em;
-}
 .fc-daygrid-event-harness{
 	display:inline-block;
 	box-sizing:content-box;
@@ -24,7 +13,4 @@
 }
 .record-create{
 	min-height:9em;
-}
-#record-view{
-	padding:5em;
 }

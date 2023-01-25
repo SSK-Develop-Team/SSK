@@ -28,10 +28,10 @@
 		</c:when>
 		<c:when test="${user.userRole eq 'CHILD'}">
 			<a href="childHome.jsp" class="w3-bar-item w3-button sidebar"><b>홈</b></a>
-			<a href="langTestMain.jsp" class="w3-bar-item w3-button sidebar">언어 발달 검사</a>
+			<a href="GetUserAgeGroup" class="w3-bar-item w3-button sidebar">언어 발달 검사</a>
 			<a href="sdqTestMain.jsp" class="w3-bar-item w3-button sidebar">정서/행동 발달 검사</a>
 			<a href="esmTestMain.jsp" class="w3-bar-item w3-button sidebar">정서 반복 기록</a>
-			<a href="GetEsmRecord" class="w3-bar-item w3-button sidebar">정서 다이어리</a>
+			<a href="GetEsmRecordMain" class="w3-bar-item w3-button sidebar">정서 다이어리</a>
 		</c:when>
 		<c:otherwise>
 			<a href="#" class="w3-bar-item w3-button sidebar">로그인이 필요합니다. </a>
