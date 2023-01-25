@@ -21,5 +21,5 @@ public enum EsmType {
 				.findAny()
 				.orElse(positive);
 	}
-
+	
 }

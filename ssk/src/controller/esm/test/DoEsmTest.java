@@ -58,25 +58,15 @@ public class DoEsmTest extends HttpServlet {
 		HashMap<Integer, Integer> esmEmotionRecordMap = (HashMap<Integer,Integer>)session.getAttribute("esmEmotionRecordMap");
 	 	
 	 	ArrayList<EsmReply> esmReplyList = new ArrayList<EsmReply>();
-	 	int positive = 0, negative = 0;
 	 	for(Integer key :esmEmotionRecordMap.keySet()) {
 	 		EsmReply esmReply = new EsmReply(esmTestLog.getEsmTestLogId(), key, esmEmotionRecordMap.get(key));
-	 		System.out.println(key);
-	 		if(key>=1&&key<=5) positive+=esmEmotionRecordMap.get(key);
-	 		else negative+=esmEmotionRecordMap.get(key);
 	 		EsmReplyDAO.insertEsmReply(conn, esmReply);
 	 		esmReplyList.add(esmReply);
 	 	}
 	 	
-	 	System.out.println(positive + " " + negative);
-	 	
-	 	request.setAttribute("positive",positive);
-	 	request.setAttribute("negative",negative);
-	 	
 		session.removeAttribute("esmEmotionRecordMap");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/esmResult.jsp");
-		rd.forward(request, response);
+		response.sendRedirect(getServletContext().getContextPath()+"/GetEsmResult?esmTestLogId="+esmTestLog.getEsmTestLogId());
 		
 	}
 
