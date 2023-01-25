@@ -47,16 +47,11 @@ public class GetDayEsmRecord extends HttpServlet {
 	 	
 	 	//해당 날짜의 기록 조회
 	 	ArrayList<EsmRecord> currEsmRecordList = (ArrayList<EsmRecord>)EsmRecordDAO.getEsmRecordListByDate(conn, currUser.getUserId(), selectedDateValue);
-	 	
-	 	/*사용자의 EsmRecord 목록 가져오기 -> session events JSON 객체로 저장*/ 
-		ArrayList<Date> esmRecordDateList = (ArrayList<Date>)EsmRecordDAO.getEsmRecordDateList(conn, currUser.getUserId());
-		JSONObject eventsJsonObject = EsmRecordProcessor.EsmRecordDateListToJSON(esmRecordDateList);
 		
-		session.setAttribute("eventsJsonObject",eventsJsonObject);
 	 	request.setAttribute("currEsmRecordList", currEsmRecordList);
 	 	request.setAttribute("currDateStr", selectedDateStr);
 	 	
-	 	RequestDispatcher rd = request.getRequestDispatcher("/esmRecord.jsp");
+	 	RequestDispatcher rd = request.getRequestDispatcher("/viewEsmRecord.jsp");
 		rd.forward(request, response);
 	}
 
