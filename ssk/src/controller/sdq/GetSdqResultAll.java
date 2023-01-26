@@ -1,6 +1,7 @@
 package controller.sdq;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
@@ -54,6 +55,11 @@ public class GetSdqResultAll extends HttpServlet {
 		
 		//모든 SdqTestLog
 		ArrayList<SdqTestLog> sdqTestLogList = SdqTestLogDAO.getSdqTestLogAllByUserId(conn, focusUser.getUserId());
+		if(sdqTestLogList.size()==0) {
+ 			PrintWriter out = response.getWriter();
+ 			out.println("<script>location.href='../ssk/sdqTestMain.jsp';alert('검사 후 다시 조회하세요.');</script>");
+ 			out.flush();
+ 		}
 		SdqTestLog selectedSdqTestLog = null;
 		
 		//선택한 테스트 로그 정보 가져오기

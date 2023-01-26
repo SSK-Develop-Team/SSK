@@ -1,6 +1,7 @@
 package controller.esm.test;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.Date;
@@ -46,6 +47,13 @@ public class GetEsmTestProfileByTime extends HttpServlet {
 	 	
 		// reply 날짜 데이터
 		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, currUser.getUserId());
+		if(esmTestDateList.size()==0) {
+ 			PrintWriter out = response.getWriter();
+ 			out.println("<script>location.href='../ssk/esmTestMain.jsp';alert('기록 후 다시 조회하세요.');</script>");
+ 			session.setAttribute("currUser", currUser);
+ 			out.flush();
+ 		}
+		
 	 	ArrayList<EsmTestLog> selectedDateEsmTestLogList = new ArrayList<EsmTestLog>();
 
 		String selectedDateStr = request.getParameter("date");
