@@ -16,6 +16,7 @@
 	<link href='fullcalendar/main.css' rel='stylesheet' />
 	<link href="css/esmRecord.css" rel="stylesheet" type='text/css' >
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 	
 	<script src='fullcalendar/main.js'></script>
 	<script src='fullcalendar/locales-all.js'></script>

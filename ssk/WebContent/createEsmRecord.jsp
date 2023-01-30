@@ -18,6 +18,7 @@
 	<head>
 	<title>정서 다이어리 기록하기</title>
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <%@ include file="sidebar.jsp"%>

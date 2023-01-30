@@ -1,6 +1,7 @@
 package controller.esm.test;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -44,7 +45,12 @@ public class GetEsmTestProfileByDay extends HttpServlet {
 	 	User currUser = (User)session.getAttribute("currUser");
 	 	
  		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, currUser.getUserId());// 기록(테스트)한 모든 날짜 
- 		
+ 		if(esmTestDateList.size()==0) {
+ 			PrintWriter out = response.getWriter();
+ 			out.println("<script>location.href='../ssk/esmTestMain.jsp';alert('기록 후 다시 조회하세요.');</script>");
+ 			session.setAttribute("currUser", currUser);
+ 			out.flush();
+ 		}
  		/**
  		 * selected week -> graph data
  		 * */
