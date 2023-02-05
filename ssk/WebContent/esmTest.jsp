@@ -76,7 +76,7 @@
 			<div class="w3-row">
 				<div class="w3-col s1 m1 l3">&nbsp;</div>
 				<%if(esmEmotionList.get(0).getEsmType().equals("positive")){ %>
-				<button class="w3-col s5 m5 l3 esmBtn" onclick="location.href='../ssk/esmTestMain.jsp';">메인으로</button>
+				<button class="w3-col s5 m5 l3 esmBtn" onclick="location.href='esmTestMain.jsp';">메인으로</button>
 				<button class="w3-col s5 m5 l3 esmBtn" onclick="document.getElementById('esmForm').submit();">다음으로</button>
 				<%}else{ %>
 				<button class="w3-col s5 m5 l3 esmBtn" onclick="getPreviousEsmEmotion();">이전으로</button>

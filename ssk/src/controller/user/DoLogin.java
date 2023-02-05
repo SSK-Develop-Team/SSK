@@ -42,7 +42,7 @@ public class DoLogin extends HttpServlet {
 		if(currUser == null) { //login failed
 			System.out.println("User not found");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('회원 정보를 확인해주세요.'); location.href='../ssk/login.jsp';</script>");
+			out.println("<script>alert('회원 정보를 확인해주세요.'); location.href='login.jsp';</script>");
 			out.flush();
 		}
 		else { //login success

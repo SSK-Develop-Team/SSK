@@ -117,7 +117,7 @@
 			<%} %>
 			<p>
 			<div class="btnBox" style="float : right; margin-top : 3%;">
-				<input type="button" class="btn" id="cancelLang" value="취소" onClick="location.href='../ssk/langTestMain.jsp'">
+				<input type="button" class="btn" id="cancelLang" value="취소" onClick="location.href='langTestMain.jsp'">
 				<input type="submit" class="btn" id="submitLang" value="결과 제출">
 			</div>
 		</form>

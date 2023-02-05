@@ -13,7 +13,7 @@
 			frm.user_login_id.focus();
 			return;
 		}
-		url = "../ssk/checkId?id=" + id;
+		url = "checkId?id=" + id;
 		window.open(url, "IDCheck", "width=300,height=150");
 	}
 

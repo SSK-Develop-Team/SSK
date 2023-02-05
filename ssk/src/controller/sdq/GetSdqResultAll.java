@@ -57,7 +57,7 @@ public class GetSdqResultAll extends HttpServlet {
 		ArrayList<SdqTestLog> sdqTestLogList = SdqTestLogDAO.getSdqTestLogAllByUserId(conn, focusUser.getUserId());
 		if(sdqTestLogList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>location.href='../ssk/sdqTestMain.jsp';alert('검사 후 다시 조회하세요.');</script>");
+ 			out.println("<script>location.href='sdqTestMain.jsp';alert('검사 후 다시 조회하세요.');</script>");
  			out.flush();
  		}
 		SdqTestLog selectedSdqTestLog = null;

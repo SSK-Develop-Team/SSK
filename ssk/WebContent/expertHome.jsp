@@ -17,7 +17,7 @@
 </div>
 </div>
 <div class="buttons" style="width:100%;">
-	<button class="w3-button w3-right" onclick="location.href='../ssk/register.jsp?role=child';">아동 계정 생성</button>
+	<button class="w3-button w3-right" onclick="location.href='register.jsp?role=child';">아동 계정 생성</button>
 	<button class="w3-button w3-right">선택 계정 수정</button>
 	<button class="w3-button w3-right">선택 계정 삭제</button>
 </div>

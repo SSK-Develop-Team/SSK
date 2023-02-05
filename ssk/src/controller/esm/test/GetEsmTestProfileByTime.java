@@ -49,7 +49,7 @@ public class GetEsmTestProfileByTime extends HttpServlet {
 		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, currUser.getUserId());
 		if(esmTestDateList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>location.href='../ssk/esmTestMain.jsp';alert('기록 후 다시 조회하세요.');</script>");
+ 			out.println("<script>location.href='esmTestMain.jsp';alert('기록 후 다시 조회하세요.');</script>");
  			session.setAttribute("currUser", currUser);
  			out.flush();
  		}
