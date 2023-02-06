@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import model.dao.UserDAO;
 import model.dto.User;
+import model.dto.UserPaging;
 
 /**
  * 전문가 홈 - 모든 아동 리스트 조회 페이지
@@ -35,10 +36,20 @@ public class GetExpertHome extends HttpServlet {
 	    ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 	 	
-		//모든 아동 리스트 가져오기 
-		ArrayList<User> childList = UserDAO.getUserListByUserRole(conn, "CHILD");
+		// 아동 pagination 초기화
+	 	int curPage = 1;
+		UserPaging userPaging = new UserPaging();
+		userPaging.makeLastPageNum(conn);
+		userPaging.makeBlock(curPage);//첫 페이지로 시작
 		
-		request.setAttribute("childList",childList);
+		//페이지에 해당하는 아동 목록 불러오기 - default 정렬 : 등록일 순
+		int startIndex = curPage-1;
+		int length = UserPaging.getListRange();
+		
+		ArrayList<User> currUserList = UserDAO.getUserListByUserRoleOrderByRegistrationDateLimit(conn, "CHILD", startIndex, length);
+		
+		request.setAttribute("userPaging",userPaging);
+		request.setAttribute("currUserList", currUserList);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/expertHome.jsp");
 		rd.forward(request, response);

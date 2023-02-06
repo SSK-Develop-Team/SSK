@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,24 @@
 	<button class="w3-button w3-right" onclick="location.href='register.jsp?role=child';">아동 계정 생성</button>
 	<button class="w3-button w3-right">선택 계정 수정</button>
 	<button class="w3-button w3-right">선택 계정 삭제</button>
+</div>
+<%
+UserPaging userPaging = (UserPaging)request.getAttribute("userPaging");
+ArrayList<User> currUserList = (ArrayList<User>)request.getAttribute("currUserList");
+for (int i =0;i<currUserList.size();i++){
+	%>
+	<div><%=currUserList.get(i).getUserLoginId() %></div>
+<% }%>
+<div>page count : <%=userPaging.getLastPageNum() %></div>
+<div class="w3-center">
+<div class="w3-bar">
+  <a href="#" class="w3-bar-item w3-button">&laquo;</a>
+  <a href="#" class="w3-button">1</a>
+  <a href="#" class="w3-button">2</a>
+  <a href="#" class="w3-button">3</a>
+  <a href="#" class="w3-button">4</a>
+  <a href="#" class="w3-button">&raquo;</a>
+</div>
 </div>
 </body>
 </html>
