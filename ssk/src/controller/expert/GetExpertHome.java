@@ -38,17 +38,27 @@ public class GetExpertHome extends HttpServlet {
 	 	
 		// 아동 pagination 초기화
 	 	int curPage = 1;
+	 	if(request.getParameter("curPage")==null) {
+	 		curPage = 1;
+	 	}else {
+	 		curPage = Integer.parseInt(request.getParameter("curPage"));
+	 	}
+	 	
 		UserPaging userPaging = new UserPaging();
 		userPaging.makeLastPageNum(conn);
 		userPaging.makeBlock(curPage);//첫 페이지로 시작
+		System.out.println(userPaging.getBlockStartNum());
+		System.out.println(userPaging.getBlockEndNum());
+		System.out.println(userPaging.getLastPageNum());
 		
 		//페이지에 해당하는 아동 목록 불러오기 - default 정렬 : 등록일 순
-		int startIndex = curPage-1;
 		int length = UserPaging.getListRange();
+		int startIndex = (curPage-1)*length;
 		
 		ArrayList<User> currUserList = UserDAO.getUserListByUserRoleOrderByRegistrationDateLimit(conn, "CHILD", startIndex, length);
 		
 		request.setAttribute("userPaging",userPaging);
+		request.setAttribute("currPageNum", curPage);
 		request.setAttribute("currUserList", currUserList);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/expertHome.jsp");

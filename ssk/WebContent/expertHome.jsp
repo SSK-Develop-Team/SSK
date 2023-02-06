@@ -23,21 +23,66 @@
 	<button class="w3-button w3-right">선택 계정 삭제</button>
 </div>
 <%
-UserPaging userPaging = (UserPaging)request.getAttribute("userPaging");
-ArrayList<User> currUserList = (ArrayList<User>)request.getAttribute("currUserList");
-for (int i =0;i<currUserList.size();i++){
+	UserPaging userPaging = (UserPaging)request.getAttribute("userPaging");
+	ArrayList<User> currUserList = (ArrayList<User>)request.getAttribute("currUserList");
+	int blockStartNum = userPaging.getBlockStartNum();
+	int blockEndNum = userPaging.getBlockEndNum();
+	int lastPageNum = userPaging.getLastPageNum();
+	int currPageNum = (int)request.getAttribute("currPageNum");
+	int blockRange = UserPaging.getBlockRange();
+	
+%>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 정렬 기준 : 등록일 순</div>
+<div class="w3-container">
+  <table class="w3-table-all w3-hoverable">
+    <thead>
+      <tr class="w3-light-grey">
+      	<th>&nbsp;</th>
+        <th>NO.</th>
+        <th>이름</th>
+        <th>아이디</th>
+        <th>생년월일</th>
+        <th>등록일</th>
+        <th>이메일</th>
+      </tr>
+    </thead>
+    <%for (int i =0;i<currUserList.size();i++){
 	%>
-	<div><%=currUserList.get(i).getUserLoginId() %></div>
-<% }%>
-<div>page count : <%=userPaging.getLastPageNum() %></div>
+	<tr onclick = "location.href='GetExpertToChildHome?userId=<%=currUserList.get(i).getUserId()%>';">
+	  <td><input type="checkbox" id="check"/></td>
+      <td><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
+      <td><%=currUserList.get(i).getUserName() %></td>
+      <td><%=currUserList.get(i).getUserLoginId() %></td>
+      <td><%=currUserList.get(i).getUserBirth() %></td>
+      <td><%=currUserList.get(i).getRegistrationDate() %></td>
+      <td><%=currUserList.get(i).getUserEmail() %></td>
+    </tr>
+	<% }%>
+  </table>
+</div>
 <div class="w3-center">
 <div class="w3-bar">
-  <a href="#" class="w3-bar-item w3-button">&laquo;</a>
-  <a href="#" class="w3-button">1</a>
-  <a href="#" class="w3-button">2</a>
-  <a href="#" class="w3-button">3</a>
-  <a href="#" class="w3-button">4</a>
-  <a href="#" class="w3-button">&raquo;</a>
+	<c:set var="uPaging" scope="page" value="${requestScope.userPaging}" />
+	<c:set var="curPageNum" scope="page" value="${requestScope.currPageNum}" />
+	<c:if test="${curPageNum > blockRange}">
+	 <a href="GetExpertHome?curPage=${uPaging.blockStartNum - 1}" class="w3-bar-item w3-button">&laquo;</a>
+	</c:if>
+ 	<c:forEach var="i" begin="${uPaging.blockStartNum}" end="${uPaging.blockEndNum}">
+ 		<c:choose>
+ 			<c:when test="${i>uPaging.lastPageNum}"></c:when>
+ 			<c:when test="${i==curPageNum}">
+ 				<a href="#" class="w3-button w3-gray">${i}</a>
+ 			</c:when>
+ 			<c:otherwise>
+ 				<a href="GetExpertHome?curPage=${i}" class="w3-button">${i}</a>
+ 			</c:otherwise>
+ 		</c:choose>
+ 	</c:forEach>
+  	<c:if test="${uPaging.lastPageNum > uPaging.blockEndNum}">
+	 <a href="GetExpertHome?curPage=${uPaging.blockEndNum + 1}" class="w3-bar-item w3-button">&raquo;</a>
+	</c:if>
+  	<c:remove var="uPaging" scope="page"/>
+  	<c:remove var="curPageNum" scope="page"/>
 </div>
 </div>
 </body>

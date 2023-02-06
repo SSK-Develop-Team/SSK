@@ -52,6 +52,10 @@ public class UserPaging {
 		return listRange;
 	}
 	
+	public static int getBlockRange() {
+		return blockRange;
+	}
+	
 	/*현재 페이지 번호를 기준으로 block의 시작과 끝 번호를 계산*/
 	public void makeBlock(int curPage) {
 		int blockNum = 0;
