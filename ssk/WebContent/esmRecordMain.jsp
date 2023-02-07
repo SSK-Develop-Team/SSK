@@ -66,7 +66,7 @@
 	  }
 	 function getCreateEsmRecordPage(){
 		 var selectedDateStr = document.getElementById("selectedDateStrInput").value;
-		 location.href="../ssk/createEsmRecord.jsp?date="+selectedDateStr;
+		 location.href="createEsmRecord.jsp?date="+selectedDateStr;
 	 }
 	 
 	 

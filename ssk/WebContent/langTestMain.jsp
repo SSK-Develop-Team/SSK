@@ -83,7 +83,7 @@
 				<p>(<%=ageStr[curAge] %>)</p>
 				<p>해당 단계를 진행하시겠습니까?</p>
 				<button id="otherBtn" onClick="selectModalOpen()">다른 단계 진행</button>
-				<button id="testBtn" onClick="location.href='../ssk/GetLangTest'">해당 단계 진행</button>
+				<button id="testBtn" onClick="location.href='GetLangTest'">해당 단계 진행</button>
 			</div>
 		</div>
 	</div>

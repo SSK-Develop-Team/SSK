@@ -86,7 +86,7 @@
 			<div class="w3-col s1 m1 l1 w3-center"onclick="alert('이전 기록이 없습니다.');"><img src="./image/left-arrow.png" style="width:2.5em; opacity: 0.5;"/></div>
 		</c:when>
 		<c:otherwise>
-			<div class="w3-col s1 m1 l1 w3-center" onclick="location.href='../ssk/GetSdqResultAll?sdqTestLogId=<%=sdqTestLogList.get(selectedIndex-1).getSdqTestLogId()%>'"><img src="./image/left-arrow.png" style="width:2.5em;"/></div>
+			<div class="w3-col s1 m1 l1 w3-center" onclick="location.href='GetSdqResultAll?sdqTestLogId=<%=sdqTestLogList.get(selectedIndex-1).getSdqTestLogId()%>'"><img src="./image/left-arrow.png" style="width:2.5em;"/></div>
 		</c:otherwise>
 		</c:choose>
 		
@@ -95,7 +95,7 @@
 			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=selectedSdqTestLog.getSdqTestDate().toString()%>&nbsp;<%=selectedSdqTestLog.getSdqTestTime().toString()%></button>
 			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
 			      <%for(int i = sdqTestLogList.size()-1 ; i >= 0 ;i--){ %>
-			      <a href="../ssk/GetSdqResultAll?sdqTestLogId=<%=sdqTestLogList.get(i).getSdqTestLogId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=sdqTestLogList.get(i).getSdqTestDate().toString()%>&nbsp;<%=sdqTestLogList.get(i).getSdqTestTime().toString()%></a>
+			      <a href="GetSdqResultAll?sdqTestLogId=<%=sdqTestLogList.get(i).getSdqTestLogId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=sdqTestLogList.get(i).getSdqTestDate().toString()%>&nbsp;<%=sdqTestLogList.get(i).getSdqTestTime().toString()%></a>
 			      <%} %>
 			    </div>
 		    </div>
@@ -106,7 +106,7 @@
 			<div class="w3-col s1 m1 l1 w3-center"onclick="alert('다음 기록이 없습니다.');"><img src="./image/right-arrow.png" style="width:2.5em; opacity: 0.5;"/></div>
 		</c:when>
 		<c:otherwise>
-			<div class="w3-col s1 m1 l1 w3-center"onclick="location.href='../ssk/GetSdqResultAll?sdqTestLogId=<%=sdqTestLogList.get(selectedIndex+1).getSdqTestLogId()%>'"><img src="./image/right-arrow.png" style="width:2.5em;"/></div>
+			<div class="w3-col s1 m1 l1 w3-center"onclick="location.href='GetSdqResultAll?sdqTestLogId=<%=sdqTestLogList.get(selectedIndex+1).getSdqTestLogId()%>'"><img src="./image/right-arrow.png" style="width:2.5em;"/></div>
 		</c:otherwise>
 		</c:choose>
 		
@@ -130,7 +130,7 @@
 		</div>
 		<div class="w3-col s1 m1 l3">&nbsp;</div>
 		<div class="w3-col w3-row s3 m2 l1">
-			<button class="w3-button w3-col w3-padding"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;"onclick="location.href='../ssk/sdqTestMain.jsp';">메인으로</button>
+			<button class="w3-button w3-col w3-padding"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;"onclick="location.href='sdqTestMain.jsp';">메인으로</button>
 		</div>
 		<div class="w3-col s2 m2 l3">&nbsp;</div>
 	</div>

@@ -34,7 +34,7 @@
 				<textarea name="newRecordText" style="border:1px solid #1A2A3A;border-radius:10px;margin-bottom:10px;width:100%;height:30vh;font-size:1em;"></textarea>
 				<button class="w3-button w3-col w3-padding"style="border:1px solid #1A2A3A;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;">기록하기</button>
 			</form>
-			<button class="w3-button w3-col w3-padding"style="border:1px solid #1A2A3A;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;"onclick="location.href='../ssk/GetEsmRecordMain'">돌아가기</button>
+			<button class="w3-button w3-col w3-padding"style="border:1px solid #1A2A3A;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;"onclick="location.href='GetEsmRecordMain'">돌아가기</button>
 		</div>
 		<div class="w3-col s1 m3 l4">&nbsp;</div>
 	</div>

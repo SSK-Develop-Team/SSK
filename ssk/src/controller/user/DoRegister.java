@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.dao.UserDAO;
 import model.dto.User;
@@ -28,9 +29,21 @@ public class DoRegister extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("UTF-8");
+	    HttpSession session = request.getSession(true);
 
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
+		
+		User currUser = (User)session.getAttribute("currUser");
+		
+		String location="";
+		if(currUser.getUserRole().equals("ADMIN")) {
+			location = "GetAdminHome";
+		}else if(currUser.getUserRole().equals("EXPERT")) {
+			location = "GetExpertHome";
+		}else {
+			location = "login.jsp";
+		}
 		
 	    String userid = request.getParameter("userId");
 	    String userpw = request.getParameter("userPw");
@@ -69,12 +82,12 @@ public class DoRegister extends HttpServlet {
 		join_result = UserDAO.insertUser(conn, user);
 		if(join_result == false) {
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('계정 정보를 확인해주세요.'); location.href='../ssk/register.jsp';</script>");
+			out.println("<script>alert('계정 정보를 확인해주세요.'); location.href='register.jsp';</script>");
 			out.flush();
 		}
 		else { 
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('계정 생성 성공'); location.href='../ssk/login.jsp';</script>");
+			out.println("<script>alert('계정 생성 성공'); location.href='"+location+"';</script>");
 			out.flush();
 		}		
 	}

@@ -74,7 +74,7 @@ $(window).resize(function(){
 	<div class="w3-row">
 		<div class="w3-col s1 m3 l4">&nbsp;</div>
 		<div class="w3-col s10 m6 l4">
-			<button class="w3-button w3-col w3-padding"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;"onclick="location.href='../ssk/esmTestMain.jsp';">메인으로</button>
+			<button class="w3-button w3-col w3-padding"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;"onclick="location.href='esmTestMain.jsp';">메인으로</button>
 		</div>
 		<div class="w3-col s1 m3 l4">&nbsp;</div>
 	</div>
