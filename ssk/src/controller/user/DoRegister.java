@@ -47,7 +47,6 @@ public class DoRegister extends HttpServlet {
 		
 	    String userid = request.getParameter("userId");
 	    String userpw = request.getParameter("userPw");
-		String userpwchk = request.getParameter("userPwChk");
 		String username = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
 		String userRole = request.getParameter("userRole");

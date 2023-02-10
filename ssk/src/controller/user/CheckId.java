@@ -1,6 +1,9 @@
 package controller.user;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
@@ -13,33 +16,65 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.dao.UserDAO;
 
-@WebServlet("/checkId")
+@WebServlet("/CheckId")
 public class CheckId extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    private String checkResult;
        
     public CheckId() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
-	    request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		String id = getBody(request);// 넘어온 id 읽기
+		System.out.println("id : "+id);
 		
-		// for DB Connection
 		ServletContext sc = getServletContext();
-		Connection conn= (Connection) sc.getAttribute("DBconnection");
+	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 		
-		String id = (String) request.getParameter("id");
-		boolean result = UserDAO.checkId(conn, id);
-		request.setAttribute("result", result);
+		System.out.println("checkId : "+UserDAO.checkId(conn, id));
+		checkResult = (UserDAO.checkId(conn, id)) ? "ok" : "error";
 		
-		// 이동
-		RequestDispatcher rd = request.getRequestDispatcher("/checkid.jsp");
-		rd.forward(request, response);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(checkResult);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
+	public static String getBody(HttpServletRequest request) throws IOException {
+		 
+        String body = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+ 
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+ 
+        body = stringBuilder.toString();
+        return body;
+    }
 
 }
