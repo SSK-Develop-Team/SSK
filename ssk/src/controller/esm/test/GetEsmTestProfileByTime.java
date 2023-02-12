@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import model.dao.EsmReplyDAO;
 import model.dao.EsmTestLogDAO;
+import model.dao.UserDAO;
 import model.dto.EsmReply;
 import model.dto.EsmTestLog;
 import model.dto.User;
@@ -35,7 +36,6 @@ public class GetEsmTestProfileByTime extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("UTF-8");
 	    HttpSession session = request.getSession(true);
@@ -43,27 +43,35 @@ public class GetEsmTestProfileByTime extends HttpServlet {
 	 	ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 	 	
-	 	User currUser = (User)session.getAttribute("currUser");
+	 	User focusUser = new User();
+	 	
+	 	if(request.getParameter("childId")==null) {//아동이 로그인한 상태 : 자신의 아이디를 parameter로 보내지 않았을 때
+	 		focusUser = (User)session.getAttribute("currUser");
+		}else{
+			int childId = Integer.parseInt(request.getParameter("childId"));
+		 	focusUser  = UserDAO.getUserById(conn, childId);
+		}
+	 	
 	 	
 		// reply 날짜 데이터
-		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, currUser.getUserId());
+		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, focusUser.getUserId());
 		if(esmTestDateList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>location.href='esmTestMain.jsp';alert('기록 후 다시 조회하세요.');</script>");
- 			session.setAttribute("currUser", currUser);
+ 			out.println("<script>alert('기록 후 다시 조회하세요.');history.go(-1);</script>");
  			out.flush();
  		}
 		
 	 	ArrayList<EsmTestLog> selectedDateEsmTestLogList = new ArrayList<EsmTestLog>();
 
-		String selectedDateStr = request.getParameter("date");
-		
-		if(selectedDateStr.equals("0")) {
-			selectedDateEsmTestLogList = (ArrayList<EsmTestLog>) EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, currUser.getUserId(), esmTestDateList.stream().map(i->i).max(Date::compareTo).get());
-		}else {
-            Date selectedDate = Date.valueOf(selectedDateStr);
-            selectedDateEsmTestLogList = (ArrayList<EsmTestLog>) EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, currUser.getUserId(), selectedDate);
+		if(request.getParameter("date")==null) {
+			selectedDateEsmTestLogList = (ArrayList<EsmTestLog>) EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, focusUser.getUserId(), esmTestDateList.stream().map(i->i).max(Date::compareTo).get());
+		}else{
+			String selectedDateStr = request.getParameter("date");
+			System.out.println(selectedDateStr);
+			Date selectedDate = Date.valueOf(selectedDateStr);
+            selectedDateEsmTestLogList = (ArrayList<EsmTestLog>) EsmTestLogDAO.getEsmTestLogByUserIdAndDate(conn, focusUser.getUserId(), selectedDate);
 		}
+		
 		int selectedIndexOfEsmTestDateList = esmTestDateList.indexOf(selectedDateEsmTestLogList.get(0).getEsmTestDate());
 		
 		// day를 기준으로 해당 데이터 가져오기
@@ -75,6 +83,7 @@ public class GetEsmTestProfileByTime extends HttpServlet {
 			negativeList.add(EsmReplyDAO.getEsmReplyNegativeValueByEsmTestLogId(conn, selectedDateEsmTestLogList.get(i).getEsmTestLogId()));
 		}
 		
+		request.setAttribute("focusUser", focusUser);
 		request.setAttribute("esmTestDateList", esmTestDateList);//기록이 있는 일자 정보
 		request.setAttribute("selectedIndexOfEsmTestDateList", selectedIndexOfEsmTestDateList);
 		request.setAttribute("selectedEsmTestLogList", selectedDateEsmTestLogList);//선택된 일자의 기록 리스트

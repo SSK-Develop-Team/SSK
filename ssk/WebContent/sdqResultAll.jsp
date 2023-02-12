@@ -126,7 +126,7 @@
 	<div class="w3-row w3-margin-top">
 		<div class="w3-col s2 m3 l3">&nbsp;</div>
 		<div class="w3-col w3-row s4 m3 l2">
-			<button class="w3-button w3-col w3-padding" id="sdqPopUpBtn" style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;"onclick="document.getElementById('modal').style.display='block';">검사 결과 설명 보기</button>
+			<button class="w3-button w3-col" style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;padding:0px;"onclick="document.getElementById('modal').style.display='block';">검사 결과 설명 보기</button>
 		</div>
 		<div class="w3-col s1 m1 l3">&nbsp;</div>
 		<div class="w3-col w3-row s3 m2 l1">

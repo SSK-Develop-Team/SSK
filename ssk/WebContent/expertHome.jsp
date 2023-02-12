@@ -48,7 +48,7 @@
     </thead>
     <%for (int i =0;i<currUserList.size();i++){
 	%>
-	<tr onclick = "location.href='GetExpertToChildHome?userId=<%=currUserList.get(i).getUserId()%>';">
+	<tr onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';">
 	  <td><input type="checkbox" id="check"/></td>
       <td><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
       <td><%=currUserList.get(i).getUserName() %></td>
