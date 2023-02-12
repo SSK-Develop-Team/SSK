@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import model.dto.User;
 
 public class UserDAO {
-	
-	private final static String SQLST_SELECT_USER_LOGIN_ID_BY_ID = "select user_login_id from user_profile where user_login_id = ?;";
 	private final static String SQLST_SELECT_USER_BY_LOGIN_ID = "select * from user_profile where user_login_id = ?";
 	private final static String SQLST_SELECT_USER_BY_ID = "select * from user_profile where user_id=?";
 	private final static String SQLST_INSERT_USER = "insert user_profile(user_login_id, user_password, user_name, "
@@ -22,10 +20,10 @@ public class UserDAO {
 	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE_ORDER_BY_REGISTRATION_DATE_LIMIT = "SELECT * FROM user_profile WHERE user_role=? ORDER BY registration_date DESC LIMIT ?, ?";
 	private final static String SQLST_DELETE_USER = "DELETE FROM user_profile WHERE user_id = ?";
 	
-	public static boolean checkId(Connection con, String userid){
+	public static boolean checkId(Connection con, String userId){
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_USER_LOGIN_ID_BY_ID);
-			pstmt.setString(1, userid);
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_USER_BY_LOGIN_ID);
+			pstmt.setString(1, userId);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
