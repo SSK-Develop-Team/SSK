@@ -78,6 +78,7 @@
 		<div class="w3-col s1 m3 l4">&nbsp;</div>
 		<div class="w3-col s10 m6 l4">
 			<div style="font-size:1.3em;"><b>정서 다이어리</b></div>
+			<div style="font-size:0.8em;">  날짜를 선택한 후 기록하기를 클릭하여 입력해주세요.</div>
 			<div>&nbsp;</div>
 			<div id="calendar-view">
 				<div id='calendar' style="width:100%;"></div>

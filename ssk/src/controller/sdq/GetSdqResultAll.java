@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import model.dao.SdqReplyDAO;
 import model.dao.SdqResultAnalysisDAO;
 import model.dao.SdqTestLogDAO;
+import model.dao.UserDAO;
 import model.dto.SdqReply;
 import model.dto.SdqResultAnalysis;
 import model.dto.SdqResultOfType;
@@ -51,19 +52,26 @@ public class GetSdqResultAll extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
 		
-		User focusUser = (User)session.getAttribute("currUser");
+		User focusUser = new User();
+	 	
+	 	if(request.getParameter("childId")==null) {//아동이 로그인한 상태 : 자신의 아이디를 parameter로 보내지 않았을 때
+	 		focusUser = (User)session.getAttribute("currUser");
+		}else{
+			int childId = Integer.parseInt(request.getParameter("childId"));
+		 	focusUser  = UserDAO.getUserById(conn, childId);
+		}
 		
 		//모든 SdqTestLog
 		ArrayList<SdqTestLog> sdqTestLogList = SdqTestLogDAO.getSdqTestLogAllByUserId(conn, focusUser.getUserId());
 		if(sdqTestLogList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>location.href='sdqTestMain.jsp';alert('검사 후 다시 조회하세요.');</script>");
+ 			out.println("<script>alert('검사 후 다시 조회하세요.');history.go(-1);</script>");
  			out.flush();
  		}
 		SdqTestLog selectedSdqTestLog = null;
 		
 		//선택한 테스트 로그 정보 가져오기
-		if((request.getParameter("sdqTestLogId")).equals("0")) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
+		if(request.getParameter("sdqTestLogId")==null) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
 			Comparator<SdqTestLog> comparatorById = Comparator.comparingInt(SdqTestLog::getSdqTestLogId);
 			selectedSdqTestLog = sdqTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
 		}else {

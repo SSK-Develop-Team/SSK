@@ -156,9 +156,9 @@
 		<div class="w3-col s1 m1 l3">&nbsp;</div>
 		<div class="w3-col w3-row s3 m2 l1">
 			<%if(currUser.getUserRole().equals("CHILD")){ %>
-			<button class="w3-button w3-col"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;padding:0px;"onclick="location.href='esmTestMain.jsp';">메인으로</button>
+			<button class="w3-button w3-col"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;padding:0px;"onclick="location.href='esmTestMain.jsp';">메인으로</button>
 		<%}else{ %>
-			<button class="w3-button w3-col"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;padding:0px;"onclick="location.href='GoToChildHome?childId=<%=focusUser.getUserId()%>';">메인으로</button>
+			<button class="w3-button w3-col"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;padding:0px;"onclick="location.href='GoToChildHome?childId=<%=focusUser.getUserId()%>';">메인으로</button>
 		<%} %>
 		</div>
 		<div class="w3-col s2 m2 l3">&nbsp;</div>

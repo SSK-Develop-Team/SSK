@@ -20,7 +20,7 @@
 <div class="w3-center" style="font-weight:bold;font-size:25px;"> 정서 반복 기록</div>
 <div class="w3-display-container" style="width:100%;height:150px;">
 <div class="w3-display-middle" style="text-align:center;"><%=name %>(이)의 정서를 관찰할 시간입니다. <br>
-			지금 이 시간, <%=name %>(이)의 정서를 정서 반복 기록에 기록해 주세요.<br>
+			지금 이 시간, <%=name %>(이)의 정서를 하단의 기록하기 버튼을 눌러 입력해주세요.<br>
 			시간에 따른 자녀의 정서 변화를 시각화된 결과 프로파일로 확인할 수 있습니다.<br></div>
 </div>
 <div>&nbsp;</div><div>&nbsp;</div>
