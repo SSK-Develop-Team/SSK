@@ -1,4 +1,4 @@
-package controller.admin;
+package controller.user;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -17,13 +17,14 @@ import model.dto.User;
 import model.dto.UserPaging;
 
 /**
- * Admin 홈 - 모든 전문가 끌어오기
+ * 아동 계정 관리
+ * 관리자, 전문가 공통
  */
-@WebServlet("/GetAdminHome")
-public class GetAdminHome extends HttpServlet {
+@WebServlet("/GetManageChild")
+public class GetManageChild extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public GetAdminHome() {
+    public GetManageChild() {
         super();
     }
 
@@ -34,7 +35,7 @@ public class GetAdminHome extends HttpServlet {
 	    ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 	 	
-		// 전문가 pagination 초기화
+		// 아동 pagination 초기화
 	 	int curPage = 1;
 	 	if(request.getParameter("curPage")==null) {
 	 		curPage = 1;
@@ -52,15 +53,14 @@ public class GetAdminHome extends HttpServlet {
 		//페이지에 해당하는 아동 목록 불러오기 - default 정렬 : 등록일 순
 		int length = UserPaging.getListRange();
 		int startIndex = (curPage-1)*length;
-		System.out.println("start : "+startIndex);
 		
-		ArrayList<User> currUserList = UserDAO.getUserListByUserRoleOrderByRegistrationDateLimit(conn, "EXPERT", startIndex, length);
+		ArrayList<User> currUserList = UserDAO.getUserListByUserRoleOrderByRegistrationDateLimit(conn, "CHILD", startIndex, length);
 		
 		request.setAttribute("userPaging",userPaging);
 		request.setAttribute("currPageNum", curPage);
 		request.setAttribute("currUserList", currUserList);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/adminHome.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/manageChild.jsp");
 		rd.forward(request, response);
 	}
 

@@ -38,9 +38,9 @@ public class DoRegister extends HttpServlet {
 		
 		String location="";
 		if(currUser.getUserRole().equals("ADMIN")) {
-			location = "GetAdminHome";
+			location = "GetManageChild";
 		}else if(currUser.getUserRole().equals("EXPERT")) {
-			location = "GetExpertHome";
+			location = "GetManageChild";
 		}else {
 			location = "login.jsp";
 		}
