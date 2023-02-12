@@ -15,6 +15,7 @@
 
 <%
 	User focusUser = (User)request.getAttribute("focusUser");
+	User currUser = (User)session.getAttribute("currUser");
 
 	ArrayList<SdqTestLog> sdqTestLogList = (ArrayList<SdqTestLog>)request.getAttribute("sdqTestLogList");
 	SdqTestLog selectedSdqTestLog = (SdqTestLog)request.getAttribute("selectedSdqTestLog");
@@ -35,9 +36,9 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['정서 / 행동 발달 검사', 'Result', {role:"style"}, {role:'annotation'}],
+          ['정서 / 행동 발달 검사', '결과', {role:"style"},  {type: 'string', role: 'tooltip', p: {'html': true}}],
           <%for(int i=0;i<sdqResult.size();i++){%>
-	          ['<%=sdqResultAnalysisList.get(i).getSdqType()%>', <%=sdqResult.get(i).getResult()%>, '<%=sdqResultAnalysisList.get(i).getColor()%>', '<%=sdqResultAnalysisList.get(0).getSdqAnalysisResult()%>'],
+	          ['<%=sdqResultAnalysisList.get(i).getSdqType()%>', <%=sdqResult.get(i).getResult()%>, '<%=sdqResultAnalysisList.get(i).getColor()%>', '<div style="width:100px;margin:0px;padding:5px;"><b><%=sdqResultAnalysisList.get(i).getSdqType()%></b> <br>결과: <%=sdqResultAnalysisList.get(i).getSdqAnalysisResult()%></div>'],
         <%}%>
           ]);
         
@@ -47,7 +48,7 @@
                            sourceColumn: 1,
                            type: "string",
                            role: "annotation" },
-                         2]);
+                         2,3]);
 
         var options = {
         	annotations : {
@@ -59,6 +60,7 @@
           			min : 0
           		}
           	},
+          	tooltip: {isHtml: true},
         	'legend' : 'none'
           	
         };
@@ -126,11 +128,15 @@
 	<div class="w3-row w3-margin-top">
 		<div class="w3-col s2 m3 l3">&nbsp;</div>
 		<div class="w3-col w3-row s4 m3 l2">
-			<button class="w3-button w3-col w3-padding" id="sdqPopUpBtn" style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;"onclick="document.getElementById('modal').style.display='block';">검사 결과 설명 보기</button>
+			<button class="w3-button w3-col" style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;padding:0px;"onclick="document.getElementById('modal').style.display='block';">검사 결과 설명 보기</button>
 		</div>
 		<div class="w3-col s1 m1 l3">&nbsp;</div>
 		<div class="w3-col w3-row s3 m2 l1">
-			<button class="w3-button w3-col w3-padding"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;"onclick="location.href='sdqTestMain.jsp';">메인으로</button>
+			<%if(currUser.getUserRole().equals("CHILD")){ %>
+			<button class="w3-button w3-col"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;padding:0px;"onclick="location.href='sdqTestMain.jsp';">메인으로</button>
+		<%}else{ %>
+			<button class="w3-button w3-col"style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;padding:0px;"onclick="location.href='GoToChildHome?childId=<%=focusUser.getUserId()%>';">메인으로</button>
+		<%} %>
 		</div>
 		<div class="w3-col s2 m2 l3">&nbsp;</div>
 	</div>

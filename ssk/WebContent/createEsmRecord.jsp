@@ -14,10 +14,12 @@
 </head>
 <body>
 <%@ include file="sidebar.jsp"%>
+	<div>&nbsp;</div>
 	<div class="w3-row">
 		<div class="w3-col s1 m3 l4">&nbsp;</div>
 		<div class="w3-col s10 m6 l4">
 			<div style="font-size:1.3em;"><b>정서 다이어리 기록하기</b></div>
+			<div style="font-size:0.8em;">자녀의 정서를 이해하는 데 도움이 되는 메모를 남겨주세요.</div>
 			<div>&nbsp;</div>
 			<div style="float:right;font-size:0.8em;"><%=selectedDateStr%></div>
 			<div>&nbsp;</div>

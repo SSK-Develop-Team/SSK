@@ -17,8 +17,10 @@ import javax.servlet.http.HttpSession;
 
 import model.dao.EsmReplyDAO;
 import model.dao.EsmTestLogDAO;
+import model.dao.UserDAO;
 import model.dto.EsmDateWeekType;
 import model.dto.EsmResultWithDate;
+import model.dto.EsmTestLog;
 import model.dto.User;
 import util.process.EsmProcessor;
 
@@ -42,34 +44,42 @@ public class GetEsmTestProfileByDay extends HttpServlet {
 	 	ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 	 	
-	 	User currUser = (User)session.getAttribute("currUser");
+	 	User focusUser = new User();
 	 	
- 		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, currUser.getUserId());// 기록(테스트)한 모든 날짜 
+	 	if(request.getParameter("childId")==null) {//아동이 로그인한 상태 : 자신의 아이디를 parameter로 보내지 않았을 때
+	 		focusUser = (User)session.getAttribute("currUser");
+		}else{
+			int childId = Integer.parseInt(request.getParameter("childId"));
+		 	focusUser  = UserDAO.getUserById(conn, childId);
+		}
+	 	
+ 		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, focusUser.getUserId());// 기록(테스트)한 모든 날짜 
  		if(esmTestDateList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>location.href='esmTestMain.jsp';alert('기록 후 다시 조회하세요.');</script>");
- 			session.setAttribute("currUser", currUser);
+ 			out.println("<script>alert('기록 후 다시 조회하세요.');history.go(-1);</script>");
  			out.flush();
  		}
  		/**
  		 * selected week -> graph data
  		 * */
- 		String sdateStr = request.getParameter("date");
+ 		
  		Date sdate = null;
  		
  		/*선택한 일자의 Date 구하기*/
- 		if(sdateStr.equals("0")) {
+ 		if(request.getParameter("date")==null) {
  			sdate = esmTestDateList.stream().map(i->i).max(Date::compareTo).get();//테스트를 수행한 가장 최근 일자 구하기
- 		}else {
-             sdate = Date.valueOf(sdateStr);
- 		}
+		}else{
+			String sdateStr = request.getParameter("date");
+			sdate = Date.valueOf(sdateStr);
+		}
+ 		
  		
 	 	/*선택한 일자에 해당하는 주의 날짜 리스트(그래프 X축)*/
  		ArrayList<Date> sDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(sdate);
  		EsmDateWeekType selectedDateWeek = new EsmDateWeekType(sdate,sDateListOfWeek.get(0), sDateListOfWeek.get(6));
  		
  		/*해당 주의 모든 기록 - 일별 평균 응답*/
- 		ArrayList<EsmResultWithDate> esmReplyOfDayList = EsmReplyDAO.getEsmReplyListByWeek(conn, currUser.getUserId(), sDateListOfWeek.get(0), sDateListOfWeek.get(6));
+ 		ArrayList<EsmResultWithDate> esmReplyOfDayList = EsmReplyDAO.getEsmReplyListByWeek(conn, focusUser.getUserId(), sDateListOfWeek.get(0), sDateListOfWeek.get(6));
 
  		/**
  		 * all week -> drop down data
@@ -87,6 +97,7 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  			}
  		}
  		
+ 		request.setAttribute("focusUser", focusUser);
  		request.setAttribute("esmTestDateList", esmTestDateList);//전체 기록
  		request.setAttribute("selectedDateWeek", selectedDateWeek);
  		request.setAttribute("dateWeekList", dateWeekList);//drop down에 표시할 기간 데이터

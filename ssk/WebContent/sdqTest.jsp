@@ -11,7 +11,7 @@
 <title>정서 행동 발달 검사</title>
 <style>
 .sdqAnswerBtn{
-	width:21%;
+	width:19%;
 	margin-right:0.2em;
 	border:1px solid #ff6666;
 	border-radius : 10px;
@@ -24,14 +24,14 @@
 }
 
 .sdqPreviousBtn{
-	width:13%;
+	width:19%;
 	margin-right:0.2em;
 	border:1px solid #ff6666;
 	border-radius : 10px;
 	background-color:#ff6666;
 	color : white;
 	height:50px;
-	font-size:0.5em;
+	font-size:0.8em;
 	align-items:center;
 	text-align:center;
 }
@@ -141,22 +141,22 @@ function ableBtn(){
 		<div class="w3-col m2 l2">&nbsp;</div>
 	</div>
 	<div class="w3-row w3-margin">
-		<div class="w3-col m2 l2">&nbsp;</div>
+		<div class="w3-col m2 l2 w3-hide-small">&nbsp;</div>
 		<div class="w3-col w3-row s12 m8 l8">
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn w3-center" onclick="addAnswerChat('매우 그렇다', 4)">매우 그렇다</button>
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('그렇다', 3)">그렇다</button>
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('조금 그렇다', 2)">조금 그렇다</button>
-			<button class="w3-button w3-col w3-padding sdqAnswerBtn" onclick="addAnswerChat('전혀 아니다', 1)">전혀 아니다</button>
-			<button class="w3-button w3-col w3-padding sdqPreviousBtn" onclick="backAnswerChat()">되돌리기</button>
+			<button class="w3-button w3-col sdqAnswerBtn w3-center" style="padding:0px;" onclick="addAnswerChat('매우 그렇다', 4)">매우 그렇다</button>
+			<button class="w3-button w3-col sdqAnswerBtn" style="padding:0px;" onclick="addAnswerChat('그렇다', 3)">그렇다</button>
+			<button class="w3-button w3-col sdqAnswerBtn" style="padding:0px;" onclick="addAnswerChat('조금 그렇다', 2)">조금 그렇다</button>
+			<button class="w3-button w3-col sdqAnswerBtn" style="padding:0px;" onclick="addAnswerChat('전혀 아니다', 1)">전혀 아니다</button>
+			<button class="w3-button w3-col sdqPreviousBtn" style="padding:0px;" onclick="backAnswerChat()">되돌리기</button>
 		</div>
-		<div class="w3-col m2 l2">&nbsp;</div>
+		<div class="w3-col m2 l2 w3-hide-small">&nbsp;</div>
 	</div>
 	<div class="w3-row w3-margin">
-		<div class="w3-col m2 l2">&nbsp;</div>
+		<div class="w3-col m2 l2 w3-hide-small">&nbsp;</div>
 		<div class="w3-col w3-row s12 m8 l8">
 			<button class="w3-button w3-col w3-padding" id="sdqSubmitBtn" onclick="document.getElementById('sdqForm').submit();">제출하기</button>
 		</div>
-		<div class="w3-col m2 l2">&nbsp;</div>
+		<div class="w3-col m2 l2 w3-hide-small">&nbsp;</div>
 	</div>
 </body>
 </html>

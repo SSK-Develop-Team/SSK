@@ -18,12 +18,12 @@ import model.dto.User;
 /**
  * 
  */
-@WebServlet("/GetExpertToChildHome")
-public class GetExpertToChildHome extends HttpServlet {
+@WebServlet("/GoToChildHome")
+public class GoToChildHome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public GetExpertToChildHome() {
+    public GoToChildHome() {
         super();
 
     }
@@ -31,22 +31,21 @@ public class GetExpertToChildHome extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("UTF-8");
-	    HttpSession session = request.getSession(true);
 	    
 	    ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 	 	
 
 	 	User selectedChild = new User();
-	 	if(request.getParameter("userId")!=null) {
-	 		selectedChild = UserDAO.getUserById(conn, Integer.parseInt(request.getParameter("userId")));
+	 	if(request.getParameter("childId")!=null) {
+	 		selectedChild = UserDAO.getUserById(conn, Integer.parseInt(request.getParameter("childId")));
 	 	}else {
 	 		System.out.println("user not selected");
 	 	}
 	 	
 	 	request.setAttribute("selectedChild",selectedChild);
 	 	
-	 	RequestDispatcher rd = request.getRequestDispatcher("/expertToChildHome.jsp");
+	 	RequestDispatcher rd = request.getRequestDispatcher("/toChildHome.jsp");
 		rd.forward(request, response);
 	}
 

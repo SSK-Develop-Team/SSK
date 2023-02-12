@@ -20,7 +20,7 @@
 <div class="w3-center" style="font-weight:bold;font-size:25px;"> 정서 반복 기록</div>
 <div class="w3-display-container" style="width:100%;height:150px;">
 <div class="w3-display-middle" style="text-align:center;"><%=name %>(이)의 정서를 관찰할 시간입니다. <br>
-			지금 이 시간, <%=name %>(이)의 정서를 정서 반복 기록에 기록해 주세요.<br>
+			지금 이 시간, <%=name %>(이)의 정서를 하단의 기록하기 버튼을 눌러 입력해주세요.<br>
 			시간에 따른 자녀의 정서 변화를 시각화된 결과 프로파일로 확인할 수 있습니다.<br></div>
 </div>
 <div>&nbsp;</div><div>&nbsp;</div>
@@ -31,7 +31,7 @@
 	<div class="w3-padding w3-col s10 m6 l4">
 		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;font-size:1.3em;" onclick="location.href='GetEsmTest?currEsmType=none'">기록하기</button>
 		<div>&nbsp;</div>
-		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;font-size:1.3em;" onclick="location.href='GetEsmTestProfileByTime?date=0'">조회하기</button>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#FF92A4;color:white;font-size:1.3em;" onclick="location.href='GetEsmTestProfileByTime'">조회하기</button>
 	</div>
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 </div>
