@@ -14,6 +14,10 @@ public class EsmRecordDAO {
 	private final static String SQLST_INSERT_ESM_RECORD ="INSERT esm_record(esm_record_text, esm_record_date, esm_record_time, user_id) values(?,?,?,?) ";
 	private final static String SQLST_SELECT_ESM_RECORD_BY_DATE = "SELECT * FROM esm_record WHERE user_id = ? AND esm_record_date = ?";
 	private final static String SQLST_SELECT_ESM_RECORD_DATE_GROUP_BY_DATE = "SELECT esm_record_date, COUNT(*) FROM esm_record WHERE user_id=? GROUP BY esm_record_date";
+	private final static String SQLST_SELECT_ESM_RECORD_BY_ESM_RECORD_ID = "SELECT * FROM esm_record WHERE esm_record_id = ?";
+	private final static String SQLST_UPDATE_ESM_RECORD = "UPDATE esm_record SET esm_record_text = ? WHERE esm_record_id = ?";
+	private final static String SQLST_DELETE_ESM_RECORD = "DELETE FROM esm_record WHERE esm_record_id = ?";
+	
 	/*텍스트 기록 삽입*/
 	public static boolean insertEsmRecord(Connection con, String esmRecordText, Date esmRecordDate, Time esmRecordTime, int userId) {
 		try {
@@ -79,4 +83,67 @@ public class EsmRecordDAO {
 		
 		return esmRecordDateList;
 	}
+	
+	/*정서 다이어리 조회*/
+	public static EsmRecord getEsmRecordById(Connection con, int esmRecordId){
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_RECORD_BY_ESM_RECORD_ID);
+			pstmt.setInt(1, esmRecordId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				EsmRecord esmRecord = new EsmRecord();
+				esmRecord.setEsmRecordId(rs.getInt("esm_record_id"));
+				esmRecord.setEsmRecordText(rs.getString("esm_record_text"));
+				esmRecord.setEsmRecordDate(rs.getDate("esm_record_date"));
+				esmRecord.setEsmRecordTime(rs.getTime("esm_record_time"));
+				esmRecord.setUserId(rs.getInt("user_id"));
+				return esmRecord;
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return null;
+	}
+	
+	/*정서 다이어리 수정*/
+	public static boolean updateEsmRecord(Connection con, int esmRecordId, String esmRecordText) {
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_UPDATE_ESM_RECORD);
+			pstmt.setString(1, esmRecordText);
+			pstmt.setInt(2, esmRecordId);
+			
+			int res = pstmt.executeUpdate();
+			if(res > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/*정서 다이어리 삭제*/
+	public static boolean deleteEsmRecord(Connection con, int esmRecordId) {
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_DELETE_ESM_RECORD);
+			pstmt.setInt(1, esmRecordId);
+			
+			int res = pstmt.executeUpdate();
+			if(res > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 }

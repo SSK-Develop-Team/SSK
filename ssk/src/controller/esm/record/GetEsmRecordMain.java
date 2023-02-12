@@ -46,7 +46,7 @@ public class GetEsmRecordMain extends HttpServlet {
 		/*사용자의 EsmRecord 목록 가져오기 -> session events JSON 객체로 저장*/ 
 		ArrayList<Date> esmRecordDateList = (ArrayList<Date>)EsmRecordDAO.getEsmRecordDateList(conn, currUser.getUserId());
 		JSONObject eventsJsonObject = EsmRecordProcessor.EsmRecordDateListToJSON(esmRecordDateList);
-		session.setAttribute("eventsJsonObject",eventsJsonObject);
+		request.setAttribute("eventsJsonObject",eventsJsonObject);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = new Date(System.currentTimeMillis());

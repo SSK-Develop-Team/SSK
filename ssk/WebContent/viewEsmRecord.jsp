@@ -9,7 +9,7 @@
 <% 
 	String currDateStr = (String)request.getAttribute("currDateStr");
 	ArrayList<EsmRecord> currEsmRecordList = (ArrayList<EsmRecord>)request.getAttribute("currEsmRecordList");
-	JSONObject eventsJsonObject = (JSONObject)session.getAttribute("eventsJsonObject");
+	JSONObject eventsJsonObject = (JSONObject)request.getAttribute("eventsJsonObject");
 	JSONArray eventsJsonArray = (JSONArray)eventsJsonObject.get("events");	
 %>
 	<head>
@@ -105,9 +105,13 @@
 						<div class="record-box w3-panel w3-border w3-round-large">
 							<%
 								if(currEsmRecordList.get(i).getEsmRecordTime() == null) {%>
-								<div class="record-time"style="text-align:right;font-size:1em;">&nbsp;</div>
+								<div class="record-time"style="text-align:right;font-size:0.8em;margin-top:0.5em;">
+								<button class="w3-button" style="background-color:white;font-size:0.9em;padding:0px;width:2em;" onclick="location.href='GetUpdateEsmRecord?esmRecordId=<%=currEsmRecordList.get(i).getEsmRecordId()%>';">수정</button>  <span style="font-size:0.5em;font-weight:100;">|</span>
+								<button class="w3-button" style="background-color:white;font-size:0.9em;padding:0px;width:2em;"onclick="deleteEsmRecord(<%=currEsmRecordList.get(i).getEsmRecordId()%>);">삭제</button></div>
 							<%}else{ %>
-								<div class="record-time"style="text-align:right;font-size:1em;margin-top:0.5em;"><%=currEsmRecordList.get(i).getEsmRecordTime()%></div>
+								<div class="record-time"style="text-align:right;font-size:0.8em;margin-top:0.5em;"><%=currEsmRecordList.get(i).getEsmRecordTime()%>&nbsp;
+								<button class="w3-button" style="background-color:white;font-size:0.9em;padding:0px;width:2em;" onclick="location.href='GetUpdateEsmRecord?esmRecordId=<%=currEsmRecordList.get(i).getEsmRecordId()%>';">수정</button>  <span style="font-size:0.5em;font-weight:100;">|</span>
+								<button class="w3-button" style="background-color:white;font-size:0.9em;padding:0px;width:2em;"onclick="deleteEsmRecord(<%=currEsmRecordList.get(i).getEsmRecordId()%>);">삭제</button></div>
 							<%} %>
 							<div class="record-text"style="font-size:1em;min-height:7vh;width:100%;word-break:break-all;margin-bottom:1em;"><%=currEsmRecordList.get(i).getEsmRecordText()%></div>
 						</div>
@@ -127,8 +131,12 @@
 		</div>
 		<div class="w3-col s1 m1 l1">&nbsp;</div>
 	</div>
-	
- 	
- 	<script type="text/javascript" src="./js/esmRecord.js"></script>
+ 	<script>
+ 	function deleteEsmRecord(esmRecordId){
+ 		if (confirm("해당 정서 다이어리를 삭제하시겠습니까?")) {
+            location.href="DeleteEsmRecord?esmRecordId="+esmRecordId;
+        }
+ 	}
+ 	</script>
 </body>
 </html>

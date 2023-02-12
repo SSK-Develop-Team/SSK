@@ -8,7 +8,7 @@
 <html>
 <% 
 	String currDateStr = (String)request.getAttribute("currDateStr");
-	JSONObject eventsJsonObject = (JSONObject)session.getAttribute("eventsJsonObject");
+	JSONObject eventsJsonObject = (JSONObject)request.getAttribute("eventsJsonObject");
 	JSONArray eventsJsonArray = (JSONArray)eventsJsonObject.get("events");	
 %>
 	<head>

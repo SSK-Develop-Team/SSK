@@ -6,14 +6,6 @@
 <html>
 <% 
 	String selectedDateStr = (String)request.getParameter("date");	
-/*
-	SimpleDateFormat formatterOnlyDate = new SimpleDateFormat("yyyy-MM-dd");
-	Date date = new Date(System.currentTimeMillis());
-	
-	if(selectedDateStr.equals(formatterOnlyDate.format(date))){
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		selectedDateStr = formatter.format(date);
-	}*/
 %>
 	<head>
 	<title>정서 다이어리 기록하기</title>
