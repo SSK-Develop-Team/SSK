@@ -17,7 +17,7 @@ public class UserDAO {
 	private final static String SQLST_SELECT_USER_CNT_BY_USER_ROLE = "select count(*) from user_profile where user_role=?";
 	private final static String SQLST_UPDATE_USER_INFO = "update user_profile set user_password=?, user_name=?, user_email=?,"
             + "user_role=?, registration_date=?, user_gender=?, user_birth=?, user_icon=?";
-	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE_ORDER_BY_REGISTRATION_DATE_LIMIT = "SELECT * FROM user_profile WHERE user_role=? ORDER BY registration_date DESC LIMIT ?, ?";
+	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE_ORDER_BY_REGISTRATION_DATE_LIMIT = "SELECT * FROM user_profile WHERE user_role=? ORDER BY user_id DESC LIMIT ?, ?";
 	private final static String SQLST_DELETE_USER = "DELETE FROM user_profile WHERE user_id = ?";
 	
 	public static boolean checkId(Connection con, String userId){

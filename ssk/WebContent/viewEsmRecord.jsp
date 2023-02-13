@@ -103,7 +103,6 @@
 						<div class="w3-col s3 w3-center">
 							<button class="w3-button w3-circle w3-white w3-right" id="next_btn"onclick="getNextDayEsmRecord('GetDayEsmRecord','<%=currDateStr%>',<%=childId%>);"><img src="./image/next_w.png" alt="next_btn" style="width:1em;height:auto;filter: brightness(0.3);"></button>
 						</div>
-						
 					</div>
 					<hr>
 					

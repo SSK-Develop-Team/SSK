@@ -20,11 +20,11 @@
 	<c:choose>
 		<c:when test="${user.userRole eq 'ADMIN'}">
 			<a href="GetAdminHome" class="w3-bar-item w3-button sidebar">&nbsp;전문가 계정 관리</a>
-			<a href="adminManageChild.jsp" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
+			<a href="GetManageChild" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
 		</c:when>
 		<c:when test="${user.userRole eq 'EXPERT'}">
 			<a href="GetExpertHome" class="w3-bar-item w3-button sidebar">&nbsp;아동별 결과 조회</a>
-			<a href="#" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
+			<a href="GetManageChild" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
 		</c:when>
 		<c:when test="${user.userRole eq 'CHILD'}">
 			<a href="childHome.jsp" class="w3-bar-item w3-button sidebar"><b>홈</b></a>

@@ -56,7 +56,7 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  		ArrayList<Date> esmTestDateList = (ArrayList<Date>) EsmTestLogDAO.getEsmTestLogDateByUserIdGroupByDate(conn, focusUser.getUserId());// 기록(테스트)한 모든 날짜 
  		if(esmTestDateList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>alert('기록 후 다시 조회하세요.');history.go(-1);</script>");
+ 			out.println("<script>alert('아직 기록이 없습니다. ');history.go(-1);</script>");
  			out.flush();
  		}
  		/**
