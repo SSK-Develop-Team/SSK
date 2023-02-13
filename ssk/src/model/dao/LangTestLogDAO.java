@@ -66,6 +66,8 @@ public class LangTestLogDAO {
 			return null;
 		}
 	}
+	
+	
 	/*언어 발달 테스트 기록 조회*/
 	public static LangTestLog getLangTestLogById(Connection con, int langTestLogId) {
 		try {

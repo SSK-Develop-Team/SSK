@@ -58,8 +58,20 @@ public class GetLangGame extends HttpServlet {
 		session.setAttribute("currLangGameList", currLangGameList);
 		session.setAttribute("currLangGameIndex", 0);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/langGame.jsp");
-		rd.forward(request, response);
+		
+		if(gameID == 7) {
+			RequestDispatcher rd = request.getRequestDispatcher("/langGame07.jsp");
+			rd.forward(request, response);
+		}
+		
+		else if(gameID == 47) {
+			RequestDispatcher rd = request.getRequestDispatcher("/langGame47.jsp");
+			rd.forward(request, response);
+		}
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher("/langGame.jsp");
+			rd.forward(request, response);
+		}
 		
 	}
 
