@@ -13,8 +13,28 @@
 
 <div class="w3-row">
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
+	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.5em;padding-left:1em;padding-top:1em;"><img src="./image/research.png" style="width:35px;">     아동별 결과 조회</div>
+	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
+</div>
+
+<div class="w3-row">
+	<div class="w3-col w3-hide-small m3 l5">&nbsp;</div>
+	<div class="select-box w3-col s12 m9 l6"style="margin-bottom:0.5em;padding-right:1em;">
+		<div style="font-weight:bold;font-size:0.9em;margin-left:0.3em; margin-bottom:0.3em;">카테고리<span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 아동 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
+		<div class="w3-cell-row w3-container" style="background-color:#D9D9D9;font-size:0.9em; line-height:7vh;">
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 행동 발달 검사</label></div>
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 반복 기록</label></div>
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
+			<div class="w3-cell" style="vertical-align:middle;line-height:2vh; text-align:right;"><button class="w3-button" style="background-color:#51459E; color:white;vertical-align:middle;" onclick="location.href='export_excel.jsp?fileName=테스트파일생성.xls';"> excel export </button></div>
+		</div>
+	</div>
+	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
+</div>
+
+<div class="w3-row">
+	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 	<div class="w3-col s12 m12 l10">
-		<div class="w3-margin" style="font-weight:bold;font-size:20px;"><img src="./image/research.png" style="width:35px;">     아동별 결과 조회</div>
 		<div style="width:100%;margin-bottom:50px;">
 		<div class="search w3-right" style="width: 300px;">
 		  <input class="w3-border" type="text" placeholder="아동 이름 검색" style="width: 85%;border: 1px solid #bbb;border-radius: 8px;padding: 10px 12px;font-size: 14px;">
@@ -28,7 +48,7 @@
 			int blockRange = UserPaging.getBlockRange();
 			
 		%>
-		<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 정렬 기준 : 등록일 순</div>
+		<div style="font-size:0.5em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 정렬 기준 : 등록일 순</div>
 		<div class="w3-container">
 		  <table class="w3-table-all w3-hoverable">
 		    <thead>

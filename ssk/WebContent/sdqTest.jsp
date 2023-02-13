@@ -127,6 +127,7 @@ function ableBtn(){
 	ArrayList<SdqQuestion> sdqQuestionList = (ArrayList<SdqQuestion>)session.getAttribute("sdqQuestionList");
 %>
 	<div class="w3-container w3-center"><h4><b>정서/행동 발달 검사</b></h4></div>
+	
 	<div class="w3-row" >
 		<div class="w3-col m2 l2">&nbsp;</div>
 		<div class="w3-col s12 m8 l8" id="sdqChat" style="overflow:auto; height:55vh; background-color:#ededed;padding-bottom:6px;padding-top:6px;">
