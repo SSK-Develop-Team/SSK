@@ -20,9 +20,16 @@
 	User currUser = (User)session.getAttribute("currUser");
 	String name = currUser.getUserName();
 
-	LangTestLog langTestLog = (LangTestLog)request.getAttribute("langTestLog");
-	ArrayList<LangReply> langReplyList = (ArrayList<LangReply>)request.getAttribute("langReplyList");
-	ArrayList<LangQuestion> langQuestionList = (ArrayList<LangQuestion>)request.getAttribute("langQuestionList");
+	ArrayList<LangTestLog> langTestLogList = (ArrayList<LangTestLog>)request.getAttribute("langTestLogList");
+	
+	LangTestLog selectedLangTestLog = (LangTestLog)request.getAttribute("selectedLangTestLog");
+	
+	ArrayList<Integer> langTestAgeGroupId = (ArrayList<Integer>)request.getAttribute("langTestAgeGroupId");
+	
+	ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)request.getAttribute("selectLangReplyList");
+	ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)request.getAttribute("selectLangQuestionList");
+	
+	int selectedIndex = langTestLogList.indexOf(selectedLangTestLog);
 	
 %>
 <style>
@@ -83,9 +90,31 @@ ul.tabs li.current{
 <%@ include file="sidebar.jsp" %>
 <div style="width:92%;margin:4%;"> 
 	<h2 style="text-align:center;"><%=name%>님의 언어 발달 평가 결과</h2>
-	<p style="text-align:right;"> 검사일 : <%=langTestLog.getLangTestDate() %></p>
+	<div class="w3-col s1 m2 l4">&nbsp;</div>
 </div>
-<div class="container">
+
+  <div class="w3-row">
+	<div class="w3-col s1 m2 l4">&nbsp;</div>
+	<c:set var="selectedIndex" scope="page"><%=selectedIndex%></c:set>
+	
+	<div class="w3-col s10 m8 l4">
+		<div class="w3-dropdown-hover"style="width:100%;">
+		    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=langTestAgeGroupId.get(0)%>단계</button>
+		    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
+		      <%for(int i = langTestLogList.size()-1 ; i >= 0 ;i--){ %>
+		      <a href="../ssk/AllLangResult?langTestLogId=<%=langTestLogList.get(i).getLangTestLogId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=langTestLogList.get(i).getLangTestDate().toString()%></a>
+		      <%} %>
+		    </div>
+	    </div>
+	</div>
+
+	<c:remove var="selectedIndex" scope="page"/>
+	
+	<!-- <div class="w3-col s1 m2 l4">&nbsp;</div> -->
+
+  </div>
+
+<div class="container" style = "margin-top : 3%">
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">막대그래프로 확인하기</li>
 		<li class="tab-link" data-tab="tab-2">오각그래프로 확인하기</li>
@@ -125,11 +154,11 @@ ul.tabs li.current{
         var chart = new Chart(ctx, {
             type: 'bar', 
             data: {
-                labels: ['<%= langQuestionList.get(0).getLangType()%>', '<%= langQuestionList.get(1).getLangType()%>', '<%= langQuestionList.get(2).getLangType()%>', '<%= langQuestionList.get(3).getLangType()%>', '<%= langQuestionList.get(4).getLangType()%>'],
+                labels: ['<%= selectLangQuestionList.get(0).getLangType()%>', '<%= selectLangQuestionList.get(1).getLangType()%>', '<%= selectLangQuestionList.get(2).getLangType()%>', '<%= selectLangQuestionList.get(3).getLangType()%>', '<%= selectLangQuestionList.get(4).getLangType()%>'],
                 datasets: [{
                     backgroundColor: '#FF92A4',
                     borderColor: '#FF92A4',
-                    data: [<%= langReplyList.get(0).getLangReplyContent()%>, <%= langReplyList.get(1).getLangReplyContent()%>, <%= langReplyList.get(2).getLangReplyContent()%>, <%= langReplyList.get(3).getLangReplyContent()%>, <%= langReplyList.get(4).getLangReplyContent()%>]
+                    data: [<%= selectLangReplyList.get(0).getLangReplyContent()%>, <%= selectLangReplyList.get(1).getLangReplyContent()%>, <%= selectLangReplyList.get(2).getLangReplyContent()%>, <%= selectLangReplyList.get(3).getLangReplyContent()%>, <%= selectLangReplyList.get(4).getLangReplyContent()%>]
                 }]
             },
             
@@ -167,7 +196,7 @@ ul.tabs li.current{
         var chart2 = new Chart(ctx2, {
             type: 'radar', 
             data: {
-            	labels: ['<%= langQuestionList.get(0).getLangType()%>', '<%= langQuestionList.get(1).getLangType()%>', '<%= langQuestionList.get(2).getLangType()%>', '<%= langQuestionList.get(3).getLangType()%>', '<%= langQuestionList.get(4).getLangType()%>'],
+            	labels: ['<%= selectLangQuestionList.get(0).getLangType()%>', '<%= selectLangQuestionList.get(1).getLangType()%>', '<%= selectLangQuestionList.get(2).getLangType()%>', '<%= selectLangQuestionList.get(3).getLangType()%>', '<%= selectLangQuestionList.get(4).getLangType()%>'],
                 datasets: [{
                     backgroundColor: 'transparent',
                     fill : false,
@@ -176,7 +205,7 @@ ul.tabs li.current{
 		            pointBorderColor: '#fff',
 		            pointHoverBackgroundColor: '#fff',
 		            pointHoverBorderColor: 'rgb(255, 99, 132)',
-                    data: [<%= langReplyList.get(0).getLangReplyContent()%>, <%= langReplyList.get(1).getLangReplyContent()%>, <%= langReplyList.get(2).getLangReplyContent()%>, <%= langReplyList.get(3).getLangReplyContent()%>, <%= langReplyList.get(4).getLangReplyContent()%>]
+                    data: [<%= selectLangReplyList.get(0).getLangReplyContent()%>, <%= selectLangReplyList.get(1).getLangReplyContent()%>, <%= selectLangReplyList.get(2).getLangReplyContent()%>, <%= selectLangReplyList.get(3).getLangReplyContent()%>, <%= selectLangReplyList.get(4).getLangReplyContent()%>]
                 }]
             },
             

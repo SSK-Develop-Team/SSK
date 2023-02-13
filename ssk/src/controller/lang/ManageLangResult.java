@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -83,13 +85,17 @@ public class ManageLangResult extends HttpServlet {
 			}
 		}
 		
+		
 		request.setAttribute("langTestLog", langTestLog);
 		request.setAttribute("langReplyList", langReplyList);
 		request.setAttribute("langQuestionList",  langQuestionList);
+
 		
 		request.setAttribute("currLangTestLogId",langTestLog.getLangTestLogId());
-		RequestDispatcher rd = request.getRequestDispatcher("/langTestResult.jsp");
-		rd.forward(request, response);
+		
+		
+		response.sendRedirect(getServletContext().getContextPath()+"/AllLangResult?langTestLogId=0");
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
