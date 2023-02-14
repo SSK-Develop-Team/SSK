@@ -15,7 +15,7 @@
 <body>
 <c:set var="user" scope="page" value="${sessionScope.currUser }" />
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none;z-index:5;width:300px;background-color:#D9D9D9;" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none;z-index:5;width:300px;background-color:#D9D9D9;font-size:1em;" id="mySidebar">
 	<button class="w3-bar-item w3-button" onclick="w3_close()" style="display: flex;justify-content: right; ">&times;</button>
 	<c:choose>
 		<c:when test="${user.userRole eq 'ADMIN'}">
@@ -45,7 +45,7 @@
 <!-- Page content -->
 
 <div class="header">
-		<div class="w3-bar w3-xlarge">
+		<div class="w3-bar">
 		<button class="w3-button w3-xxlarge w3-left" onclick="w3_open()">&#9776;</button>
 	  		<c:choose>
 	  			<c:when test="${user eq null }">
@@ -54,28 +54,28 @@
 				<c:when test="${user.userRole eq 'CHILD'}">
 		  			<form id="f" name = "post" action = "logout">
 			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.2rem;" onclick="location.href='childHome.jsp'">아동 ${user.userName}&nbsp;님</a>				
+		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='childHome.jsp'">아동 ${user.userName}&nbsp;님</a>				
 		  			</form>				
 				</c:when>
 				<c:when test="${user.userRole eq 'EXPERT'}">
 		  			<form id="f" name = "post" action = "logout">
 			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.2rem;" onclick="location.href='GetExpertHome'">전문가 ${user.userName}&nbsp;님</a>				
+		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetExpertHome'">전문가 ${user.userName}&nbsp;님</a>				
 		  			</form>				
 				</c:when>
 	  			<c:otherwise>
 		  			<form id="f" name = "post" action = "logout">
 			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.2rem;" onclick="location.href='GetAdminHome'">${user.userName}&nbsp;님</a>				
+		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetAdminHome'">${user.userName}&nbsp;님</a>				
 		  			</form>
 	  			</c:otherwise>
 	  		</c:choose>
 	  		<c:remove var="user" scope="page" />
-	  		<div style="margin-left:25px;margin-right:25px;">
-	  		<div class="logo" style="margin-left:17vw;font-weight:bold;margin-top:55px;text-align:center;font-size:1.2rem;">SSK</div>
-	  		<hr class="logo" >
 	  		</div>
-		</div>
+	  		<div style="margin-left:2em;margin-right:2em;transform:translateY(-1.5em);">
+		  		<div class="logo w3-center" style="font-weight:bold;font-size:1.2rem;">SSK</div>
+		  		<hr>
+	  		</div>
 	</div>
 	<script type="text/javascript" src="js/logout.js" charset="UTF-8"></script>
 <!-- JS to open and close sidebar with overlay effect -->

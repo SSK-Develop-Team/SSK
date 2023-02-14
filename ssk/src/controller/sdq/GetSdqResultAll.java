@@ -65,7 +65,7 @@ public class GetSdqResultAll extends HttpServlet {
 		ArrayList<SdqTestLog> sdqTestLogList = SdqTestLogDAO.getSdqTestLogAllByUserId(conn, focusUser.getUserId());
 		if(sdqTestLogList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>alert('검사 후 다시 조회하세요.');history.go(-1);</script>");
+ 			out.println("<script>alert('검사 기록이 없습니다.');history.go(-1);</script>");
  			out.flush();
  		}
 		SdqTestLog selectedSdqTestLog = null;

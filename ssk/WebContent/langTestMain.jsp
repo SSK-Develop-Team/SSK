@@ -26,12 +26,11 @@
 </head>
 <body>
 <%@ include file = "sidebar.jsp" %>
-<div>&nbsp;</div><div>&nbsp;</div>
 <div style="width:100%;background-color:#D9D9D9;">
 <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
-<div class="w3-center" style="font-weight:bold;font-size:30px;"> 언어 발달 평가 </div>
+<div class="w3-center" style="font-weight:bold;font-size:1.7em;"> 언어 발달 평가 </div>
 <div class="w3-display-container" style="width:100%;height:150px;">
-<div class="w3-display-middle" style="text-align:center;"><%=name%>님, 현재 나이에 적합한 언어 발달 검사가 진행됩니다. <br>
+<div class="w3-display-middle" style="text-align:center;font-size:1em;"><%=name%>님, 현재 나이에 적합한 언어 발달 검사가 진행됩니다. <br>
 			해당 언어 발달 검사가 아동에게 맞지 않는다면, 다른 나이대의 언어 발달 검사를 선택하여 진행해주세요.<br></div>
 </div>
 <div>&nbsp;</div><div>&nbsp;</div>
@@ -45,6 +44,11 @@
 		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;font-size:1.3em;" onclick="location.href='GetLangTestResult'">결과보기</button>
 	</div>
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
+</div>
+<div style="position: absolute; right: 2em; bottom: 2em;">
+    <button class="w3-button w3-circle" style="background-color:#D9D9D9;width:2.7em;height:2.7em;padding:0;" onclick="location.href='childHome.jsp'">
+		<img src="./image/home-icon.png" style="width:1.7em;height:1.7em;">
+	</button>
 </div>
 
 <%	
