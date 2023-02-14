@@ -9,10 +9,7 @@
 </head>
 <body>
 <%@ include file = "sidebar.jsp" %>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
+
 <div class="w3-row">
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 	<div class="w3-padding w3-col s10 m6 l4">
