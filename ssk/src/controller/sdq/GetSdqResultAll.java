@@ -71,7 +71,7 @@ public class GetSdqResultAll extends HttpServlet {
 		SdqTestLog selectedSdqTestLog = null;
 		
 		//선택한 테스트 로그 정보 가져오기
-		if(request.getParameter("sdqTestLogId")==null) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
+		if(request.getParameter("sdqTestLogId")==null||request.getParameter("sdqTestLogId").equals("0")) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
 			Comparator<SdqTestLog> comparatorById = Comparator.comparingInt(SdqTestLog::getSdqTestLogId);
 			selectedSdqTestLog = sdqTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
 		}else {
