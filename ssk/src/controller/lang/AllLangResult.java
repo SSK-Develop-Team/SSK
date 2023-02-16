@@ -51,17 +51,19 @@ public class AllLangResult extends HttpServlet {
 		
 		User currUser = (User)session.getAttribute("currUser");
 
-		//All Log
+		//All
 		ArrayList<LangTestLog> langTestLogList = LangTestLogDAO.getLangTestLogByUserId(conn, currUser.getUserId());
 		if(langTestLogList.size() == 0) {
 			PrintWriter out = response.getWriter();
 			out.println("<script>location.href='../ssk/langTestMain.jsp';alert('언어 평가 기록이 없습니다.');</script>");
  			out.flush();
 		}
+		/*
+		ArrayList<Integer> langTestLogIdList = langTestLogList
 		
+		//Selected
 		LangTestLog selectedLangTestLog = null;
 		
-		//Select Log
 		if((request.getParameter("langTestLogId")).equals("0")) {
 			Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
 			selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
@@ -72,20 +74,15 @@ public class AllLangResult extends HttpServlet {
 		request.setAttribute("langTestLogList", langTestLogList);
 		request.setAttribute("selectedLangTestLog", selectedLangTestLog);
 		
-		//Age Group ID
-		ArrayList<Integer> langTestAgeGroupId = (ArrayList<Integer>)LangReplyDAO.getLangAgeGroupIdByLogId(conn, selectedLangTestLog.getLangTestLogId());		
-		
-		//Select Result
+		int langTestAgeGroupId = (int)LangReplyDAO.getLangAgeGroupIdByLogId(conn, selectedLangTestLog.getLangTestLogId());		
 		ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)LangReplyDAO.getLangReplyListByLangTestLogId(conn, selectedLangTestLog.getLangTestLogId());
-		
-		//Select Question 
-		ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)LangQuestionDAO.getLangQuestionListByAgeGroupId(conn, langTestAgeGroupId.get(0));
+		ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)LangQuestionDAO.getLangQuestionListByAgeGroupId(conn, langTestAgeGroupId);
 		
 		request.setAttribute("langTestAgeGroupId", langTestAgeGroupId);
 		
 		request.setAttribute("selectLangReplyList",  selectLangReplyList);
 		request.setAttribute("selectLangQuestionList",  selectLangQuestionList);
-		
+		*/
 		RequestDispatcher rd = request.getRequestDispatcher("/langTestResult.jsp");
 		rd.forward(request, response);
 

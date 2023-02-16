@@ -95,7 +95,7 @@ public class LangReplyDAO {
 		}
 	}
 	
-	public static ArrayList<Integer> getLangAgeGroupIdByLogId(Connection con, int langTestLogId){
+	public static int getLangAgeGroupIdByLogId(Connection con, int langTestLogId){
 		try {
 			ArrayList<Integer> ageGroupIdList = new ArrayList<Integer>();
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_AGE_GROUP_ID_BY_TEST_LOG_ID);
@@ -108,10 +108,10 @@ public class LangReplyDAO {
 				if(!ageGroupIdList.contains(ageGroupIdElement))
 					ageGroupIdList.add(ageGroupIdElement);
 			}
-			return ageGroupIdList;
+			return ageGroupIdList.get(0);
 		}catch(SQLException e) {
 			e.printStackTrace();
-			return null;
+			return -1;
 		}
 	}
 }

@@ -24,7 +24,7 @@
 	
 	LangTestLog selectedLangTestLog = (LangTestLog)request.getAttribute("selectedLangTestLog");
 	
-	ArrayList<Integer> langTestAgeGroupId = (ArrayList<Integer>)request.getAttribute("langTestAgeGroupId");
+	int langTestAgeGroupId = (int)request.getAttribute("langTestAgeGroupId");
 	
 	ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)request.getAttribute("selectLangReplyList");
 	ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)request.getAttribute("selectLangQuestionList");
@@ -99,7 +99,7 @@ ul.tabs li.current{
 	
 	<div class="w3-col s10 m8 l4">
 		<div class="w3-dropdown-hover"style="width:100%;">
-		    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=langTestAgeGroupId.get(0)%>단계</button>
+		    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=langTestAgeGroupId%>단계</button>
 		    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
 		      <%for(int i = langTestLogList.size()-1 ; i >= 0 ;i--){ %>
 		      <a href="../ssk/AllLangResult?langTestLogId=<%=langTestLogList.get(i).getLangTestLogId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=langTestLogList.get(i).getLangTestDate().toString()%></a>
