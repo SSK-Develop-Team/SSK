@@ -26,7 +26,7 @@
 			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 행동 발달 검사</label></div>
 			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 반복 기록</label></div>
 			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
-			<div class="w3-cell" style="vertical-align:middle;line-height:2vh; text-align:right;"><button class="w3-button" style="background-color:#51459E; color:white;vertical-align:middle;" onclick="location.href='exportChildResultExcel';"> excel export </button></div>
+			<div class="w3-cell" style="vertical-align:middle;line-height:2vh; text-align:right;"><button class="w3-button" style="background-color:#51459E; color:white;vertical-align:middle;" onclick="location.href='ExportChildResultExcel';"> excel export </button></div>
 		</div>
 	</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
