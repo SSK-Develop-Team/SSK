@@ -65,13 +65,13 @@ public class GetSdqResultAll extends HttpServlet {
 		ArrayList<SdqTestLog> sdqTestLogList = SdqTestLogDAO.getSdqTestLogAllByUserId(conn, focusUser.getUserId());
 		if(sdqTestLogList.size()==0) {
  			PrintWriter out = response.getWriter();
- 			out.println("<script>alert('검사 후 다시 조회하세요.');history.go(-1);</script>");
+ 			out.println("<script>alert('검사 기록이 없습니다.');history.go(-1);</script>");
  			out.flush();
  		}
 		SdqTestLog selectedSdqTestLog = null;
 		
 		//선택한 테스트 로그 정보 가져오기
-		if(request.getParameter("sdqTestLogId")==null) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
+		if(request.getParameter("sdqTestLogId")==null||request.getParameter("sdqTestLogId").equals("0")) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
 			Comparator<SdqTestLog> comparatorById = Comparator.comparingInt(SdqTestLog::getSdqTestLogId);
 			selectedSdqTestLog = sdqTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
 		}else {

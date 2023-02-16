@@ -17,7 +17,13 @@
 <div class="w3-row">
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 	<div class="w3-padding w3-col s10 m6 l4">
-		<div class="w3-margin w3-center"><span style="font-weight:bold;font-size:1.8em;">아동 <%=selectedChild.getUserName()%></span>&nbsp;<span><%=selectedChild.getUserBirth()%></span></div>
+		<div class="w3-margin w3-center">
+			<span style="font-weight:bold;font-size:1.8em;">아동 <%=selectedChild.getUserName()%></span>&nbsp;
+			<span><%=selectedChild.getUserBirth()%></span>&nbsp;&nbsp;
+			<button class="w3-button w3-circle" style="background-color:#D9D9D9;transform:translateY(-0.5em);width:2.3em;height:2.3em;padding:0;margin-top:0.5em;" onclick="location.href='GetExpertHome'">
+				<img src="./image/turn-back.png" style="width:1.5em;height:1.5em;">
+			</button>
+		</div>
 		<div>&nbsp;</div>
 		<div style="width:100%;text-align:center;color:grey;">━━━━━━━━언어━━━━━━━━</div>
 		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;font-size:1.3em;" onclick="location.href='GetUserAgeGroup'">언어 발달 검사 결과</button>

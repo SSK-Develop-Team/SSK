@@ -46,12 +46,12 @@
 	%>
 	<tr>
 	  <td><input type="checkbox" id="check"/></td>
-      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
-      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserName() %></td>
-      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserLoginId() %></td>
-      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserBirth() %></td>
-      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getRegistrationDate() %></td>
-      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserEmail() %></td>
+      <td><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
+      <td><%=currUserList.get(i).getUserName() %></td>
+      <td><%=currUserList.get(i).getUserLoginId() %></td>
+      <td><%=currUserList.get(i).getUserBirth() %></td>
+      <td><%=currUserList.get(i).getRegistrationDate() %></td>
+      <td><%=currUserList.get(i).getUserEmail() %></td>
     </tr>
 	<% }%>
   </table>
@@ -62,7 +62,7 @@
 	<c:set var="curPageNum" scope="page" value="${requestScope.currPageNum}" />
 	<c:set var="blockRange" scope="page" value="<%=blockRange%>" />
 	<c:if test="${curPageNum > blockRange}">
-	 <a href="GetExpertHome?curPage=${uPaging.blockStartNum - 1}" class="w3-button">&laquo;</a>
+	 <a href="GetManageChild?curPage=${uPaging.blockStartNum - 1}" class="w3-button">&laquo;</a>
 	</c:if>
  	<c:forEach var="i" begin="${uPaging.blockStartNum}" end="${uPaging.blockEndNum}">
  		<c:choose>
@@ -71,12 +71,12 @@
  				<a href="#" class="w3-button w3-gray">${i}</a>
  			</c:when>
  			<c:otherwise>
- 				<a href="GetExpertHome?curPage=${i}" class="w3-button">${i}</a>
+ 				<a href="GetManageChild?curPage=${i}" class="w3-button">${i}</a>
  			</c:otherwise>
  		</c:choose>
  	</c:forEach>
   	<c:if test="${uPaging.lastPageNum > uPaging.blockEndNum}">
-	 <a href="GetExpertHome?curPage=${uPaging.blockEndNum + 1}" class="w3-button">&raquo;</a>
+	 <a href="GetManageChild?curPage=${uPaging.blockEndNum + 1}" class="w3-button">&raquo;</a>
 	</c:if>
   	<c:remove var="uPaging" scope="page"/>
   	<c:remove var="curPageNum" scope="page"/>

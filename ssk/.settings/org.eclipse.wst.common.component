@@ -2,7 +2,8 @@
                 
     
     
-    <wb-module deploy-name="ssk">
+    <wb-module deploy-name="SSK-0.0.1-SNAPSHOT">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
                                 
         
         
@@ -12,8 +13,7 @@
         
         
         <property name="java-output-path" value="/ssk/build/classes"/>
-                
-        <property name="context-root" value="/ssk"/>
+        <property name="context-root" value="SSK"/>
                             
     
     
