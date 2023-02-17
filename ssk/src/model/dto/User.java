@@ -60,6 +60,9 @@ public class User {
 	public String getUserGender() {
 		return userGender;
 	}
+	public String getUserGenderKr() {
+		return (userGender.equals("male")?"남":"여");
+	}
 	public void setUserGender(String userGender) {
 		this.userGender = userGender;
 	}

@@ -11,6 +11,7 @@ import model.dto.SdqQuestion;
 public class SdqQuestionDAO {
 	
 	private final static String SQLST_SELECT_SDQ_QUESTION_LIST_BY_SDQ_TARGET = "select * from sdq_question where sdq_target=?";
+
 	/*sdq target(부모, 아동)에 따라 List 가져오기*/
 	public static ArrayList<SdqQuestion> getSdqQuestionList(Connection con, String sdqTarget) {
 		ArrayList<SdqQuestion> sdqQuestionList = new ArrayList<SdqQuestion>();
