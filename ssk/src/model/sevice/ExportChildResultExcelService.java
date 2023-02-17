@@ -1,10 +1,7 @@
 package model.sevice;
 
 import model.dao.*;
-import model.dto.EsmRecord;
-import model.dto.EsmTestLog;
-import model.dto.SdqTarget;
-import model.dto.SdqTestLog;
+import model.dto.*;
 import model.dto.export.*;
 
 import java.sql.Connection;
@@ -18,6 +15,30 @@ public class ExportChildResultExcelService {
     }
 
     /*언어 검사 결과*/
+    public static  ArrayList<LangExcelDTO> getLangDataListOfUser(Connection con, int childId, String childName){
+        ArrayList<LangExcelDTO> langDataList = new ArrayList<LangExcelDTO>();
+
+        ArrayList<LangTestLog> langTestLogList = LangTestLogDAO.getLangTestLogByUserId(con, childId);
+        for(int i=0;i<langTestLogList.size();i++){
+            LangTestLog langTestLog = langTestLogList.get(i);
+
+            LangExcelDTO langData = new LangExcelDTO();
+            langData.setUserId(childId);
+            langData.setUserName(childName);
+            langData.setId(i+1);
+            langData.setDateStr(langTestLog.getLangTestDate());
+            langData.setAgeGroupStr(LangReplyDAO.getLangAgeGroupIdByLogId(con,langTestLog.getLangTestLogId()).get(0));
+            ArrayList<LangReply> langReplyList = LangReplyDAO.getLangReplyListByLangTestLogId(con,langTestLog.getLangTestLogId());
+            ArrayList<Integer> langReplyIntegerList = new ArrayList<Integer>();
+            for(int j=0;j< langReplyList.size();j++){
+                langReplyIntegerList.add(langReplyList.get(j).getLangReplyContent());/*순서 보장 필요 -> 쿼리문으로 조정할 것(order by question id)*/
+            }
+            langData.setReplyList(langReplyIntegerList);
+            langDataList.add(langData);
+        }
+        return langDataList;
+    }
+
 
     /*정서행동 발달 검사 결과*/
     public static ArrayList<SdqExcelDTO> getSdqDataListOfUser(Connection con, int childId, String childName){
@@ -95,7 +116,8 @@ public class ExportChildResultExcelService {
         sskExcelByUser.addUserData(userExcelDTO);
 
         if(lang==true){
-
+            ArrayList<LangExcelDTO> langExcelDTOS = getLangDataListOfUser(con, childId, userExcelDTO.getName());
+            sskExcelByUser.addLangData(langExcelDTOS);
         }
         if(sdq==true){
             ArrayList<SdqExcelDTO> sdqExcelDTOS = getSdqDataListOfUser(con, childId, userExcelDTO.getName());

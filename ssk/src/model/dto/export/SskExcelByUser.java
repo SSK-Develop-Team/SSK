@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import static model.dto.export.EsmColumnInfo.*;
 import static model.dto.export.EsmRecordColumnInfo.*;
+import static model.dto.export.LangColumnInfo.*;
 import static model.dto.export.SdqColumnInfo.*;
 import static model.dto.export.UserColumnInfo.*;
 
@@ -59,6 +60,32 @@ public class SskExcelByUser {
         createCellWithStyle(bodyRow, GENDER.getColumnIndex(), userExcelDTO.getGenderStr(), bodyCellStyle);
 
         sheet.setColumnWidth(EMAIL.getColumnIndex(), 2000);
+    }
+
+    /*Lang Data Export*/
+    public void addLangData(ArrayList<LangExcelDTO> langExcelDTOS){
+        sheet.createRow(rowIndex++);
+        sheet.createRow(rowIndex++);
+
+        Row headerRow = sheet.createRow(rowIndex++);
+
+        for(LangColumnInfo x : LangColumnInfo.getAllColumns()){
+            createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
+            setAutoSizeColumnPlus(sheet,x.getColumnIndex());
+        }
+
+        for(int i=0;i<langExcelDTOS.size();i++){
+            Row bodyRow  = sheet.createRow(rowIndex++);
+            createCellWithStyleInt(bodyRow, LANG_ID.getColumnIndex(), langExcelDTOS.get(i).getId(), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_DATE.getColumnIndex(), langExcelDTOS.get(i).getDateStr(), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_AGE_GROUP.getColumnIndex(), langExcelDTOS.get(i).getAgeGroupStr(), bodyCellStyle);
+            sheet.autoSizeColumn(LANG_DATE.getColumnIndex());sheet.autoSizeColumn(LANG_AGE_GROUP.getColumnIndex());
+            createCellWithStyleInt(bodyRow, LANG_ANSWER1.getColumnIndex(), langExcelDTOS.get(i).getReplyList().get(0), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, LANG_ANSWER2.getColumnIndex(), langExcelDTOS.get(i).getReplyList().get(1), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, LANG_ANSWER3.getColumnIndex(), langExcelDTOS.get(i).getReplyList().get(2), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, LANG_ANSWER4.getColumnIndex(), langExcelDTOS.get(i).getReplyList().get(3), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, LANG_ANSWER5.getColumnIndex(), langExcelDTOS.get(i).getReplyList().get(4), bodyCellStyle);
+        }
     }
 
     /*Sdq Data Export*/
