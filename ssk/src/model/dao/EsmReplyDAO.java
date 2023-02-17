@@ -23,7 +23,7 @@ import model.dto.SdqReply;
 
 public class EsmReplyDAO {/*REPLY!=RESULT*/
 	private final static String SQLST_INSERT_ESM_REPLY = "insert esm_reply(esm_test_log_id, esm_emotion_id, esm_reply_content) values(?,?,?)";
-	private final static String SQLST_SELECT_ESM_REPLY_LIST_BY_ESM_TEST_LOG_ID = "select * from esm_reply where esm_test_log_id = ?";
+	private final static String SQLST_SELECT_ESM_REPLY_LIST_BY_ESM_TEST_LOG_ID = "select * from esm_reply where esm_test_log_id = ? ORDER BY esm_emotion_id";
 	private final static String SQLST_SELECT_ESM_REPLY_SUM_POSITIVE_BY_ESM_TEST_LOG_ID = "select SUM(esm_reply_content) from esm_reply where esm_test_log_id = ? and esm_emotion_id>=1 and esm_emotion_id<=5";
 	private final static String SQLST_SELECT_ESM_REPLY_SUM_NEGATIVE_BY_ESM_TEST_LOG_ID = "select SUM(esm_reply_content) from esm_reply where esm_test_log_id = ? and esm_emotion_id>=6 and esm_emotion_id<=10";
 	private final static String SQLST_SELECT_ESM_REPLY_AVG_POSITIVE_LIST_OF_WEEK = "select stbl.esm_test_date, SUM(stbl.reply_sum)/COUNT(*) 'positive' \r\n" + 
@@ -78,6 +78,24 @@ public class EsmReplyDAO {/*REPLY!=RESULT*/
 				EsmReply esmReply = new EsmReply(rs.getInt(2),rs.getInt(3),rs.getInt(4));
 				esmReply.setEsmReplyId(rs.getInt(1));
 				esmReplyList.add(esmReply);
+			}
+			return esmReplyList;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	/*정서 반복 기록 응답(reply) 조회*/
+	public static ArrayList<Integer> getEsmReplyIntegerListByEsmTestLogId(Connection con, int esmTestLogId){
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_REPLY_LIST_BY_ESM_TEST_LOG_ID);
+			pstmt.setInt(1, esmTestLogId);
+			ResultSet rs = pstmt.executeQuery();
+
+			ArrayList<Integer> esmReplyList = new ArrayList<Integer>();
+			while(rs.next()) {
+				esmReplyList.add(rs.getInt("esm_reply_content"));
 			}
 			return esmReplyList;
 		}

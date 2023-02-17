@@ -47,7 +47,7 @@ public class EsmTestLogDAO {
 	}
 	
 	/*사용자별 정서 발달 기록 조회*/
-	public static ArrayList<EsmTestLog> getEsmTestLogByUserId(Connection con, int userId){
+	public static ArrayList<EsmTestLog> getEsmTestLogListByUserId(Connection con, int userId){
 		try {
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_LOG_BY_USER);
 			pstmt.setInt(1, userId);
@@ -68,7 +68,7 @@ public class EsmTestLogDAO {
 	}
 	
 	/*사용자별 정서 발달 기록 일자별 조회*/
-	public static ArrayList<EsmTestLog> getEsmTestLogByUserIdAndDate(Connection con, int userId, Date esmTestDate){
+	public static ArrayList<EsmTestLog> getEsmTestLogListByUserIdAndDate(Connection con, int userId, Date esmTestDate){
 		try {
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_LOG_BY_USER_AND_DATE);
 			pstmt.setInt(1, userId);
@@ -90,7 +90,7 @@ public class EsmTestLogDAO {
 	}
 	
 	/*사용자별 정서 발달 기록 일자 조회*/
-	public static ArrayList<Date> getEsmTestLogDateByUserIdGroupByDate(Connection con, int userId){
+	public static ArrayList<Date> getEsmTestLogDateListByUserIdGroupByDate(Connection con, int userId){
 		ArrayList<Date> esmTestDateList = new ArrayList<Date>();
 		try {
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_DATE_BY_USER_GROUP_BY_DATE);

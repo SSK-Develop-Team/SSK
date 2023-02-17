@@ -1,38 +1,51 @@
 package controller.expert;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
- 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+
+import model.dto.export.SskExcelByUser;
+import model.sevice.ExportChildResultExcelService;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
+ * @author Jiwon Lee
  * 아동 결과 엑셀 파일 export
  */
-@WebServlet("/exportChildResultExcel")
-public class exportChildResultExcel extends HttpServlet {
+@WebServlet("/ExportChildResultExcel")
+public class ExportChildResultExcel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public exportChildResultExcel() {
+    public ExportChildResultExcel() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+
+		ServletContext sc = getServletContext();
+		Connection conn= (Connection) sc.getAttribute("DBconnection");
+
+		int childId = 4;
+		//int childId = Integer.parseInt(request.getParameter("childId"));
+
+		SskExcelByUser sskExcelByUser = ExportChildResultExcelService.getSskExcelByChild(conn, childId, true, true, true, true);
+		Workbook wb = sskExcelByUser.getWorkBook();
+		String fileName = new String(sskExcelByUser.getFileName().getBytes("KSC5601"), StandardCharsets.ISO_8859_1);//encoding
+
+		response.setHeader("Set-Cookie", "fileDownload=true; path=/");
+		response.setHeader("Content-Disposition", String.format("attachment; filename=\""+fileName+"\""));
+
+		wb.write(response.getOutputStream());
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

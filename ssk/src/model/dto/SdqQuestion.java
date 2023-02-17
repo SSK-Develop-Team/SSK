@@ -6,7 +6,7 @@ public class SdqQuestion {
 	private SdqType sdqType;
 	private String sdqQuestionContent;
 	private String sdqScoringType;
-	private String sdqTarget;
+	private SdqTarget sdqTarget;
 	
 	public int getSdqQuestionId() {
 		return sdqQuestionId;
@@ -33,10 +33,9 @@ public class SdqQuestion {
 		this.sdqScoringType = sdqScoringType;
 	}
 	public String getSdqTarget() {
-		return sdqTarget;
+		return SdqTarget.getTypeName(sdqTarget);
 	}
 	public void setSdqTarget(String sdqTarget) {
-		this.sdqTarget = sdqTarget;
+		this.sdqTarget = SdqTarget.findByTypeName(sdqTarget);
 	}
-
 }
