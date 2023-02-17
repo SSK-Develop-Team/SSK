@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dto.SskExcelByUser;
+import model.dto.export.SskExcelByUser;
 import model.sevice.ExportChildResultExcelService;
 import org.apache.poi.ss.usermodel.Workbook;
 

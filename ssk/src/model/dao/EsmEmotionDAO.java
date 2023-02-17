@@ -11,7 +11,7 @@ import model.dto.EsmRecord;
 import model.dto.EsmType;
 
 public class EsmEmotionDAO {
-	private final static String SQLST_SELECT_ESM_EMOTION = "SELECT * FROM esm_emotion WHERE esm_type= ?";
+	private final static String SQLST_SELECT_ESM_EMOTION = "SELECT * FROM esm_emotion WHERE esm_type= ? ORDER BY esm_emotion_id";
 	
 	public static ArrayList<EsmEmotion> getEsmEmotionListByEsmType(Connection con, String esmTypeName){
 		ArrayList<EsmEmotion> esmEmotionList = new ArrayList<EsmEmotion>();

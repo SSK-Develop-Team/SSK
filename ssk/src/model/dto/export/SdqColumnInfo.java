@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum SdqColumnInfo implements ExcelColumnInfo {
-    SDQ_ID("번호", 0),
-    SDQ_TARGET("검사 종류", 1),
-    SDQ_DATETIME("검사 시간", 2),
+    SDQ_ID("NO.", 0),
+    SDQ_TARGET("검사종류", 1),
+    SDQ_DATETIME("검사시간", 2),
     SDQ_ANSWER1("문항1", 3),
     SDQ_ANSWER2("문항2", 4),
     SDQ_ANSWER3("문항3", 5),

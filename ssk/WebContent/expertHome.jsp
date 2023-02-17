@@ -53,25 +53,27 @@
 		  <table class="w3-table-all w3-hoverable" style="font-size:0.8em;">
 		    <thead>
 		      <tr class="w3-light-grey">
-		      	<th>&nbsp;</th>
-		        <th>NO.</th>
-		        <th>이름</th>
-		        <th>아이디</th>
-		        <th>생년월일</th>
-		        <th>등록일</th>
-		        <th>이메일</th>
+				  <th>&nbsp;</th>
+				  <th>NO.</th>
+				  <th>이름</th>
+				  <th>아이디</th>
+				  <th>생년월일</th>
+				  <th>성별</th>
+				  <th>등록일</th>
+				  <th>이메일</th>
 		      </tr>
 		    </thead>
 		    <%for (int i =0;i<currUserList.size();i++){
 			%>
 			<tr>
-			  <td><input type="checkbox" id="check"/></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserName() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserLoginId() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserBirth() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getRegistrationDate() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserEmail() %></td>
+				<td><input type="checkbox" id="check"/></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserName() %></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserLoginId() %></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserBirth() %></td>
+				<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserGenderKr() %></td>
+				<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getRegistrationDate() %></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserEmail() %></td>
 		    </tr>
 			<% }%>
 		  </table>

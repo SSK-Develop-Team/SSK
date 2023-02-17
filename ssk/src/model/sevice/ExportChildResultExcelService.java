@@ -1,13 +1,11 @@
 package model.sevice;
 
-import model.dao.SdqReplyDAO;
-import model.dao.SdqTestLogDAO;
-import model.dao.UserDAO;
+import model.dao.*;
+import model.dto.EsmRecord;
+import model.dto.EsmTestLog;
 import model.dto.SdqTarget;
 import model.dto.SdqTestLog;
-import model.dto.SskExcelByUser;
-import model.dto.export.SdqExcelDTO;
-import model.dto.export.UserExcelDTO;
+import model.dto.export.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -46,18 +44,71 @@ public class ExportChildResultExcelService {
     }
 
     /*정서 반복 기록*/
-    
+    public static ArrayList<EsmExcelDTO> getEsmDataListOfUser(Connection con, int childId, String childName){
+        ArrayList<EsmExcelDTO> esmDataList = new ArrayList<EsmExcelDTO>();
+
+        ArrayList<EsmTestLog> esmTestLogList = EsmTestLogDAO.getEsmTestLogListByUserId(con, childId);
+        for(int i=0;i< esmTestLogList.size();i++){
+            EsmTestLog esmTestLog = esmTestLogList.get(i);
+
+            EsmExcelDTO esmData = new EsmExcelDTO();
+            esmData.setUserId(childId);
+            esmData.setUserName(childName);
+
+            esmData.setId(i+1);
+            esmData.setDateStr(esmTestLog.getEsmTestDate(), esmTestLog.getEsmTestTime());
+            esmData.setReplyList(EsmReplyDAO.getEsmReplyIntegerListByEsmTestLogId(con,esmTestLog.getEsmTestLogId()));
+            esmData.setScoreList(EsmReplyDAO.getEsmResultByEsmTestLogId(con,esmTestLog.getEsmTestLogId()));
+
+            esmDataList.add(esmData);
+        }
+
+        return esmDataList;
+    }
+
     /*정서 다이어리*/
+    public static ArrayList<EsmRecordExcelDTO> getEsmRecordDataListOfUser(Connection con, int childId, String childName){
+        ArrayList<EsmRecordExcelDTO> esmRecordDataList = new ArrayList<EsmRecordExcelDTO>();
+
+        ArrayList<EsmRecord> esmRecordList = EsmRecordDAO.getEsmRecordListByUser(con, childId);
+        for(int i=0;i<esmRecordList.size();i++){
+            EsmRecordExcelDTO esmRecordData = new EsmRecordExcelDTO();
+            esmRecordData.setUserId(childId);
+            esmRecordData.setUserName(childName);
+
+            esmRecordData.setId(i+1);
+            esmRecordData.setText(esmRecordList.get(i).getEsmRecordText());
+            esmRecordData.setDateStr(esmRecordList.get(i).getEsmRecordDate(), esmRecordList.get(i).getEsmRecordTime());
+
+            esmRecordDataList.add(esmRecordData);
+        }
+
+        return esmRecordDataList;
+    }
 
 
     /* export ssk excel by child*/
     public static SskExcelByUser getSskExcelByChild(Connection con, int childId, boolean lang, boolean sdq, boolean esm, boolean esmRecord){
-        UserExcelDTO userExcelDTO = getChildData(con, childId);
-        ArrayList<SdqExcelDTO> sdqExcelDTOS = getSdqDataListOfUser(con, childId, userExcelDTO.getName());
-
         SskExcelByUser sskExcelByUser = new SskExcelByUser();
+
+        UserExcelDTO userExcelDTO = getChildData(con, childId);
         sskExcelByUser.addUserData(userExcelDTO);
-        sskExcelByUser.addSdqData(sdqExcelDTOS);
+
+        if(lang==true){
+
+        }
+        if(sdq==true){
+            ArrayList<SdqExcelDTO> sdqExcelDTOS = getSdqDataListOfUser(con, childId, userExcelDTO.getName());
+            sskExcelByUser.addSdqData(sdqExcelDTOS);
+        }
+        if(esm==true){
+            ArrayList<EsmExcelDTO> esmExcelDTOS = getEsmDataListOfUser(con, childId, userExcelDTO.getName());
+            sskExcelByUser.addEsmData(esmExcelDTOS);
+        }
+        if(esmRecord==true){
+            ArrayList<EsmRecordExcelDTO> esmRecordExcelDTOS = getEsmRecordDataListOfUser(con, childId, userExcelDTO.getName());
+            sskExcelByUser.addEsmRecordData(esmRecordExcelDTOS);
+        }
 
         return sskExcelByUser;
     }

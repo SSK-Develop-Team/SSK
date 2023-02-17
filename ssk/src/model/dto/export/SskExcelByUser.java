@@ -1,9 +1,7 @@
-package model.dto;
+package model.dto.export;
 
-import model.dto.export.SdqColumnInfo;
-import model.dto.export.SdqExcelDTO;
-import model.dto.export.UserColumnInfo;
-import model.dto.export.UserExcelDTO;
+import model.dto.EsmResultOfType;
+import model.dto.SdqResultOfType;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,6 +9,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import static model.dto.export.EsmColumnInfo.*;
+import static model.dto.export.EsmRecordColumnInfo.*;
 import static model.dto.export.SdqColumnInfo.*;
 import static model.dto.export.UserColumnInfo.*;
 
@@ -25,7 +25,7 @@ public class SskExcelByUser {
     /*init*/
     public SskExcelByUser(){
         wb = new XSSFWorkbook();
-        sheet = wb.createSheet();
+        sheet = wb.createSheet("검사 정보");
         setHeaderCellStyle();
         setBodyCellStyle();
     }
@@ -69,8 +69,8 @@ public class SskExcelByUser {
         Row headerRow = sheet.createRow(rowIndex++);
 
         for(SdqColumnInfo x : SdqColumnInfo.getAllColumns()){
-             createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
-             sheet.autoSizeColumn(x.getColumnIndex());
+            createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
+            setAutoSizeColumnPlus(sheet,x.getColumnIndex());
         }
 
         for(int i=0;i<sdqExcelDTOS.size();i++){
@@ -99,12 +99,79 @@ public class SskExcelByUser {
 
                 createCellWithStyleInt(bodyRow, columnIndex, scoreList.get(j).getResult(), bodyCellStyle);
                 sheet.autoSizeColumn(columnIndex);
+
             }
 
         }
 
     }
 
+    /*Esm Data Export*/
+    public void addEsmData(ArrayList<EsmExcelDTO> esmExcelDTOS){
+        sheet.createRow(rowIndex++);
+        sheet.createRow(rowIndex++);
+
+        Row headerRow = sheet.createRow(rowIndex++);
+
+        for(EsmColumnInfo x : EsmColumnInfo.getAllColumns()){
+            createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
+            setAutoSizeColumnPlus(sheet,x.getColumnIndex());
+        }
+
+        for(int i=0;i<esmExcelDTOS.size();i++){
+            Row bodyRow  = sheet.createRow(rowIndex++);
+            createCellWithStyleInt(bodyRow, ESM_ID.getColumnIndex(), esmExcelDTOS.get(i).getId(), bodyCellStyle);
+            createCellWithStyle(bodyRow, ESM_DATETIME.getColumnIndex(), esmExcelDTOS.get(i).getDateStr(), bodyCellStyle);
+            sheet.autoSizeColumn(ESM_DATETIME.getColumnIndex());
+            createCellWithStyleInt(bodyRow, ESM_ANSWER1.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(0), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER2.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(1), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER3.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(2), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER4.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(3), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER5.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(4), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER6.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(5), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER7.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(6), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER8.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(7), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER9.getColumnIndex(), esmExcelDTOS.get(i).getReplyList().get(8), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_ANSWER10.getColumnIndex(),esmExcelDTOS.get(i).getReplyList().get(9), bodyCellStyle);
+
+            ArrayList<EsmResultOfType> scoreList = esmExcelDTOS.get(i).getScoreList();
+
+            /*match sdq result and type column*/
+            for(int j = 0 ; j<scoreList.size();j++){
+                String typeName = scoreList.get(j).getEsmType();
+                int columnIndex = EsmColumnInfo.findColumnByEsmType(typeName).getColumnIndex();
+
+                createCellWithStyleInt(bodyRow, columnIndex, scoreList.get(j).getResult(), bodyCellStyle);
+            }
+
+        }
+    }
+
+    /*ESM Record Data Export*/
+    public void addEsmRecordData(ArrayList<EsmRecordExcelDTO> esmRecordExcelDTOS){
+        sheet.createRow(rowIndex++);
+        sheet.createRow(rowIndex++);
+
+        Row headerRow = sheet.createRow(rowIndex++);
+
+        for(EsmRecordColumnInfo x : EsmRecordColumnInfo.getAllColumns()){
+            createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
+            setAutoSizeColumnPlus(sheet,x.getColumnIndex());
+        }
+
+        for(int i=0;i<esmRecordExcelDTOS.size();i++){
+            Row bodyRow  = sheet.createRow(rowIndex++);
+            createCellWithStyleInt(bodyRow, ESM_RECORD_ID.getColumnIndex(), esmRecordExcelDTOS.get(i).getId(), bodyCellStyle);
+            createCellWithStyle(bodyRow, ESM_RECORD_DATETIME.getColumnIndex(), esmRecordExcelDTOS.get(i).getDateStr(), bodyCellStyle);
+            sheet.autoSizeColumn(ESM_RECORD_DATETIME.getColumnIndex());
+            createCellWithStyle(bodyRow, ESM_RECORD_TEXT.getColumnIndex(), esmRecordExcelDTOS.get(i).getText(), bodyCellStyle);
+        }
+    }
+
+    public void setAutoSizeColumnPlus(Sheet sheet, int columnIndex){
+        sheet.autoSizeColumn(columnIndex);
+        sheet.setColumnWidth(columnIndex,sheet.getColumnWidth(columnIndex)+1000);
+    }
     public void createCellWithStyle(Row row, int columnIndex, String value, CellStyle cellStyle){
         Cell cell = row.createCell(columnIndex);
         cell.setCellValue(value);
