@@ -3,6 +3,7 @@ package model.dto.export;
 import model.dto.EsmResultOfType;
 import model.dto.SdqResultOfType;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.sql.Date;
@@ -20,12 +21,14 @@ public class SskExcelByUser {
     private Sheet sheet;
     private int rowIndex = 0;
 
-    private CellStyle headerCellStyle, bodyCellStyle;
+    private CellStyle defaultCellStyle, headerCellStyle, bodyCellStyle;
 
     /*init*/
     public SskExcelByUser(){
         wb = new XSSFWorkbook();
-        sheet = wb.createSheet("검사 정보");
+        sheet = wb.createSheet("검사 결과");
+
+        setDefaultCellStyle();
         setHeaderCellStyle();
         setBodyCellStyle();
     }
@@ -43,7 +46,15 @@ public class SskExcelByUser {
     /*User data export*/
     public void addUserData(UserExcelDTO userExcelDTO){
         this.fileName = userExcelDTO.getId() + "_" + userExcelDTO.getLoginId() + "_" + userExcelDTO.getName() + "_" + new Date(System.currentTimeMillis()) +"_아동별.xlsx";
-        sheet.createRow(rowIndex++);
+
+        Row titleRow = sheet.createRow(rowIndex);
+        titleRow.setHeight((short)1000);
+        Cell titleCell = titleRow.createCell(0);
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,UserColumnInfo.getAllColumns().size()-1));
+        titleCell.setCellValue("아동 정보");
+        titleCell.setCellStyle(defaultCellStyle);
+        rowIndex++;
+
         Row headerRow = sheet.createRow(rowIndex++);
 
         for(UserColumnInfo x : UserColumnInfo.getAllColumns()){
@@ -66,6 +77,14 @@ public class SskExcelByUser {
         sheet.createRow(rowIndex++);
         sheet.createRow(rowIndex++);
 
+        Row titleRow = sheet.createRow(rowIndex);
+        titleRow.setHeight((short)1000);
+        Cell titleCell = titleRow.createCell(0);
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,LangColumnInfo.getAllColumns().size()-1));
+        titleCell.setCellValue("언어 발달 평가");
+        titleCell.setCellStyle(defaultCellStyle);
+        rowIndex++;
+        
         Row headerRow = sheet.createRow(rowIndex++);
 
         for(LangColumnInfo x : LangColumnInfo.getAllColumns()){
@@ -92,6 +111,14 @@ public class SskExcelByUser {
     public void addSdqData(ArrayList<SdqExcelDTO> sdqExcelDTOS){
         sheet.createRow(rowIndex++);
         sheet.createRow(rowIndex++);
+
+        Row titleRow = sheet.createRow(rowIndex);
+        titleRow.setHeight((short)1000);
+        Cell titleCell = titleRow.createCell(0);
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,SdqColumnInfo.getAllColumns().size()-1));
+        titleCell.setCellValue("정서/행동 발달 평가");
+        titleCell.setCellStyle(defaultCellStyle);
+        rowIndex++;
 
         Row headerRow = sheet.createRow(rowIndex++);
 
@@ -137,6 +164,14 @@ public class SskExcelByUser {
     public void addEsmData(ArrayList<EsmExcelDTO> esmExcelDTOS){
         sheet.createRow(rowIndex++);
         sheet.createRow(rowIndex++);
+        
+        Row titleRow = sheet.createRow(rowIndex);
+        titleRow.setHeight((short)1000);
+        Cell titleCell = titleRow.createCell(0);
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,EsmColumnInfo.getAllColumns().size()-1));
+        titleCell.setCellValue("정서 반복 기록");
+        titleCell.setCellStyle(defaultCellStyle);
+        rowIndex++;
 
         Row headerRow = sheet.createRow(rowIndex++);
 
@@ -178,6 +213,14 @@ public class SskExcelByUser {
     public void addEsmRecordData(ArrayList<EsmRecordExcelDTO> esmRecordExcelDTOS){
         sheet.createRow(rowIndex++);
         sheet.createRow(rowIndex++);
+        
+        Row titleRow = sheet.createRow(rowIndex);
+        titleRow.setHeight((short)1000);
+        Cell titleCell = titleRow.createCell(0);
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,EsmRecordColumnInfo.getAllColumns().size()-1));
+        titleCell.setCellValue("정서 다이어리");
+        titleCell.setCellStyle(defaultCellStyle);
+        rowIndex++;
 
         Row headerRow = sheet.createRow(rowIndex++);
 
@@ -219,12 +262,34 @@ public class SskExcelByUser {
 
 
 
-    /*Set Standard Cell Style - header, body*/
+    /*Set Standard Cell Style - defualt, header, body*/
+    public void setDefaultCellStyle(){
+        defaultCellStyle = wb.createCellStyle();
+
+        Font font = wb.createFont();
+        font.setFontHeightInPoints((short) 14);
+        font.setBold(true);
+        defaultCellStyle.setFont(font);
+
+        // 배경색 지정
+        //defaultCellStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        //defaultCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // 정렬
+        defaultCellStyle.setAlignment(HorizontalAlignment.CENTER);
+        defaultCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        // 테두리
+        //defaultCellStyle.setBorderTop(BorderStyle.THIN);
+        //defaultCellStyle.setBorderBottom(BorderStyle.THIN);
+        //defaultCellStyle.setBorderLeft(BorderStyle.THIN);
+        //defaultCellStyle.setBorderRight(BorderStyle.THIN);
+    }
     public void setHeaderCellStyle(){
         headerCellStyle = wb.createCellStyle();
 
         // 배경색 지정
-        headerCellStyle.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+        headerCellStyle.setFillForegroundColor(IndexedColors.PALE_BLUE.getIndex());
         headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
         // 정렬
