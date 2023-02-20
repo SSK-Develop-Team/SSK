@@ -27,7 +27,5 @@ public class SdqResultOfType {
 	public void setResult(int result) {
 		this.result = result;
 	}
-	
-	
-	
+
 }

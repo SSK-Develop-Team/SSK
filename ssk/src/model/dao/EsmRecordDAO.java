@@ -15,6 +15,7 @@ public class EsmRecordDAO {
 	private final static String SQLST_SELECT_ESM_RECORD_BY_DATE = "SELECT * FROM esm_record WHERE user_id = ? AND esm_record_date = ?";
 	private final static String SQLST_SELECT_ESM_RECORD_DATE_GROUP_BY_DATE = "SELECT esm_record_date, COUNT(*) FROM esm_record WHERE user_id=? GROUP BY esm_record_date";
 	private final static String SQLST_SELECT_ESM_RECORD_BY_ESM_RECORD_ID = "SELECT * FROM esm_record WHERE esm_record_id = ?";
+	private final static String SQLST_SELECT_ESM_RECORD_BY_USER_ID = "SELECT * FROM esm_record WHERE user_id = ?";
 	private final static String SQLST_UPDATE_ESM_RECORD = "UPDATE esm_record SET esm_record_text = ? WHERE esm_record_id = ?";
 	private final static String SQLST_DELETE_ESM_RECORD = "DELETE FROM esm_record WHERE esm_record_id = ?";
 	
@@ -105,6 +106,30 @@ public class EsmRecordDAO {
 			e.printStackTrace();
 		} 
 		return null;
+	}
+
+	public static ArrayList<EsmRecord> getEsmRecordListByUser(Connection con, int userId){
+		ArrayList<EsmRecord> esmRecordList = new ArrayList<EsmRecord>();
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_RECORD_BY_USER_ID);
+			pstmt.setInt(1, userId);
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				EsmRecord esmRecordElement = new EsmRecord();
+				esmRecordElement.setEsmRecordId(rs.getInt("esm_record_id"));
+				esmRecordElement.setEsmRecordText(rs.getString("esm_record_text"));
+				esmRecordElement.setEsmRecordDate(rs.getDate("esm_record_date"));
+				esmRecordElement.setEsmRecordTime(rs.getTime("esm_record_time"));
+				esmRecordElement.setUserId(rs.getInt("user_id"));
+				esmRecordList.add(esmRecordElement);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return esmRecordList;
 	}
 	
 	/*정서 다이어리 수정*/

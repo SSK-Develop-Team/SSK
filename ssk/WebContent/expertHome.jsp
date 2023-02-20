@@ -13,20 +13,20 @@
 
 <div class="w3-row">
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
-	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.5em;padding-left:1em;"><img src="./image/research.png" style="width:35px;">     아동별 결과 조회</div>
+	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.2em;padding-left:1em;"><img src="./image/research.png" style="width:35px;">     아동별 결과 조회</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 </div>
-
+<form method="post" action="ExportChildResultExcel"id="exportFrm">
 <div class="w3-row">
 	<div class="w3-col w3-hide-small m3 l5">&nbsp;</div>
 	<div class="select-box w3-col s12 m9 l6"style="margin-bottom:0.5em;padding-right:1em;">
 		<div style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">카테고리<span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 아동 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
 		<div class="w3-cell-row w3-container" style="background-color:#D9D9D9;font-size:0.8em; line-height:7vh;">
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 행동 발달 검사</label></div>
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 반복 기록</label></div>
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
-			<div class="w3-cell" style="vertical-align:middle;line-height:2vh; text-align:right;"><button class="w3-button" style="background-color:#51459E; color:white;vertical-align:middle;" onclick="location.href='export_excel.jsp?fileName=테스트파일생성.xls';"> excel export </button></div>
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="lang" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="sdq" style="transform:translateY(0.1em);">&nbsp;<label>정서 행동 발달 검사</label></div>
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="esm" style="transform:translateY(0.1em);">&nbsp;<label>정서 반복 기록</label></div>
+			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="esmRecord" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
+			<div class="w3-cell" style="vertical-align:middle;line-height:2vh; text-align:right;"><div class="w3-button" style="background-color:#51459E; color:white;vertical-align:middle;" onclick="exportData();"> excel export </div></div>
 		</div>
 	</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
@@ -53,25 +53,27 @@
 		  <table class="w3-table-all w3-hoverable" style="font-size:0.8em;">
 		    <thead>
 		      <tr class="w3-light-grey">
-		      	<th>&nbsp;</th>
-		        <th>NO.</th>
-		        <th>이름</th>
-		        <th>아이디</th>
-		        <th>생년월일</th>
-		        <th>등록일</th>
-		        <th>이메일</th>
+				  <th><input type="checkbox" name="childId" id="checkChildIdAll" value="0" onclick="selectChildAll(this)"/></th>
+				  <th>NO.</th>
+				  <th>이름</th>
+				  <th>아이디</th>
+				  <th>생년월일</th>
+				  <th>성별</th>
+				  <th>등록일</th>
+				  <th>이메일</th>
 		      </tr>
 		    </thead>
 		    <%for (int i =0;i<currUserList.size();i++){
 			%>
 			<tr>
-			  <td><input type="checkbox" id="check"/></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserName() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserLoginId() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserBirth() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getRegistrationDate() %></td>
-		      <td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserEmail() %></td>
+				<td><input type="checkbox" name="childId" value="<%=currUserList.get(i).getUserId()%>" id="check"/></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserName() %></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserLoginId() %></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserBirth() %></td>
+				<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserGenderKr() %></td>
+				<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getRegistrationDate() %></td>
+		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserEmail() %></td>
 		    </tr>
 			<% }%>
 		  </table>
@@ -103,7 +105,28 @@
 		</div>
 		</div>
 	</div>
-	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
+	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>	
 </div>
+</form>
+<script>
+function exportData(){
+	const categoryCnt = document.querySelectorAll('input[name="category"]:checked').length;
+	const childCnt = document.querySelectorAll('input[name="childId"]:checked').length;
+	if(categoryCnt==0){//미선택 예외 처리
+		alert("카테고리를 선택해주세요.");
+	}else if(childCnt==0){
+		alert("아동을 선택해주세요.");
+	}else{
+		document.getElementById('exportFrm').submit();
+	}
+}
+
+function selectChildAll(selectChildAll){
+	const checkboxes = document.getElementsByName('childId');
+	checkboxes.forEach((checkbox) => {
+		  checkbox.checked = selectChildAll.checked; 
+		})
+}
+</script>
 </body>
 </html>
