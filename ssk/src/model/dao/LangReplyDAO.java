@@ -30,6 +30,11 @@ public class LangReplyDAO {
 							"LEFT JOIN lang_question ON lang_reply.lang_question_id = lang_question.lang_question_id \r\n" +
 							"WHERE lang_test_log_id = ?";
 	
+	private final static String SQLST_SELECT_TEST_LOG_ID_BY_AGE_GROUP_WITH_USER = "SELECT lang_test_log.lang_test_log_id FROM lang_question  \r\n" +
+							"RIGHT JOIN lang_reply ON lang_question.lang_question_id = lang_reply.lang_question_id \r\n" +
+							"RIGHT join lang_test_log ON lang_reply.lang_test_log_id = lang_test_log.lang_test_log_id \r\n" +
+							"WHERE age_group_id = ? AND user_id = ?";
+	
 	/*응답 삽입*/
 	public static boolean insertLangReply(Connection con, LangReply langReply) {
 		try {
@@ -97,21 +102,41 @@ public class LangReplyDAO {
 	
 	public static int getLangAgeGroupIdByLogId(Connection con, int langTestLogId){
 		try {
-			ArrayList<Integer> ageGroupIdList = new ArrayList<Integer>();
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_AGE_GROUP_ID_BY_TEST_LOG_ID);
 			pstmt.setInt(1, langTestLogId);
 			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int ageGroupIdElement = 0;
-				ageGroupIdElement = rs.getInt(1);
-				if(!ageGroupIdList.contains(ageGroupIdElement))
-					ageGroupIdList.add(ageGroupIdElement);
+				return rs.getInt(1);
 			}
-			return ageGroupIdList.get(0);
+			//return ageGroupIdList.get(0);
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return -1;
 		}
+		return -1;
 	}
+	
+	public static ArrayList<Integer> getLangTestLogIdByAgeGroup(Connection con, int ageGroup, int userId){
+		ArrayList<Integer> logIds = new ArrayList<Integer>();
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_TEST_LOG_ID_BY_AGE_GROUP_WITH_USER);
+			pstmt.setInt(1, ageGroup);
+			pstmt.setInt(2, userId);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int logId = rs.getInt("lang_test_log_id");
+				logIds.add(logId);
+			}
+			
+			return logIds;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 }

@@ -94,7 +94,7 @@ public class ManageLangResult extends HttpServlet {
 		request.setAttribute("currLangTestLogId",langTestLog.getLangTestLogId());
 		
 		
-		response.sendRedirect(getServletContext().getContextPath()+"/AllLangResult?langTestLogId=0");
+		response.sendRedirect(getServletContext().getContextPath()+"/AllLangResult?isTesting=1");
 
 	}
 
