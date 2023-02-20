@@ -25,7 +25,7 @@ public class SskExcelByUser {
     /*init*/
     public SskExcelByUser(){
         wb = new XSSFWorkbook();
-        sheet = wb.createSheet("검사 정보");
+        sheet = wb.createSheet("검사 결과");
         setHeaderCellStyle();
         setBodyCellStyle();
     }
