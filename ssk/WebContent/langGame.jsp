@@ -116,7 +116,7 @@
 	window.onload = function () {
 		var audio = new Audio();
 		audio.src="<%=langGameList.get(i).getLangGameVoice()%>";
-		if(<%=audioEndedNextFlag%> == 1){
+		if(<%=audioEndedNextFlag%>==1){
 			audio.addEventListener("onended",function(){
 				alert("end");
 				getNextContent(<%=i%>,<%=gameID%>,<%=langGameList.size()%>);
