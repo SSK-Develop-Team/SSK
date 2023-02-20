@@ -14,7 +14,7 @@ import model.dao.UserDAO;
  * lastPageNum - page 총 갯수 (전체의 마지막 page 번호)
  */
 public class UserPaging {
-	private final static int listRange = 10; 
+	private final static int listRange = 20; 
 	private final static int blockRange = 5; 
 	private int blockStartNum = 0;
 	private int blockEndNum = 0;

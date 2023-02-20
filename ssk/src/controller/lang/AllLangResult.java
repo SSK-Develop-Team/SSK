@@ -31,6 +31,8 @@ import model.dto.User;
 /**
  * 
  * 언어 평가 전체 결과 호출
+ * 
+ * 세션 정리 필요 
  */
 @WebServlet("/AllLangResult")
 public class AllLangResult extends HttpServlet {
@@ -50,44 +52,105 @@ public class AllLangResult extends HttpServlet {
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		
 		User currUser = (User)session.getAttribute("currUser");
+		int curAge = (int)session.getAttribute("curAge");
 
-		//All Log
+		//All
 		ArrayList<LangTestLog> langTestLogList = LangTestLogDAO.getLangTestLogByUserId(conn, currUser.getUserId());
-		if(langTestLogList.size() == 0) {
+		int logListSize = langTestLogList.size();
+		
+		if(logListSize == 0) {
 			PrintWriter out = response.getWriter();
 			out.println("<script>location.href='../ssk/langTestMain.jsp';alert('언어 평가 기록이 없습니다.');</script>");
  			out.flush();
 		}
 		
-		LangTestLog selectedLangTestLog = null;
+		ArrayList<Integer> langTestLogIDList = new ArrayList<Integer>();
+		for(int i =0 ;i < logListSize; i++) {
+			langTestLogIDList.add(langTestLogList.get(i).getLangTestLogId());
+		}
 		
-		//Select Log
-		if((request.getParameter("langTestLogId")).equals("0")) {
+		ArrayList<ArrayList<LangReply>> allLangReplyList = new ArrayList<ArrayList<LangReply>>();
+		for(int j=0; j< logListSize; j++) {
+			ArrayList<LangReply> langReplyElement = LangReplyDAO.getLangReplyListByLangTestLogId(conn, langTestLogIDList.get(j));
+				allLangReplyList.add(langReplyElement);
+		}
+		
+		ArrayList<Integer> allAgeGroupIDList = new ArrayList<Integer>();
+		ArrayList<Integer> ageGroupSet = new ArrayList<Integer>();
+		for(int k=0; k< logListSize; k++) {
+			int ageGroupIDElement = LangReplyDAO.getLangAgeGroupIdByLogId(conn, langTestLogIDList.get(k));	
+			allAgeGroupIDList.add(ageGroupIDElement);
+			
+			if(! ageGroupSet.contains(ageGroupIDElement)) {
+				ageGroupSet.add(ageGroupIDElement);
+			}
+		}
+		
+		request.setAttribute("langTestLogIDList", langTestLogIDList);
+		request.setAttribute("allLangReplyList",  allLangReplyList);
+		request.setAttribute("allAgeGroupIDList",  allAgeGroupIDList);
+		request.setAttribute("ageGroupSet",  ageGroupSet);
+		
+		
+		//Age Select After
+		ArrayList<Integer> langLogIdListByUser = (ArrayList<Integer>)session.getAttribute("langLogIdListByUser");
+		ArrayList<LangTestLog> langLogListByUser = new ArrayList<LangTestLog>();
+		ArrayList<ArrayList<LangReply>> langReplyContentListByUser = new ArrayList<ArrayList<LangReply>>();
+		
+		if(langLogIdListByUser != null) {
+			for(int i=0; i<langLogIdListByUser.size(); i++) {
+				langLogListByUser.add(LangTestLogDAO.getLangTestLogById(conn, langLogIdListByUser.get(i)));
+				langReplyContentListByUser.add(LangReplyDAO.getLangReplyListByLangTestLogId(conn, langLogIdListByUser.get(i)));
+			}
+		}
+		
+		request.setAttribute("langLogListByUser", langLogListByUser);
+		request.setAttribute("langReplyContentListByUser", langReplyContentListByUser);
+		
+		
+		//Selected
+		LangTestLog selectedLangTestLog = null;
+		int selectIndex = 0;
+		
+		if(request.getAttribute("selectIndex") != null) selectIndex = (int)request.getAttribute("selectIndex");
+		
+		boolean isTesting = false;
+		if((request.getParameter("isTesting"))!=null) {
 			Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
 			selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
+			isTesting = true;
 		}else {
-			selectedLangTestLog = LangTestLogDAO.getLangTestLogById(conn, Integer.parseInt(request.getParameter("langTestLogId")));
+			if(langLogIdListByUser != null) {
+				if(request.getAttribute("selectIndex") != null) {
+					selectedLangTestLog = langLogListByUser.get(selectIndex);
+					request.setAttribute("selectIndex", selectIndex);
+				}
+				else{
+					selectedLangTestLog = langLogListByUser.get(0);
+				}
+				
+			} else {
+				selectedLangTestLog = langTestLogList.get(allAgeGroupIDList.lastIndexOf(curAge));
+			}
 		}
 
 		request.setAttribute("langTestLogList", langTestLogList);
 		request.setAttribute("selectedLangTestLog", selectedLangTestLog);
+		request.setAttribute("isTesting", isTesting);
 		
-		//Age Group ID
-		ArrayList<Integer> langTestAgeGroupId = (ArrayList<Integer>)LangReplyDAO.getLangAgeGroupIdByLogId(conn, selectedLangTestLog.getLangTestLogId());		
 		
-		//Select Result
+		int langTestAgeGroupId = (int)LangReplyDAO.getLangAgeGroupIdByLogId(conn, selectedLangTestLog.getLangTestLogId());		
 		ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)LangReplyDAO.getLangReplyListByLangTestLogId(conn, selectedLangTestLog.getLangTestLogId());
+		ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)LangQuestionDAO.getLangQuestionListByAgeGroupId(conn, langTestAgeGroupId);
 		
-		//Select Question 
-		ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)LangQuestionDAO.getLangQuestionListByAgeGroupId(conn, langTestAgeGroupId.get(0));
-		
-		request.setAttribute("langTestAgeGroupId", langTestAgeGroupId);
-		
+		request.setAttribute("selectAgeGroupId", langTestAgeGroupId);
 		request.setAttribute("selectLangReplyList",  selectLangReplyList);
 		request.setAttribute("selectLangQuestionList",  selectLangQuestionList);
 		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/langTestResult.jsp");
 		rd.forward(request, response);
+		
 
 	}
 

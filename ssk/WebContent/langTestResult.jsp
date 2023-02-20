@@ -21,21 +21,30 @@
 	String name = currUser.getUserName();
 
 	ArrayList<LangTestLog> langTestLogList = (ArrayList<LangTestLog>)request.getAttribute("langTestLogList");
+	ArrayList<Integer> langTestLogIDList = (ArrayList<Integer>)request.getAttribute("langTestLogIDList");
+	ArrayList<ArrayList<LangReply>> allLangReplyList = (ArrayList<ArrayList<LangReply>>)request.getAttribute("allLangReplyList");
+	ArrayList<Integer> allAgeGroupIDList = (ArrayList<Integer>)request.getAttribute("allAgeGroupIDList");
+	ArrayList<Integer> ageGroupSet = (ArrayList<Integer>)request.getAttribute("ageGroupSet");
+	
+	boolean isTesting = (boolean)request.getAttribute("isTesting");
+	int selectIndex = 0;
 	
 	LangTestLog selectedLangTestLog = (LangTestLog)request.getAttribute("selectedLangTestLog");
-	
-	ArrayList<Integer> langTestAgeGroupId = (ArrayList<Integer>)request.getAttribute("langTestAgeGroupId");
-	
+	int selectAgeGroupId = (int)request.getAttribute("selectAgeGroupId");
 	ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)request.getAttribute("selectLangReplyList");
 	ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)request.getAttribute("selectLangQuestionList");
 	
-	int selectedIndex = langTestLogList.indexOf(selectedLangTestLog);
+	ArrayList<ArrayList<LangReply>> langReplyContentListByUser = (ArrayList<ArrayList<LangReply>>)request.getAttribute("langReplyContentListByUser");
+	ArrayList<LangTestLog> langLogListByUser = (ArrayList<LangTestLog>)request.getAttribute("langLogListByUser");
+	
+	if(request.getAttribute("selectIndex") != null) selectIndex = (int)request.getAttribute("selectIndex");
+	
 	
 %>
 <style>
 
 body{
-	margin-top: 100px;
+	/* margin-top: 100px; */
 	line-height: 1.6
 }
 .container{
@@ -95,18 +104,43 @@ ul.tabs li.current{
 
   <div class="w3-row">
 	<div class="w3-col s1 m2 l4">&nbsp;</div>
-	<c:set var="selectedIndex" scope="page"><%=selectedIndex%></c:set>
-	
-	<div class="w3-col s10 m8 l4">
-		<div class="w3-dropdown-hover"style="width:100%;">
-		    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=langTestAgeGroupId.get(0)%>단계</button>
-		    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
-		      <%for(int i = langTestLogList.size()-1 ; i >= 0 ;i--){ %>
-		      <a href="../ssk/AllLangResult?langTestLogId=<%=langTestLogList.get(i).getLangTestLogId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=langTestLogList.get(i).getLangTestDate().toString()%></a>
-		      <%} %>
+	<c:set var="isTesting" scope="page"><%=isTesting%></c:set>
+	<c:choose>
+	<c:when test="${isTesting ne true}">
+		<div class="w3-col s10 m8 l4">
+			<div class="w3-dropdown-hover"style="width:100%;">
+			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=selectAgeGroupId%>단계</button>
+			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
+			      <%for(int i = 0; i < ageGroupSet.size() ; i++){ %>
+			      <a href="GetLangLog?ageGroupId=<%=ageGroupSet.get(i)%>" class="w3-bar-item w3-button"style="width:100%;"><%=ageGroupSet.get(i).toString()%>단계</a>
+			      <%} %>
+			    </div>
+		    </div>
+		</div>
+		
+		<div class="w3-col">&nbsp;</div>
+		<div class="w3-col s1 m2 l4">&nbsp;</div>
+		
+		<div class="w3-col s10 m8 l4">
+			<div class="w3-dropdown-hover"style="width:100%;">
+			 <%if(langLogListByUser.size() > 0){ %>
+			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=langLogListByUser.get(selectIndex).getLangTestDate().toString()%>&nbsp;<%=langLogListByUser.get(selectIndex).getLangTestTime().toString()%></button>
+			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
+			      <%for(int i = 0; i < langLogListByUser.size() ; i++){ %>
+			      <a href="GetLangLogTime?selectNum=<%=i %>" class="w3-bar-item w3-button"style="width:100%;"><%=langLogListByUser.get(i).getLangTestDate().toString()%>&nbsp;<%=langLogListByUser.get(i).getLangTestTime().toString()%></a>
+			      <%} } else{ %>
+			      	<button class="w3-button"style="width:100%;background-color:#D9D9D9;">X</button>
+			    	<div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
+			      <%} %>
+			    </div>
 		    </div>
 	    </div>
-	</div>
+	    
+	</c:when>
+	<c:otherwise>
+		<div class="w3-col">&nbsp;</div>
+	</c:otherwise>
+	</c:choose>
 
 	<c:remove var="selectedIndex" scope="page"/>
 	
