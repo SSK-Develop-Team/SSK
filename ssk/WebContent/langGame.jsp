@@ -34,7 +34,8 @@
 <div class="w3-col m2 l3">&nbsp;</div>
 <div class="w3-col w3-container s12 m8 l6">
 	<div><img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/></div>
-	<div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div>
+	<% if(currLangGameElement.getLangGameSpeaker().equals("-")) { %><div class="w3-col m2 l3">&nbsp;</div><%} %>
+	<% if(! currLangGameElement.getLangGameSpeaker().equals("-")){%><div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div><%} %>
 	<div class="w3-container w3-round-large w3-padding" style="border:1px solid #12192C;">
 		
 		<div class="w3-container w3-padding-32"><%=langGameContent%></div>
@@ -97,7 +98,7 @@ function getPrevContent(i){
 		var prevForm = document.createElement("form");
 		prevForm.setAttribute("charset", "UTF-8");
 		prevForm.setAttribute("method", "post");
-		prevForm.setAttribute("action", "/ssk/GetLangGamePrevContent"); 
+		prevForm.setAttribute("action", "GetLangGamePrevContent"); 
 		document.body.appendChild(prevForm);
 		prevForm.submit();
 	}
@@ -110,7 +111,7 @@ function getNextContent(i,questionNum,gameSize){
 	var nextForm = document.createElement("form");
 	nextForm.setAttribute("charset", "UTF-8");
 	nextForm.setAttribute("method", "post");
-	nextForm.setAttribute("action", "/ssk/GetLangGameNextContent"); 
+	nextForm.setAttribute("action", "GetLangGameNextContent"); 
 	document.body.appendChild(nextForm);
 	nextForm.submit();		
 }
