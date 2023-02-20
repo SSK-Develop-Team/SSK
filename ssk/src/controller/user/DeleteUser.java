@@ -33,12 +33,15 @@ public class DeleteUser extends HttpServlet {
 	    
 	    ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
-	 	
-	 	int deleteUserId = Integer.parseInt(request.getParameter("deleteUserId"));
-	 	
-	 	UserDAO.deleteUser(conn, deleteUserId);
-	 	
-	 	RequestDispatcher rd = request.getRequestDispatcher("/GetExpertHome");
+
+		String[] childIdStrList = request.getParameterValues("childId");
+
+		for(String c : childIdStrList){
+			int deleteUserId = Integer.parseInt(c);
+			UserDAO.deleteUser(conn, deleteUserId);
+		}
+
+	 	RequestDispatcher rd = request.getRequestDispatcher("/GetManageChild");
 		rd.forward(request, response);
 	}
 
