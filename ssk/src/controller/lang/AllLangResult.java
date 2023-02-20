@@ -60,7 +60,7 @@ public class AllLangResult extends HttpServlet {
 		
 		if(logListSize == 0) {
 			PrintWriter out = response.getWriter();
-			out.println("<script>location.href='../ssk/langTestMain.jsp';alert('언어 평가 기록이 없습니다.');</script>");
+			out.println("<script>location.href='langTestMain.jsp';alert('언어 평가 기록이 없습니다.');</script>");
  			out.flush();
 		}
 		
@@ -130,7 +130,12 @@ public class AllLangResult extends HttpServlet {
 				}
 				
 			} else {
-				selectedLangTestLog = langTestLogList.get(allAgeGroupIDList.lastIndexOf(curAge));
+				if(allAgeGroupIDList.contains(curAge))
+					selectedLangTestLog = langTestLogList.get(allAgeGroupIDList.lastIndexOf(curAge));
+				else {
+					Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
+					selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
+				}
 			}
 		}
 
