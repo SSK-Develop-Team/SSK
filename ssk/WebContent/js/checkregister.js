@@ -27,6 +27,7 @@ nameInput.addEventListener('change', checkName);
 /* 아이디 중복 검사  */
 function checkId(){
 	const id = document.getElementById("userId").value;
+	const originUserId = document.getElementById("originUserId").value;
  	const idMsg = document.getElementById('check_id_m');
 
 	idMsg.style.color = 'red';
@@ -36,7 +37,15 @@ function checkId(){
 		idMsg.innerHTML = '아이디를 입력하세요.';
     	return false;
 	}
-	
+
+	if(id == originUserId){
+		checkedId = true;
+		checkIdBtn.style.backgroundColor = 'green';
+		idMsg.style.color = 'green';
+		idMsg.innerHTML = '기존의 아이디와 일치합니다.';
+		return;
+	}
+
 	const xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
@@ -60,6 +69,7 @@ function checkId(){
 	xhttp.setRequestHeader('Content-Type', 'text/plain; charset=UTF-8');
 	xhttp.send(id);
 }
+
 
 // 중복확인을 완료하고 아이디를 수정하면 중복확인 취소
 idInput.addEventListener('change', function (event) {

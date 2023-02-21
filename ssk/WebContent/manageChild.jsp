@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -25,7 +24,7 @@
 			</div>
 			<div class="buttons" style="width:100%;transform:translateY(0.3em);">
 				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.2em;" onclick="deleteChild()">선택 계정 삭제</button>
-				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.2em;">선택 계정 수정</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.2em;" onclick="updateChild()">선택 계정 수정</button>
 				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.2em;" onclick="location.href='register.jsp?role=child';">아동 계정 생성</button>
 			</div>
 		</div>
@@ -37,62 +36,63 @@
 
 		%>
 		<form method="post" id="manageFrm">
-		<div style="font-size:0.5em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 정렬 기준 : 등록일 순</div>
-		<div class="w3-container">
-			<table class="w3-table-all w3-hoverable" style="font-size:0.8em;">
-				<thead>
-				<tr class="w3-light-grey">
-					<th><input type="checkbox" name="childId" id="checkChildIdAll" value="0" onclick="selectChildAll(this)"/></th>
-					<th>NO.</th>
-					<th>이름</th>
-					<th>아이디</th>
-					<th>생년월일</th>
-					<th>성별</th>
-					<th>등록일</th>
-					<th>이메일</th>
-				</tr>
-				</thead>
-				<%for (int i =0;i<currUserList.size();i++){
-				%>
-				<tr>
-					<td><input type="checkbox" name="childId" value="<%=currUserList.get(i).getUserId()%>" id="check"/></td>
-					<td><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
-					<td><%=currUserList.get(i).getUserName() %></td>
-					<td><%=currUserList.get(i).getUserLoginId() %></td>
-					<td><%=currUserList.get(i).getUserBirth() %></td>
-					<td><%=currUserList.get(i).getUserGenderKr() %></td>
-					<td><%=currUserList.get(i).getRegistrationDate() %></td>
-					<td><%=currUserList.get(i).getUserEmail() %></td>
-				</tr>
-				<% }%>
-			</table>
-		</div>
-		<div class="w3-center">
-			<div class="w3-bar">
-				<c:set var="uPaging" scope="page" value="${requestScope.userPaging}" />
-				<c:set var="curPageNum" scope="page" value="${requestScope.currPageNum}" />
-				<c:set var="blockRange" scope="page" value="<%=blockRange%>" />
-				<c:if test="${curPageNum > blockRange}">
-					<a href="GetManageChild?curPage=${uPaging.blockStartNum - 1}" class="w3-button">&laquo;</a>
-				</c:if>
-				<c:forEach var="i" begin="${uPaging.blockStartNum}" end="${uPaging.blockEndNum}">
-					<c:choose>
-						<c:when test="${i>uPaging.lastPageNum}"></c:when>
-						<c:when test="${i==curPageNum}">
-							<a href="#" class="w3-button w3-gray">${i}</a>
-						</c:when>
-						<c:otherwise>
-							<a href="GetManageChild?curPage=${i}" class="w3-button">${i}</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<c:if test="${uPaging.lastPageNum > uPaging.blockEndNum}">
-					<a href="GetManageChild?curPage=${uPaging.blockEndNum + 1}" class="w3-button">&raquo;</a>
-				</c:if>
-				<c:remove var="uPaging" scope="page"/>
-				<c:remove var="curPageNum" scope="page"/>
+			<input type="hidden" id="latestChildId" name="latestChildId" value="<%=currUserList.get(0).getUserId()%>"/>
+			<div style="font-size:0.5em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 정렬 기준 : 등록일 순</div>
+			<div class="w3-container">
+				<table class="w3-table-all w3-hoverable" style="font-size:0.8em;">
+					<thead>
+					<tr class="w3-light-grey">
+						<th><input type="checkbox" name="childId" id="checkChildIdAll" value="0" onclick="selectChildAll(this)"/></th>
+						<th>NO.</th>
+						<th>이름</th>
+						<th>아이디</th>
+						<th>생년월일</th>
+						<th>성별</th>
+						<th>등록일</th>
+						<th>이메일</th>
+					</tr>
+					</thead>
+					<%for (int i =0;i<currUserList.size();i++){
+					%>
+					<tr>
+						<td><input type="checkbox" name="childId" value="<%=currUserList.get(i).getUserId()%>" id="check" onclick="setLatestChildId(<%=currUserList.get(i).getUserId()%>)"/></td>
+						<td><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
+						<td><%=currUserList.get(i).getUserName() %></td>
+						<td><%=currUserList.get(i).getUserLoginId() %></td>
+						<td><%=currUserList.get(i).getUserBirth() %></td>
+						<td><%=currUserList.get(i).getUserGenderKr() %></td>
+						<td><%=currUserList.get(i).getRegistrationDate() %></td>
+						<td><%=currUserList.get(i).getUserEmail() %></td>
+					</tr>
+					<% }%>
+				</table>
 			</div>
-		</div>
+			<div class="w3-center">
+				<div class="w3-bar">
+					<c:set var="uPaging" scope="page" value="${requestScope.userPaging}" />
+					<c:set var="curPageNum" scope="page" value="${requestScope.currPageNum}" />
+					<c:set var="blockRange" scope="page" value="<%=blockRange%>" />
+					<c:if test="${curPageNum > blockRange}">
+						<a href="GetManageChild?curPage=${uPaging.blockStartNum - 1}" class="w3-button">&laquo;</a>
+					</c:if>
+					<c:forEach var="i" begin="${uPaging.blockStartNum}" end="${uPaging.blockEndNum}">
+						<c:choose>
+							<c:when test="${i>uPaging.lastPageNum}"></c:when>
+							<c:when test="${i==curPageNum}">
+								<a href="#" class="w3-button w3-gray">${i}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="GetManageChild?curPage=${i}" class="w3-button">${i}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${uPaging.lastPageNum > uPaging.blockEndNum}">
+						<a href="GetManageChild?curPage=${uPaging.blockEndNum + 1}" class="w3-button">&raquo;</a>
+					</c:if>
+					<c:remove var="uPaging" scope="page"/>
+					<c:remove var="curPageNum" scope="page"/>
+				</div>
+			</div>
 		</form>
 	</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
@@ -109,6 +109,26 @@
 				deleteFrm.submit();
 			}
 		}
+	}
+	function updateChild(){
+		const childCnt = document.querySelectorAll('input[name="childId"]:checked').length;
+		if(childCnt==0){
+			alert("아동을 선택해주세요.");
+		}else if(childCnt==1){
+			const updateFrm = document.getElementById('manageFrm');
+			updateFrm.setAttribute("action", "GetUpdateUser")
+			updateFrm.submit();
+		}else{
+			if(confirm("마지막으로 선택한 아동의 계정을 수정합니다.")){
+				const updateFrm = document.getElementById('manageFrm');
+				updateFrm.setAttribute("action", "GetUpdateUser")
+				updateFrm.submit();
+			}
+		}
+	}
+	function setLatestChildId(childId){
+		const latestChildIdInput = document.getElementById("latestChildId");
+		latestChildIdInput.value = childId;
 	}
 	function selectChildAll(selectChildAll){
 		const checkboxes = document.getElementsByName('childId');
