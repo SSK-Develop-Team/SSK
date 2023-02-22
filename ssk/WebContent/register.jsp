@@ -55,7 +55,8 @@
 				<label><span style="color:red; margin-left:-5px;">*</span>아이디</label>
 				<div class="w3-row">
 					<input type="text" class="w3-input w3-threequarter" id="userId" name="userId" placeholder="ID" value="${user.userLoginId}" required>
-					<input type="hidden" id="originUserId" name="originUserId" value="${user.userLoginId}">
+					<input type="hidden" id="originUserId" name="originUserId" value="${user.userId}">
+					<input type="hidden" id="originUserLoginId" name="originUserLoginId" value="${user.userLoginId}">
 					<input type="button" class="w3-quarter w3-input w3-button" id="checkId" style="color:white;background-color:#51459E;" value="중복확인">
 				</div>
 				<span id="check_id_m" class="msg"></span>
@@ -160,13 +161,13 @@
 
 	function registerUser(){
 		const frm = document.getElementById("frm");
-		frm.setAttribute("action","doRegister");
+		frm.setAttribute("action","DoRegister");
 		frm.submit();
 	}
 
 	function updateUser(){
 		const frm = document.getElementById("frm");
-		frm.setAttribute("action","doUpdateUser");
+		frm.setAttribute("action","UpdateUser");
 		frm.submit();
 	}
 </script>

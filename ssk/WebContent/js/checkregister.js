@@ -1,15 +1,15 @@
 /**
  * @author Jiwon Lee - Copyright 2023 Hong Lab
- * 회원가입 유효성 검사 
- *  - 아이디 중복 검사
- *  - 이메일 형식 검사
- *  - 비밀번호 일치 검사
- *  - 빈칸 검사
+ * ����媛��� ���⑥�� 寃��� 
+ *  - ���대�� 以�蹂� 寃���
+ *  - �대��� ���� 寃���
+ *  - 鍮�諛�踰��� �쇱� 寃���
+ *  - 鍮�移� 寃���
  */
 
-let checkedId = false;//아이디 확인
-let checkedEmail = false;//이메일 확인
-let checkedPW = false;//비밀번호 확인
+let checkedId = false;//���대�� ����
+let checkedEmail = false;//�대��� ����
+let checkedPW = false;//鍮�諛�踰��� ����
 
 const idInput = document.getElementById("userId");
 const checkIdBtn = document.getElementById("checkId");
@@ -24,25 +24,25 @@ pwChkInput.addEventListener('change', checkPW);
 emailInput.addEventListener('change', checkEmail);
 nameInput.addEventListener('change', checkName);
 
-/* 아이디 중복 검사  */
+/* ���대�� 以�蹂� 寃���  */
 function checkId(){
 	const id = document.getElementById("userId").value;
-	const originUserId = document.getElementById("originUserId").value;
+	const originUserLoginId = document.getElementById("originUserLoginId").value;
  	const idMsg = document.getElementById('check_id_m');
 
 	idMsg.style.color = 'red';
 	
-	//입력 값이 있는지 확인 
+	//���� 媛��� ����吏� ���� 
 	if(id === ""){
-		idMsg.innerHTML = '아이디를 입력하세요.';
+		idMsg.innerHTML = '���대��瑜� ���ν���몄��.';
     	return false;
 	}
 
-	if(id == originUserId){
+	if(id == originUserLoginId){
 		checkedId = true;
 		checkIdBtn.style.backgroundColor = 'green';
 		idMsg.style.color = 'green';
-		idMsg.innerHTML = '기존의 아이디와 일치합니다.';
+		idMsg.innerHTML = '湲곗〈�� ���대���� �쇱��⑸����.';
 		return;
 	}
 
@@ -55,12 +55,12 @@ function checkId(){
 	        	checkedId = true;
 	        	checkIdBtn.style.backgroundColor = 'green';
 	        	idMsg.style.color = 'green';
-				idMsg.innerHTML = '사용 가능한 아이디입니다.';
+				idMsg.innerHTML = '�ъ�� 媛��ν�� ���대��������.';
 			} else {
 				checkedId = false;
-				idInput.value = ''; // input창에 입력된 값 삭제
+				idInput.value = ''; // input李쎌�� ���λ�� 媛� ����
 				idMsg.style.color = 'red';
-	        	idMsg.innerHTML = '이미 존재하는 아이디입니다.';
+	        	idMsg.innerHTML = '�대�� 議댁�ы���� ���대��������.';
 	      	}
 		}
 	};
@@ -71,7 +71,7 @@ function checkId(){
 }
 
 
-// 중복확인을 완료하고 아이디를 수정하면 중복확인 취소
+// 以�蹂듯���몄�� ��猷���怨� ���대��瑜� ������硫� 以�蹂듯���� 痍⑥��
 idInput.addEventListener('change', function (event) {
   if (checkedId === true) {
     checkedId = false;
@@ -80,7 +80,7 @@ idInput.addEventListener('change', function (event) {
   }
 });
 
-/* 이메일 형식 검사  */
+/* �대��� ���� 寃���  */
 function checkEmailForm(str) {
   const emailForm = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
@@ -95,13 +95,13 @@ function checkEmail(){
 	const emailMsg = document.getElementById('check_email_m');
 	emailMsg.style.color = 'red';
 	
-	// 입력값이 있는 지 확인
+	// ���κ��� ���� 吏� ����
 	if (email === '') {
-		emailMsg.innerHTML = '이메일을 입력하세요.';
+		emailMsg.innerHTML = '�대��쇱�� ���ν���몄��.';
 		checkedEmail = false;
 	    return false;
 	}else if (!checkEmailForm(email)) {
-		emailMsg.innerHTML = '유효한 이메일주소가 아닙니다.';
+		emailMsg.innerHTML = '���⑦�� �대��쇱＜��媛� ��������.';
 		checkedEmail = false;
 		return false;
 	}else{
@@ -111,27 +111,27 @@ function checkEmail(){
 	}
 }
 
-/* 비밀번호 확인 */
+/* 鍮�諛�踰��� ���� */
 function checkPW() {
-  const pw1 = document.getElementById('userPw').value; // 비밀번호
-  const pw2 = document.getElementById('userPwChk').value; // 비밀번호 확인
-  const checkMsg = document.getElementById('check_pw_m'); // 비밀번호 확인 결과 메세지
+  const pw1 = document.getElementById('userPw').value; // 鍮�諛�踰���
+  const pw2 = document.getElementById('userPwChk').value; // 鍮�諛�踰��� ����
+  const checkMsg = document.getElementById('check_pw_m'); // 鍮�諛�踰��� ���� 寃곌낵 硫��몄�
   checkMsg.style.color = 'red';
 
-  // 비밀번호가 입력되지 않은 경우
+  // 鍮�諛�踰��멸� ���λ��吏� ���� 寃쎌��
   if (pw1 == '') {
-    checkMsg.innerHTML = '비밀번호를 입력하세요.';
+    checkMsg.innerHTML = '鍮�諛�踰��몃�� ���ν���몄��.';
     checkedPW = false;
   } else if (pw2 == '') {
-    checkMsg.innerHTML = '비밀번호 확인을 입력하세요.';
+    checkMsg.innerHTML = '鍮�諛�踰��� ���몄�� ���ν���몄��.';
     checkedPW = false;
   } else if (pw1 == pw2) {
-    // 비밀번호가 서로 같은 경우
+    // 鍮�諛�踰��멸� ��濡� 媛��� 寃쎌��
     checkMsg.style.color = 'green';
-    checkMsg.innerHTML = '비밀번호가 확인되었습니다. ';
+    checkMsg.innerHTML = '鍮�諛�踰��멸� ���몃�����듬����. ';
     checkedPW = true;
   } else {
-    checkMsg.innerHTML = '비밀번호가 서로 다릅니다. 다시 확인해 주세요.';
+    checkMsg.innerHTML = '鍮�諛�踰��멸� ��濡� �ㅻ�����. �ㅼ�� ���명�� 二쇱�몄��.';
     checkedPW = false;
   }
 }
@@ -142,9 +142,9 @@ function checkName(){
 
 	nameMsg.style.color = 'red';
 	
-	//입력 값이 있는지 확인 
+	//���� 媛��� ����吏� ���� 
 	if(name === ""){
-		nameMsg.innerHTML = '이름을 입력하세요.';
+		nameMsg.innerHTML = '�대��� ���ν���몄��.';
     	return false;
 	}else{
 		nameMsg.innerHTML = '';
@@ -152,22 +152,22 @@ function checkName(){
 	return true;
 }
 
-/* 빈칸 검사 */
+/* 鍮�移� 寃��� */
 function checkValue(){
 	/*
-	 - 아이디 빈칸 & 중복 검사 : checkedId
-	 - 이메일 : checkedEmail
-	 - 비밀번호 : checkedPw
-	 - 이름 : checkedName
+	 - ���대�� 鍮�移� & 以�蹂� 寃��� : checkedId
+	 - �대��� : checkedEmail
+	 - 鍮�諛�踰��� : checkedPw
+	 - �대� : checkedName
 	*/
 	if(!checkedId) {
-		alert('아이디를 확인해주세요!');
+		alert('���대��瑜� ���명�댁＜�몄��!');
 	    return false;
 	}else if (!checkedPW) {
-	    alert('비밀번호 확인을 해주세요!');
+	    alert('鍮�諛�踰��� ���몄�� �댁＜�몄��!');
 	    return false;
 	}else if(!checkedEmail){
-		alert('이메일을 확인해주세요!');
+		alert('�대��쇱�� ���명�댁＜�몄��!');
 		return false;
 	}
 	if (checkName()) {
