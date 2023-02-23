@@ -213,14 +213,13 @@ public class UserDAO {
          PreparedStatement pstmt = con.prepareStatement(SQLST_UPDATE_USER_INFO);
          pstmt.setString(1, user.getUserPassword());
          pstmt.setString(2, user.getUserName());
-         pstmt.setString(3, user.getUserName());
-         pstmt.setString(4, user.getUserEmail());
-         pstmt.setString(5, user.getUserRole());
-         pstmt.setDate(6, user.getRegistrationDate());
-         pstmt.setString(7, user.getUserGender());
-         pstmt.setDate(8, user.getUserBirth());
-         pstmt.setString(9, user.getUserIcon());
-         pstmt.setInt(10, user.getUserId());
+         pstmt.setString(3, user.getUserEmail());
+         pstmt.setString(4, user.getUserRole());
+         pstmt.setDate(5, user.getRegistrationDate());
+         pstmt.setString(6, user.getUserGender());
+         pstmt.setDate(7, user.getUserBirth());
+         pstmt.setString(8, user.getUserIcon());
+         pstmt.setInt(9, user.getUserId());
          
          int count = pstmt.executeUpdate();
          if (count > 0)

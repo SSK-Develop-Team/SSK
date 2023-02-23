@@ -60,18 +60,14 @@ public class UpdateUser extends HttpServlet {
 				user.setUserIcon("");
 				
 		boolean update_result = false;
+
 				
 		update_result = UserDAO.updateUser(conn, user);
-		if(update_result == false) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('계정 정보를 확인해주세요.'); location.href='register.jsp';</script>");
-			out.flush();
-		}
-		else { 
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('계정이 수정되었습니다.'); location.href='GetManageChild';</script>");
-			out.flush();
-		}		
+		String update_msg = update_result?"계정이 수정되었습니다.":"계정 수정에 실패했습니다.";
+
+		PrintWriter out = response.getWriter();
+		out.println("<script>alert('"+update_msg+"'); location.href='GetManageChild';</script>");
+		out.flush();
 
     }
 

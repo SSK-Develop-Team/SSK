@@ -24,6 +24,15 @@ pwChkInput.addEventListener('change', checkPW);
 emailInput.addEventListener('change', checkEmail);
 nameInput.addEventListener('change', checkName);
 
+window.onload = function(){
+	const id = document.getElementById("userId").value;
+	const originUserLoginId = document.getElementById("originUserLoginId").value;
+	if(originUserLoginId!="") {
+		checkId();
+		checkEmail();
+		checkName();
+	}
+}
 /* 아이디 중복 검사 */
 function checkId(){
 	const id = document.getElementById("userId").value;
@@ -34,17 +43,18 @@ function checkId(){
 
 	//입력 값이 있는지 확인
 	if(id === ""){
+		idMsg.style.color = 'red';
 		idMsg.innerHTML = '아이디를 입력하세요.';
     	return false;
 	}
 
 	//계정을 수정하는 경우, 기존의 아이디와 일치하는지 확인
-	if(id == originUserLoginId){
+	if(originUserLoginId!="" && id == originUserLoginId){
 		checkedId = true;
 		checkIdBtn.style.backgroundColor = 'green';
 		idMsg.style.color = 'green';
 		idMsg.innerHTML = '기존의 아이디와 일치합니다.';
-		return;
+		return false;
 	}
 
 	const xhttp = new XMLHttpRequest();
@@ -95,8 +105,8 @@ function checkEmail(){
 	const email = document.getElementById('userEmail').value;
 	const emailMsg = document.getElementById('check_email_m');
 	emailMsg.style.color = 'red';
-	
-	// ���κ��� ���� 吏� ����
+
+	// 입력값이 있는 지 확인
 	if (email === '') {
 		emailMsg.innerHTML = '이메일을 입력하세요.';
 		checkedEmail = false;
@@ -162,7 +172,7 @@ function checkValue(){
 	 - 이름 : checkedName
 	*/
 	if(!checkedId) {
-		alert('아이디를 확인해주세요!');
+		alert('아이디를 중복 확인해주세요!');
 	    return false;
 	}else if (!checkedPW) {
 	    alert('비밀번호 확인을 해주세요!');
@@ -179,3 +189,17 @@ function checkValue(){
 	return true;
 }
 
+function togglePasswordType(){
+	const pwInput = document.getElementById("userPw");
+	const pwToggleIcon = document.getElementById("pwToggleIcon");
+
+	if(pwInput.getAttribute("type") == "password"){
+		pwInput.setAttribute("type","text");
+		pwToggleIcon.classList.remove("fa-eye");
+		pwToggleIcon.classList.add("fa-eye-slash");
+	}else{
+		pwInput.setAttribute("type","password");
+		pwToggleIcon.classList.remove("fa-eye-slash");
+		pwToggleIcon.classList.add("fa-eye");
+	}
+}

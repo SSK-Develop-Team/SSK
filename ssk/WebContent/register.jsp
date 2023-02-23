@@ -50,20 +50,44 @@
 	<div class="w3-row" style="height:100%;, width:100%;">
 		<div class="w3-col s1 m2 l4">&nbsp;</div>
 		<div class="w3-col s10 m8 l4 w3-padding-large w3-light-gray ">
-		<form name="regFrm" method="post" id="frm" class="w3-container" onsubmit="return checkValue();">
+			<c:choose>
+				<c:when test="${user eq null}">
+					<form name="regFrm" method="post" id="frm" action="DoRegister" class="w3-container" onsubmit="return checkValue();">
+				</c:when>
+				<c:when test="${user ne null}">
+					<form name="regFrm" method="post" id="frm" action="UpdateUser" class="w3-container" onsubmit="return checkValue();">
+				</c:when>
+			</c:choose>
+
 			<div class="w3-margin-top">
 				<label><span style="color:red; margin-left:-5px;">*</span>아이디</label>
 				<div class="w3-row">
-					<input type="text" class="w3-input w3-threequarter" id="userId" name="userId" placeholder="ID" value="${user.userLoginId}" required>
-					<input type="hidden" id="originUserId" name="originUserId" value="${user.userId}">
-					<input type="hidden" id="originUserLoginId" name="originUserLoginId" value="${user.userLoginId}">
-					<input type="button" class="w3-quarter w3-input w3-button" id="checkId" style="color:white;background-color:#51459E;" value="중복확인">
+					<c:choose>
+						<c:when test="${user eq null}">
+							<input type="text" class="w3-input w3-threequarter" id="userId" name="userId" placeholder="ID" required>
+							<input type="hidden" id="originUserLoginId" name="originUserLoginId" value="${user.userLoginId}">
+							<input type="button" class="w3-quarter w3-input w3-button" id="checkId" style="color:white;background-color:#51459E;" value="중복확인">
+						</c:when>
+						<c:when test="${user ne null}">
+							<input type="text" class="w3-input w3-threequarter" id="userId" name="userId" placeholder="ID" value="${user.userLoginId}" required>
+							<input type="hidden" id="originUserId" name="originUserId" value="${user.userId}">
+							<input type="hidden" id="originUserLoginId" name="originUserLoginId" value="${user.userLoginId}">
+							<input type="button" class="w3-quarter w3-input w3-button" id="checkId" style="color:white;background-color:#51459E;" value="중복확인">
+						</c:when>
+					</c:choose>
 				</div>
 				<span id="check_id_m" class="msg"></span>
 			</div>
 			<div class="w3-margin-top">
 				<label><span style="color:red; margin-left:-5px;">*</span>패스워드</label>
-				<input type="password" class="w3-input" id="userPw" name="userPw" value="${user.userPassword}" placeholder="Password" required>
+				<c:choose>
+					<c:when test="${user eq null}">
+						<input type="password" class="w3-input" id="userPw" name="userPw" placeholder="Password" required>
+					</c:when>
+					<c:when test="${user ne null}">
+						<input type="password" class="w3-input" id="userPw" name="userPw" value="${user.userPassword}" placeholder="Password" required>
+					</c:when>
+				</c:choose>
 				<span class="fa fa-fw fa-eye field-icon toggle-password" id="pwToggleIcon" onclick="togglePasswordType()"></span>
 			</div>
 			<div class="w3-margin-top">
@@ -82,7 +106,14 @@
 						<input type="hidden" id="userRole" name="userRole" value="CHILD" required>
 				    </c:when>
 				</c:choose>
-				<input type="text" class="w3-input" id="userName" name="userName" value="${user.userName}" placeholder="Name" required>
+				<c:choose>
+					<c:when test="${user eq null}">
+						<input type="text" class="w3-input" id="userName" name="userName" placeholder="Name" required>
+					</c:when>
+					<c:when test="${user ne null}">
+						<input type="text" class="w3-input" id="userName" name="userName" value="${user.userName}" placeholder="Name" required>
+					</c:when>
+				</c:choose>
 				<span id="check_name_m" class="msg"></span>
 			</div>
 			<c:choose>
@@ -113,14 +144,21 @@
 					</div>
 					<div class="w3-margin-top">
 						<label><span style="color:red; margin-left:-5px;">*</span>생년월일</label>
-						<input type="date" class="w3-input" name="userBirth" value="${user.userBirth}" required><br />
+						<c:choose>
+							<c:when test="${user eq null}">
+								<input type="date" class="w3-input" name="userBirth" required><br />
+							</c:when>
+							<c:when test="${user ne null}">
+								<input type="date" class="w3-input" name="userBirth" value="${user.userBirth}" required><br />
+							</c:when>
+						</c:choose>
 					</div>
 			    </c:when>
 			    <c:otherwise>
 				</c:otherwise>
 			</c:choose>
 			<div class="w3-margin-top">
-				<label>이메일</label>
+				<label><span style="color:red; margin-left:-5px;">*</span>이메일</label>
 				<input type="text" class="w3-input" id="userEmail" name="userEmail" value="${user.userEmail}" placeholder="Email">
 				<span id="check_email_m" class="msg"></span>
 			</div>
@@ -130,10 +168,10 @@
 			<div class="w3-margin-top w3-right">
 				<c:choose>
 					<c:when test="${user ne null}">
-						<div class="w3-button" style="color:white;background-color:#51459E;" onclick="updateUser()"> 수정하기 </div>
+						<input type="submit" class="w3-button" style="color:white;background-color:#51459E;" value="수정하기"/>
 					</c:when>
 					<c:when test="${user eq null}">
-						<div class="w3-button" style="color:white;background-color:#51459E;" onclick="registerUser()"> 회원 가입 </div>
+						<input type="submit" class="w3-button" style="color:white;background-color:#51459E;" value="회원가입"/>
 					</c:when>
 				</c:choose>
 			</div>
@@ -142,34 +180,6 @@
 		<div class="w3-col s1 m2 l4">&nbsp;</div>
 	</div>
 	<script type="text/javascript" src="./js/checkregister.js"></script>
-<script>
 
-	function togglePasswordType(){
-		const pwInput = document.getElementById("userPw");
-		const pwToggleIcon = document.getElementById("pwToggleIcon");
-
-		if(pwInput.getAttribute("type") == "password"){
-			pwInput.setAttribute("type","text");
-			pwToggleIcon.classList.remove("fa-eye");
-			pwToggleIcon.classList.add("fa-eye-slash");
-		}else{
-			pwInput.setAttribute("type","password");
-			pwToggleIcon.classList.remove("fa-eye-slash");
-			pwToggleIcon.classList.add("fa-eye");
-		}
-	}
-
-	function registerUser(){
-		const frm = document.getElementById("frm");
-		frm.setAttribute("action","DoRegister");
-		frm.submit();
-	}
-
-	function updateUser(){
-		const frm = document.getElementById("frm");
-		frm.setAttribute("action","UpdateUser");
-		frm.submit();
-	}
-</script>
 </body>
 </html>
