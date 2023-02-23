@@ -11,7 +11,7 @@
 <%@ include file = "sidebar.jsp" %>
 <div class="w3-row">
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
-	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.2em;padding-left:1em;"><img src="./image/manage.png" style="width:20px;">     아동 계정 관리</div>
+	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.2em;padding-left:1em;"><img src="./image/profile.png" style="width:20px;">     아동 계정 관리</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 </div>
 <div class="w3-row">

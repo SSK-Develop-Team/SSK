@@ -25,17 +25,20 @@ public class GetUpdateUser extends HttpServlet {
         Connection conn= (Connection) sc.getAttribute("DBconnection");
 
         int userId = 0;
+        String location = null;
         if(request.getParameter("latestChildId")!=null){
             userId = Integer.parseInt(request.getParameter("latestChildId"));
+            location="/register.jsp?role=child";
         }else if(request.getParameter("latestExpertId")!=null){
             userId = Integer.parseInt(request.getParameter("latestExpertId"));
+            location="/register.jsp?role=expert";
         }
 
         User user = UserDAO.getUserById(conn,userId);
 
         request.setAttribute("user",user);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/register.jsp?role=child");
+        RequestDispatcher rd = request.getRequestDispatcher(location);
         rd.forward(request, response);
     }
 

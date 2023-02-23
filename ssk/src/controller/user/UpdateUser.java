@@ -34,7 +34,7 @@ public class UpdateUser extends HttpServlet {
 		String userRole = request.getParameter("userRole");
 		String usergender = request.getParameter("userGender");
 		String userbirth = request.getParameter("userBirth");
-		
+
 		Date birth=null;
 		Date registrationDate = new Date(System.currentTimeMillis());
 		
@@ -65,8 +65,10 @@ public class UpdateUser extends HttpServlet {
 		update_result = UserDAO.updateUser(conn, user);
 		String update_msg = update_result?"계정이 수정되었습니다.":"계정 수정에 실패했습니다.";
 
+		String location=userRole.equals("CHILD")?"GetManageChild":"GetAdminHome";
+
 		PrintWriter out = response.getWriter();
-		out.println("<script>alert('"+update_msg+"'); location.href='GetManageChild';</script>");
+		out.println("<script>alert('"+update_msg+"'); location.href='"+location+"';</script>");
 		out.flush();
 
     }
