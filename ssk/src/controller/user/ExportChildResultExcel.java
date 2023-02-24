@@ -1,4 +1,4 @@
-package controller.expert;
+package controller.user;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -79,7 +79,7 @@ public class ExportChildResultExcel extends HttpServlet {
 				SskExcelByUser sskExcelByUser = ExportChildResultExcelService.getSskExcelByChild(conn, childId, lang, sdq, esm, esmRecord);
 				Workbook wb = sskExcelByUser.getWorkBook();
 
-				String fileName = new String(sskExcelByUser.getFileName().getBytes("KSC5601"), StandardCharsets.ISO_8859_1);//encoding
+				String fileName = new String(sskExcelByUser.getFileName().getBytes("KSC5601"), "EUC_KR");//encoding
 
 				File excelFile = new File(dirPath+fileName);
 				FileOutputStream fos = new FileOutputStream(excelFile);
@@ -130,7 +130,7 @@ public class ExportChildResultExcel extends HttpServlet {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ZipArchiveOutputStream zos = new ZipArchiveOutputStream(baos);
 
-		zos.setEncoding("UTF-8");
+		zos.setEncoding("EUC-KR");
 
 		searchDirectory(directory, directory, zos);
 		

@@ -1,6 +1,6 @@
 /**
  * @author Jiwon Lee - Copyright 2023 Hong Lab
- * 회원가입 유효성 검사 
+ * 회원가입 유효성 검사
  *  - 아이디 중복 검사
  *  - 이메일 형식 검사
  *  - 비밀번호 일치 검사
@@ -24,19 +24,39 @@ pwChkInput.addEventListener('change', checkPW);
 emailInput.addEventListener('change', checkEmail);
 nameInput.addEventListener('change', checkName);
 
-/* 아이디 중복 검사  */
+window.onload = function(){
+	const id = document.getElementById("userId").value;
+	const originUserLoginId = document.getElementById("originUserLoginId").value;
+	if(originUserLoginId!="") {
+		checkId();
+		checkEmail();
+		checkName();
+	}
+}
+/* 아이디 중복 검사 */
 function checkId(){
 	const id = document.getElementById("userId").value;
+	const originUserLoginId = document.getElementById("originUserLoginId").value;
  	const idMsg = document.getElementById('check_id_m');
 
 	idMsg.style.color = 'red';
-	
-	//입력 값이 있는지 확인 
+
+	//입력 값이 있는지 확인
 	if(id === ""){
+		idMsg.style.color = 'red';
 		idMsg.innerHTML = '아이디를 입력하세요.';
     	return false;
 	}
-	
+
+	//계정을 수정하는 경우, 기존의 아이디와 일치하는지 확인
+	if(originUserLoginId!="" && id == originUserLoginId){
+		checkedId = true;
+		checkIdBtn.style.backgroundColor = 'green';
+		idMsg.style.color = 'green';
+		idMsg.innerHTML = '기존의 아이디와 일치합니다.';
+		return false;
+	}
+
 	const xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
@@ -61,7 +81,8 @@ function checkId(){
 	xhttp.send(id);
 }
 
-// 중복확인을 완료하고 아이디를 수정하면 중복확인 취소
+
+/* 중복확인을 완료하고 아이디를 수정하면 중복확인 취소 */
 idInput.addEventListener('change', function (event) {
   if (checkedId === true) {
     checkedId = false;
@@ -84,7 +105,7 @@ function checkEmail(){
 	const email = document.getElementById('userEmail').value;
 	const emailMsg = document.getElementById('check_email_m');
 	emailMsg.style.color = 'red';
-	
+
 	// 입력값이 있는 지 확인
 	if (email === '') {
 		emailMsg.innerHTML = '이메일을 입력하세요.';
@@ -110,19 +131,19 @@ function checkPW() {
 
   // 비밀번호가 입력되지 않은 경우
   if (pw1 == '') {
-    checkMsg.innerHTML = '비밀번호를 입력하세요.';
-    checkedPW = false;
+	  checkMsg.innerHTML = '비밀번호를 입력하세요.';
+	  checkedPW = false;
   } else if (pw2 == '') {
-    checkMsg.innerHTML = '비밀번호 확인을 입력하세요.';
-    checkedPW = false;
+	  checkMsg.innerHTML = '비밀번호 확인을 입력하세요.';
+	  checkedPW = false;
   } else if (pw1 == pw2) {
-    // 비밀번호가 서로 같은 경우
-    checkMsg.style.color = 'green';
-    checkMsg.innerHTML = '비밀번호가 확인되었습니다. ';
-    checkedPW = true;
+	  // 비밀번호가 서로 같은 경우
+	  checkMsg.style.color = 'green';
+	  checkMsg.innerHTML = '비밀번호가 확인되었습니다. ';
+	  checkedPW = true;
   } else {
-    checkMsg.innerHTML = '비밀번호가 서로 다릅니다. 다시 확인해 주세요.';
-    checkedPW = false;
+	  checkMsg.innerHTML = '비밀번호가 서로 다릅니다. 다시 확인해 주세요.';
+	  checkedPW = false;
   }
 }
 
@@ -131,8 +152,8 @@ function checkName(){
  	const nameMsg = document.getElementById('check_name_m');
 
 	nameMsg.style.color = 'red';
-	
-	//입력 값이 있는지 확인 
+
+	//입력 값이 있는지 확인
 	if(name === ""){
 		nameMsg.innerHTML = '이름을 입력하세요.';
     	return false;
@@ -151,7 +172,7 @@ function checkValue(){
 	 - 이름 : checkedName
 	*/
 	if(!checkedId) {
-		alert('아이디를 확인해주세요!');
+		alert('아이디를 중복 확인해주세요!');
 	    return false;
 	}else if (!checkedPW) {
 	    alert('비밀번호 확인을 해주세요!');
@@ -168,3 +189,17 @@ function checkValue(){
 	return true;
 }
 
+function togglePasswordType(){
+	const pwInput = document.getElementById("userPw");
+	const pwToggleIcon = document.getElementById("pwToggleIcon");
+
+	if(pwInput.getAttribute("type") == "password"){
+		pwInput.setAttribute("type","text");
+		pwToggleIcon.classList.remove("fa-eye");
+		pwToggleIcon.classList.add("fa-eye-slash");
+	}else{
+		pwInput.setAttribute("type","password");
+		pwToggleIcon.classList.remove("fa-eye-slash");
+		pwToggleIcon.classList.add("fa-eye");
+	}
+}
