@@ -19,13 +19,13 @@
 	<div class="w3-col s12 m12 l10">
 		<div style="width:100%;margin-bottom:20px;">
 			<div class="search w3-right" style="width: 300px;">
-				<input class="w3-border" type="text" placeholder="아동 이름 검색" style="width: 85%;border: 1px solid #bbb;border-radius: 8px;padding: 10px 12px;font-size:0.8em;">
-				<button style="height:42px;"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" style="width:17px;"></button>
+				<input class="w3-border" type="text" placeholder="아동 이름 검색" style="width: 85%;border: 1px solid #bbb;border-radius: 8px;padding: 10px 12px;font-size:0.7em;">
+				<button style="height:42px;background-color:white;border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" style="width:17px;"></button>
 			</div>
 			<div class="buttons" style="width:100%;transform:translateY(0.3em);">
-				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.2em;" onclick="deleteChild()">선택 계정 삭제</button>
-				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.2em;" onclick="updateChild()">선택 계정 수정</button>
-				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.2em;" onclick="location.href='register.jsp?role=child';">아동 계정 생성</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.7em;" onclick="deleteChild()">선택 계정 삭제</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.7em;" onclick="updateChild()">선택 계정 수정</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.7em;" onclick="location.href='register.jsp?role=child';">아동 계정 생성</button>
 			</div>
 		</div>
 

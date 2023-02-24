@@ -17,20 +17,16 @@
 <div class="w3-row">
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 	<div class="w3-col s12 m12 l10">
-		<div class="w3-row">
-			<div class="w3-col s1 m7 l8">&nbsp;</div>
-			<div class="w3-col s10 m4 l4">
-				<div class="search" style="width: 20em;">
-					<input class="w3-border" type="text" placeholder="전문가 이름 검색" style="width: 85%;border: 1px solid #bbb;border-radius: 8px;padding: 10px 12px;font-size:0.7em;">
-					<button style="height:35px;transform: translateY(0.1em);border-radius: 8px; border:none; background: none;"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" style="width:17px;"></button>
-				</div>
-				<div class="buttons">
-					<button class="w3-button" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.2em;" onclick="location.href='register.jsp?role=expert';">전문가 계정 생성</button>
-					<button class="w3-button" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.2em;" onclick="updateExpert()">선택 계정 수정</button>
-					<button class="w3-button" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.2em;" onclick="deleteExpert()">선택 계정 삭제</button>
-				</div>
+		<div style="width:100%;margin-bottom:20px;">
+			<div class="search w3-right" style="width: 300px;">
+				<input class="w3-border" type="text" placeholder="전문가 이름 검색" style="width: 85%;border: 1px solid #bbb;border-radius: 8px;padding: 10px 12px;font-size:0.7em;">
+				<button style="height:42px;background-color:white;border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" style="width:17px;"></button>
 			</div>
-			<div class="w3-col s1 m1">&nbsp;</div>
+			<div class="buttons" style="width:100%;transform:translateY(0.3em);">
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.2em;" onclick="deleteExpert()">선택 계정 삭제</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.2em;" onclick="updateExpert()">선택 계정 수정</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.2em;" onclick="location.href='register.jsp?role=expert';">아동 계정 생성</button>
+			</div>
 		</div>
 
 		<%
