@@ -6,10 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,6 +20,8 @@ import javax.servlet.ServletOutputStream;
 
 import model.dto.export.SskExcelByUser;
 import model.sevice.ExportChildResultExcelService;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.apache.poi.ss.usermodel.Workbook;
 
 
@@ -32,6 +33,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class ExportChildResultExcel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
+
 	
     public ExportChildResultExcel() {
         super();
@@ -76,11 +78,12 @@ public class ExportChildResultExcel extends HttpServlet {
 				if(childId==0) continue;
 				SskExcelByUser sskExcelByUser = ExportChildResultExcelService.getSskExcelByChild(conn, childId, lang, sdq, esm, esmRecord);
 				Workbook wb = sskExcelByUser.getWorkBook();
-				
+
 				String fileName = new String(sskExcelByUser.getFileName().getBytes("KSC5601"), StandardCharsets.ISO_8859_1);//encoding
-				
-				FileOutputStream fos = new FileOutputStream(new File(dirPath+fileName));
-				
+
+				File excelFile = new File(dirPath+fileName);
+				FileOutputStream fos = new FileOutputStream(excelFile);
+
 				wb.write(fos);
 				fos.flush();
 				fos.close();
@@ -93,10 +96,10 @@ public class ExportChildResultExcel extends HttpServlet {
 			if(files != null && files.length > 0) {
 				byte[] zip = zipFiles(directory);
 				ServletOutputStream sos = response.getOutputStream();
-	            response.setContentType("application/zip;charset=utf-8");
+	            response.setContentType("application/zip;");
 	            String headerKey = "Content-Disposition";
 	            
-	            String filename = new String("테스트용 파일".getBytes("utf-8"),StandardCharsets.ISO_8859_1);
+	            String filename = new String("결과 export(아동별)".getBytes("UTF-8"),StandardCharsets.ISO_8859_1);
 	            String headerValue = String.format("attachment; filename=\"" + filename + ".zip");
 	            response.setHeader(headerKey, headerValue);
 	            
@@ -125,8 +128,10 @@ public class ExportChildResultExcel extends HttpServlet {
 	
 	private byte[] zipFiles(File directory) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ZipOutputStream zos = new ZipOutputStream(baos);
-        
+		ZipArchiveOutputStream zos = new ZipArchiveOutputStream(baos);
+
+		zos.setEncoding("UTF-8");
+
 		searchDirectory(directory, directory, zos);
 		
 		zos.flush();
@@ -136,29 +141,29 @@ public class ExportChildResultExcel extends HttpServlet {
         return baos.toByteArray();
 	}
 	
-	private void compressFile(File parentDir, String fileName, ZipOutputStream zos){
+	private void compressFile(File parentDir, String fileName, ZipArchiveOutputStream zos){
 		byte bytes[] = new byte[2048];
 		FileInputStream fis;
 		try {
 			fis = new FileInputStream(parentDir.getPath() + FILE_SEPARATOR + fileName);
 			BufferedInputStream bis = new BufferedInputStream(fis);
 
-	        zos.putNextEntry(new ZipEntry( parentDir.getName()+ FILE_SEPARATOR + fileName));
+	        zos.putArchiveEntry(new ZipArchiveEntry( parentDir.getName()+ FILE_SEPARATOR + fileName));
 	        int bytesRead;
             while ((bytesRead = bis.read(bytes)) != -1) {
                 zos.write(bytes, 0, bytesRead);
             }
-            zos.closeEntry();
+            zos.closeArchiveEntry();
             bis.close();
             fis.close();
 	        
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
 	
-	public void searchDirectory(File file, File parentDir ,ZipOutputStream zos) {
+	public void searchDirectory(File file, File parentDir ,ZipArchiveOutputStream zos) {
 		if( file.isDirectory()) {
 			
 			File[] childrenFile = file.listFiles();

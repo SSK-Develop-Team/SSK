@@ -117,7 +117,7 @@ ul.tabs li.current{
 			    </div>
 		    </div>
 		</div>
-		
+
 		<div class="w3-col">&nbsp;</div>
 		<div class="w3-col s1 m2 l4">&nbsp;</div>
 		
@@ -135,7 +135,7 @@ ul.tabs li.current{
 			    </div>
 		    </div>
 	    </div>
-	    
+
 	</c:when>
 	<c:otherwise>
 		<div class="w3-col">&nbsp;</div>
@@ -143,7 +143,7 @@ ul.tabs li.current{
 	</c:choose>
 
 	<c:remove var="selectedIndex" scope="page"/>
-	
+
 	<!-- <div class="w3-col s1 m2 l4">&nbsp;</div> -->
 
   </div>
