@@ -90,7 +90,7 @@
 									<div class="textBox"><%="우리 아이는 "  + currQuestionList.get(i).getLangQuestionContent() %></div>
 								</div>
 								<div class="w3-col" style="width : 15%; margin-left : 5%;">
-									<div class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;margin-top:5%;" onclick="selectGame(<%=gameID%>);">게임하고 오기</div>
+									<div class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;margin-top:5%;padding:0px;" onclick="selectGame(<%=gameID%>);">게임하고 오기</div>
 								</div>
 							</div>
 						</div>

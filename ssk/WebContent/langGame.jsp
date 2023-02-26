@@ -29,10 +29,11 @@
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
-<h2>직접평가 #<%= gameID %></h2>
+
 <div class="w3-row">
-	<div class="w3-col m2 l3">&nbsp;</div>
-	<div class="w3-col w3-container s12 m8 l6">
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
+	<div class="w3-col w3-container s12 m10 l6">
+		<div style="font-size:1em;font-weight:bold;">직접평가 #<%= gameID %></div>
 		<div><img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/></div>
 		<% if(currLangGameElement.getLangGameSpeaker().equals("-")) { %><div class="w3-col m2 l3">&nbsp;</div><%} %>
 		<% if(! currLangGameElement.getLangGameSpeaker().equals("-")){%><div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div><%} %>
@@ -45,7 +46,7 @@
 			</div>
 		</div>
 		<div class="w3-row w3-padding">
-			<div class="w3-col w3-left"style="width:65%;">
+			<div class="w3-col w3-right"style="width:65%;">
 				<%if(currLangGameElement.getLangGameHint()!=null||currLangGameElement.getLangGameHintVoice()!=null){ %>
 				<button class="w3-button w3-container w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';document.getElementById('hint-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;padding:3px;">힌트 확인하기</button>
 				<div id="hint-modal" class="w3-modal">
@@ -85,7 +86,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="w3-col m2 l3">&nbsp;</div>
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 </div>
 
 </body>
