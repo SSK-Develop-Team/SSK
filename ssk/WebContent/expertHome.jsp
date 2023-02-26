@@ -18,8 +18,8 @@
 </div>
 <form method="post" action="ExportChildResultExcel"id="exportFrm">
 <div class="w3-row">
-	<div class="w3-col w3-hide-small m3 l5">&nbsp;</div>
-	<div class="select-box w3-col s12 m9 l6"style="margin-bottom:0.5em;padding-right:1em;">
+	<div class="w3-col w3-hide-small m1 l4">&nbsp;</div>
+	<div class="select-box w3-col s12 m11 l7"style="margin-bottom:0.5em;padding-right:1em;">
 		<div style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">카테고리<span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 아동 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
 		<div class="w3-cell-row w3-container" style="background-color:#D9D9D9;font-size:0.8em; line-height:7vh;">
 			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="lang" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>

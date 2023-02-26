@@ -17,7 +17,7 @@ import model.dto.LangGame;
  *
  */
 public class LangGameDAO {
-	private final static String SQLST_SELECT_LANG_GAME_LIST = "select * from lang_game where lang_question_id = ?";
+	private final static String SQLST_SELECT_LANG_GAME_LIST = "select * from lang_game where lang_question_id = ? ORDER BY lang_game_order ASC";
 	
 	public static ArrayList<LangGame> getLangGameListByLangQuestionId(Connection con, int langQuestionId){
 		try {

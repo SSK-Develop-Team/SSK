@@ -29,10 +29,11 @@
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
-<h2>직접평가 #<%= gameID %></h2>
+
 <div class="w3-row">
-	<div class="w3-col m2 l3">&nbsp;</div>
-	<div class="w3-col w3-container s12 m8 l6">
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
+	<div class="w3-col w3-container s12 m10 l6">
+		<div style="font-size:1em;font-weight:bold;">직접평가 #<%= gameID %></div>
 		<div><img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/></div>
 		<% if(currLangGameElement.getLangGameSpeaker().equals("-")) { %><div class="w3-col m2 l3">&nbsp;</div><%} %>
 		<% if(! currLangGameElement.getLangGameSpeaker().equals("-")){%><div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div><%} %>
@@ -44,75 +45,45 @@
 				<%if(i<=langGameList.size()-1){ %><button class="w3-button" onclick="getNextContent(<%=i%>, <%= gameID %>,<%=langGameList.size()%>);" style="border:none; background-color:#FFFFFF;">다음 &gt; </button><%}%>
 			</div>
 		</div>
-		<div class="w3-row w3-padding">
-			<div class="w3-col w3-left"style="width:65%;">
-				<%if(currLangGameElement.getLangGameHint()!=null||currLangGameElement.getLangGameHintVoice()!=null){ %>
-				<button class="w3-button w3-container w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';document.getElementById('hint-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;padding:3px;">힌트 확인하기</button>
-				<div id="hint-modal" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity">
-						<div class="w3-container">
-							<span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-							<%if(currLangGameElement.getLangGameHint()!=null){ %>
-							<p><%=currLangGameElement.getLangGameHint() %></p>
-							<%}%>
-							<%if(currLangGameElement.getLangGameHintVoice()!=null){ %>
-							<audio id="hint-audio" controls onended="document.getElementById('hint-modal').style.display='none'">
-								<source src="<%=currLangGameElement.getLangGameHintVoice()%>">
-							</audio>
-							<%}%>
-						</div>
+		<div class="w3-left" style="margin-top:5px;">
+			<%if(currLangGameElement.getLangGameHint()!=null||currLangGameElement.getLangGameHintVoice()!=null){ %>
+			<button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';document.getElementById('hint-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+			<div id="hint-modal" class="w3-modal">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-container w3-center">
+						<span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<%if(currLangGameElement.getLangGameHint()!=null){ %>
+						<p><br><br><br><br><%=currLangGameElement.getLangGameHint() %></p>
+						<%}%>
 					</div>
 				</div>
-				<%} %>
-				<%if(currLangGameElement.getLangGameAnswer()!=null||currLangGameElement.getLangGameAnswerVoice()!=null){ %>
-				<button class="w3-button w3-container w3-round-large" onclick="document.getElementById('answer-modal').style.display='block'" style="background-color:#12192C; color:white; text-align:center;padding:3px;">정답 확인하기</button>
-				<div id="answer-modal" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity">
-						<div class="w3-container">
-							<span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-							<%if(currLangGameElement.getLangGameAnswer()!=null){ %>
-							<p><%=currLangGameElement.getLangGameAnswer() %></p>
-							<%} %>
-							<%if(currLangGameElement.getLangGameAnswerVoice()!=null){ %>
-							<audio controls onended="document.getElementById('answer-modal').style.display='none'">
-								<source src="<%=currLangGameElement.getLangGameAnswerVoice()%>">
-							</audio>
-							<%} %>
-						</div>
-					</div>
-				</div>
-				<%} %>
 			</div>
+			<%} %>
+			<%if(currLangGameElement.getLangGameAnswer()!=null||currLangGameElement.getLangGameAnswerVoice()!=null){ %>
+			<button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+			<div id="answer-modal" class="w3-modal">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-container w3-center">
+						<span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<%if(currLangGameElement.getLangGameAnswer()!=null){ %>
+						<p><br><br><br><br><%=currLangGameElement.getLangGameAnswer() %></p>
+						<%} %>
+						<%if(currLangGameElement.getLangGameAnswerVoice()!=null){ %>
+						<audio controls onended="document.getElementById('answer-modal').style.display='none'">
+							<source src="<%=currLangGameElement.getLangGameAnswerVoice()%>">
+						</audio>
+						<%} %>
+					</div>
+				</div>
+			</div>
+			<%} %>
 		</div>
 	</div>
-	<div class="w3-col m2 l3">&nbsp;</div>
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 </div>
 
 </body>
 <script>
-	function getPrevContent(i){
-		if(i<=0){
-			alert("이전 페이지가 없습니다.");
-		}else{
-			var prevForm = document.createElement("form");
-			prevForm.setAttribute("charset", "UTF-8");
-			prevForm.setAttribute("method", "post");
-			prevForm.setAttribute("action", "GetLangGamePrevContent");
-			document.body.appendChild(prevForm);
-			prevForm.submit();
-		}
-	}
-	function getNextContent(i,questionNum,gameSize){
-		if(i>=gameSize-1){
-			if(!confirm(questionNum + "번 문항의 게임을 종료하시겠습니까?")){return;}
-		}
-		var nextForm = document.createElement("form");
-		nextForm.setAttribute("charset", "UTF-8");
-		nextForm.setAttribute("method", "post");
-		nextForm.setAttribute("action", "GetLangGameNextContent");
-		document.body.appendChild(nextForm);
-		nextForm.submit();
-	}
 	window.onload = function () {
 		var audio = new Audio();
 		audio.src="<%=langGameList.get(i).getLangGameVoice()%>";
@@ -125,4 +96,5 @@
 		audio.play();
 	}
 </script>
+<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
 </html>
