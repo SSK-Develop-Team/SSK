@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.dto.LangGame;
+import util.process.LangGameProcessor;
 
 /**
  * @author Jiwon Lee
@@ -40,11 +41,14 @@ public class GetLangGameNextContent extends HttpServlet {
 		//현재 인덱스 받아오기
 		int currLangGameIndex = (int)session.getAttribute("currLangGameIndex");
 		ArrayList<LangGame> currLangGameList = (ArrayList<LangGame>)session.getAttribute("currLangGameList");
+		int currLangGameId = (int)session.getAttribute("langGameID");
 		
 		//마지막 페이지가 아닐때
 		if(currLangGameIndex<currLangGameList.size()-1) {
 			session.setAttribute("currLangGameIndex",currLangGameIndex+1);
-			response.sendRedirect(request.getContextPath() +"/langGame.jsp");
+			System.out.println(currLangGameId+"  "+currLangGameIndex);
+			String location = LangGameProcessor.getForwardLocationByLangQuestionIdAndLangGameId(currLangGameId,currLangGameIndex+1);
+			response.sendRedirect(request.getContextPath() +location);
 		}
 		else{//마지막 페이지일 때
 			response.sendRedirect(request.getContextPath() +"/langTest.jsp");

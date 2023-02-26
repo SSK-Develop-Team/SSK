@@ -3,8 +3,6 @@ G
 src/model/dto/User.java,d\2\d27b0acf5c08611b22060bdb9431e2b955c8a119
 G
 WebContent/js/logout.js,1\8\182fa4aa822def5797784e4d59203782688af135
-F
-WebContent/sidebar.jsp,7\6\76397d2a79e9ffa81d8fc7640a630398f8737638
 J
 src/model/dao/UserDAO.java,f\7\f7b97e2fbf4cd64cbe7ad293bc287ea0d3880fe2
 N

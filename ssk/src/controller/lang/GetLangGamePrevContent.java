@@ -1,8 +1,12 @@
 package controller.lang;
 
+import model.dto.LangGame;
+import util.process.LangGameProcessor;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,16 +39,12 @@ public class GetLangGamePrevContent extends HttpServlet {
 		
 		//현재 인덱스 받아오기
 		int currLangGameIndex = (int)session.getAttribute("currLangGameIndex");
+		int currLangGameId = (int)session.getAttribute("langGameID");
 		
-		if(currLangGameIndex==0) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('이전 페이지가 없습니다.'); location.href='../EwhaSSK/login.jsp';</script>");
-			out.flush();
-		}else {
-			session.setAttribute("currLangGameIndex",currLangGameIndex-1);
-			response.sendRedirect(request.getContextPath() +"/langGame.jsp");
-		}
-		
+		session.setAttribute("currLangGameIndex",currLangGameIndex-1);
+
+		String location = LangGameProcessor.getForwardLocationByLangQuestionIdAndLangGameId(currLangGameId,currLangGameIndex-1);
+		response.sendRedirect(request.getContextPath() +location);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

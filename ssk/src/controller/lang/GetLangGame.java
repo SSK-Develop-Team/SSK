@@ -17,6 +17,7 @@ import model.dto.LangGame;
 import model.dto.User;
 
 import model.dao.LangGameDAO;
+import util.process.LangGameProcessor;
 
 /**
  * 선택한 문항마다 게임(직접 평가)으로 연결
@@ -58,20 +59,10 @@ public class GetLangGame extends HttpServlet {
 		session.setAttribute("currLangGameList", currLangGameList);
 		session.setAttribute("currLangGameIndex", 0);
 		
-		
-		if(gameID == 7) {
-			RequestDispatcher rd = request.getRequestDispatcher("/langGame07.jsp");
-			rd.forward(request, response);
-		}
-		
-		else if(gameID == 47) {
-			RequestDispatcher rd = request.getRequestDispatcher("/langGame47.jsp");
-			rd.forward(request, response);
-		}
-		else {
-			RequestDispatcher rd = request.getRequestDispatcher("/langGame.jsp");
-			rd.forward(request, response);
-		}
+		String location = LangGameProcessor.getForwardLocationByLangQuestionIdAndLangGameId(gameID, 0);
+
+		RequestDispatcher rd = request.getRequestDispatcher(location);
+		rd.forward(request, response);
 		
 	}
 
