@@ -1,0 +1,17 @@
+
+f	java:S117>"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ã‹Ãæ
+f	java:S117B"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šüÛ™
+‡
+java:S1989"lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(áò‰øÿÿÿÿ
+t
+java:S1989"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(¥¥ÌÑÿÿÿÿÿ
+t
+java:S1989/"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(é»ïÿÿÿÿÿ
+t
+java:S1989/"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(é»ïÿÿÿÿÿ
+t
+java:S1989/"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(é»ïÿÿÿÿÿ
+k
+java:S1989F"PHandle the following exception that could be thrown by "getWriter": IOException.(ïô†úÿÿÿÿ
+z
+java:S1989N"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿ

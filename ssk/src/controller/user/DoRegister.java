@@ -35,16 +35,7 @@ public class DoRegister extends HttpServlet {
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
 		
 		User currUser = (User)session.getAttribute("currUser");
-		
-		String location="";
-		if(currUser.getUserRole().equals("ADMIN")) {
-			location = "GetManageChild";
-		}else if(currUser.getUserRole().equals("EXPERT")) {
-			location = "GetManageChild";
-		}else {
-			location = "login.jsp";
-		}
-		
+
 	    String userid = request.getParameter("userId");
 	    String userpw = request.getParameter("userPw");
 		String username = request.getParameter("userName");
@@ -52,7 +43,7 @@ public class DoRegister extends HttpServlet {
 		String userRole = request.getParameter("userRole");
 		String usergender = request.getParameter("userGender");
 		String userbirth = request.getParameter("userBirth");
-		
+
 		Date birth=null;
 		Date registrationDate = new Date(System.currentTimeMillis());
 		
@@ -84,7 +75,9 @@ public class DoRegister extends HttpServlet {
 			out.println("<script>alert('계정 정보를 확인해주세요.'); location.href='register.jsp';</script>");
 			out.flush();
 		}
-		else { 
+		else {
+			String location=userRole.equals("CHILD")?"GetManageChild":"GetAdminHome";
+
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('계정 생성 성공'); location.href='"+location+"';</script>");
 			out.flush();
