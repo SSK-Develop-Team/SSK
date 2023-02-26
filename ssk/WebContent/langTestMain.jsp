@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="model.dto.User" %>
-<%@ page import="util.process.UserInfoProcessor" %>
-<%@ page import="model.dao.AgeGroupDAO" %>
-
-<%@ page import="java.sql.Date" %>
 
 <% 
 	User currUser = (User)session.getAttribute("currUser"); 
@@ -83,7 +79,7 @@
 	<div class = "modal">
 		<div class = "modalFunc">
 			<div class = "modalContent">
-				<button id = "closeBtn" onClick="modalClose()">X</button>
+				<button class = "closeBtn" onClick="modalClose()">X</button>
 				<p>현재 <%=name%>의 테스트 단계는 <span><%=curAge%></span>입니다.</p> 
 				<p>(<%=ageStr[curAge] %>)</p>
 				<p>해당 단계를 진행하시겠습니까?</p>
@@ -95,8 +91,8 @@
 	
 	<form method="get" class = "selectModal" action="GetLangTest">
 		<div class = "selectModalFunc">
-			<div class = "selectmodalContent">
-				<button id = "closeBtn" onClick="selectModalClose()">X</button>
+			<div class = "selectModalContent">
+				<button class = "closeBtn" onClick="selectModalClose()">X</button>
 				<p>평가를 진행할 단계를 선택해주세요.</p> 
 				
 				<select id = "ageGroupSelect" name="ageGroup">
@@ -128,12 +124,12 @@
 		$(".modal").css('display', 'none');
 		$(".selectModal").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
-		
-		if(<%=prevAge%> == 14){
+
+		if(<%=prevAge%> === 14){
 			$('#ageGroupSelect').children("[value='prevAge']").remove();
 		}
 		
-		if(<%=prev2Age%> == 14){
+		if(<%=prev2Age%> === 14){
 			$('#ageGroupSelect').children("[value='prev2Age']").remove();
 		}
 	}
