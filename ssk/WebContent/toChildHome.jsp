@@ -20,6 +20,9 @@
 		<div class="w3-margin w3-center">
 			<span style="font-weight:bold;font-size:1.8em;">아동 <%=selectedChild.getUserName()%></span>&nbsp;
 			<span><%=selectedChild.getUserBirth()%></span>&nbsp;&nbsp;
+			<button class="w3-button w3-circle" style="background-color:#D9D9D9;transform:translateY(-0.5em);width:2.3em;height:2.3em;padding:0;margin-top:0.5em;" onclick="location.href='ExportChildResultExcel?childId=<%=selectedChild.getUserId()%>'">
+				<img src="./image/printing.png" style="width:1.5em;height:1.5em;">
+			</button>
 			<button class="w3-button w3-circle" style="background-color:#D9D9D9;transform:translateY(-0.5em);width:2.3em;height:2.3em;padding:0;margin-top:0.5em;" onclick="location.href='GetExpertHome'">
 				<img src="./image/turn-back.png" style="width:1.5em;height:1.5em;">
 			</button>
