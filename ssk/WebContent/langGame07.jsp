@@ -123,7 +123,7 @@
 	
 	audio{width : 100%;}
 	
-	#closeBtn {
+	.closeBtn {
 		float : right;
 		margin-right : 3%;
 		background-color : #fff;
@@ -256,7 +256,7 @@
 <div class="modalLayer"></div>
 	<div class = "answerModal">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modalClose()">X</button>
+			<button class = "closeBtn" onClick="modalClose()">X</button>
 			<p>엄마, 바나나, 포도, 아빠</p>
 			<audio controls src="./audio/lang01_7.m4a"></audio>
 		</div>
@@ -265,7 +265,7 @@
 	<!-- 사과 찾기 -->
 	<div class = "appleModal01">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="appleModal01Close()">X</button>
+			<button class = "closeBtn" onClick="appleModal01Close()">X</button>
 			<p>잘 듣고 따라해보세요, "엄마"</p>
 			<audio controls src="./audio/Age09/age_01_7_3.wav"></audio>
 		</div>
@@ -273,7 +273,7 @@
 	
 	<div class = "appleModal02">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="appleModal02Close()">X</button>
+			<button class = "closeBtn" onClick="appleModal02Close()">X</button>
 			<p>잘 듣고 따라해보세요, "바나나"</p>
 			<audio controls src="./audio/Age09/age_01_7_5.wav"></audio>
 		</div>
@@ -281,7 +281,7 @@
 	
 	<div class = "appleModal03">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="appleModal03Close()">X</button>
+			<button class = "closeBtn" onClick="appleModal03Close()">X</button>
 			<p>잘 듣고 따라해보세요, "포도"</p>
 			<audio controls src="./audio/Age09/age_01_7_6_1.wav"></audio>
 		</div>
@@ -289,7 +289,7 @@
 	
 	<div class = "appleModal04">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="appleModal04Close()">X</button>
+			<button class = "closeBtn" onClick="appleModal04Close()">X</button>
 			<p>잘 듣고 따라해보세요, "아빠"</p>
 			<audio controls src="./audio/Age09/age_01_7_7.wav"></audio>
 		</div>

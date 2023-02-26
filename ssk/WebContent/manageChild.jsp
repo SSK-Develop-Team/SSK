@@ -23,9 +23,9 @@
 				<button style="height:42px;background-color:white;border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" style="width:17px;"></button>
 			</div>
 			<div class="buttons" style="width:100%;transform:translateY(0.3em);">
-				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.7em;" onclick="deleteChild()">선택 계정 삭제</button>
-				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.7em;" onclick="updateChild()">선택 계정 수정</button>
-				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.8em;margin-right:0.7em;" onclick="location.href='register.jsp?role=child';">아동 계정 생성</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.7em;" onclick="deleteChild()">선택 계정 삭제</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.7em;" onclick="updateChild()">선택 계정 수정</button>
+				<button class="w3-button w3-right" style="background-color:#51459E; color:white; font-size:0.7em;margin-right:0.7em;" onclick="location.href='register.jsp?role=child';">아동 계정 생성</button>
 			</div>
 		</div>
 
