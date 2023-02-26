@@ -41,7 +41,7 @@ public class DeleteUser extends HttpServlet {
 			location = "/GetManageChild";
 		}else if(request.getParameterValues("expertId")!=null){
 			userIdStrList = request.getParameterValues("expertId");
-			location = "/GetExpertHome";
+			location = "/GetAdminHome";
 		}
 
 		for(String c : userIdStrList){

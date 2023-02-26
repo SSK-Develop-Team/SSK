@@ -11,8 +11,6 @@ N
 WebContent/js/checkregister.js,f\c\fc12ecaa1307e5fbee47d0d6d4883b89f5c7d7bc
 G
 WebContent/register.jsp,f\7\f7c77dbe4d02bf86891d8fd5a9f322e2dd7de8fe
-S
-#src/controller/user/DeleteUser.java,2\1\218b3c7617eb10383c44d4ce1ca8cad9fbc017fb
 V
 &src/controller/user/GetUpdateUser.java,a\7\a78fa01d957b4de21e01136983f0a8d055edc298
 S
