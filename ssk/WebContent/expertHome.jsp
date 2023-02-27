@@ -16,7 +16,7 @@
 	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.2em;padding-left:1em;"><img src="./image/research.png" style="width:35px;">     아동별 결과 조회</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 </div>
-<form method="post" action="ExportChildResultExcel"id="exportFrm">
+<form method="post" action="ExportChildListResultExcel"id="exportFrm">
 <div class="w3-row">
 	<div class="w3-col w3-hide-small m1 l4">&nbsp;</div>
 	<div class="select-box w3-col s12 m11 l7"style="margin-bottom:0.5em;padding-right:1em;">
