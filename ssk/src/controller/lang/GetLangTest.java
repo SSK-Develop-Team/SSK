@@ -61,7 +61,7 @@ public class GetLangTest extends HttpServlet {
 			else if(selectOption.equals("curAge")) selectAge = nowAge;		
 		} else selectAge = nowAge;
 		
-		ArrayList<LangQuestion> currQuestionList = LangQuestionDAO.getLangQuestionListByAgeGroupId(con, 1);
+		ArrayList<LangQuestion> currQuestionList = LangQuestionDAO.getLangQuestionListByAgeGroupId(con, selectAge);
 		
 		session.setAttribute("currQuestionList", currQuestionList);
 		
