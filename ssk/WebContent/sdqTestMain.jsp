@@ -29,7 +29,7 @@
 	</div>
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 </div>
-<div style="position: absolute; right: 2em; bottom: 2em;">
+<div style="position: fixed; right: 2em; bottom: 2em;">
     <button class="w3-button w3-circle" style="background-color:#D9D9D9;width:2.7em;height:2.7em;padding:0;" onclick="location.href='childHome.jsp'">
 		<img src="./image/home-icon.png" style="width:1.7em;height:1.7em;">
 	</button>
