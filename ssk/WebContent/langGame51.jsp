@@ -354,7 +354,7 @@
 	<div class = "modal06">
 		<div class = "modalContent">
 			<button class = "closeBtn" onClick="modal06Close()">X</button>
-			<img src="./image/LangGameImg/Age10/age10_1_3_modal06.png" width="90%">
+			<img src="./image/LqangGameImg/Age10/age10_1_3_modal06.png" width="90%">
 		</div>
 	</div>  
 	
