@@ -181,6 +181,10 @@
 		top : 0;
 	} 
 	
+	.gameImg03{
+		position : none;
+	} 
+	
 	.numImg01{
 		position : absolute;
 		left : 47%;
@@ -213,12 +217,13 @@
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
-<h3>직접 평가 #07</h3>
 <div class="container">
+	
 
 	<!-- 게임 이미지 -->
 	<div class="imgbox">
-		<img class="gameImg01" src="./image/minsu04.png" height="100%" alt="민수가 궁금해하고 있는 그림"/>
+	<div style="font-size:1em;font-weight:bold;">직접평가 #7</div>
+		<img class="gameImg01" src="./image/LangGameImg/Age01/age01_2_1.png" height="100%" alt="민수가 궁금해하고 있는 그림"/>
 		<div class="homeBack">
 			<img class="gameImg02" src="./image/age3_house.png" width="100%" height="100%" alt="거실 그림, 오른쪽 쇼파에는 엄마, 아빠, 여자아이가 앉아 있고 왼쪽 바닥에는 바나나, 오른쪽에는 책장이 있으며 그 맨 위에는 포도가 있다."/>
 			<img class="numImg01" src="./image/age3_num1.png" height="6%" alt="1번 버튼" onClick="appleModal01Open()" />
@@ -226,8 +231,7 @@
 			<img class="numImg03" src="./image/age3_num3.png" height="6%" alt="3번 버튼" onClick="appleModal03Open()"/>
 			<img class="numImg04" src="./image/age3_num4.png" height="6%" alt="4번 버튼" onClick="appleModal04Open()"/>
 		</div>
-		<img class="gameImg03" src="./image/minsu03.png" height="100%" alt="민수가 신나서 만세하고 있는 그림"/>
-		<img class="gameImg04" src="./image/age3_apple_01.png" height="30%" alt="사과"/>
+		<img class="gameImg03" src="./image/LangGameImg/Age01/age01_2_2.png" height="95%" alt="민수가 사과를 찾고 신나서 만세하고 있는 그림"/>
 	</div>
 	
 	<!-- 게임 텍스트 (말풍선) -->
@@ -391,7 +395,6 @@
 	      		$(".gametext03").css('display', 'inline'); 
 	      		$(".homeBack").css('display', 'none');
 	      		$(".gameImg03").css('display', 'inline');
-	      		$(".gameImg04").css('display', 'inline');
 	      		$("#leftbtn").css('display', 'inline');
 	      		$("#answer").css('display', 'none');
 	      		var audio = new Audio('./audio/Age09/age_01_7_8.wav');
@@ -423,7 +426,6 @@
 	      		$(".gametext03").css('display', 'none'); 
 	      		$(".homeBack").css('display', 'block');
 	      		$(".gameImg03").css('display', 'none');
-	      		$(".gameImg04").css('display', 'none');
 	      		$("#leftbtn").css('display', 'inline');
 	      		$("#answer").css('display', 'inline');
 	      		var audio = new Audio('./audio/Age09/age_01_7_2.wav');
