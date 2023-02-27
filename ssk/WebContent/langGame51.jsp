@@ -106,8 +106,6 @@
 		color : white;
 	}
 
-	#correctAnswer { display : none; }
-	
 	.modalContent {
 		position: fixed;
 		top: 30%;
@@ -161,7 +159,7 @@
 	.modal06 { display : none ;}
 	
 	.roomBack {
-		display : inline;
+		display : block;
 		height : 100%;
 		width : 100%;
 		position : relative;
@@ -184,76 +182,79 @@
 	.selectImg01{
 		position : absolute;
 		left : 15%;
-		top : 10%;
+		top : 23%;
 	}
 	.selectImg02{
 		position : absolute;
 		left : 25%;
-		margin-top : 7%;
+		top : 16%;
 	}
 	.selectImg03{
 		position : absolute;
 		left : 62%;
-		margin-top : 10%;
+		top : 23%;
 	}
 	.selectImg04{
 		position : absolute;
-		left : 71%;
-		margin-top : 7%;
+		left : 72%;
+		top : 16%;
 	}
+	
 	
 	.selectImg05{
 		position : absolute;
-		left : 47%;
-		top : 52%;
+		left : 37%;
+		top : 13%;
 	}
 	.selectImg06{
 		position : absolute;
-		left : 37%;
-		top : 76%;
+		left : 32%;
+		top : 67%;
 	}
 	.selectImg07{
 		position : absolute;
 		left : 83%;
-		top : 10%;
+		top : 13%;
 	}
 	.selectImg08{
 		position : absolute;
-		left : 70%;
-		top : 50%;
+		left : 77%;
+		top : 67%;
 	}
+	
 	
 	.selectImg09{
 		position : absolute;
-		left : 47%;
-		top : 52%;
+		left : 10%;
+		top : 48%;
 	}
 	.selectImg10{
 		position : absolute;
-		left : 37%;
-		top : 76%;
+		left : 25%;
+		top : 55%;
 	}
 	.selectImg11{
 		position : absolute;
-		left : 83%;
-		top : 10%;
+		left : 55%;
+		top : 48%;
 	}
 	.selectImg12{
 		position : absolute;
-		left : 70%;
-		top : 50%;
+		left : 74%;
+		top : 55%;
 	}
+	
+	#answer { display : none ;}
 	</style>
 	
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
-<h3>직접 평가 #07</h3>
 <div class="container">
 
 	<!-- 게임 이미지 -->
 	<div class="imgbox">
-	
+		<div style="font-size:1em;font-weight:bold;">직접평가 #51</div>
 	<!-- 거실 틀린그림 찾기  -->
 		<div class="roomBack">
 			<img class="gameImg01" src="./image/LangGameImg/Age10/age10_1_1.png" width="100%" height="100%" alt="거실의 틀린그림 찾기, 가운데 쇼파가 있고 회색 벽돌로 된 벽에는 세 개의 액자가 걸려있다."/>
@@ -266,19 +267,19 @@
 	<!-- 놀이터 틀린그림 찾기  -->
 		<div class="playBack">
 			<img class="gameImg02" src="./image/LangGameImg/Age10/age10_1_2.png" width="100%" height="100%" alt="놀이터의 틀린그림 찾기, 가운데 코끼리 모양 미끄럼틀이 있고 여자아이와 남자아이가 놀고 있다."/>
-			<img class="selectImg05" src="./image/LangGameImg/Age10/age10_1_2_icon01.png" height="6%" alt="비행기" onClick="modal03Open()" />
-			<img class="selectImg06" src="./image/LangGameImg/Age10/age10_1_2_icon02.png" height="6%" alt="파랑새" onClick="modal04Open()" />
-			<img class="selectImg07" src="./image/LangGameImg/Age10/age10_1_2_icon03.png" height="6%" alt="모래놀이" onClick="modal03Open()" />
-			<img class="selectImg08" src="./image/LangGameImg/Age10/age10_1_2_icon04.png" height="6%" alt="시소" onClick="modal04Open()" />
+			<img class="selectImg05" src="./image/LangGameImg/Age10/age10_1_2_icon01.png" height="12%" alt="비행기" onClick="modal03Open()" />
+			<img class="selectImg06" src="./image/LangGameImg/Age10/age10_1_2_icon02.png" height="20%" alt="모래놀이" onClick="modal04Open()" />
+			<img class="selectImg07" src="./image/LangGameImg/Age10/age10_1_2_icon03.png" height="12%" alt="파랑새" onClick="modal03Open()" />
+			<img class="selectImg08" src="./image/LangGameImg/Age10/age10_1_2_icon04.png" height="25%" alt="시소" onClick="modal04Open()" />
 		</div>
 		
 	<!-- 눈언덕 틀린그림 찾기  -->
 		<div class="snowBack">
 			<img class="gameImg03" src="./image/LangGameImg/Age10/age10_1_3.png" width="100%" height="100%" alt="눈 쌓인 언덕의 틀린그림 찾기, 눈이 펑펑 내리고 뒤로는 큰 보름달이 떠있다."/>
-			<img class="selectImg09" src="./image/LangGameImg/Age10/age10_1_3_icon01.png" height="6%" alt="눈사람" onClick="modal05Open()" />
-			<img class="selectImg10" src="./image/LangGameImg/Age10/age10_1_3_icon02.png" height="6%" alt="북극곰" onClick="modal06Open()" />
-			<img class="selectImg11" src="./image/LangGameImg/Age10/age10_1_3_icon03.png" height="6%" alt="순록과 산타" onClick="modal05Open()" />
-			<img class="selectImg12" src="./image/LangGameImg/Age10/age10_1_3_icon04.png" height="6%" alt="썰매와 산타" onClick="modal06Open()" />
+			<img class="selectImg09" src="./image/LangGameImg/Age10/age10_1_3_icon01.png" height="23%" alt="눈사람" onClick="modal05Open()" />
+			<img class="selectImg10" src="./image/LangGameImg/Age10/age10_1_3_icon02.png" height="23%" alt="썰매와 산타" onClick="modal06Open()" />
+			<img class="selectImg11" src="./image/LangGameImg/Age10/age10_1_3_icon03.png" height="23%" alt="북극곰" onClick="modal05Open()" />
+			<img class="selectImg12" src="./image/LangGameImg/Age10/age10_1_3_icon04.png" height="23%" alt="썰매와 산타" onClick="modal06Open()" />
 		</div>
 
 	</div>
@@ -315,38 +316,59 @@
 	</div>
 	
 <!-- 클릭 가능한 버튼 -->
-	<!-- <div class = "modal01">
+	<div class = "modal01">
 		<div class = "modalContent">
 			<button id = "closeBtn" onClick="modal01Close()">X</button>
-			<img src="./image/LangGameImg/Age10/age10_1_1_modal01.png">
+			<img src="./image/LangGameImg/Age10/age10_1_1_modal01.png" width="90%">
 			<p>무엇이 어떻게 다른지 설명해보아요.</p>
 			<audio controls src="./audio/Age09/age_01_7_3.wav"></audio>
 		</div>
 	</div>
 	
-	<div class = "appleModal02">
+	<div class = "modal02">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="appleModal02Close()">X</button>
-			<p>잘 듣고 따라해보세요, "바나나"</p>
+			<button id = "closeBtn" onClick="modal02Close()">X</button>
+			<img src="./image/LangGameImg/Age10/age10_1_1_modal02.png" width="90%">
+			<p>무엇이 어떻게 다른지 설명해보아요.</p>
 			<audio controls src="./audio/Age09/age_01_7_5.wav"></audio>
 		</div>
 	</div>
 	
-	<div class = "appleModal03">
+	<div class = "modal03">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="appleModal03Close()">X</button>
-			<p>잘 듣고 따라해보세요, "포도"</p>
+			<button id = "closeBtn" onClick="modal03Close()">X</button>
+			<img src="./image/LangGameImg/Age10/age10_1_2_modal03.png" width="90%">
+			<p>무엇이 어떻게 다른지 설명해보아요.</p>
 			<audio controls src="./audio/Age09/age_01_7_6_1.wav"></audio>
 		</div>
 	</div>
 	
-	<div class = "appleModal04">
+	<div class = "modal04">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="appleModal04Close()">X</button>
-			<p>잘 듣고 따라해보세요, "아빠"</p>
+			<button id = "closeBtn" onClick="modal04Close()">X</button>
+			<img src="./image/LangGameImg/Age10/age10_1_2_modal04.png" width="90%">
+			<p>무엇이 어떻게 다른지 설명해보아요.</p>
 			<audio controls src="./audio/Age09/age_01_7_7.wav"></audio>
 		</div>
-	</div>  -->
+	</div>  
+	
+	<div class = "modal05">
+		<div class = "modalContent">
+			<button id = "closeBtn" onClick="modal05Close()">X</button>
+			<img src="./image/LangGameImg/Age10/age10_1_3_modal05.png" width="90%">
+			<p>무엇이 어떻게 다른지 설명해보아요.</p>
+			<audio controls src="./audio/Age09/age_01_7_6_1.wav"></audio>
+		</div>
+	</div>
+	
+	<div class = "modal06">
+		<div class = "modalContent">
+			<button id = "closeBtn" onClick="modal06Close()">X</button>
+			<img src="./image/LangGameImg/Age10/age10_1_3_modal06.png" width="90%">
+			<p>무엇이 어떻게 다른지 설명해보아요.</p>
+			<audio controls src="./audio/Age09/age_01_7_7.wav"></audio>
+		</div>
+	</div>  
 	
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
 <script type="text/javascript">
@@ -362,40 +384,62 @@
 	}
 	
 	//사과 찾기
-	function appleModal01Open(){
-		$(".appleModal01").css('display', 'block');
+	function modal01Open(){
+		$(".modal01").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
 	} 
 	
-	function appleModal01Close(){
-		$(".appleModal01").css('display', 'none');
+	function modal01Close(){
+		$(".modal01").css('display', 'none');
 		$(".modalLayer").css('display', 'none');
 	}
-	function appleModal02Open(){
-		$(".appleModal02").css('display', 'block');
+	function modal02Open(){
+		$(".modal02").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
 	} 
 	
-	function appleModal02Close(){
-		$(".appleModal02").css('display', 'none');
+	function modal02Close(){
+		$(".modal02").css('display', 'none');
 		$(".modalLayer").css('display', 'none');
 	}
-	function appleModal03Open(){
-		$(".appleModal03").css('display', 'block');
+	
+	function modal03Open(){
+		$(".modal03").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
 	} 
 	
-	function appleModal03Close(){
-		$(".appleModal03").css('display', 'none');
+	function modal03Close(){
+		$(".modal03").css('display', 'none');
 		$(".modalLayer").css('display', 'none');
 	}
-	function appleModal04Open(){
-		$(".appleModal04").css('display', 'block');
+	
+	function modal04Open(){
+		$(".modal04").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
 	} 
 	
-	function appleModal04Close(){
-		$(".appleModal04").css('display', 'none');
+	function modal04Close(){
+		$(".modal04").css('display', 'none');
+		$(".modalLayer").css('display', 'none');
+	}
+	
+	function modal05Open(){
+		$(".modal05").css('display', 'block');
+		$(".modalLayer").css('display', 'block');
+	} 
+	
+	function modal05Close(){
+		$(".modal05").css('display', 'none');
+		$(".modalLayer").css('display', 'none');
+	}
+	
+	function modal06Open(){
+		$(".modal06").css('display', 'block');
+		$(".modalLayer").css('display', 'block');
+	} 
+	
+	function modal06Close(){
+		$(".modal06").css('display', 'none');
 		$(".modalLayer").css('display', 'none');
 	}
 	
@@ -427,31 +471,22 @@
 		  cnt = cnt+1;
 		  
 		  if(cnt == 1){
-			$("#minsu").css('display', 'none'); 
-			$(".gameImg01").css('display', 'none');
-			$(".homeBack").css('display', 'block');			
-          	$(".gametext01").css('display', 'none');
-      		$(".gametext02").css('display', 'inline');  
-      		$("#answer").css('display', 'inline');
+			$(".roomBack").css('display', 'none');		
+			$(".playBack").css('display', 'block');	
        	 	$("#leftbtn").css('display', 'inline');
-
       		var audio = new Audio('./audio/Age09/age_01_7_2.wav');
       		gameBtnFunc(audio);
           }
 		  else if(cnt == 2){
-				$("#minsu").css('display', 'inline'); 
-	          	$(".gametext02").css('display', 'none');
-	      		$(".gametext03").css('display', 'inline'); 
-	      		$(".homeBack").css('display', 'none');
-	      		$(".gameImg03").css('display', 'inline');
-	      		$(".gameImg04").css('display', 'inline');
+	      		$(".playBack").css('display', 'none');
+	      		$(".snowBack").css('display', 'block');
 	      		$("#leftbtn").css('display', 'inline');
-	      		$("#answer").css('display', 'none');
+	      		$("#answer").css('display', 'inline');
 	      		var audio = new Audio('./audio/Age09/age_01_7_8.wav');
 	      		gameBtnFunc(audio);
 	       } 
           else if(cnt == 3){
-      			if(!confirm("7번 문항의 게임을 종료하시겠습니까?")){return;}
+      			if(!confirm("51번 문항의 게임을 종료하시겠습니까?")){return;}
         	  	location.href = './langTest.jsp';
           }
 	}     
@@ -461,24 +496,17 @@
 		  cnt = cnt-1;
 		  
 		  if(cnt == 0){
-				$("#minsu").css('display', 'inline'); 
-				$(".gameImg01").css('display', 'inline');
-				$(".homeBack").css('display', 'none');			
-	          	$(".gametext01").css('display', 'inline');
-	      		$(".gametext02").css('display', 'none'); 
-          		$("#answer").css('display', 'none');
+				$(".roomBack").css('display', 'block');			
+				$(".playBack").css('display', 'none');			
+        		$("#answer").css('display', 'none');
+        		$("#leftbtn").css('display', 'none');
 	      		var audio = new Audio('./audio/Age09/age_01_7_1.wav');
 	      		gameBtnFunc(audio);
 	          }
 			  else if(cnt == 1){
-				$("#minsu").css('display', 'none'); 
-	          	$(".gametext02").css('display', 'inline');
-	      		$(".gametext03").css('display', 'none'); 
-	      		$(".homeBack").css('display', 'block');
-	      		$(".gameImg03").css('display', 'none');
-	      		$(".gameImg04").css('display', 'none');
-	      		$("#leftbtn").css('display', 'inline');
-	      		$("#answer").css('display', 'inline');
+	      		$(".playBack").css('display', 'block');
+	      		$(".snowBack").css('display', 'none');
+	      		$("#answer").css('display', 'none');
 	      		var audio = new Audio('./audio/Age09/age_01_7_2.wav');
 	      		gameBtnFunc(audio);
 	       	} 
