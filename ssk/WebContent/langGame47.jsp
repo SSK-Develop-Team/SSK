@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<title>직접 평가 7번 문항</title>
+<title>직접 평가 47번 문항</title>
 
 <style>
 	.gametext02{ display : none; }
@@ -207,11 +207,11 @@
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
-<h3>직접 평가 #47</h3>
 <div class="container">
 
 	<!-- 게임 이미지 -->
 	<div class="imgbox">
+		<div style="font-size:1em;font-weight:bold;">직접평가 #47</div>
 		<div class="Quiz01">
 			<img class="gameImg01" src="./image/LangGameImg/Age09/age09_2_1.png" width="100%" alt="마녀의 퀴즈 1"/>  
 			<button class="w3-button w3-container w3-round-large" id="chooseA1" onclick='wrongA()' style="background-color:#ffffff; text-align:center;padding:10px;">2마리</button>	
