@@ -16,7 +16,7 @@ public class UserDAO {
 	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE = "select * from user_profile where user_role=?";
 	private final static String SQLST_SELECT_USER_CNT_BY_USER_ROLE = "select count(*) from user_profile where user_role=?";
 	private final static String SQLST_UPDATE_USER_INFO = "update user_profile set user_password=?, user_name=?, user_email=?,"
-            + "user_role=?, registration_date=?, user_gender=?, user_birth=?, user_icon=?";
+            + "user_role=?, registration_date=?, user_gender=?, user_birth=?, user_icon=? where user_id = ?";
 	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE_ORDER_BY_REGISTRATION_DATE_LIMIT = "SELECT * FROM user_profile WHERE user_role=? ORDER BY user_id DESC LIMIT ?, ?";
 	private final static String SQLST_DELETE_USER = "DELETE FROM user_profile WHERE user_id = ?";
 	
@@ -40,7 +40,7 @@ public class UserDAO {
 		return false;
 	}
 	
-	
+	/* 로그인 */
 	public static User findUser(Connection con, String userLoginId, String userLoginPw){
 		User user = new User();
 		try {
@@ -77,7 +77,7 @@ public class UserDAO {
 		}
 		return null;
 	}
-   
+	
 	/*회원가입*/
 	public static boolean insertUser(Connection con, User user){
 		try {
@@ -213,13 +213,14 @@ public class UserDAO {
          PreparedStatement pstmt = con.prepareStatement(SQLST_UPDATE_USER_INFO);
          pstmt.setString(1, user.getUserPassword());
          pstmt.setString(2, user.getUserName());
-         pstmt.setString(3, user.getUserName());
-         pstmt.setString(4, user.getUserEmail());
-         pstmt.setString(5, user.getUserRole());
-         pstmt.setDate(6, user.getRegistrationDate());
-         pstmt.setString(7, user.getUserGender());
-         pstmt.setDate(8, user.getUserBirth());
-         pstmt.setString(9, user.getUserIcon());
+         pstmt.setString(3, user.getUserEmail());
+         pstmt.setString(4, user.getUserRole());
+         pstmt.setDate(5, user.getRegistrationDate());
+         pstmt.setString(6, user.getUserGender());
+         pstmt.setDate(7, user.getUserBirth());
+         pstmt.setString(8, user.getUserIcon());
+         pstmt.setInt(9, user.getUserId());
+         
          int count = pstmt.executeUpdate();
          if (count > 0)
             flag = true;

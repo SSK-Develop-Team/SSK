@@ -34,14 +34,22 @@ public class DeleteUser extends HttpServlet {
 	    ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 
-		String[] childIdStrList = request.getParameterValues("childId");
+		String[] userIdStrList = null;
+		String location = null;
+		if(request.getParameterValues("childId")!=null){
+			userIdStrList = request.getParameterValues("childId");
+			location = "/GetManageChild";
+		}else if(request.getParameterValues("expertId")!=null){
+			userIdStrList = request.getParameterValues("expertId");
+			location = "/GetExpertHome";
+		}
 
-		for(String c : childIdStrList){
+		for(String c : userIdStrList){
 			int deleteUserId = Integer.parseInt(c);
 			UserDAO.deleteUser(conn, deleteUserId);
 		}
 
-	 	RequestDispatcher rd = request.getRequestDispatcher("/GetManageChild");
+	 	RequestDispatcher rd = request.getRequestDispatcher(location);
 		rd.forward(request, response);
 	}
 
