@@ -48,8 +48,7 @@ body{
 	line-height: 1.6
 }
 .container{
-	width: 40%;
-	margin: 0 auto;
+	width:100%;
 }
 
 ul.tabs{
@@ -97,9 +96,8 @@ ul.tabs li.current{
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
-<div style="width:92%;margin:4%;"> 
-	<h2 style="text-align:center;"><%=name%>님의 언어 발달 평가 결과</h2>
-	<div class="w3-col s1 m2 l4">&nbsp;</div>
+<div>
+	<h4 style="text-align:center;font-weight:bold;"><%=name%>님의 언어 발달 평가 결과</h4>
 </div>
 
   <div class="w3-row">
@@ -138,34 +136,37 @@ ul.tabs li.current{
 
 	</c:when>
 	<c:otherwise>
-		<div class="w3-col">&nbsp;</div>
 	</c:otherwise>
 	</c:choose>
 
 	<c:remove var="selectedIndex" scope="page"/>
 
-	<!-- <div class="w3-col s1 m2 l4">&nbsp;</div> -->
-
   </div>
+<div class="w3-row">
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
+	<div class="w3-col s12 m10 l6">
+		<div class="w3-panel container">
+			<ul class="tabs">
+				<li class="tab-link current" data-tab="tab-1">막대그래프로 확인하기</li>
+				<li class="tab-link" data-tab="tab-2">오각그래프로 확인하기</li>
+			</ul>
 
-<div class="container" style = "margin-top : 3%">
-	<ul class="tabs">
-		<li class="tab-link current" data-tab="tab-1">막대그래프로 확인하기</li>
-		<li class="tab-link" data-tab="tab-2">오각그래프로 확인하기</li>
-	</ul>
+			<div id="tab-1" class="tab-content current">
+				<canvas id="myChart"></canvas>
+			</div>
+			<div id="tab-2" class="tab-content">
+				<canvas id="myChart2"></canvas>
+			</div>
 
-	<div id="tab-1" class="tab-content current">
-		<canvas id="myChart"></canvas>
+			<div class="btnbox">
+				<input type="button" class="btn" id="share" value="공유하기">
+				<input type="button" class="btn" id="mainBack" value="돌아가기" onClick="javascript:location.href='childHome.jsp'">
+			</div>
+		</div>
 	</div>
-	<div id="tab-2" class="tab-content">
-		<canvas id="myChart2"></canvas>
-	</div>
-	
-	<div class="btnbox">
-		<input type="button" class="btn" id="share" value="공유하기">
-		<input type="button" class="btn" id="mainBack" value="돌아가기" onClick="javascript:location.href='childHome.jsp'">
-	</div>
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 </div>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
