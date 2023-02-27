@@ -121,7 +121,7 @@
 	
 	audio{width : 100%;}
 	
-	#closeBtn {
+	.closeBtn {
 		float : right;
 		margin-right : 3%;
 		background-color : #fff;
@@ -309,64 +309,52 @@
 
 	<div class = "answerModal">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modalClose()">X</button>
-			<p>로봇, 로켓, 리본, 빨간색, 분홍색, 새, 시소, 삽, 썰매, 산타(싼타), 눈사람</p>
-			<audio controls src="./audio/lang01_7.m4a"></audio>
+			<button class = "closeBtn" onClick="modalClose()">X</button>
+			<p>로봇, 로켓, 리본, 빨간색, 분홍색 / 새, 시소, 삽 / 썰매, 산타(싼타), 눈사람</p>
+			<audio controls src="./audio/Age10/age_10_51_answer.wav"></audio>
 		</div>
 	</div>
 	
 <!-- 클릭 가능한 버튼 -->
 	<div class = "modal01">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modal01Close()">X</button>
+			<button class = "closeBtn" onClick="modal01Close()">X</button>
 			<img src="./image/LangGameImg/Age10/age10_1_1_modal01.png" width="90%">
-			<p>무엇이 어떻게 다른지 설명해보아요.</p>
-			<audio controls src="./audio/Age09/age_01_7_3.wav"></audio>
 		</div>
 	</div>
 	
 	<div class = "modal02">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modal02Close()">X</button>
+			<button class = "closeBtn" onClick="modal02Close()">X</button>
 			<img src="./image/LangGameImg/Age10/age10_1_1_modal02.png" width="90%">
-			<p>무엇이 어떻게 다른지 설명해보아요.</p>
-			<audio controls src="./audio/Age09/age_01_7_5.wav"></audio>
 		</div>
 	</div>
 	
 	<div class = "modal03">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modal03Close()">X</button>
+			<button class = "closeBtn" onClick="modal03Close()">X</button>
 			<img src="./image/LangGameImg/Age10/age10_1_2_modal03.png" width="90%">
-			<p>무엇이 어떻게 다른지 설명해보아요.</p>
-			<audio controls src="./audio/Age09/age_01_7_6_1.wav"></audio>
 		</div>
 	</div>
 	
 	<div class = "modal04">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modal04Close()">X</button>
+			<button class = "closeBtn" onClick="modal04Close()">X</button>
 			<img src="./image/LangGameImg/Age10/age10_1_2_modal04.png" width="90%">
-			<p>무엇이 어떻게 다른지 설명해보아요.</p>
-			<audio controls src="./audio/Age09/age_01_7_7.wav"></audio>
 		</div>
 	</div>  
 	
 	<div class = "modal05">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modal05Close()">X</button>
+			<button class = "closeBtn" onClick="modal05Close()">X</button>
 			<img src="./image/LangGameImg/Age10/age10_1_3_modal05.png" width="90%">
-			<p>무엇이 어떻게 다른지 설명해보아요.</p>
-			<audio controls src="./audio/Age09/age_01_7_6_1.wav"></audio>
 		</div>
 	</div>
 	
 	<div class = "modal06">
 		<div class = "modalContent">
-			<button id = "closeBtn" onClick="modal06Close()">X</button>
+			<button class = "closeBtn" onClick="modal06Close()">X</button>
 			<img src="./image/LangGameImg/Age10/age10_1_3_modal06.png" width="90%">
-			<p>무엇이 어떻게 다른지 설명해보아요.</p>
-			<audio controls src="./audio/Age09/age_01_7_7.wav"></audio>
 		</div>
 	</div>  
 	
@@ -383,10 +371,11 @@
 		$(".modalLayer").css('display', 'none');
 	}
 	
-	//사과 찾기
 	function modal01Open(){
 		$(".modal01").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
+		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
+		audio.play();
 	} 
 	
 	function modal01Close(){
@@ -396,6 +385,8 @@
 	function modal02Open(){
 		$(".modal02").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
+		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
+		audio.play();
 	} 
 	
 	function modal02Close(){
@@ -406,6 +397,8 @@
 	function modal03Open(){
 		$(".modal03").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
+		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
+		audio.play();
 	} 
 	
 	function modal03Close(){
@@ -416,6 +409,8 @@
 	function modal04Open(){
 		$(".modal04").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
+		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
+		audio.play();
 	} 
 	
 	function modal04Close(){
@@ -426,6 +421,8 @@
 	function modal05Open(){
 		$(".modal05").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
+		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
+		audio.play();
 	} 
 	
 	function modal05Close(){
@@ -436,6 +433,8 @@
 	function modal06Open(){
 		$(".modal06").css('display', 'block');
 		$(".modalLayer").css('display', 'block');
+		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
+		audio.play();
 	} 
 	
 	function modal06Close(){
@@ -448,7 +447,7 @@
 	
 	//음성 재생
 	window.onload = function () {
-		var audio = new Audio('./audio/Age09/age_01_7_1.wav');
+		var audio = new Audio('./audio/Age10/age_10_51_1.wav');
 		audio.play();
 	}
 	
@@ -474,16 +473,16 @@
 			$(".roomBack").css('display', 'none');		
 			$(".playBack").css('display', 'block');	
        	 	$("#leftbtn").css('display', 'inline');
-      		var audio = new Audio('./audio/Age09/age_01_7_2.wav');
-      		gameBtnFunc(audio);
+	      	var audio = new Audio('./audio/Age10/age_10_51_1.wav');
+			audio.play();
           }
 		  else if(cnt == 2){
 	      		$(".playBack").css('display', 'none');
 	      		$(".snowBack").css('display', 'block');
 	      		$("#leftbtn").css('display', 'inline');
 	      		$("#answer").css('display', 'inline');
-	      		var audio = new Audio('./audio/Age09/age_01_7_8.wav');
-	      		gameBtnFunc(audio);
+		      	var audio = new Audio('./audio/Age10/age_10_51_1.wav');
+				audio.play();
 	       } 
           else if(cnt == 3){
       			if(!confirm("51번 문항의 게임을 종료하시겠습니까?")){return;}
@@ -500,15 +499,15 @@
 				$(".playBack").css('display', 'none');			
         		$("#answer").css('display', 'none');
         		$("#leftbtn").css('display', 'none');
-	      		var audio = new Audio('./audio/Age09/age_01_7_1.wav');
-	      		gameBtnFunc(audio);
+    	      	var audio = new Audio('./audio/Age10/age_10_51_1.wav');
+    			audio.play();
 	          }
 			  else if(cnt == 1){
 	      		$(".playBack").css('display', 'block');
 	      		$(".snowBack").css('display', 'none');
 	      		$("#answer").css('display', 'none');
-	      		var audio = new Audio('./audio/Age09/age_01_7_2.wav');
-	      		gameBtnFunc(audio);
+		      	var audio = new Audio('./audio/Age10/age_10_51_1.wav');
+				audio.play();
 	       	} 
 	      		
 		}
