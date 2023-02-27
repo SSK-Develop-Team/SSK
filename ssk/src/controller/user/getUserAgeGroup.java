@@ -45,13 +45,11 @@ public class getUserAgeGroup extends HttpServlet {
 		int nowAge = UserInfoProcessor.getUserBirthToCurrAge(userBirth);
 		
 		int curAgeGroup = AgeGroupDAO.getCurrAge(con, nowAge);
-		
+
 		session.setAttribute("curAge", curAgeGroup);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/langTestMain.jsp");
 		rd.forward(request, response);
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
