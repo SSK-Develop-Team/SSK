@@ -11,13 +11,13 @@
 <body>
 <%@ include file = "sidebar.jsp" %>
 <div style="width:100%;background-color:#FFDDDD;">
-<div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+<div>&nbsp;</div><div>&nbsp;</div><div class="w3-hide-small">&nbsp;</div>
 <div class="w3-center" style="font-weight:bold;font-size:1.7em;"> 정서/행동 발달 검사 </div>
-<div class="w3-display-container" style="width:100%;height:150px;">
-<div class="w3-display-middle" style="text-align:center;font-size:1em;">본 검사는 자녀의 정서/행동 특성을 평가하는 검사입니다. <br>
+<div class="w3-panel" style="width:100%;height:150px;">
+<div class="w3-hide-small">&nbsp;</div>
+<div class="w3-center" style="text-align:center;font-size:1em;">본 검사는 자녀의 정서/행동 특성을 평가하는 검사입니다. <br>
 			총 10문항에 응답해 주시면 자녀의 정서/행동 상태를 확인할 수 있습니다.<br></div>
 </div>
-<div>&nbsp;</div><div>&nbsp;</div>
 </div>
 <div>&nbsp;</div><div>&nbsp;</div>
 <div class="w3-row">
