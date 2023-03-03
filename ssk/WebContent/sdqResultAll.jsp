@@ -24,7 +24,25 @@
 
 	int selectedIndex = sdqTestLogList.indexOf(selectedSdqTestLog);
 %>
+<style>
+.fullBtn{
+	border:1px solid #ff6666;
+	border-radius:10px;
+	background-color:#ff6666;
+	margin-bottom:10px;
+	height:50px;
+	color:white;
+	font-size:0.9em;
+	align-items : center;
+	padding:0px;
+}
+@media (max-width: 390px) {
+  .fullBtn {
+    font-size:0.8em;
+  }
+}
 
+</style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -119,16 +137,16 @@
    
 	<!-- 시간별 그래프 뷰 -->
 	<div class="w3-row">
-		<div class="w3-col m1 l2">&nbsp;</div>
+		<div class="w3-col w3-hide-small m1 l2">&nbsp;</div>
 		<div class="w3-col s12 m10 l8">
 			<div id="columnchart_values" style="width:100%;height: 60vh;"></div>
 		</div>
-		<div class="w3-col m1 l2">&nbsp;</div>
+		<div class="w3-col w3-hide-small m1 l2">&nbsp;</div>
 	</div>
 	<div class="w3-row w3-margin-top">
 		<div class="w3-col s2 m3 l3">&nbsp;</div>
 		<div class="w3-col w3-row s4 m3 l2">
-			<button class="w3-button w3-col" style="border:1px solid #ff6666;border-radius:10px;background-color:#ff6666;margin-bottom:10px;height:50px;color:white;font-size:0.9em;align-items : center;padding:0px;"onclick="document.getElementById('modal').style.display='block';">검사 결과 설명 보기</button>
+			<button class="w3-button w3-col fullBtn" onclick="document.getElementById('modal').style.display='block';">검사 결과 설명 보기</button>
 		</div>
 		<div class="w3-col s1 m1 l3">&nbsp;</div>
 		<div class="w3-col w3-row s3 m2 l1">

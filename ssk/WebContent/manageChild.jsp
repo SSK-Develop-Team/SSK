@@ -17,7 +17,7 @@
 <div class="w3-row">
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 	<div class="w3-col s12 m12 l10">
-		<div style="width:100%;margin-bottom:20px;">
+		<div class="w3-row" style="width:100%;margin-bottom:20px;">
 			<div class="search w3-right" style="width: 300px;">
 				<input class="w3-border" type="text" placeholder="아동 이름 검색" style="width: 85%;border: 1px solid #bbb;border-radius: 8px;padding: 10px 12px;font-size:0.7em;">
 				<button style="height:42px;background-color:white;border:none;"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png" style="width:17px;"></button>
@@ -37,7 +37,7 @@
 		%>
 		<form method="post" id="manageFrm">
 			<input type="hidden" id="latestChildId" name="latestChildId" value="<%=currUserList.get(0).getUserId()%>"/>
-			<div style="font-size:0.5em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 정렬 기준 : 등록일 순</div>
+			<div class="w3-container" style="font-size:0.5em;">* 정렬 기준 : 등록일 순</div>
 			<div class="w3-container">
 				<table class="w3-table-all w3-hoverable" style="font-size:0.8em;">
 					<thead>

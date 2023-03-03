@@ -50,7 +50,8 @@
 	font-size : 1.2em;
 	text-align: center;
 }
-   
+
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -62,7 +63,7 @@
 			<div class="w3-col w3-hide-small m1 l1">&nbsp;</div>
 			<div class="w3-col s12 m10 l10">
 				<div class="w3-panel">
-					<div style="font-weight:bold; font-size : 2em;">언어 발달 평가</div>
+					<div style="font-weight:bold; font-size : 1.8em;">언어 발달 평가</div>
 					<h6>질문에 답하기 어려울 경우, 직접 평가(게임)를 하고 다시 돌아와 결정해주세요.</h6>
 				</div>
 				<form method="post" action="ManageLangResult">
