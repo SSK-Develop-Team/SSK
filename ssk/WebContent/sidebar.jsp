@@ -34,7 +34,7 @@
 			<a href="GetEsmRecordMain" class="w3-bar-item w3-button sidebar">정서 다이어리</a>
 		</c:when>
 		<c:otherwise>
-			<a href="#" class="w3-bar-item w3-button sidebar">로그인이 필요합니다. </a>
+			<a href="login.jsp" class="w3-bar-item w3-button sidebar">로그인이 필요합니다. </a>
 		</c:otherwise>
 	</c:choose>
 </div>
@@ -60,7 +60,7 @@
 				<c:when test="${user.userRole eq 'EXPERT'}">
 		  			<form id="f" name = "post" action = "logout">
 			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetExpertHome'">전문가 ${user.userName}&nbsp;님</a>				
+		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetExpertHome'">${user.userName}&nbsp;님</a>				
 		  			</form>				
 				</c:when>
 	  			<c:otherwise>

@@ -33,6 +33,8 @@ public class LangGameProcessor {
 			location = "/langGame29_4.jsp";
 		}else if(langQuestionId == 46 && (langGameId == 2||langGameId == 3||langGameId == 4)){
 			location = "/langGame46_3to5.jsp";
+		}else if(langQuestionId==51){
+			location = "/langGame51.jsp";
 		}
 		return location;
 	}

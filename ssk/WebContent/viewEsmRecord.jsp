@@ -86,7 +86,6 @@
 	<div class="w3-row">
 		<div class="w3-col s1 m1 l1">&nbsp;</div>
 		<div class="w3-col s10 m10 l10">
-			<div class="w3-hide-medium w3-hide-large">&nbsp;</div>
 			<div style="font-size:1.3em;"><b>정서 다이어리 조회하기</b></div>
 			<div style="font-size:0.8em;"><%=focusUser.getUserName()%>님의 다이어리입니다.</div>
 			<div>&nbsp;</div>
@@ -94,8 +93,8 @@
 				<div id='calendar-view' class="w3-hide-small w3-half w3-container ">
 					<div id='calendar'></div>
 				</div>
-				<div id='record-view' class="w3-half w3-container">
-				<div class="records-date w3-panel w3-row ">
+				<div id='record-view' class="w3-half">
+				<div class="records-date w3-panel w3-row w3-center">
 						<div class="w3-col s3 w3-center" >
 							<button class="w3-button w3-circle w3-white w3-left" id="pre_btn" onclick="getPreDayEsmRecord('GetDayEsmRecord','<%=currDateStr%>',<%=childId%>);"><img src="./image/previous_w.png" alt="pre_btn" style="width:1em;height:auto;filter: brightness(0.3);"></button>
 						</div>
@@ -134,9 +133,9 @@
 				<%} %>
 				<div>&nbsp;</div>
 				<%if(currUser.getUserRole().equals("CHILD")){ %>
-					<button class="w3-button w3-col w3-padding"style="border:1px solid #1A2A3A;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;" onclick="location.href='GetEsmRecordMain'">돌아가기</button>
+					<button class="w3-button w3-col w3-padding w3-center"style="border:1px solid #1A2A3A;width:90%;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;margin-left:5%;margin-right:5%;height:50px;color:white;font-size:1em;align-items : center;" onclick="location.href='GetEsmRecordMain'">돌아가기</button>
 				<%}else{ %>
-					<button class="w3-button w3-col w3-padding"style="border:1px solid #1A2A3A;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;" onclick="location.href='GoToChildHome?childId=<%=focusUser.getUserId()%>'">돌아가기</button>
+					<button class="w3-button w3-col w3-padding w3-center"style="border:1px solid #1A2A3A;width:90%;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;margin-left:5%;margin-right:5%;height:50px;color:white;font-size:1em;align-items : center;" onclick="location.href='GoToChildHome?childId=<%=focusUser.getUserId()%>'">돌아가기</button>
 				<%} %>
 				</div>
 		 	</div>

@@ -56,6 +56,15 @@
   border-radius: 5px;
   background-color: grey;
 }
+@media (max-width: 390px) {
+  .sdqAnswerBtn {
+    font-size:0.7em;
+  }
+  .sdqPreviousBtn {
+    font-size:0.7em;
+  }
+}
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
@@ -130,7 +139,7 @@ function ableBtn(){
 	<div class="w3-container w3-center"><h4><b>정서/행동 발달 검사</b></h4></div>
 	
 	<div class="w3-row" >
-		<div class="w3-col m2 l2">&nbsp;</div>
+		<div class="w3-col w3-hide-small m2 l2">&nbsp;</div>
 		<div class="w3-col s12 m8 l8">
 			<c:set var="target" scope="page" value="<%=sdqTarget%>" />
 			<c:choose>
@@ -145,14 +154,14 @@ function ableBtn(){
 			<div id="sdqChat" style="overflow:auto; height:55vh; background-color:#ededed;padding-bottom:6px;padding-top:6px;">
 				<form id="sdqForm" method="post" action="DoSdqTest">
 					<%for(int i=0;i<sdqQuestionList.size();i++){ %>
-					<div class="w3-margin w3-padding " id="sdqQuestion<%=i%>" style="border:1px solid #ff6666;border-radius : 0px 10px 10px 10px;clear:both;float:left;background-color:#ff6666;color : white;height:50px;font-size:1em;display:none;align-items : center;"><%=sdqQuestionList.get(i).getSdqQuestionContent() %></div>
-					<div class="w3-margin w3-padding" id="sdqAnswer<%=i%>" style="border:1px solid #ff6666;border-radius : 10px 10px 0px 10px;clear:both;float:right;background-color:white;color : #ff6666;height:50px;font-size:1em;display:none;align-items:center;">아니다</div>
+					<div class="w3-margin w3-padding " id="sdqQuestion<%=i%>" style="border:1px solid #ff6666;border-radius : 0px 10px 10px 10px;clear:both;float:left;background-color:#ff6666;color : white;height:50px;font-size:0.9rem;display:none;align-items : center;"><%=sdqQuestionList.get(i).getSdqQuestionContent() %></div>
+					<div class="w3-margin w3-padding" id="sdqAnswer<%=i%>" style="border:1px solid #ff6666;border-radius : 10px 10px 0px 10px;clear:both;float:right;background-color:white;color : #ff6666;height:50px;font-size:0.9rem;display:none;align-items:center;">아니다</div>
 					<input type="hidden" id="sdqInput<%=i%>" name="sdqInput<%=i%>" value="0"/>
 					<%} %>
 				</form>
 			</div>
 		</div>
-		<div class="w3-col m2 l2">&nbsp;</div>
+		<div class="w3-col w3-hide-small m2 l2">&nbsp;</div>
 	</div>
 	<div class="w3-row w3-margin">
 		<div class="w3-col m2 l2 w3-hide-small">&nbsp;</div>

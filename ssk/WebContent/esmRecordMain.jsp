@@ -17,7 +17,7 @@
 	<link href="css/esmRecord.css" rel="stylesheet" type='text/css' >
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<script src='fullcalendar/main.js'></script>
 	<script src='fullcalendar/locales-all.js'></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -37,6 +37,7 @@
 	    	displayEventTime:false,
 			timeZone: "local",
 	  		dateClick: function(info) {//날짜 클릭 시 이벤트
+	  			info.dayEl.style.backgroundColor = '#CAFFDC';
 		    	//getDayEsmRecord('GetDayEsmRecord',info.dateStr);//해당 날짜 문자열 반환 -> 해당하는 텍스트 데이터 받아오기
 				//gotoDate(info.dateStr);
 				setSelectedDateStrInput(info.dateStr);
@@ -81,7 +82,7 @@
 			<div style="font-size:0.8em;">  날짜를 선택한 후 기록하기를 클릭하여 입력해주세요.</div>
 			<div>&nbsp;</div>
 			<div id="calendar-view">
-				<div id='calendar' style="width:100%;"></div>
+				<div id='calendar'></div>
 			</div>
 			<div>&nbsp;</div>
 			<button class="w3-button w3-col w3-padding"style="border:1px solid #1A2A3A;border-radius:10px;background-color:#1A2A3A;margin-bottom:10px;height:50px;color:white;font-size:1em;align-items : center;" onclick="getCreateEsmRecordPage()">기록하기</button>
