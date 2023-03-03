@@ -6,10 +6,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.NoSuchElementException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.LangQuestionDAO;
 import model.dao.LangReplyDAO;
 import model.dao.LangTestLogDAO;
 import model.dto.LangQuestion;
@@ -27,14 +23,13 @@ import model.dto.LangTestLog;
 import model.dto.User;
 
 /**
- * 
- * 언어 발달 평가 저장 및 호출 준비
+ * 테스트 결과 저장
  */
-@WebServlet("/ManageLangResult")
-public class ManageLangResult extends HttpServlet {
+@WebServlet("/DoLangTest")
+public class DoLangTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public ManageLangResult() {
+       
+    public DoLangTest() {
         super();
     }
 
@@ -94,8 +89,7 @@ public class ManageLangResult extends HttpServlet {
 		request.setAttribute("currLangTestLogId",langTestLog.getLangTestLogId());
 		
 		
-		response.sendRedirect(getServletContext().getContextPath()+"/AllLangResult?isTesting=1");
-
+		response.sendRedirect(getServletContext().getContextPath()+"/GetLangResultAll?isTesting=1");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

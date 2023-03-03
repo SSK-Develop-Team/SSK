@@ -66,7 +66,7 @@
 					<div style="font-weight:bold; font-size : 1.8em;">언어 발달 평가</div>
 					<h6>질문에 답하기 어려울 경우, 직접 평가(게임)를 하고 다시 돌아와 결정해주세요.</h6>
 				</div>
-				<form method="post" action="ManageLangResult">
+				<form method="post" action="DoLangTest">
 
 					<%
 						for(int i=0; i < currQuestionList.size(); i++){
