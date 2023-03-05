@@ -1,0 +1,40 @@
+
+t
+java:S2293:"YReplace the type specification in this constructor call with the diamond operator ("<>").(×—ªøÿÿÿÿ
+U
+java:S1161,":Add the "@Override" annotation above this method signature(Ïû©Öûÿÿÿÿ
+‡
+java:S1989."lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(áò‰øÿÿÿÿ
+t
+java:S19897"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(¿šÕÓüÿÿÿÿ
+w
+java:S1989F"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(ãìÄ
+P
+java:S1161J":Add the "@Override" annotation above this method signature(‹¨¯¿
+z
+java:S1989K"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿ
+F
+java:S1128"0Remove this unused import 'java.io.PrintWriter'.(ÓŞÏÛ
+@
+java:S1128"*Remove this unused import 'java.sql.Date'.(ÙÀ½Ê
+E
+java:S1128"*Remove this unused import 'java.sql.Time'.(Üå»‰şÿÿÿÿ
+G
+java:S1128	"1Remove this unused import 'java.util.Comparator'.(î¹ó¹
+X
+java:S1128
+"=Remove this unused import 'java.util.NoSuchElementException'.(®“ÿéúÿÿÿÿ
+Q
+java:S1128"6Remove this unused import 'model.dao.LangQuestionDAO'.(¡Şçñıÿÿÿÿ
+P
+java:S1128"5Remove this unused import 'model.dao.LangTestLogDAO'.(®ÒŠœüÿÿÿÿ
+O
+java:S1128"4Remove this unused import 'model.dao.SdqTestLogDAO'.(úéÄÏúÿÿÿÿ
+I
+java:S1128"3Remove this unused import 'model.dto.LangQuestion'.(Ó€¡í
+K
+java:S1128"0Remove this unused import 'model.dto.LangReply'.(ÇÁÑ¢ıÿÿÿÿ
+M
+java:S1128"2Remove this unused import 'model.dto.LangTestLog'.(Î§Ù†ıÿÿÿÿ
+L
+java:S1128"1Remove this unused import 'model.dto.SdqTestLog'.(“×Î¨üÿÿÿÿ

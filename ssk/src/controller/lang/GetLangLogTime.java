@@ -54,7 +54,7 @@ public class GetLangLogTime extends HttpServlet {
 		int selectNum = Integer.parseInt(request.getParameter("selectNum"));
 		request.setAttribute("selectIndex", selectNum);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/AllLangResult");
+		RequestDispatcher rd = request.getRequestDispatcher("/GetLangResultAll");
 		rd.forward(request, response);
 
 	}

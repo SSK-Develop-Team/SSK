@@ -34,11 +34,11 @@ import model.dto.User;
  * 
  * 세션 정리 필요 
  */
-@WebServlet("/AllLangResult")
-public class AllLangResult extends HttpServlet {
+@WebServlet("/GetLangResultAll")
+public class GetLangResultAll extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public AllLangResult() {
+    public GetLangResultAll() {
         super();
     }
 
@@ -79,47 +79,50 @@ public class AllLangResult extends HttpServlet {
 		ArrayList<Integer> ageGroupSet = new ArrayList<Integer>();
 		for(int k=0; k< logListSize; k++) {
 			int ageGroupIDElement = LangReplyDAO.getLangAgeGroupIdByLogId(conn, langTestLogIDList.get(k));	
-			allAgeGroupIDList.add(ageGroupIDElement);
-			
-			if(! ageGroupSet.contains(ageGroupIDElement)) {
-				ageGroupSet.add(ageGroupIDElement);
+			if(ageGroupIDElement !=-1) {
+				allAgeGroupIDList.add(ageGroupIDElement);
+				if(!ageGroupSet.contains(ageGroupIDElement)) {
+					ageGroupSet.add(ageGroupIDElement);
+				}
 			}
+			
+			
 		}
-		
-		request.setAttribute("langTestLogIDList", langTestLogIDList);
-		request.setAttribute("allLangReplyList",  allLangReplyList);
-		request.setAttribute("allAgeGroupIDList",  allAgeGroupIDList);
-		request.setAttribute("ageGroupSet",  ageGroupSet);
 		
 		
 		//Age Select After
+		@SuppressWarnings("unchecked")
 		ArrayList<Integer> langLogIdListByUser = (ArrayList<Integer>)session.getAttribute("langLogIdListByUser");
 		ArrayList<LangTestLog> langLogListByUser = new ArrayList<LangTestLog>();
 		ArrayList<ArrayList<LangReply>> langReplyContentListByUser = new ArrayList<ArrayList<LangReply>>();
 		
-		if(langLogIdListByUser != null) {
+		if(langLogIdListByUser != null) {//결과보기창에서 AgeGroup을 선택한 경우
 			for(int i=0; i<langLogIdListByUser.size(); i++) {
 				langLogListByUser.add(LangTestLogDAO.getLangTestLogById(conn, langLogIdListByUser.get(i)));
 				langReplyContentListByUser.add(LangReplyDAO.getLangReplyListByLangTestLogId(conn, langLogIdListByUser.get(i)));
 			}
 		}
 		
-		request.setAttribute("langLogListByUser", langLogListByUser);
-		request.setAttribute("langReplyContentListByUser", langReplyContentListByUser);
 		
-		
-		//Selected
+		//Selected Lang Test Log  - 결과창에 띄울 그래프의 테스트 로그 데이터 선정
 		LangTestLog selectedLangTestLog = null;
 		int selectIndex = 0;
 		
 		if(request.getAttribute("selectIndex") != null) selectIndex = (int)request.getAttribute("selectIndex");
 		
 		boolean isTesting = false;
-		if((request.getParameter("isTesting"))!=null) {
-			Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
-			selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
+		
+		/*결과 보기 버튼으로 바로 접속 시 selectedLangTestLog가 저장되지 않아 아래 코드를 추가함. 로직 확인 필요!*/
+		Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
+		selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
+		/*결과 보기 버튼으로 바로 접속 시 selectedLangTestLog가 저장되지 않아 코드를 추가함. 로직 확인 필요!*/
+		
+		
+		if((request.getParameter("isTesting"))!=null) {//검사 직후 결과보기인 경우 = 가장 최근 결과를 지정
+			//Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
+			//selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
 			isTesting = true;
-		}else {
+		}else {//결과 보기 버튼으로 접속했을 경우 
 			if(langLogIdListByUser != null) {
 				if(request.getAttribute("selectIndex") != null) {
 					selectedLangTestLog = langLogListByUser.get(selectIndex);
@@ -133,20 +136,30 @@ public class AllLangResult extends HttpServlet {
 				if(allAgeGroupIDList.contains(curAge))
 					selectedLangTestLog = langTestLogList.get(allAgeGroupIDList.lastIndexOf(curAge));
 				else {
-					Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
-					selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
+					//Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
+					//selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
 				}
 			}
 		}
-
-		request.setAttribute("langTestLogList", langTestLogList);
-		request.setAttribute("selectedLangTestLog", selectedLangTestLog);
-		request.setAttribute("isTesting", isTesting);
 		
 		
 		int langTestAgeGroupId = (int)LangReplyDAO.getLangAgeGroupIdByLogId(conn, selectedLangTestLog.getLangTestLogId());		
 		ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)LangReplyDAO.getLangReplyListByLangTestLogId(conn, selectedLangTestLog.getLangTestLogId());
 		ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)LangQuestionDAO.getLangQuestionListByAgeGroupId(conn, langTestAgeGroupId);
+		
+		
+		
+		request.setAttribute("langTestLogIDList", langTestLogIDList);
+		request.setAttribute("allLangReplyList",  allLangReplyList);
+		request.setAttribute("allAgeGroupIDList",  allAgeGroupIDList);
+		request.setAttribute("ageGroupSet",  ageGroupSet);
+		
+		request.setAttribute("langLogListByUser", langLogListByUser);
+		request.setAttribute("langReplyContentListByUser", langReplyContentListByUser);
+		
+		request.setAttribute("langTestLogList", langTestLogList);
+		request.setAttribute("selectedLangTestLog", selectedLangTestLog);
+		request.setAttribute("isTesting", isTesting);
 		
 		request.setAttribute("selectAgeGroupId", langTestAgeGroupId);
 		request.setAttribute("selectLangReplyList",  selectLangReplyList);

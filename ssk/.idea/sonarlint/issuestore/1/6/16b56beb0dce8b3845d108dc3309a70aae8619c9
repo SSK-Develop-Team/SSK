@@ -1,0 +1,18 @@
+
+U
+java:S1161":Add the "@Override" annotation above this method signature(Οϋ©Φϋÿÿÿÿ
+‡
+java:S1989!"lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(ας‰ψÿÿÿÿ
+o
+java:S1989+"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(“―ΊΆ
+N	java:S1061"9Replace this use of System.out or System.err by a logger.(½ΝΫ
+N	java:S1062"9Replace this use of System.out or System.err by a logger.(ΎΎερ
+S	java:S1063"9Replace this use of System.out or System.err by a logger.(δ»ƒδώÿÿÿÿ
+w
+java:S1989@"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(γμΔ
+P
+java:S1161C":Add the "@Override" annotation above this method signature(‹¨―Ώ
+z
+java:S1989D"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Σ‘ϋÿÿÿÿÿ
+Q
+java:S1128";Remove this unused import 'javax.servlet.http.HttpSession'.(ν¨τ

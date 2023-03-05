@@ -114,26 +114,20 @@ ul.tabs li.current{
 			      <%} %>
 			    </div>
 		    </div>
-		</div>
-
-		<div class="w3-col">&nbsp;</div>
-		<div class="w3-col s1 m2 l4">&nbsp;</div>
-		
-		<div class="w3-col s10 m8 l4">
-			<div class="w3-dropdown-hover"style="width:100%;">
+		    <div class="w3-row">&nbsp;</div>
+		    <div class="w3-dropdown-hover"style="width:100%;">
 			 <%if(langLogListByUser.size() > 0){ %>
 			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=langLogListByUser.get(selectIndex).getLangTestDate().toString()%>&nbsp;<%=langLogListByUser.get(selectIndex).getLangTestTime().toString()%></button>
 			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
 			      <%for(int i = 0; i < langLogListByUser.size() ; i++){ %>
 			      <a href="GetLangLogTime?selectNum=<%=i %>" class="w3-bar-item w3-button"style="width:100%;"><%=langLogListByUser.get(i).getLangTestDate().toString()%>&nbsp;<%=langLogListByUser.get(i).getLangTestTime().toString()%></a>
-			      <%} } else{ %>
-			      	<button class="w3-button"style="width:100%;background-color:#D9D9D9;">X</button>
-			    	<div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
+			      <%} 
+			   } else{ %>
+			      <button class="w3-button"style="width:100%;background-color:#D9D9D9;">X</button>
 			      <%} %>
 			    </div>
 		    </div>
-	    </div>
-
+		</div>
 	</c:when>
 	<c:otherwise>
 	</c:otherwise>

@@ -15,3 +15,7 @@ S
 #src/controller/user/UpdateUser.java,3\d\3d7f5768b3d201f208fed6a89d62df054fad014f
 S
 #src/controller/user/DoRegister.java,5\7\574197ecf5f086f3351e18fd1765e0ad6d9d809f
+X
+(src/controller/expert/GetExpertHome.java,1\6\16b56beb0dce8b3845d108dc3309a70aae8619c9
+S
+#src/controller/lang/GetLangLog.java,3\8\3867d6ee3cf54c5f2025b06345222aa2e0e88626

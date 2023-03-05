@@ -51,7 +51,6 @@ public class GetLangLog extends HttpServlet {
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		
 		User currUser = (User)session.getAttribute("currUser");
-		int curAge = (int)session.getAttribute("curAge");
 
 		int selectAgeGroup = Integer.parseInt(request.getParameter("ageGroupId"));
 
@@ -67,7 +66,7 @@ public class GetLangLog extends HttpServlet {
 		session.setAttribute("langLogIdListByUser", langLogIdListByUser);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/AllLangResult");
+		RequestDispatcher rd = request.getRequestDispatcher("/GetLangResultAll");
 		rd.forward(request, response);
 
 	}
