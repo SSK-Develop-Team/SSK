@@ -1,21 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ page import="model.dto.User" %>
-<%@ page import="java.util.*" %>
-
-<%
-	/* User currUser = (User)session.getAttribute("currUser");	
-	session.setAttribute("currUser", currUser); */
-	
-%>
+<%@ page import="model.dto.LangGame" %>
+<%@ page import="util.process.LangGameProcessor" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
-<head>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<title>직접 평가 51번 문항</title>
+
 
 <style>
 	.gametext02{ display : none; }
@@ -248,202 +239,141 @@
 	</style>
 	
 </head>
+
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<title>51번 문항 직접 평가</title>
+</head>
 <body>
 <%@ include file="sidebar.jsp" %>
-<div class="container">
 
-	<!-- 게임 이미지 -->
-	<div class="imgbox">
-		<div style="font-size:1em;font-weight:bold;">직접평가 #51</div>
-	<!-- 거실 틀린그림 찾기  -->
-		<div class="roomBack">
-			<img class="gameImg01" src="./image/LangGameImg/Age10/age10_1_1.png" width="100%" height="100%" alt="거실의 틀린그림 찾기, 가운데 쇼파가 있고 회색 벽돌로 된 벽에는 세 개의 액자가 걸려있다."/>
-			<img class="selectImg01" src="./image/LangGameImg/Age10/age10_1_1_icon01.png" width="5%" alt="로켓" onClick="modal01Open()" />
-			<img class="selectImg02" src="./image/LangGameImg/Age10/age10_1_1_icon02.png" width="5%" alt="분홍색 리본" onClick="modal02Open()" />
-			<img class="selectImg03" src="./image/LangGameImg/Age10/age10_1_1_icon03.png" width="5%" alt="로봇" onClick="modal01Open()" />
-			<img class="selectImg04" src="./image/LangGameImg/Age10/age10_1_1_icon04.png" width="5%" alt="빨간색 리본" onClick="modal02Open()" />
-		</div>
+<div class="w3-row">
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
+	<div class="w3-col w3-container s12 m10 l6">
+		<div style="font-size:1em;font-weight:bold;">직접평가 #52</div>
+		<div>
+			<div class="roomBack">
+				<img class="gameImg01" src="./image/LangGameImg/Age10/age10_1_1.png" width="100%" height="100%" alt="거실의 틀린그림 찾기, 가운데 쇼파가 있고 회색 벽돌로 된 벽에는 세 개의 액자가 걸려있다."/>
+				<img class="selectImg01" src="./image/LangGameImg/Age10/age10_1_1_icon01.png" width="5%" alt="로켓" onclick="document.getElementById('select-modal01').style.display='block';playAudio();" />
+				<img class="selectImg02" src="./image/LangGameImg/Age10/age10_1_1_icon02.png" width="5%" alt="분홍색 리본" onclick="document.getElementById('select-modal02').style.display='block';playAudio();" />
+				<img class="selectImg03" src="./image/LangGameImg/Age10/age10_1_1_icon03.png" width="5%" alt="로봇" onclick="document.getElementById('select-modal01').style.display='block';playAudio();" />
+				<img class="selectImg04" src="./image/LangGameImg/Age10/age10_1_1_icon04.png" width="5%" alt="빨간색 리본" onclick="document.getElementById('select-modal02').style.display='block';playAudio();" />
+			
+				<div id="select-modal01" class="w3-modal">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-container w3-center">
+							<span onclick="document.getElementById('select-modal01').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+							<img src="./image/LangGameImg/Age10/age10_1_1_modal01.png" width="90%" style="margin-top : 5%">
+						</div>
+					</div>
+				</div>
+				
+				<div id="select-modal02" class="w3-modal">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-container w3-center">
+							<span onclick="document.getElementById('select-modal02').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+							<img src="./image/LangGameImg/Age10/age10_1_1_modal02.png" width="90%" style="margin-top : 5%">
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			
+			<div class="playBack">
+				<img class="gameImg02" src="./image/LangGameImg/Age10/age10_1_2.png" width="100%" height="100%" alt="놀이터의 틀린그림 찾기, 가운데 코끼리 모양 미끄럼틀이 있고 여자아이와 남자아이가 놀고 있다."/>
+				<img class="selectImg05" src="./image/LangGameImg/Age10/age10_1_2_icon01.png" height="12%" alt="비행기" onClick="document.getElementById('select-modal03').style.display='block';playAudio();" />
+				<img class="selectImg06" src="./image/LangGameImg/Age10/age10_1_2_icon02.png" height="20%" alt="모래놀이" onClick="document.getElementById('select-modal04').style.display='block';playAudio();" />
+				<img class="selectImg07" src="./image/LangGameImg/Age10/age10_1_2_icon03.png" height="12%" alt="파랑새" onclick="document.getElementById('select-modal03').style.display='block';playAudio();" />
+				<img class="selectImg08" src="./image/LangGameImg/Age10/age10_1_2_icon04.png" height="25%" alt="시소" onclick="document.getElementById('select-modal04').style.display='block';playAudio();" />
+				
+				<div id="select-modal03" class="w3-modal">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-container w3-center">
+							<span onclick="document.getElementById('select-modal03').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+							<img src="./image/LangGameImg/Age10/age10_1_2_modal03.png" width="90%" style="margin-top : 5%">
+						</div>
+					</div>
+				</div>
+				
+				<div id="select-modal04" class="w3-modal">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-container w3-center">
+							<span onclick="document.getElementById('select-modal04').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+							<img src="./image/LangGameImg/Age10/age10_1_2_modal04.png" width="90%" style="margin-top : 5%">
+						</div>
+					</div>
+				</div>
+			</div>
 		
-	<!-- 놀이터 틀린그림 찾기  -->
-		<div class="playBack">
-			<img class="gameImg02" src="./image/LangGameImg/Age10/age10_1_2.png" width="100%" height="100%" alt="놀이터의 틀린그림 찾기, 가운데 코끼리 모양 미끄럼틀이 있고 여자아이와 남자아이가 놀고 있다."/>
-			<img class="selectImg05" src="./image/LangGameImg/Age10/age10_1_2_icon01.png" height="12%" alt="비행기" onClick="modal03Open()" />
-			<img class="selectImg06" src="./image/LangGameImg/Age10/age10_1_2_icon02.png" height="20%" alt="모래놀이" onClick="modal04Open()" />
-			<img class="selectImg07" src="./image/LangGameImg/Age10/age10_1_2_icon03.png" height="12%" alt="파랑새" onClick="modal03Open()" />
-			<img class="selectImg08" src="./image/LangGameImg/Age10/age10_1_2_icon04.png" height="25%" alt="시소" onClick="modal04Open()" />
-		</div>
-		
-	<!-- 눈언덕 틀린그림 찾기  -->
-		<div class="snowBack">
-			<img class="gameImg03" src="./image/LangGameImg/Age10/age10_1_3.png" width="100%" height="100%" alt="눈 쌓인 언덕의 틀린그림 찾기, 눈이 펑펑 내리고 뒤로는 큰 보름달이 떠있다."/>
-			<img class="selectImg09" src="./image/LangGameImg/Age10/age10_1_3_icon01.png" height="23%" alt="눈사람" onClick="modal05Open()" />
-			<img class="selectImg10" src="./image/LangGameImg/Age10/age10_1_3_icon02.png" height="23%" alt="썰매와 산타" onClick="modal06Open()" />
-			<img class="selectImg11" src="./image/LangGameImg/Age10/age10_1_3_icon03.png" height="23%" alt="북극곰" onClick="modal05Open()" />
-			<img class="selectImg12" src="./image/LangGameImg/Age10/age10_1_3_icon04.png" height="23%" alt="썰매와 산타" onClick="modal06Open()" />
-		</div>
 
-	</div>
-	
-	<!-- 게임 텍스트 (말풍선) -->
-	<div class="textbox">
-		<div class="gametext">
-			<div class="gametext01">두 그림에서 서로 다른 부분을 찾아 눌러보세요.</div>
+			<div class="snowBack">
+				<img class="gameImg03" src="./image/LangGameImg/Age10/age10_1_3.png" width="100%" height="100%" alt="눈 쌓인 언덕의 틀린그림 찾기, 눈이 펑펑 내리고 뒤로는 큰 보름달이 떠있다."/>
+				<img class="selectImg09" src="./image/LangGameImg/Age10/age10_1_3_icon01.png" height="23%" alt="눈사람" onclick="document.getElementById('select-modal05').style.display='block';playAudio();" />
+				<img class="selectImg10" src="./image/LangGameImg/Age10/age10_1_3_icon02.png" height="23%" alt="썰매와 산타" onclick="document.getElementById('select-modal06').style.display='block';playAudio();" />
+				<img class="selectImg11" src="./image/LangGameImg/Age10/age10_1_3_icon03.png" height="23%" alt="북극곰" onclick="document.getElementById('select-modal05').style.display='block';playAudio();" />
+				<img class="selectImg12" src="./image/LangGameImg/Age10/age10_1_3_icon04.png" height="23%" alt="썰매와 산타" onclick="document.getElementById('select-modal06').style.display='block';playAudio();" />
+			
+				<div id="select-modal05" class="w3-modal">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-container w3-center">
+							<span onclick="document.getElementById('select-modal05').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+							<img src="./image/LangGameImg/Age10/age10_1_3_modal05.png" width="80%" style="margin-top : 5%">
+						</div>
+					</div>
+				</div>
+				
+				<div id="select-modal06" class="w3-modal">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-container w3-center">
+							<span onclick="document.getElementById('select-modal06').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+							<img src="./image/LangGameImg/Age10/age10_1_3_modal06.png" width="90%" style="margin-top : 5%">
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
-		
-			<!-- 게임 이동 버튼 -->
-		<div class="gamebtnbox">
-			<input type="button" class="gamebtn" id="leftbtn" value="< 이전" onClick='contentBack()'>
-			<input type="button" class="gamebtn" id="rightbtn" value="다음 >" onclick='content()'>
-		</div>
-	</div>
+		<div class="w3-container w3-round-large w3-padding" style="border:1px solid #12192C;">
 
-	<div class="btnbox">
-		<button class="w3-button w3-container w3-round-large" id="answer" onclick='modalOpen()' style="background-color:#12192C; color:white; text-align:center;padding:3px; margin-left:25.4%;">정답 확인하기</button>	
+			<div class="w3-container w3-padding-32">
+				<div class="gametext">
+					<div class="gametext01">두 그림에서 서로 다른 부분을 찾아 눌러보세요.</div>
+				</div>
+			</div>
+			<div class="w3-container w3-right">
+				<button class="w3-button" onclick="contentBack();" style="border:none; background-color:#FFFFFF;"> &lt; 이전</button>
+				<button class="w3-button" onclick="content();" style="border:none; background-color:#FFFFFF;">다음 &gt; </button>
+			</div>
+		</div>
+		<div class="w3-left" style="margin-top:5px;">
+			<button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+			<div id="answer-modal" class="w3-modal">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-container w3-center">
+						<span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<p><br><br><br><br>로봇, 로켓, 리본, 빨간색, 분홍색 / 새, 시소, 삽 / 썰매, 산타(싼타), 눈사람
+						<audio controls src="./audio/Age10/age_10_51_answer.wav"></audio>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	
+	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 </div>
 
-
-<!-- 정답 모달  -->
-<div class="modalLayer"></div>
-
-	<div class = "answerModal">
-		<div class = "modalContent">
-			<button class = "closeBtn" onClick="modalClose()">X</button>
-			<p>로봇, 로켓, 리본, 빨간색, 분홍색 / 새, 시소, 삽 / 썰매, 산타(싼타), 눈사람</p>
-			<audio controls src="./audio/Age10/age_10_51_answer.wav"></audio>
-		</div>
-	</div>
-	
-<!-- 클릭 가능한 버튼 -->
-	<div class = "modal01">
-		<div class = "modalContent">
-			<button class = "closeBtn" onClick="modal01Close()">X</button>
-			<img src="./image/LangGameImg/Age10/age10_1_1_modal01.png" width="90%">
-		</div>
-	</div>
-	
-	<div class = "modal02">
-		<div class = "modalContent">
-			<button class = "closeBtn" onClick="modal02Close()">X</button>
-			<img src="./image/LangGameImg/Age10/age10_1_1_modal02.png" width="90%">
-		</div>
-	</div>
-	
-	<div class = "modal03">
-		<div class = "modalContent">
-			<button class = "closeBtn" onClick="modal03Close()">X</button>
-			<img src="./image/LangGameImg/Age10/age10_1_2_modal03.png" width="90%">
-		</div>
-	</div>
-	
-	<div class = "modal04">
-		<div class = "modalContent">
-			<button class = "closeBtn" onClick="modal04Close()">X</button>
-			<img src="./image/LangGameImg/Age10/age10_1_2_modal04.png" width="90%">
-		</div>
-	</div>  
-	
-	<div class = "modal05">
-		<div class = "modalContent">
-			<button class = "closeBtn" onClick="modal05Close()">X</button>
-			<img src="./image/LangGameImg/Age10/age10_1_3_modal05.png" width="90%">
-		</div>
-	</div>
-	
-	<div class = "modal06">
-		<div class = "modalContent">
-			<button class = "closeBtn" onClick="modal06Close()">X</button>
-			<img src="./image/LqangGameImg/Age10/age10_1_3_modal06.png" width="90%">
-		</div>
-	</div>  
-	
+</body>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
 <script type="text/javascript">
-	
-	function modalOpen(){
-		$(".answerModal").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-	} 
-	
-	function modalClose(){
-		$(".answerModal").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}
-	
-	function modal01Open(){
-		$(".modal01").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
+
+	function playAudio(){
 		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
 		audio.play();
-	} 
-	
-	function modal01Close(){
-		$(".modal01").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
 	}
-	function modal02Open(){
-		$(".modal02").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
-		audio.play();
-	} 
-	
-	function modal02Close(){
-		$(".modal02").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}
-	
-	function modal03Open(){
-		$(".modal03").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
-		audio.play();
-	} 
-	
-	function modal03Close(){
-		$(".modal03").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}
-	
-	function modal04Open(){
-		$(".modal04").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
-		audio.play();
-	} 
-	
-	function modal04Close(){
-		$(".modal04").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}
-	
-	function modal05Open(){
-		$(".modal05").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
-		audio.play();
-	} 
-	
-	function modal05Close(){
-		$(".modal05").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}
-	
-	function modal06Open(){
-		$(".modal06").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-		var audio = new Audio('./audio/Age10/age_10_51_2.wav');
-		audio.play();
-	} 
-	
-	function modal06Close(){
-		$(".modal06").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}
-	
-	
-	var cnt = 0;
+
+var cnt = 0;
 	
 	//음성 재생
 	window.onload = function () {
@@ -513,6 +443,5 @@
 		}
 	
 </script>
-
-</body>
+<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
 </html>

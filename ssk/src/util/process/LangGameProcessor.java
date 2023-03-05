@@ -36,6 +36,21 @@ public class LangGameProcessor {
 		}else if(langQuestionId==51){
 			location = "/langGame51.jsp";
 		}
+		else if(langQuestionId == 52) {
+			location = "/langGame52.jsp";
+		}
+		else if(langQuestionId == 53) {
+			location = "/langGame53.jsp";
+		}
+		else if(langQuestionId == 54) {
+			location = "/langGame54.jsp";
+		}
+		else if(langQuestionId == 56 && langGameId == 6) {
+			location = "/langGame56_7.jsp";
+		}
+		else if(langQuestionId == 57 && langGameId == 6) {
+			location = "/langGame57_7.jsp";
+		}
 		return location;
 	}
 }
