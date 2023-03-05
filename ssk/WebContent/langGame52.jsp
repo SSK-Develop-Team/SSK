@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 
-
+<link href="css/langGame.css" rel="stylesheet" type='text/css' >
 <style>	
 	.oceanBack1 {
 		display : block;
@@ -68,7 +68,7 @@
 				<img class="gameImg01" src="./image/LangGameImg/Age10/age10_2_1.png" width="100%" height="100%" alt="바다의 틀린그림 찾기, 오른쪽 위에 물고기 두 마리."/>
 				<img class="selectImg01" src="./image/LangGameImg/Age10/age10_2_1_icon01.png" width="4%" alt="작은 문어" onclick="document.getElementById('select-modal01').style.display='block';playAudio();" />
 					<div id="select-modal01" class="w3-modal">
-						<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 							<div class="w3-container w3-center">
 								<span onclick="document.getElementById('select-modal01').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 								<img src="./image/LangGameImg/Age10/age10_2_1_modal01.png" width="90%" style="margin-top : 5%">
@@ -83,7 +83,7 @@
 				<img class="gameImg02" src="./image/LangGameImg/Age10/age10_2_2.png" width="100%" height="100%" alt="바다의 틀린그림 찾기 2, 왼쪽 아래에 해초."/>
 				<img class="selectImg03" src="./image/LangGameImg/Age10/age10_2_1_icon02.png" height="40%" alt="큰 거북" onClick="document.getElementById('select-modal02').style.display='block';playAudio();" />
 				<div id="select-modal02" class="w3-modal">
-						<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+						<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 							<div class="w3-container w3-center">
 								<span onclick="document.getElementById('select-modal02').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 								<img src="./image/LangGameImg/Age10/age10_2_2_modal02.png" width="90%" style="margin-top : 5%">
@@ -108,21 +108,21 @@
 		</div>
 		<div class="w3-left" style="margin-top:5px;">
 		
-	      <button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+	      <button class="w3-button w3-round-large" onclick="openHint();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
 	      <div id="hint-modal" class="w3-modal">
-	        <div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
-	            <span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 	            <p><br><br><br><br>아이가 'ㅇㅇ보다 커', ㅇㅇ보다 작아'라는 말로 비교 표현을 사용하는지 확인해 주세요.<br>
 	          </div>
 	        </div>
 	      </div>
 		
-			<button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+			<button class="w3-button w3-round-large" onclick="openAnswer();;document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
 			<div id="answer-modal" class="w3-modal">
-				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
-						<span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<p><br><br><br><br>더 커요 / 더 작아요
 					</div>
 				</div>
@@ -195,5 +195,5 @@
 		}
 	
 </script>
-<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
 </html>

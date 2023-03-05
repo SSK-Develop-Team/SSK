@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 
-
+<link href="css/langGame.css" rel="stylesheet" type='text/css' >
 <style>
 	.gametext02{ display : none; }
 	.gametext03{ display : none; }
@@ -125,7 +125,8 @@
 				<img class="selectImg04" src="./image/LangGameImg/Age10/age10_1_1_icon04.png" width="5%" alt="빨간색 리본" onclick="document.getElementById('select-modal02').style.display='block';playAudio();" />
 			
 				<div id="select-modal01" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
+
 						<div class="w3-container w3-center">
 							<span onclick="document.getElementById('select-modal01').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 							<img src="./image/LangGameImg/Age10/age10_1_1_modal01.png" width="90%" style="margin-top : 5%">
@@ -134,7 +135,7 @@
 				</div>
 				
 				<div id="select-modal02" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 						<div class="w3-container w3-center">
 							<span onclick="document.getElementById('select-modal02').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 							<img src="./image/LangGameImg/Age10/age10_1_1_modal02.png" width="90%" style="margin-top : 5%">
@@ -152,7 +153,7 @@
 				<img class="selectImg08" src="./image/LangGameImg/Age10/age10_1_2_icon04.png" height="25%" alt="시소" onclick="document.getElementById('select-modal04').style.display='block';playAudio();" />
 				
 				<div id="select-modal03" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 						<div class="w3-container w3-center">
 							<span onclick="document.getElementById('select-modal03').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 							<img src="./image/LangGameImg/Age10/age10_1_2_modal03.png" width="90%" style="margin-top : 5%">
@@ -161,7 +162,7 @@
 				</div>
 				
 				<div id="select-modal04" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 						<div class="w3-container w3-center">
 							<span onclick="document.getElementById('select-modal04').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 							<img src="./image/LangGameImg/Age10/age10_1_2_modal04.png" width="90%" style="margin-top : 5%">
@@ -179,7 +180,7 @@
 				<img class="selectImg12" src="./image/LangGameImg/Age10/age10_1_3_icon04.png" height="23%" alt="썰매와 산타" onclick="document.getElementById('select-modal06').style.display='block';playAudio();" />
 			
 				<div id="select-modal05" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 						<div class="w3-container w3-center">
 							<span onclick="document.getElementById('select-modal05').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 							<img src="./image/LangGameImg/Age10/age10_1_3_modal05.png" width="80%" style="margin-top : 5%">
@@ -188,7 +189,7 @@
 				</div>
 				
 				<div id="select-modal06" class="w3-modal">
-					<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 						<div class="w3-container w3-center">
 							<span onclick="document.getElementById('select-modal06').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 							<img src="./image/LangGameImg/Age10/age10_1_3_modal06.png" width="90%" style="margin-top : 5%">
@@ -212,21 +213,21 @@
 		</div>
 		<div class="w3-left" style="margin-top:5px;">
 		
-	      <button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+	      <button class="w3-button w3-round-large" onclick="openHint();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
 	      <div id="hint-modal" class="w3-modal">
-	        <div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
-	            <span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 	            <p><br><br><br><br>답은 틀려도 괜찮아요. <br>그림속 단어를 정확한 발음으로 말할 수 있는지 확인해주세요.<br>
 	          </div>
 	        </div>
 	      </div>
 		
-			<button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+			<button class="w3-button w3-round-large" onclick="openAnswer();;document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
 			<div id="answer-modal" class="w3-modal">
-				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
-						<span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<p><br><br><br><br>로봇, 로켓, 리본, 빨간색, 분홍색 / 새, 시소, 삽 / 썰매, 산타(싼타), 눈사람
 						<audio controls src="./audio/Age10/age_10_51_answer.wav"></audio>
 					</div>
@@ -316,5 +317,5 @@ var cnt = 0;
 		}
 	
 </script>
-<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
 </html>

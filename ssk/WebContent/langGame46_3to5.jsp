@@ -10,6 +10,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="css/langGame.css" rel="stylesheet" type='text/css' >
   <%
     User currUser = (User)session.getAttribute("currUser");
     int gameID = (int)session.getAttribute("langGameID");
@@ -70,11 +71,11 @@
     </div>
     <div class="w3-left" style="margin-top:5px;">
       <%if(currLangGameElement.getLangGameHint()!=null||currLangGameElement.getLangGameHintVoice()!=null){ %>
-      <button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';document.getElementById('hint-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+      <button class="w3-button w3-round-large" onclick="openHint();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
       <div id="hint-modal" class="w3-modal">
-        <div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
           <div class="w3-container w3-center">
-            <span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
             <%if(currLangGameElement.getLangGameHint()!=null){ %>
             <p><br><br><br><br><%=currLangGameElement.getLangGameHint() %></p>
             <%}%>
@@ -83,16 +84,16 @@
       </div>
       <%} %>
       <%if(currLangGameElement.getLangGameAnswer()!=null||currLangGameElement.getLangGameAnswerVoice()!=null){ %>
-      <button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+      <button class="w3-button w3-round-large" onclick="openAnswer();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
       <div id="answer-modal" class="w3-modal">
-        <div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
           <div class="w3-container w3-center">
-            <span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+            <span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
             <%if(currLangGameElement.getLangGameAnswer()!=null){ %>
             <p><br><br><br><br><%=currLangGameElement.getLangGameAnswer() %></p>
             <%} %>
             <%if(currLangGameElement.getLangGameAnswerVoice()!=null){ %>
-            <audio controls onended="document.getElementById('answer-modal').style.display='none'">
+            <audio id="answer-audio" controls>
               <source src="<%=currLangGameElement.getLangGameAnswerVoice()%>">
             </audio>
             <%} %>
@@ -111,14 +112,13 @@
     var audio = new Audio();
     audio.src="<%=langGameList.get(i).getLangGameVoice()%>";
     if(<%=audioEndedNextFlag%>==1){
-      audio.addEventListener("onended",function(){
-        alert("end");
-        getNextContent(<%=i%>,<%=gameID%>,<%=langGameList.size()%>);
-      });
-    }
+		audio.addEventListener("ended",function(){
+			setTimeout(() => getNextContent(<%=i%>,<%=gameID%>,<%=langGameList.size()%>),2000);
+		});
+	}
     audio.play();
   }
 </script>
-<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/canvas.js" charset="UTF-8"></script>
 </html>

@@ -10,6 +10,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="css/langGame07_2.css" rel="stylesheet" type='text/css' >
+	<link href="css/langGame.css" rel="stylesheet" type='text/css' >
 	<%
 		User currUser = (User)session.getAttribute("currUser");
 		int gameID = (int)session.getAttribute("langGameID");
@@ -26,7 +28,7 @@
 		String langGameContent = LangGameProcessor.changeNameOfLangGameContent(currLangGameElement.getLangGameContent(), currUser.getUserName()) ;
 	%>
 	<title><%= gameID %>번 문항 직접 평가</title>
-	<link href="css/langGame07_2.css" rel="stylesheet" type='text/css' >
+	
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
@@ -37,17 +39,17 @@
 		<div style="font-size:1em;font-weight:bold;">직접평가 #<%= gameID %></div>
 		<div class="container">
 			<img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/>
-			<img class="numImg" id="numImg01" src="./image/age3_num1.png" alt="1번 엄마 버튼"/>
-			<img class="numImg" id="numImg02" src="./image/age3_num2.png" alt="2번 바나나 버튼"/>
-			<img class="numImg" id="numImg03" src="./image/age3_num3.png" alt="3번 포도 버튼"/>
-			<img class="numImg" id="numImg04" src="./image/age3_num4.png" alt="4번 아빠 버튼"/>
+			<img class="numImg" id="numImg01" src="./image/age3_num1.png" alt="1번 엄마 버튼" onClick="clickContent(1)"/>
+			<img class="numImg" id="numImg02" src="./image/age3_num2.png" alt="2번 바나나 버튼" onClick="clickContent(2)"/>
+			<img class="numImg" id="numImg03" src="./image/age3_num3.png" alt="3번 포도 버튼" onClick="clickContent(3)"/>
+			<img class="numImg" id="numImg04" src="./image/age3_num4.png" alt="4번 아빠 버튼" onClick="clickContent(4)"/>
 			<div id="click-modal" class="w3-modal modal">
-				<div class="modal-content w3-modal-content w3-animate-opacity w3-round-large">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large">
 					<div class="w3-container w3-center">
-						<span onclick="document.getElementById('click-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<span onclick="closeContent();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<p id="click-content-text"></p>
-						<audio id="click-content-audio" controls onended="document.getElementById('click-modal').style.display='none'">
-							<source src="">
+						<audio id="click-content-audio" controls onended="setTimeout(() =>document.getElementById('click-modal').style.display='none',1000)">
+							<source id="click-content-audio-source"/>
 						</audio>
 					</div>
 				</div>
@@ -65,11 +67,11 @@
 		</div>
 		<div class="w3-left" style="margin-top:5px;">
 			<%if(currLangGameElement.getLangGameHint()!=null||currLangGameElement.getLangGameHintVoice()!=null){ %>
-			<button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';document.getElementById('hint-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+			<button class="w3-button w3-round-large" onclick="openHint();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
 			<div id="hint-modal" class="w3-modal">
-				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 50vh;">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
-						<span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<%if(currLangGameElement.getLangGameHint()!=null){ %>
 						<p><br><br><br><br><%=currLangGameElement.getLangGameHint() %></p>
 						<%}%>
@@ -78,16 +80,16 @@
 			</div>
 			<%} %>
 			<%if(currLangGameElement.getLangGameAnswer()!=null||currLangGameElement.getLangGameAnswerVoice()!=null){ %>
-			<button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+			<button class="w3-button w3-round-large" onclick="openAnswer();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
 			<div id="answer-modal" class="w3-modal">
-				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
-						<span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<%if(currLangGameElement.getLangGameAnswer()!=null){ %>
 						<p><br><br><br><br><%=currLangGameElement.getLangGameAnswer() %></p>
 						<%} %>
 						<%if(currLangGameElement.getLangGameAnswerVoice()!=null){ %>
-						<audio controls onended="document.getElementById('answer-modal').style.display='none'">
+						<audio id="answer-audio" controls>
 							<source src="<%=currLangGameElement.getLangGameAnswerVoice()%>">
 						</audio>
 						<%} %>
@@ -106,13 +108,39 @@
 		var audio = new Audio();
 		audio.src="<%=langGameList.get(i).getLangGameVoice()%>";
 		if(<%=audioEndedNextFlag%>==1){
-			audio.addEventListener("onended",function(){
-				alert("end");
-				getNextContent(<%=i%>,<%=gameID%>,<%=langGameList.size()%>);
+			audio.addEventListener("ended",function(){
+				setTimeout(() => getNextContent(<%=i%>,<%=gameID%>,<%=langGameList.size()%>),2000);
 			});
 		}
 		audio.play();
 	}
+	
+	function clickContent(num){
+		const text = document.getElementById('click-content-text');
+		const audio = document.getElementById('click-content-audio');
+		const source = document.getElementById('click-content-audio-source');
+		if(num == 1){
+			text.innerHTML = "잘 듣고 따라해보세요. '엄마'";
+			source.src = "./audio/Age01/age_01_7_3.wav";
+		}else if(num == 2){
+			text.innerHTML = "잘 듣고 따라해보세요. '바나나'";
+			source.src = "./audio/Age01/age_01_7_5.wav";
+		}else if(num == 3){
+			text.innerHTML = "잘 듣고 따라해보세요. '포도'";
+			source.src = "./audio/Age01/age_01_7_6_1.wav";
+		}else if(num == 4){
+			text.innerHTML = "잘 듣고 따라해보세요. '아빠'";
+			source.src = "./audio/Age01/age_01_7_7.wav";
+		}
+		
+		document.getElementById('click-modal').style.display='block';
+		audio.load();
+		audio.play();
+	}
+	function closeContent(){
+		document.getElementById('click-modal').style.display='none'
+		document.getElementById('click-content-audio').pause();
+	}
 </script>
-<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
 </html>
