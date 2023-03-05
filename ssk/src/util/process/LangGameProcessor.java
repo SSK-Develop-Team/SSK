@@ -21,28 +21,28 @@ public class LangGameProcessor {
 		return res;
 	}
 	
-	/*예외 문항 처리 - langGameLocation 지정 함수*/
+	/*예외 문항 처리 - langGameLocation 지정 함수 - langGameId는 실제 DB에 저장된 langGameId의 -1한 값*/
 	public static String getForwardLocationByLangQuestionIdAndLangGameId(int langQuestionId, int langGameId){
 		String location = "/langGame.jsp";
 
-		if(langQuestionId == 7 && langGameId == 0) {
-			location = "/langGame07.jsp";
+		if(langQuestionId == 7 && langGameId == 1) {
+			location = "/langGame07_2.jsp";
 		} else if(langQuestionId == 47 && langGameId == 0) {
 			location = "/langGame47.jsp";
 		}else if(langQuestionId == 29 &&langGameId == 3){
 			location = "/langGame29_4.jsp";
 		}else if(langQuestionId == 46 && (langGameId == 2||langGameId == 3||langGameId == 4)){
 			location = "/langGame46_3to5.jsp";
-		}else if(langQuestionId==51){
+		}else if(langQuestionId==51 && langGameId == 0){
 			location = "/langGame51.jsp";
 		}
-		else if(langQuestionId == 52) {
+		else if(langQuestionId == 52 && langGameId == 0) {
 			location = "/langGame52.jsp";
 		}
-		else if(langQuestionId == 53) {
+		else if(langQuestionId == 53 && langGameId == 0) {
 			location = "/langGame53.jsp";
 		}
-		else if(langQuestionId == 54) {
+		else if(langQuestionId == 54 && langGameId == 0) {
 			location = "/langGame54.jsp";
 		}
 		else if(langQuestionId == 56 && langGameId == 6) {
@@ -50,6 +50,9 @@ public class LangGameProcessor {
 		}
 		else if(langQuestionId == 57 && langGameId == 6) {
 			location = "/langGame57_7.jsp";
+		}
+		else if(langQuestionId == 64 && (langGameId == 2||langGameId == 3)) {
+			location = "/langGame64_3_4.jsp";
 		}
 		return location;
 	}

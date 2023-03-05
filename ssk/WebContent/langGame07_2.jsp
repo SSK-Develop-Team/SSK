@@ -26,6 +26,7 @@
 		String langGameContent = LangGameProcessor.changeNameOfLangGameContent(currLangGameElement.getLangGameContent(), currUser.getUserName()) ;
 	%>
 	<title><%= gameID %>번 문항 직접 평가</title>
+	<link href="css/langGame07_2.css" rel="stylesheet" type='text/css' >
 </head>
 <body>
 <%@ include file="sidebar.jsp" %>
@@ -34,7 +35,24 @@
 	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 	<div class="w3-col w3-container s12 m10 l6">
 		<div style="font-size:1em;font-weight:bold;">직접평가 #<%= gameID %></div>
-		<div><img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/></div>
+		<div class="container">
+			<img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/>
+			<img class="numImg" id="numImg01" src="./image/age3_num1.png" alt="1번 엄마 버튼"/>
+			<img class="numImg" id="numImg02" src="./image/age3_num2.png" alt="2번 바나나 버튼"/>
+			<img class="numImg" id="numImg03" src="./image/age3_num3.png" alt="3번 포도 버튼"/>
+			<img class="numImg" id="numImg04" src="./image/age3_num4.png" alt="4번 아빠 버튼"/>
+			<div id="click-modal" class="w3-modal modal">
+				<div class="modal-content w3-modal-content w3-animate-opacity w3-round-large">
+					<div class="w3-container w3-center">
+						<span onclick="document.getElementById('click-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<p id="click-content-text"></p>
+						<audio id="click-content-audio" controls onended="document.getElementById('click-modal').style.display='none'">
+							<source src="">
+						</audio>
+					</div>
+				</div>
+			</div>
+		</div>
 		<% if(currLangGameElement.getLangGameSpeaker().equals("-")) { %><div class="w3-col m2 l3">&nbsp;</div><%} %>
 		<% if(! currLangGameElement.getLangGameSpeaker().equals("-")){%><div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div><%} %>
 		<div class="w3-container w3-round-large w3-padding" style="border:1px solid #12192C;">

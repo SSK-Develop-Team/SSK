@@ -25,6 +25,26 @@
 
 		String langGameContent = LangGameProcessor.changeNameOfLangGameContent(currLangGameElement.getLangGameContent(), currUser.getUserName()) ;
 	%>
+	<style>
+		.container {
+			position: relative;
+		}
+		.container .btn{
+			position: absolute;
+			top: 50%;
+			left: 65%;
+			transform: translate(-50%, -35%);
+			-ms-transform: translate(-50%, -35%);
+			background-color: #555;
+			color: white;
+			font-size: 1rem;;
+			padding: 0.6rem 1.2rem;
+			border: none;
+			cursor: pointer;
+			border-radius: 5px;
+			text-align: center;
+		}
+	</style>
 	<title><%= gameID %>번 문항 직접 평가</title>
 </head>
 <body>
@@ -34,7 +54,10 @@
 	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 	<div class="w3-col w3-container s12 m10 l6">
 		<div style="font-size:1em;font-weight:bold;">직접평가 #<%= gameID %></div>
-		<div><img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/></div>
+		<div class="container">
+			<img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/>
+			<button class="btn w3-button" onclick="location.href='langGame64Canvas.jsp';">글자 쓰기</button>
+		</div>
 		<% if(currLangGameElement.getLangGameSpeaker().equals("-")) { %><div class="w3-col m2 l3">&nbsp;</div><%} %>
 		<% if(! currLangGameElement.getLangGameSpeaker().equals("-")){%><div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div><%} %>
 		<div class="w3-container w3-round-large w3-padding" style="border:1px solid #12192C;">
@@ -49,7 +72,7 @@
 			<%if(currLangGameElement.getLangGameHint()!=null||currLangGameElement.getLangGameHintVoice()!=null){ %>
 			<button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';document.getElementById('hint-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
 			<div id="hint-modal" class="w3-modal">
-				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 50vh;">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
 					<div class="w3-container w3-center">
 						<span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<%if(currLangGameElement.getLangGameHint()!=null){ %>
@@ -97,4 +120,5 @@
 	}
 </script>
 <script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/canvas.js" charset="UTF-8"></script>
 </html>
