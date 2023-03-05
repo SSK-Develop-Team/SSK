@@ -13,16 +13,18 @@ ctx.lineWidth = 2.5;
 let painting = false;
 
 
-function startPainting(event) {
+function startPainting() {
+	console.log("startPainting");
     painting=true;
 }
-function stopPainting(event) {
+function stopPainting() {
+	console.log("stopPainting");
     painting=false;
 }
 
 function onMouseMove(event) {
-    const x = event.offsetX;
-    const y = event.offsetY;
+    const x = event.pageX - canvas.offsetLeft;
+    const y = event.pageY - canvas.offsetTop;
     if(!painting) {
         ctx.beginPath();
         ctx.moveTo(x, y);
@@ -34,8 +36,8 @@ function onMouseMove(event) {
 }
 function onTouchMove(event) {
     event.preventDefault();
-    const x = event.targetTouches[0].pageX;
-    const y = event.targetTouches[0].pageY;
+    const x = event.targetTouches[0].pageX - canvas.offsetLeft;
+    const y = event.targetTouches[0].pageY - canvas.offsetTop;
     if(!painting) {
         ctx.beginPath();
         ctx.moveTo(x, y);
@@ -51,10 +53,11 @@ if (canvas) {
     canvas.addEventListener("mousedown", startPainting);
     canvas.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
-    canvas.addEventListener("touchstart", startPainting, false);
-    canvas.addEventListener("touchmove", onTouchMove, false);
-    canvas.addEventListener("touchend", stopPainting, false);
-    canvas.addEventListener("touchcancel", stopPainting, false);
+
+    canvas.addEventListener("touchstart", startPainting);
+    canvas.addEventListener("touchmove", onTouchMove);
+    canvas.addEventListener("touchend", stopPainting);
+	canvas.addEventListener("touchcancel", stopPainting);
 }
 
 function removePainting(){
