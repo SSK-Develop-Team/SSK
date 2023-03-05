@@ -130,6 +130,20 @@
 				<button class="w3-button" onclick="content();" style="border:none; background-color:#FFFFFF;">다음 &gt; </button>
 			</div>
 		</div>
+		
+		<div class="w3-left" style="margin-top:5px;">
+		
+	      <button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+	      <div id="hint-modal" class="w3-modal">
+	        <div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+	          <div class="w3-container w3-center">
+	            <span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+	            <p><br><br><br><br>화면의 글자를 읽고 글자에 맞는 그림을 찾는지 확인해주세요.<br>
+	          </div>
+	        </div>
+	      </div>
+		</div>
+		
 	</div>
 	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 </div>
