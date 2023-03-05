@@ -12,143 +12,6 @@
 	.gametext02{ display : none; }
 	.gametext03{ display : none; }
 	
-	#leftbtn{
-		display : none;
-		margin-right : 3%;
-	}
-	
-	#rightbtn{
-		display : inline;
-	}
-	
-	html, body {
-		height : 90%;
-	}
-	
-	.container { 
-		height : 80%;
-		width : 100%;
-	}
-	
-	.imgbox {
-		overflow : hidden;
-		height : 70%; 
-		margin-left : 15%;
-		margin-right : 2%;
-		margin-bottom : 2%;
-		width : 70%;
-	}
-	
-	.textbox { 
-		overflow : hidden;
-		height : 20%; 
-		width : 50%;
-		margin-left : 25%;
-		margin-right : 2%;
-		margin-bottom : 0.2%;
-		border : 1px solid #12192C;;
-		border-radius : 2px;
-		text-align : center;
-		
-	}
-	
-	.gamebtnbox {
-		margin-left : 80%;
-		height : 25%;
-	}
-	
-	.buttonbox { 
-		height : 10%; 
-	}
-
-
-	.gamebtn {
-		color : #000;
-		background-color : #fff;
-		border : #fff;
-		font-size : 100%;
-		font-weight : bold;
-	}
-	
-	.gametext {
-		padding-left : 2%;
-		padding-right : 2%;
-		padding-top : 2%;
-		height : 50%;
-	}
-	
-	.btn{
-		border : 1px solid #1a2a3a;
-		border-radius : 10px;
-		background-color:#1a2a3a;
-		color : white;
-		width : 13%;
-		margin-left : 2%;
-		padding : 1%;
-	}
-	
-	span {
-		margin-left : 5%;
-		padding-top : 0.5%;
-		padding-bottom : 1%;
-		padding-left : 2%;
-		padding-right : 2%;
-		background-color:#1a2a3a;
-		color : white;
-	}
-
-	.modalContent {
-		position: fixed;
-		top: 30%;
-		left: 25%;
-		transform: translate(-50%, -50%);
-		width:20%;
-		margin:0 auto;
-		padding:20px 10px;
-		background:#fff;
-		border:2px solid #666;
-		text-align : center;
-	}
-	
-	audio{width : 100%;}
-	
-	.closeBtn {
-		float : right;
-		margin-right : 3%;
-		background-color : #fff;
-		color : #000;
-		border : #fff;
-		font-weight : bold;
-	}
-	
-	.modalLayer {
-		display : none;
-		position:fixed;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-		background:rgba(0, 0, 0, 0.5);
-	}
-	
-	.answerModal {
-		display : none;
-		width:100%;
-		height:100%;
-	}
-	.gameModal {
-		display : none;
-		width:100%;
-		height:100%;
-	}
-	
-	.modal01 { display : none ;}
-	.modal02 { display : none ;}
-	.modal03 { display : none ;}
-	.modal04 { display : none ;}
-	.modal05 { display : none ;}
-	.modal06 { display : none ;}
-	
 	.roomBack {
 		display : block;
 		height : 100%;
@@ -234,8 +97,7 @@
 		left : 74%;
 		top : 55%;
 	}
-	
-	#answer { display : none ;}
+
 	</style>
 	
 </head>
@@ -349,6 +211,17 @@
 			</div>
 		</div>
 		<div class="w3-left" style="margin-top:5px;">
+		
+	      <button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+	      <div id="hint-modal" class="w3-modal">
+	        <div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+	          <div class="w3-container w3-center">
+	            <span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+	            <p><br><br><br><br>답은 틀려도 괜찮아요. <br>그림속 단어를 정확한 발음으로 말할 수 있는지 확인해주세요.<br>
+	          </div>
+	        </div>
+	      </div>
+		
 			<button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
 			<div id="answer-modal" class="w3-modal">
 				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
