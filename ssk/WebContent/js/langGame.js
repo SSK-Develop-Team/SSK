@@ -21,3 +21,27 @@ function getNextContent(i,questionNum,gameSize){
     document.body.appendChild(nextForm);
     nextForm.submit();
 }
+
+function openHint(){
+	document.getElementById('hint-modal').style.display='block';
+}
+
+function closeHint(){
+	document.getElementById('hint-modal').style.display='none';
+}
+
+function openAnswer(){
+	document.getElementById('answer-modal').style.display='block';
+	const audio = document.getElementById('answer-audio');
+	audio.load();
+	audio.play();
+}
+
+function closeAnswer(){
+	document.getElementById('answer-modal').style.display='none'
+	document.getElementById('answer-audio').pause();
+}
+
+document.getElementById('answer-audio').addEventListener("ended", function() {
+	setTimeout(() =>document.getElementById('answer-modal').style.display='none',1000);
+});

@@ -11,7 +11,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	
+	<link href="css/langGame.css" rel="stylesheet" type='text/css' >
 	<style type = "text/css">
 		.townBack {
 			display : block;
@@ -154,11 +154,11 @@
 		</div>
 		<div class="w3-left" style="margin-top:5px;">
 		
-	     <button class="w3-button w3-round-large" onclick="document.getElementById('hint-modal').style.display='block';" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
+	     <button class="w3-button w3-round-large" onclick="openHint();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">힌트 확인하기</button>
 	      <div id="hint-modal" class="w3-modal">
-	        <div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
-	            <span onclick="document.getElementById('hint-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 	            <%if(gameID == 56) {%> <p><br><br><br><br>화면의 글자를 읽고 글자에 맞는 그림을 찾는지 확인해주세요.<br><%} %>
 	            <%if(gameID == 57) {%> <p><br><br><br><br>아이가 사과잼, 쌍둥이, 리라과일가게, 오렌지를 정확한 발음으로 말할 수 있는지 확인해주세요.<br><%} %>
 	          </div>
@@ -166,11 +166,11 @@
 	      </div>
 		
 			<%if(gameID == 56) {%>
-			<button class="w3-button w3-round-large" onclick="document.getElementById('answer-modal').style.display='block';document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+			<button class="w3-button w3-round-large" onclick="openAnswer();;document.getElementById('answer-audio').autoplay();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
 			<div id="answer-modal" class="w3-modal">
-				<div class="w3-modal-content w3-animate-opacity w3-round-large" style="width:40vw;height: 40vh;">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
-						<span onclick="document.getElementById('answer-modal').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<p><br><br><br><br>쌍둥이빵집을 누르면 정답.
 					</div>
 				</div>
@@ -199,5 +199,5 @@
 		audio.play();
 	}
 </script>
-<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
 </html>

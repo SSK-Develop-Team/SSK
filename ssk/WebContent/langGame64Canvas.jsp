@@ -65,7 +65,7 @@
   </div>
   <div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 </div>
-<script type="text/javascript" src="js/moveLangGameContent.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
 <script type="text/javascript" src="js/canvas.js" charset="UTF-8"></script>
 </body>
 </html>
