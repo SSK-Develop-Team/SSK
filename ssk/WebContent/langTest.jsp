@@ -25,11 +25,6 @@
 <meta charset="UTF-8">
 <title>언어 발달 평가</title>
 <style>
-.textBox {
-	text-align: center;
-	line-height: 100px;
-}
-
 .question {
 	margin-left: 20px;
 	margin-right: 20px;
@@ -55,7 +50,8 @@
 	font-size : 1.2em;
 	text-align: center;
 }
-   
+
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -63,14 +59,13 @@
 <body>
 	<%@ include file="sidebar.jsp" %>
 	<div class="container">
-		
-		<div class="titleBox" style="margin-left: 12%;">
-			<div class="w3-margin-top" style="font-weight:bold; font-size : 2em;">언어 발달 평가</div>
-			<h6>질문에 답하기 어려울 경우, 직접 평가(게임)를 하고 다시 돌아와 결정해주세요.</h6>
-		</div>
 		<div class="w3-row">
 			<div class="w3-col w3-hide-small m1 l1">&nbsp;</div>
 			<div class="w3-col s12 m10 l10">
+				<div class="w3-panel">
+					<div style="font-weight:bold; font-size : 1.8em;">언어 발달 평가</div>
+					<h6>질문에 답하기 어려울 경우, 직접 평가(게임)를 하고 다시 돌아와 결정해주세요.</h6>
+				</div>
 				<form method="post" action="ManageLangResult">
 
 					<%
@@ -83,38 +78,39 @@
 					%>
 
 					<div class="w3-container w3-margin-top w3-margin-bottom">
-						<div class="w3-container w3-padding-large">
+						<div>
 							<div class="testNum"><b><%=currNumStr%></b></div>
 							<div class="w3-row w3-margin">
-								<div class="w3-col" style="width : 80%; background: #F4F4F4;">
-									<div class="textBox"><%="우리 아이는 "  + currQuestionList.get(i).getLangQuestionContent() %></div>
+								<div class="w3-col s12 m9 l10" style="background: #F4F4F4;">
+									<div class="w3-margin w3-center"><%="우리 아이는 "  + currQuestionList.get(i).getLangQuestionContent() %></div>
 								</div>
-								<div class="w3-col" style="width : 15%; margin-left : 5%;">
-									<div class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;margin-top:5%;padding:0px;" onclick="selectGame(<%=gameID%>);">게임하고 오기</div>
+								<div class="w3-col s5 m3 l2 w3-right" style="padding-top:16px;padding-bottom:16px;padding-left:8px;">
+									<div class="w3-button w3-round-large w3-padding" style="background-color:#51459E;color:white;padding:0px;" onclick="selectGame(<%=gameID%>);">게임하고 오기</div>
 								</div>
 							</div>
 						</div>
 						<div class="w3-row w3-margin">
-							<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
+							<div class="w3-col m2 l2">
 								<%if(langProgList.get(i) == 1){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1" checked="checked">
 								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1"> <%} %>
 								<label>못한다</label>
 							</div>
-							<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
+							<div class="w3-col m3 l3">
 								<%if(langProgList.get(i) == 2){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2" checked="checked">
 								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2"> <%} %>
 								<label>할 수 있다</label>
 							</div>
-							<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
+							<div class="w3-col m2 l2">
 								<%if(langProgList.get(i) == 3){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3" checked="checked">
 								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3"> <%} %>
 								<label>잘한다</label>
 							</div>
-							<div class="w3-col w3-padding-left w3-padding-right" style="width:20%;">
+							<div class="w3-col m3 l3">
 								<%if(langProgList.get(i) == 4){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4" checked="checked">
 								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4"> <%} %>
 								<label>매우 잘한다</label>
 							</div>
+							<div class="w3-col w3-hide-small m2 l2"></div>
 						</div>
 					</div>
 					<%} %>

@@ -19,14 +19,16 @@
 <form method="post" action="ExportChildListResultExcel"id="exportFrm">
 <div class="w3-row">
 	<div class="w3-col w3-hide-small m1 l4">&nbsp;</div>
-	<div class="select-box w3-col s12 m11 l7"style="margin-bottom:0.5em;padding-right:1em;">
-		<div style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">카테고리<span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 아동 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
-		<div class="w3-cell-row w3-container" style="background-color:#D9D9D9;font-size:0.8em; line-height:7vh;">
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="lang" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="sdq" style="transform:translateY(0.1em);">&nbsp;<label>정서 행동 발달 검사</label></div>
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="esm" style="transform:translateY(0.1em);">&nbsp;<label>정서 반복 기록</label></div>
-			<div class="w3-cell" style="vertical-align:middle;"><input type="checkbox" name="category" value="esmRecord" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
-			<div class="w3-cell" style="vertical-align:middle;line-height:2vh; text-align:right;"><div class="w3-button" style="background-color:#51459E; color:white;vertical-align:middle;" onclick="exportData();"> excel export </div></div>
+	<div class="select-box w3-col s12 m11 l7 w3-padding"style="margin-bottom:0.5em;">
+		<div class="w3-row" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">카테고리<span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 아동 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
+		<div class="w3-row w3-padding" style="background-color:#D9D9D9;font-size:0.8em;">
+			<div class="w3-col s8 m10 l10 w3-row">
+				<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="lang" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>
+				<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="sdq" style="transform:translateY(0.1em);">&nbsp;<label>정서 행동 발달 검사</label></div>
+				<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="esm" style="transform:translateY(0.1em);">&nbsp;<label>정서 반복 기록</label></div>
+				<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="esmRecord" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
+			</div>
+			<div class="w3-col s4 m2 l2"><div class="w3-button w3-padding" style="background-color:#51459E; color:white;" onclick="exportData();"> excel export </div></div>
 		</div>
 	</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
