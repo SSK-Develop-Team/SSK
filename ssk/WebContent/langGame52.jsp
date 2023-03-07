@@ -113,7 +113,7 @@
 	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
 	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-	            <p><br><br><br><br>아이가 'ㅇㅇ보다 커', ㅇㅇ보다 작아'라는 말로 비교 표현을 사용하는지 확인해 주세요.<br>
+	            <p>아이가 'ㅇㅇ보다 커', ㅇㅇ보다 작아'라는 말로 비교 표현을 사용하는지 확인해 주세요.</p>
 	          </div>
 	        </div>
 	      </div>
@@ -123,7 +123,7 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p><br><br><br><br>더 커요 / 더 작아요
+						<p>더 커요 / 더 작아요</p>
 					</div>
 				</div>
 			</div>

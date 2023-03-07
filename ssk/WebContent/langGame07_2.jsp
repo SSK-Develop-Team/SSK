@@ -73,7 +73,7 @@
 					<div class="w3-container w3-center">
 						<span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<%if(currLangGameElement.getLangGameHint()!=null){ %>
-						<p><br><br><br><br><%=currLangGameElement.getLangGameHint() %></p>
+						<p><%=currLangGameElement.getLangGameHint() %></p>
 						<%}%>
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 						<%if(currLangGameElement.getLangGameAnswer()!=null){ %>
-						<p><br><br><br><br><%=currLangGameElement.getLangGameAnswer() %></p>
+						<p><%=currLangGameElement.getLangGameAnswer() %></p>
 						<%} %>
 						<%if(currLangGameElement.getLangGameAnswerVoice()!=null){ %>
 						<audio id="answer-audio" controls>

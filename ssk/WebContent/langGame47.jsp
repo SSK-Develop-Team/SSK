@@ -114,7 +114,7 @@
 	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
 	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-	            <p><br><br><br><br>개수 + 단위로 말하도록 해주세요<br>
+	            <p>개수 + 단위로 말하도록 해주세요.</p>
 	          </div>
 	        </div>
 	      </div>
@@ -124,7 +124,7 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p><br><br><br><br>(1) 2개  (2) 4송이  (3) 3마리 
+						<p>(1) 2개  (2) 4송이  (3) 3마리 </p>
 					</div>
 				</div>
 			</div>
