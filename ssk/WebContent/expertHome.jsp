@@ -68,7 +68,7 @@
 		    <%for (int i =0;i<currUserList.size();i++){
 			%>
 			<tr>
-				<td><input type="checkbox" name="childId" value="<%=currUserList.get(i).getUserId()%>" id="check"/></td>
+				<td><input type="checkbox" name="childId" value="<%=currUserList.get(i).getUserId()%>"/></td>
 		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
 		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserName() %></td>
 		      	<td onclick = "location.href='GoToChildHome?childId=<%=currUserList.get(i).getUserId()%>';"><%=currUserList.get(i).getUserLoginId() %></td>
@@ -112,8 +112,8 @@
 </form>
 <script>
 function exportData(){
-	const categoryCnt = document.querySelectorAll('input[name="category"]:checked').length;
-	const childCnt = document.querySelectorAll('input[name="childId"]:checked').length;
+	const categoryCnt = document.querySelectorAll("input[name='category']:checked").length;
+	const childCnt = document.querySelectorAll("input[name='childId']:checked").length;
 	if(categoryCnt==0){//미선택 예외 처리
 		alert("카테고리를 선택해주세요.");
 	}else if(childCnt==0){
