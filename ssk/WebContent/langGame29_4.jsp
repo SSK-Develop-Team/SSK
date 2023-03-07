@@ -58,7 +58,7 @@
         <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
           <div class="w3-container w3-center">
             <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-            <p><br><br><br><br>아이가 자신의 이름을 쓸 수 있나요?<br>
+            <p>아이가 자신의 이름을 쓸 수 있나요?<br>
               한 글자라도 쓸 수 있나요?<br>
               직접 연필을 주고 종이에 써보게 하세요.</p>
           </div>
@@ -69,7 +69,7 @@
         <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
           <div class="w3-container w3-center">
             <span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-            <p><br><br><br><br>자신의 이름 중 한 글자 이상 쓸 수 있다.</p>
+            <p>자신의 이름 중 한 글자 이상 쓸 수 있다.</p>
           </div>
         </div>
       </div>

@@ -53,7 +53,9 @@ public class GetLangTest extends HttpServlet {
 		String selectOption="";
 		int selectAge = 0;
 		
-		if(request.getParameter("ageGroup")!=null) {
+		session.removeAttribute("langProgList");//이전에 저장된 응답 세션 삭제 
+		
+		if(request.getParameter("ageGroup")!=null) {//ageGroup 선택 
 			selectOption = request.getParameter("ageGroup"); 
 
 			if(selectOption.equals("prev2Age")) selectAge = nowAge - 2;

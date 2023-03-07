@@ -159,8 +159,8 @@
 	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
 	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-	            <%if(gameID == 56) {%> <p><br><br><br><br>화면의 글자를 읽고 글자에 맞는 그림을 찾는지 확인해주세요.<br><%} %>
-	            <%if(gameID == 57) {%> <p><br><br><br><br>아이가 사과잼, 쌍둥이, 리라과일가게, 오렌지를 정확한 발음으로 말할 수 있는지 확인해주세요.<br><%} %>
+	            <%if(gameID == 56) {%> <p>화면의 글자를 읽고 글자에 맞는 그림을 찾는지 확인해주세요.</p><%} %>
+	            <%if(gameID == 57) {%> <p>아이가 사과잼, 쌍둥이, 리라과일가게, 오렌지를 정확한 발음으로 말할 수 있는지 확인해주세요.</p><%} %>
 	          </div>
 	        </div>
 	      </div>
@@ -171,7 +171,7 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p><br><br><br><br>쌍둥이빵집을 누르면 정답.
+						<p>쌍둥이빵집을 누르면 정답.</p>
 					</div>
 				</div>
 			</div>

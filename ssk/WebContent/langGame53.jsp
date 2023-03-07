@@ -90,7 +90,7 @@
 	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
 	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-	            <p><br><br><br><br>들려주는 말에 맞는 그림을 고르는지 확인해주세요.<br>
+	            <p>들려주는 말에 맞는 그림을 고르는지 확인해주세요.</p>
 	          </div>
 	        </div>
 	      </div>
@@ -100,7 +100,7 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p><br><br><br><br>1) 고양이는 쥐를 잡아요  2) 물고기는 고양이한테 먹혀요 
+						<p>1) 고양이는 쥐를 잡아요  <br>2) 물고기는 고양이한테 먹혀요 </p>
 					</div>
 				</div>
 			</div>

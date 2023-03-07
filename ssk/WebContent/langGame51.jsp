@@ -218,7 +218,7 @@
 	        <div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 	          <div class="w3-container w3-center">
 	            <span onclick="closeHint();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-	            <p><br><br><br><br>답은 틀려도 괜찮아요. <br>그림속 단어를 정확한 발음으로 말할 수 있는지 확인해주세요.<br>
+	            <p>답은 틀려도 괜찮아요. <br>그림속 단어를 정확한 발음으로 말할 수 있는지 확인해주세요.<br></p>
 	          </div>
 	        </div>
 	      </div>
@@ -228,7 +228,7 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p><br><br><br><br>로봇, 로켓, 리본, 빨간색, 분홍색 / 새, 시소, 삽 / 썰매, 산타(싼타), 눈사람
+						<p>로봇, 로켓, 리본, 빨간색, 분홍색 / 새, 시소, 삽 / 썰매, 산타(싼타), 눈사람</p>
 						<audio controls src="./audio/Age10/age_10_51_answer.wav"></audio>
 					</div>
 				</div>
