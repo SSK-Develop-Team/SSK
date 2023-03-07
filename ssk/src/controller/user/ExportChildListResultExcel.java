@@ -96,7 +96,7 @@ public class ExportChildListResultExcel extends HttpServlet {
 			if(files != null && files.length > 0) {
 				byte[] zip = zipFiles(directory);
 				ServletOutputStream sos = response.getOutputStream();
-	            response.setContentType("application/zip;");
+	            response.setContentType("application/zip;charset=utf-8");
 	            String headerKey = "Content-Disposition";
 	            
 	            String filename = new String("결과 export(아동별)".getBytes("UTF-8"),StandardCharsets.ISO_8859_1);

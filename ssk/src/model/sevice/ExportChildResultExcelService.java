@@ -28,6 +28,7 @@ public class ExportChildResultExcelService {
             langData.setId(i+1);
             langData.setDateStr(langTestLog.getLangTestDate());
             langData.setAgeGroupStr(LangReplyDAO.getLangAgeGroupIdByLogId(con,langTestLog.getLangTestLogId()));
+           
             ArrayList<LangReply> langReplyList = LangReplyDAO.getLangReplyListByLangTestLogId(con,langTestLog.getLangTestLogId());
             ArrayList<Integer> langReplyIntegerList = new ArrayList<Integer>();
             for(int j=0;j< langReplyList.size();j++){
