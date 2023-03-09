@@ -7,7 +7,6 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,6 +55,7 @@ public class DoSdqTest extends HttpServlet {
 		sdqTestLog.setSdqTestTime(nowTime);
 		SdqTestLogDAO.insertSdqTestLog(conn, sdqTestLog);
 		
+		@SuppressWarnings("unchecked")
 		ArrayList<SdqQuestion> sdqQuestionList = (ArrayList<SdqQuestion>)session.getAttribute("sdqQuestionList");
 		
 		//sdq 응답 기록

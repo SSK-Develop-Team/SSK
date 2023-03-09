@@ -1,7 +1,5 @@
 package model.dto;
 
-import java.sql.Date;
-
 public class LangReply {
 	private int langReplyId;
 	private int langTestLogId;

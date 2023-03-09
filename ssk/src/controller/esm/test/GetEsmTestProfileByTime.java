@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import model.dao.EsmReplyDAO;
 import model.dao.EsmTestLogDAO;
 import model.dao.UserDAO;
-import model.dto.EsmReply;
 import model.dto.EsmTestLog;
 import model.dto.User;
 

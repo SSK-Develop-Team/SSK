@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.dto.LangQuestion;
-import model.dto.LangReply;
 
 public class LangQuestionDAO {
 	

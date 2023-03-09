@@ -14,7 +14,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 import model.dto.LangGame;
-import model.dto.User;
 
 import model.dao.LangGameDAO;
 import util.process.LangGameProcessor;
@@ -39,7 +38,6 @@ public class GetLangGame extends HttpServlet {
 
 		ServletContext sc = getServletContext();
 		Connection con = (Connection)sc.getAttribute("DBconnection");
-		User currUser = (User)session.getAttribute("currUser");
 		
 		request.setCharacterEncoding("utf-8");
 

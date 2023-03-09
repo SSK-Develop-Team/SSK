@@ -8,9 +8,7 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 
-import model.dto.LangGame;
 import model.dto.LangReply;
-import model.dto.LangQuestion;
 
 /**
  * 

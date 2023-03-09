@@ -43,6 +43,7 @@ public class DoLangTest extends HttpServlet {
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		
 		User currUser = (User)session.getAttribute("currUser");
+		@SuppressWarnings("unchecked")
 		ArrayList<LangQuestion> langQuestionList = (ArrayList<LangQuestion>)session.getAttribute("currQuestionList");
 		
 		//1. 테스트 로그 저장
