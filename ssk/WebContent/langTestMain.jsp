@@ -18,7 +18,7 @@
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="css/selectAgeModal.css" type='text/css' >
+<!-- <link rel="stylesheet" href="css/selectAgeModal.css" type='text/css' > -->
 <title>언어 발달 평가</title>
 </head>
 <body>
@@ -37,7 +37,7 @@
 <div class="w3-row">
 	<div class="w3-col s1 m3 l4">&nbsp;</div>
 	<div class="w3-padding w3-col s10 m6 l4">
-		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;font-size:1.3em;" onclick="modalOpen()">검사하기</button>
+		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;font-size:1.3em;" onClick="document.getElementById('ageCheck').style.display='block';">검사하기</button>
 		<div>&nbsp;</div>
 		<button class="w3-button w3-block w3-round-large w3-padding-16" style="background-color:#51459E;color:white;font-size:1.3em;" onclick="location.href='GetLangResultAll'">결과보기</button>
 	</div>
@@ -76,27 +76,27 @@
 %>
 
 	<!-- 연령 선택용 모달 -->
-	<div class="modalLayer"></div>
-	<div class = "modal">
-		<div class = "modalFunc">
-			<div class = "modalContent">
-				<button class = "closeBtn" onClick="modalClose()">X</button>
+	<div id="ageCheck" class="w3-modal">
+		<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
+			<div class="w3-container w3-center">
+				<span onclick="ageCheckClose()" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 				<p>현재 <%=name%>의 테스트 단계는 <span><%=curAge%></span>입니다.</p> 
 				<p>(<%=ageStr[curAge] %>)</p>
 				<p>해당 단계를 진행하시겠습니까?</p>
-				<button id="otherBtn" onClick="selectModalOpen()">다른 단계 진행</button>
-				<button id="testBtn" onClick="location.href='GetLangTest'">해당 단계 진행</button>
+				<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#FF92A4;color:white;font-size:1.3em;"onClick="ageSelect()">다른 단계 진행</button>
+				<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"onClick="location.href='GetLangTest'">해당 단계 진행</button>
 			</div>
 		</div>
 	</div>
 	
 	<form method="get" class = "selectModal" action="GetLangTest">
-		<div class = "selectModalFunc">
-			<div class = "selectModalContent">
-				<button class = "closeBtn" onClick="selectModalClose()">X</button>
+		<div id="ageSelect" class="w3-modal">
+		<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
+			<div class="w3-container w3-center">
+				<span onclick="ageSelectClose()" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 				<p>평가를 진행할 단계를 선택해주세요.</p> 
 				
-				<select id = "ageGroupSelect" name="ageGroup">
+				<select id = "ageGroupSelect" name="ageGroup" style="font-size:1.3em;">
 				<%if(prev2Age>=0){ %>
 				    <option value="prev2Age"><%=ageStr[prev2Age] %></option>
 				    <%}
@@ -106,14 +106,16 @@
 				    <option value="curAge" selected="selected"><%=ageStr[curAge] %> (현재 단계)</option>
 				</select>
 				
-				<button id="okBtn" type="submit">확인</button>
+				<button class="w3-button w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"type="submit"">확인</button>
 			</div>
 		</div>
+	</div>
 	</form>
-
+	
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
+<script type="text/javascript" src="js/selectAge.js" charset="UTF-8"></script>
 <script type="text/javascript">
 
 	function modalOpen(){
