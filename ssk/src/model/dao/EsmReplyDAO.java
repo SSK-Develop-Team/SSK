@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import model.dto.EsmReply;
 import model.dto.EsmResultOfType;
 import model.dto.EsmResultWithDate;
-import model.dto.EsmTestLog;
-import model.dto.SdqReply;
 
 /**
  * @author Seo Ji Woo, Jiwon Lee

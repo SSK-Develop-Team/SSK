@@ -3,8 +3,6 @@ package controller.sdq;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
@@ -22,12 +20,10 @@ import model.dao.SdqReplyDAO;
 import model.dao.SdqResultAnalysisDAO;
 import model.dao.SdqTestLogDAO;
 import model.dao.UserDAO;
-import model.dto.SdqReply;
 import model.dto.SdqResultAnalysis;
 import model.dto.SdqResultOfType;
 import model.dto.SdqTestLog;
 import model.dto.User;
-import util.process.SdqProcessor;
 
 /**
  * @author Jiwon Lee

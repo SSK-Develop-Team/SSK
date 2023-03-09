@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.dao.UserDAO;
 import model.dto.User;
@@ -29,12 +28,9 @@ public class DoRegister extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("UTF-8");
-	    HttpSession session = request.getSession(true);
 
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
-		
-		User currUser = (User)session.getAttribute("currUser");
 
 	    String userid = request.getParameter("userId");
 	    String userpw = request.getParameter("userPw");

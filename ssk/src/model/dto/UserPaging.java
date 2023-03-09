@@ -14,7 +14,7 @@ import model.dao.UserDAO;
  * lastPageNum - page 총 갯수 (전체의 마지막 page 번호)
  */
 public class UserPaging {
-	private final static int listRange = 20; 
+	private final static int listRange = 10; 
 	private final static int blockRange = 5; 
 	private int blockStartNum = 0;
 	private int blockEndNum = 0;
@@ -80,10 +80,10 @@ public class UserPaging {
 	/*검색어가 있는 페이지의 마지막 번호 계산 - default 이름 검색**********************************************************/
 	public void makeLastPageNum(Connection con, String keyword) {
 		//전체 element(user) 수 받아오기
-		int totalCount = UserDAO.getUserCountByUserRole(con, userRole);
+		int totalCount = UserDAO.getUserCountByUserRoleAndLikeUserName(con, userRole, keyword);
 				
 		//페이지 총 갯수(마지막 페이지 번호) 계산
-		if(totalCount % blockRange == 0) {
+		if(totalCount % listRange == 0) {
 			lastPageNum = (int)Math.floor(totalCount/listRange);
 		}else {
 			lastPageNum = (int)Math.floor(totalCount/listRange)+1;

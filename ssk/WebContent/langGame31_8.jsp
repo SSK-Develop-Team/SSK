@@ -34,9 +34,9 @@
 		.container .btn{
 			position: absolute;
 			top: 50%;
-			left: 65%;
-			transform: translate(-50%, -35%);
-			-ms-transform: translate(-50%, -35%);
+			left: 75%;
+			transform: translate(-50%, -25%);
+			-ms-transform: translate(-50%, -25%);
 			background-color: #555;
 			color: white;
 			font-size: 1rem;;
@@ -58,7 +58,7 @@
 		<div style="font-size:1em;font-weight:bold;">직접평가 #<%= gameID %></div>
 		<div class="container">
 			<img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/>
-			<button class="btn w3-button" onclick="location.href='langGameCanvas.jsp';">글자 쓰기</button>
+			<button class="btn w3-button" onclick="location.href='langGameCanvas.jsp';">이름 쓰기</button>
 		</div>
 		<% if(currLangGameElement.getLangGameSpeaker().equals("-")) { %><div class="w3-col m2 l3">&nbsp;</div><%} %>
 		<% if(! currLangGameElement.getLangGameSpeaker().equals("-")){%><div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div><%} %>

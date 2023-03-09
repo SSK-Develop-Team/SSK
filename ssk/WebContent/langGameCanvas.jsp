@@ -49,10 +49,12 @@
           <img src="./image/reload.png" style="width:1.5em;height:1.5em;">
         </button>
       </div>
-      <%if(currLangGameElement.getLangGameOrder()==3) { %>
+      <%if(gameID==64 && currLangGameElement.getLangGameOrder()==3) { %>
 		<div class="w3-left">'할머니'를 써보세요.</div>
-	  <%}else if(currLangGameElement.getLangGameOrder()==4) { %>
+	  <%}else if(gameID==64 && currLangGameElement.getLangGameOrder()==4) { %>
 		<div class="w3-left">'미나'를 써보세요.</div>
+	  <%}else if(gameID==31 && currLangGameElement.getLangGameOrder()==8) {%>
+	  	<div class="w3-left">이름을 써보세요.</div>
 	  <%} %>
     </div>
     <div id="canvas-container" style="width:100%;height:400px;">

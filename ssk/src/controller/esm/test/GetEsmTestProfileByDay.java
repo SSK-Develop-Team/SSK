@@ -20,7 +20,6 @@ import model.dao.EsmTestLogDAO;
 import model.dao.UserDAO;
 import model.dto.EsmDateWeekType;
 import model.dto.EsmResultWithDate;
-import model.dto.EsmTestLog;
 import model.dto.User;
 import util.process.EsmProcessor;
 

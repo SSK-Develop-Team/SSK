@@ -1,6 +1,5 @@
 package model.dto.export;
 
-import model.dto.EsmReply;
 import model.dto.EsmResultOfType;
 
 import java.sql.Date;

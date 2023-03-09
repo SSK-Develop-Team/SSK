@@ -1,11 +1,8 @@
 package controller.lang;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
 import java.util.ArrayList;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,11 +32,9 @@ public class GetLangGameNextContent extends HttpServlet {
 	    
 	    HttpSession session = request.getSession(true);
 		
-		ServletContext sc = getServletContext();
-		Connection conn= (Connection) sc.getAttribute("DBconnection");
-		
 		//현재 인덱스 받아오기
 		int currLangGameIndex = (int)session.getAttribute("currLangGameIndex");
+		@SuppressWarnings("unchecked")
 		ArrayList<LangGame> currLangGameList = (ArrayList<LangGame>)session.getAttribute("currLangGameList");
 		int currLangGameId = (int)session.getAttribute("langGameID");
 		

@@ -18,7 +18,9 @@ import java.sql.Date;
  */
 @WebServlet(name = "UpdateUser", value = "/UpdateUser")
 public class UpdateUser extends HttpServlet {
-    @Override
+	private static final long serialVersionUID = 1L;
+
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");

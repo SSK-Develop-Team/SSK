@@ -1,14 +1,9 @@
 package controller.lang;
 
-import model.dto.LangGame;
 import util.process.LangGameProcessor;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.util.ArrayList;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,9 +28,6 @@ public class GetLangGamePrevContent extends HttpServlet {
 	    request.setCharacterEncoding("UTF-8");
 	    
 	    HttpSession session = request.getSession(true);
-		
-		ServletContext sc = getServletContext();
-		Connection conn= (Connection) sc.getAttribute("DBconnection");
 		
 		//현재 인덱스 받아오기
 		int currLangGameIndex = (int)session.getAttribute("currLangGameIndex");
