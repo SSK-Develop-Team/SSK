@@ -83,7 +83,7 @@
 				<p>현재 <%=name%>의 테스트 단계는 <span><%=curAge%></span>입니다.</p> 
 				<p>(<%=ageStr[curAge] %>)</p>
 				<p>해당 단계를 진행하시겠습니까?</p>
-				<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#FF92A4;color:white;font-size:1.3em;"onClick="ageSelect()">다른 단계 진행</button>
+				<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#4d4d4d;color:white;font-size:1.3em;"onClick="ageSelect()">다른 단계 진행</button>
 				<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"onClick="location.href='GetLangTest'">해당 단계 진행</button>
 			</div>
 		</div>

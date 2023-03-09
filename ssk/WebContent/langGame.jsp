@@ -38,9 +38,14 @@
 		<div><img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/></div>
 		<% if(currLangGameElement.getLangGameSpeaker().equals("-")) { %><div class="w3-col m2 l3">&nbsp;</div><%} %>
 		<% if(! currLangGameElement.getLangGameSpeaker().equals("-")){%><div class="w3-container w3-round-large" style="background-color:#12192C; color:white; width:100px;text-align:center;padding:2px;"><%=currLangGameElement.getLangGameSpeaker() %></div><%} %>
-		<div class="w3-container w3-round-large w3-padding" style="border:1px solid #12192C;">
+		
 
-			<div class="w3-container w3-padding-32"><%=langGameContent%></div>
+			<% if(langGameContent.equals("-")) { %>
+			<div class="w3-container w3-round-large w3-padding">
+				<div class="w3-col m2 l3">&nbsp;</div><%} %>
+			<% if(! langGameContent.equals("-")) { %>
+			<div class="w3-container w3-round-large w3-padding" style="border:1px solid #12192C;">
+				<div class="w3-container w3-padding-32"><%=langGameContent%></div><%} %>
 			<div class="w3-container w3-right">
 				<%if(i>0){%><button class="w3-button" onclick="getPrevContent(<%=i%>);" style="border:none; background-color:#FFFFFF;"> &lt; 이전</button><%} %>
 				<%if(i<=langGameList.size()-1){ %><button class="w3-button" onclick="getNextContent(<%=i%>, <%= gameID %>,<%=langGameList.size()%>);" style="border:none; background-color:#FFFFFF;">다음 &gt; </button><%}%>

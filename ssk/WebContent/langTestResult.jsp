@@ -185,8 +185,8 @@ ul.tabs li.current{
             data: {
                 labels: ['<%= selectLangQuestionList.get(0).getLangType()%>', '<%= selectLangQuestionList.get(1).getLangType()%>', '<%= selectLangQuestionList.get(2).getLangType()%>', '<%= selectLangQuestionList.get(3).getLangType()%>', '<%= selectLangQuestionList.get(4).getLangType()%>'],
                 datasets: [{
-                    backgroundColor: '#FF92A4',
-                    borderColor: '#FF92A4',
+                    backgroundColor: '#6d6db0',
+                    borderColor: '#6d6db0',
                     data: [<%= selectLangReplyList.get(0).getLangReplyContent()%>, <%= selectLangReplyList.get(1).getLangReplyContent()%>, <%= selectLangReplyList.get(2).getLangReplyContent()%>, <%= selectLangReplyList.get(3).getLangReplyContent()%>, <%= selectLangReplyList.get(4).getLangReplyContent()%>]
                 }]
             },
@@ -229,11 +229,11 @@ ul.tabs li.current{
                 datasets: [{
                     backgroundColor: 'transparent',
                     fill : false,
-		            borderColor: 'rgb(255, 99, 132)',
-		            pointBackgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(109, 109, 176)',
+		            pointBackgroundColor: 'rgb(109, 109, 176)',
 		            pointBorderColor: '#fff',
 		            pointHoverBackgroundColor: '#fff',
-		            pointHoverBorderColor: 'rgb(255, 99, 132)',
+		            pointHoverBorderColor: 'rgb(109, 109, 176)',
                     data: [<%= selectLangReplyList.get(0).getLangReplyContent()%>, <%= selectLangReplyList.get(1).getLangReplyContent()%>, <%= selectLangReplyList.get(2).getLangReplyContent()%>, <%= selectLangReplyList.get(3).getLangReplyContent()%>, <%= selectLangReplyList.get(4).getLangReplyContent()%>]
                 }]
             },
