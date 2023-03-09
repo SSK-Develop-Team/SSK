@@ -10,15 +10,6 @@ import model.dto.User;
 
 public class UserDAO {
 	private final static String SQLST_SELECT_USER_BY_LOGIN_ID = "select * from user_profile where user_login_id = ?";
-	private final static String SQLST_SELECT_USER_BY_ID = "select * from user_profile where user_id=?";
-	private final static String SQLST_INSERT_USER = "insert user_profile(user_login_id, user_password, user_name, "
-			+ "user_email, user_role, registration_date, user_gender, user_birth, user_icon) values(?,?,?,?,?,?,?,?,?)";
-	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE = "select * from user_profile where user_role=?";
-	private final static String SQLST_SELECT_USER_CNT_BY_USER_ROLE = "select count(*) from user_profile where user_role=?";
-	private final static String SQLST_UPDATE_USER_INFO = "update user_profile set user_password=?, user_name=?, user_email=?,"
-            + "user_role=?, registration_date=?, user_gender=?, user_birth=?, user_icon=? where user_id = ?";
-	private final static String SQLST_SELECT_USER_LIST_BY_USER_ROLE_ORDER_BY_REGISTRATION_DATE_LIMIT = "SELECT * FROM user_profile WHERE user_role=? ORDER BY user_id DESC LIMIT ?, ?";
-	private final static String SQLST_DELETE_USER = "DELETE FROM user_profile WHERE user_id = ?";
 	
 	public static boolean checkId(Connection con, String userId){
 		try {
@@ -81,7 +72,8 @@ public class UserDAO {
 	/*회원가입*/
 	public static boolean insertUser(Connection con, User user){
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_INSERT_USER);
+			PreparedStatement pstmt = con.prepareStatement("insert user_profile(user_login_id, user_password, user_name, "
+					+ "user_email, user_role, registration_date, user_gender, user_birth, user_icon) values(?,?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, user.getUserLoginId());
 			pstmt.setString(2, user.getUserPassword());
 			pstmt.setString(3, user.getUserName());
@@ -105,10 +97,10 @@ public class UserDAO {
 		}
 	}
 	/*해당 role을 가진 모든 사용자 조회 */
-	public static ArrayList<User> getUserListByUserRoleOrderByRegistrationDateLimit(Connection con, String user_role, int startIndex, int length){
+	public static ArrayList<User> getUserListByUserRoleOrderByRegistrationDateLimit(Connection con, String userRole, int startIndex, int length){
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_USER_LIST_BY_USER_ROLE_ORDER_BY_REGISTRATION_DATE_LIMIT);
-			pstmt.setString(1, user_role);
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM user_profile WHERE user_role=? ORDER BY user_id DESC LIMIT ?, ?");
+			pstmt.setString(1, userRole);
 			pstmt.setInt(2, startIndex);
 			pstmt.setInt(3, length);
 			ResultSet rs = pstmt.executeQuery();
@@ -134,10 +126,42 @@ public class UserDAO {
 			return null;
 		}
 	}
+	/*사용자 이름 검색 */
+	public static ArrayList<User> getUserListLikeUserNameLimit(Connection con, String userRole, String searchName, int startIndex, int length){
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM user_profile WHERE user_role=? AND user_name LIKE ? ORDER BY user_id DESC LIMIT ?, ?");
+			pstmt.setString(1, userRole);
+			pstmt.setString(2, "%"+searchName+"%");
+			pstmt.setInt(3, startIndex);
+			pstmt.setInt(4, length);
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<User> userList = new ArrayList<User>();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserId(rs.getInt(1));
+				user.setUserLoginId(rs.getString(2));
+				user.setUserPassword(rs.getString(3));
+				user.setUserName(rs.getString(4));
+				user.setUserEmail(rs.getString(5));
+				user.setUserRole(rs.getString(6));
+				user.setRegistrationDate(rs.getDate(7));
+				user.setUserGender(rs.getString(8));
+				user.setUserBirth(rs.getDate(9));
+				user.setUserIcon(rs.getString(10));
+				userList.add(user);
+			}
+			return userList;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	/*해당 role을 가진 모든 사용자 조회 */
 	public static ArrayList<User> getUserListByUserRole(Connection con, String user_role){
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_USER_LIST_BY_USER_ROLE);
+			PreparedStatement pstmt = con.prepareStatement("select * from user_profile where user_role=?");
 			pstmt.setString(1, user_role);
 			ResultSet rs = pstmt.executeQuery();
 			ArrayList<User> userList = new ArrayList<User>();
@@ -166,8 +190,25 @@ public class UserDAO {
 	/*해당 role을 가진 모든 사용자 수 */
 	public static int getUserCountByUserRole(Connection con, String user_role){
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_USER_CNT_BY_USER_ROLE);
+			PreparedStatement pstmt = con.prepareStatement("select count(*) from user_profile where user_role=?");
 			pstmt.setString(1, user_role);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	/*해당 role을 가진 모든 사용자 수 */
+	public static int getUserCountByUserRoleAndLikeUserName(Connection con, String user_role, String keyword){
+		try {
+			PreparedStatement pstmt = con.prepareStatement("select count(*) from user_profile where user_role=? AND user_name LIKE ?");
+			pstmt.setString(1, user_role);
+			pstmt.setString(2, "%"+keyword+"%");
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				return rs.getInt(1);
@@ -182,7 +223,7 @@ public class UserDAO {
 	/*선택한 사용자 정보 */
 	public static User getUserById(Connection con, int userId) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_USER_BY_ID);
+			PreparedStatement pstmt = con.prepareStatement("select * from user_profile where user_id=?");
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -210,7 +251,8 @@ public class UserDAO {
 	public static boolean updateUser(Connection con, User user) {
       boolean flag = false;
       try {
-         PreparedStatement pstmt = con.prepareStatement(SQLST_UPDATE_USER_INFO);
+         PreparedStatement pstmt = con.prepareStatement("update user_profile set user_password=?, user_name=?, user_email=?,"
+                 + "user_role=?, registration_date=?, user_gender=?, user_birth=?, user_icon=? where user_id = ?");
          pstmt.setString(1, user.getUserPassword());
          pstmt.setString(2, user.getUserName());
          pstmt.setString(3, user.getUserEmail());
@@ -233,7 +275,7 @@ public class UserDAO {
 	/*사용자 삭제*/
 	public static void deleteUser(Connection con, int userId) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_DELETE_USER);
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM user_profile WHERE user_id = ?");
 			pstmt.setInt(1, userId);
 			
 			pstmt.executeUpdate();
