@@ -115,24 +115,16 @@
 
 var cnt = 0;
 	
+var audio1 = new Audio('./audio/Age10/age_10_53_1.wav');
+var audio2 = new Audio('./audio/Age10/age_10_53_1.wav');
+	
 	//음성 재생
-	window.onload = function () {
-		var audio = new Audio('./audio/Age10/age_10_53_1.wav');
-		audio.play();
-	}
+/* 	window.onload = function () {
+		audio1.play();
+	} */
 	
 	if (performance.navigation.type == 1) {
 		$("#rightbtn").css('display', 'inline');
-	}
-	
-
-	function gameBtnFunc(audio){
-		audio.play();
-	}
-	
-	function gameBtnHide(){
-		$("#rightbtn").css('display', 'none');
-		$("#leftbtn").css('display', 'none');
 	}
 	
 	function wrongA(){
@@ -153,21 +145,22 @@ var cnt = 0;
 			$(".gameImg01").css('display', 'none');		
 			$(".Quiz01").css('display', 'block');	
        	 	$("#leftbtn").css('display', 'inline');
-       	 	$("#gametext01").css('display', 'none');
-       	 	$("#gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_53_1.wav');
-			audio.play();
+       	 	$(".gametext01").css('display', 'none');
+       	 	$(".gametext02").css('display', 'inline');
+       	 	audio1.load();
+			audio1.play();
           }
 		  else if(cnt == 2){
+			  	audio1.pause();
 	      		$(".Quiz01").css('display', 'none');
 	      		$(".Quiz02").css('display', 'block');
 	      		$("#leftbtn").css('display', 'inline');
 	      		$("#answer").css('display', 'inline');
-		      	var audio = new Audio('./audio/Age10/age_10_53_1.wav');
-				audio.play();
+	       	 	audio2.load();
+				audio2.play();
 	       } 
           else if(cnt == 3){
-      			if(!confirm("53번 문항의 게임을 종료하시겠습니까?")){return;}
+      			if(!confirm("53번 문항의 게임을 종료하시겠습니까?")){cnt = 2; return;}
         	  	location.href = './langTest.jsp';
           }
 	}     
@@ -177,6 +170,7 @@ var cnt = 0;
 		  cnt = cnt-1;
 		  
 		  if(cnt == 0){
+			  	audio1.pause();
 				$(".gameImg01").css('display', 'inline');			
 				$(".Quiz01").css('display', 'none');			
         		$("#answer").css('display', 'none');
@@ -185,11 +179,12 @@ var cnt = 0;
            	 	$("#gametext02").css('display', 'none');
 	          }
 			  else if(cnt == 1){
+				audio2.pause();
 	      		$(".Quiz01").css('display', 'block');
 	      		$(".Quiz02").css('display', 'none');
 	      		$("#answer").css('display', 'none');
-		      	var audio = new Audio('./audio/Age10/age_10_53_1.wav');
-				audio.play();
+	       	 	audio1.load();
+				audio1.play();
 	       	} 
 	      		
 		}
