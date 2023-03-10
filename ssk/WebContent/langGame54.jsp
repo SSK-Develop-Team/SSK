@@ -47,6 +47,8 @@
 		position : relative;
 	}
 	
+	#answer-button { display : none ;}
+	
 
 	.select01{
 		position : absolute;
@@ -142,6 +144,20 @@
 	          </div>
 	        </div>
 	      </div>
+	      
+	      
+	      <button class="w3-button w3-round-large" id = "answer-button" onclick="openAnswer();audio2.pause();" style="background-color:#12192C; color:white; text-align:center;font-size:0.9em;margin-right:5px;">정답 확인하기</button>
+			<div id="answer-modal" class="w3-modal">
+				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
+					<div class="w3-container w3-center">
+						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+						<p>싸움, 꼬리, 똥, 짜장면, 빵</p>
+						<audio id="answer-audio" controls>
+							<source src="./audio/Age10/age_10_54_answer.wav">
+						</audio>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 	</div>
@@ -265,8 +281,9 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+       	 	$("#answer-button").css('display', 'inline');
        	 	audio2.load();
-			audio2.play();
+			    audio2.play();
           }   
 		  else if(cnt == 10){
    			if(!confirm("54번 문항의 게임을 종료하시겠습니까?")){cnt = 9 ;return;}
@@ -362,11 +379,12 @@
 			audio2.pause();
 			$(".gameImg09").css('display', 'inline');		
 			$(".Quiz05").css('display', 'none');		
-       	 	$("#leftbtn").css('display', 'inline');
-       	 	$(".gametext01").css('display', 'inline');
-       	 	$(".gametext02").css('display', 'none');
-       	 	audio1.load();
-			audio1.play();
+      $("#leftbtn").css('display', 'inline');
+      $(".gametext01").css('display', 'inline');
+      $(".gametext02").css('display', 'none');
+      $("#answer-button").css('display', 'none');
+      audio1.load();
+      audio1.play();
           }   
 		}
 	
