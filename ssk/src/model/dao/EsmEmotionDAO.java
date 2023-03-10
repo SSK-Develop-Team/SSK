@@ -1,14 +1,11 @@
 package model.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.dto.EsmEmotion;
-import model.dto.EsmRecord;
-import model.dto.EsmType;
 
 public class EsmEmotionDAO {
 	private final static String SQLST_SELECT_ESM_EMOTION = "SELECT * FROM esm_emotion WHERE esm_type= ? ORDER BY esm_emotion_id";

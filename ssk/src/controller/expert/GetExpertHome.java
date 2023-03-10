@@ -11,11 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import model.dao.UserDAO;
+import model.dto.SearchUserType;
 import model.dto.User;
 import model.dto.UserPaging;
+import model.sevice.UserListService;
 
 /**
  * 전문가 홈 - 모든 아동 리스트 조회 페이지
@@ -37,24 +37,35 @@ public class GetExpertHome extends HttpServlet {
 	 	
 		// 아동 pagination 초기화
 	 	int curPage = 1;
+	 	SearchUserType searchType = null;
+	 	String keyword = null;
+	 	UserPaging userPaging = new UserPaging();
 	 	if(request.getParameter("curPage")==null) {
 	 		curPage = 1;
 	 	}else {
 	 		curPage = Integer.parseInt(request.getParameter("curPage"));
 	 	}
 	 	
-		UserPaging userPaging = new UserPaging();
-		userPaging.makeLastPageNum(conn);
+	 	if(request.getParameter("searchType")!=null&&request.getParameter("keyword")!=null) { //검색어가 있는 경우
+	 		searchType = SearchUserType.findByTypeName(request.getParameter("searchType"));
+	 		keyword = request.getParameter("keyword");
+	 		userPaging.makeLastPageNum(conn, keyword);
+	 	}else {
+	 		userPaging.makeLastPageNum(conn);
+	 	}
+	 	
 		userPaging.makeBlock(curPage);//첫 페이지로 시작
-		System.out.println(userPaging.getBlockStartNum());
-		System.out.println(userPaging.getBlockEndNum());
-		System.out.println(userPaging.getLastPageNum());
 		
 		//페이지에 해당하는 아동 목록 불러오기 - default 정렬 : 등록일 순
 		int length = UserPaging.getListRange();
 		int startIndex = (curPage-1)*length;
 		
-		ArrayList<User> currUserList = UserDAO.getUserListByUserRoleOrderByRegistrationDateLimit(conn, "CHILD", startIndex, length);
+		ArrayList<User> currUserList = UserListService.getUserListByFilter(conn, "CHILD", searchType, keyword, startIndex, length);
+		
+		if(searchType!=null&&keyword!=null) {
+			request.setAttribute("searchType", SearchUserType.getTypeName(searchType));
+			request.setAttribute("keyword", keyword);
+		}
 		
 		request.setAttribute("userPaging",userPaging);
 		request.setAttribute("currPageNum", curPage);

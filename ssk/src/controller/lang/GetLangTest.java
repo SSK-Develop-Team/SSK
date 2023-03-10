@@ -15,11 +15,6 @@ import javax.servlet.ServletException;
 
 import model.dao.LangQuestionDAO;
 import model.dto.LangQuestion;
-import model.dto.User;
-import util.process.UserInfoProcessor;
-import model.dao.AgeGroupDAO;
-
-import java.sql.Date;
 
 /**
  * 해당 아동의 연령에 맞는 질문 가져오기
@@ -41,7 +36,6 @@ public class GetLangTest extends HttpServlet {
 
 		ServletContext sc = getServletContext();
 		Connection con = (Connection)sc.getAttribute("DBconnection");
-		User currUser = (User)session.getAttribute("currUser");
 		int nowAge = (int)session.getAttribute("curAge");
 
 		
