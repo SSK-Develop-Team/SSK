@@ -66,32 +66,38 @@
 		<div>
 			<div class="oceanBack1">
 				<img class="gameImg01" src="./image/LangGameImg/Age10/age10_2_1.png" width="100%" height="100%" alt="바다의 틀린그림 찾기, 오른쪽 위에 물고기 두 마리."/>
-				<img class="selectImg01" src="./image/LangGameImg/Age10/age10_2_1_icon01.png" width="4%" alt="작은 문어" onclick="document.getElementById('select-modal01').style.display='block';playAudio();" />
+				<img class="selectImg01" src="./image/LangGameImg/Age10/age10_2_1_icon01.png" width="4%" alt="작은 문어" onclick="openSelect01();audio01.pause();" />
 					<div id="select-modal01" class="w3-modal">
 						<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 							<div class="w3-container w3-center">
-								<span onclick="document.getElementById('select-modal01').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+								<span onclick="closeSelect01()" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 								<img src="./image/LangGameImg/Age10/age10_2_1_modal01.png" width="90%" style="margin-top : 5%">
+								<audio id="select-audio01">
+									<source src="./audio/Age10/age_10_52_1.wav">
+								</audio>
 							</div>
 						</div>
 					</div>
 				
-				<img class="selectImg02" src="./image/LangGameImg/Age10/age10_2_1_icon01.png" width="12%" alt="큰 문어" onClick="document.getElementById('select-modal01').style.display='block';playAudio();" />
+				<img class="selectImg02" src="./image/LangGameImg/Age10/age10_2_1_icon01.png" width="12%" alt="큰 문어" onClick="openSelect01();audio01.pause();" />
 			</div>
 		
 			<div class="oceanBack2">
 				<img class="gameImg02" src="./image/LangGameImg/Age10/age10_2_2.png" width="100%" height="100%" alt="바다의 틀린그림 찾기 2, 왼쪽 아래에 해초."/>
-				<img class="selectImg03" src="./image/LangGameImg/Age10/age10_2_1_icon02.png" height="40%" alt="큰 거북" onClick="document.getElementById('select-modal02').style.display='block';playAudio();" />
+				<img class="selectImg03" src="./image/LangGameImg/Age10/age10_2_1_icon02.png" height="40%" alt="큰 거북" onClick="openSelect02();audio02.pause();" />
 				<div id="select-modal02" class="w3-modal">
 						<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 							<div class="w3-container w3-center">
-								<span onclick="document.getElementById('select-modal02').style.display='none'" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+								<span onclick="closeSelect02()" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
 								<img src="./image/LangGameImg/Age10/age10_2_2_modal02.png" width="90%" style="margin-top : 5%">
+								<audio id="select-audio02">
+									<source src="./audio/Age10/age_10_52_1.wav">
+								</audio>
 							</div>
 						</div>
 					</div>
 				
-				<img class="selectImg04" src="./image/LangGameImg/Age10/age10_2_1_icon02.png" height="20%" alt="작은 거북" onClick="document.getElementById('select-modal02').style.display='block';playAudio();" />
+				<img class="selectImg04" src="./image/LangGameImg/Age10/age10_2_1_icon02.png" height="20%" alt="작은 거북" onClick="openSelect02();audio02.pause();" />
 			</div>
 		</div>
 		<div class="w3-container w3-round-large w3-padding" style="border:1px solid #12192C;">
@@ -142,25 +148,16 @@
 	}
 
 	var cnt = 0;
+	var audio01 = new Audio('./audio/Age10/age_10_51_1.wav');
+	var audio02 = new Audio('./audio/Age10/age_10_51_1.wav');
 	
 	//음성 재생
 	window.onload = function () {
-		var audio = new Audio('./audio/Age10/age_10_51_1.wav');
-		audio.play();
+		audio01.play();
 	}
 	
 	if (performance.navigation.type == 1) {
 		$("#rightbtn").css('display', 'inline');
-	}
-	
-
-	function gameBtnFunc(audio){
-		audio.play();
-	}
-	
-	function gameBtnHide(){
-		$("#rightbtn").css('display', 'none');
-		$("#leftbtn").css('display', 'none');
 	}
 	
 	function content() {  
@@ -168,14 +165,16 @@
 		  cnt = cnt+1;
 		  
 		  if(cnt == 1){
+			audio01.pause();
 			$(".oceanBack1").css('display', 'none');		
 			$(".oceanBack2").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
 	      	var audio = new Audio('./audio/Age10/age_10_51_1.wav');
-			audio.play();
+       	 	audio02.load();
+			audio02.play();
           } 
           else if(cnt == 2){
-      			if(!confirm("52번 문항의 게임을 종료하시겠습니까?")){return;}
+      			if(!confirm("52번 문항의 게임을 종료하시겠습니까?")){cnt = 1; return;}
         	  	location.href = './langTest.jsp';
           }
 	}     
@@ -185,15 +184,18 @@
 		  cnt = cnt-1;
 		  
 		  if(cnt == 0){
+			  	audio02.pause();
 				$(".oceanBack2").css('display', 'none');		
 				$(".oceanBack1").css('display', 'block');			
         		$("#answer").css('display', 'none');
         		$("#leftbtn").css('display', 'none');
     	      	var audio = new Audio('./audio/Age10/age_10_51_1.wav');
-    			audio.play();
+           	 	audio01.load();
+    			audio01.play();
 	          }
 		}
 	
 </script>
 <script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/langGameModal.js" charset="UTF-8"></script>
 </html>

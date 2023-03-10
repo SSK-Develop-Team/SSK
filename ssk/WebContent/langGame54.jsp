@@ -152,11 +152,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
 <script type="text/javascript">
 	var cnt = 0;
+	var audio1 = new Audio('./audio/Age10/age_10_54_1.wav');
+	var audio2 = new Audio('./audio/Age10/age_10_54_2.wav');
 	
 	//음성 재생
 	window.onload = function () {
-		var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-		audio.play();
+		audio1.play();
 	}
 	
 	if (performance.navigation.type == 1) {
@@ -178,88 +179,97 @@
 		  cnt = cnt+1;
 		  
 		  if(cnt == 1){
+			audio1.pause();
 			$(".gameImg01").css('display', 'none');		
 			$(".Quiz01").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+       	 	audio2.load();
+			audio2.play();
           } 
 		  else if(cnt == 2){
+			audio2.pause();
 			$(".gameImg03").css('display', 'inline');		
 			$(".Quiz01").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+	      	audio1.load();
+			audio1.play();
           }
 		  else if(cnt == 3){
+			audio1.pause();
 			$(".gameImg03").css('display', 'none');		
 			$(".Quiz02").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+	      	audio2.load();
+			audio2.play();
           } 
 		  else if(cnt == 4){
+			audio2.pause();
 			$(".gameImg05").css('display', 'inline');		
 			$(".Quiz02").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+	      	audio1.load();
+			audio1.play();
           }
 		  else if(cnt == 5){
+			audio1.pause();
 			$(".gameImg05").css('display', 'none');		
 			$(".Quiz03").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+	      	audio2.load();
+			audio2.play();
           } 
 		  else if(cnt == 6){
+			audio2.pause();
 			$(".gameImg07").css('display', 'inline');		
 			$(".Quiz03").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+	      	audio1.load();
+			audio1.play();
           }
 		  else if(cnt == 7){
+			audio1.pause();
 			$(".gameImg07").css('display', 'none');		
 			$(".Quiz04").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+       	 	audio2.load();
+			audio2.play();
           } 
 		  else if(cnt == 8){
+			audio2.pause();
 			$(".gameImg09").css('display', 'inline');		
 			$(".Quiz04").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+	      	audio1.load();
+			audio1.play();
           }
 		  else if(cnt == 9){
+			audio1.pause();
 			$(".gameImg09").css('display', 'none');		
 			$(".Quiz05").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+       	 	audio2.load();
+			audio2.play();
           }   
 		  else if(cnt == 10){
-   			if(!confirm("54번 문항의 게임을 종료하시겠습니까?")){return;}
+   			if(!confirm("54번 문항의 게임을 종료하시겠습니까?")){cnt = 9 ;return;}
       	  	location.href = './langTest.jsp';
           }
 	}     
@@ -269,85 +279,94 @@
 		  cnt = cnt-1;
 		  
 		  if(cnt == 0){
+			audio2.pause();
 			$(".gameImg01").css('display', 'inline');		
 			$(".Quiz01").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'none');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+	      	audio1.load();
+			audio1.play();
           } 
 		  else if(cnt == 1){
+			audio1.pause();
 			$(".gameImg03").css('display', 'none');		
 			$(".Quiz01").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+       	 	audio2.load();
+			audio2.play();
           }
 		  else if(cnt == 2){
+			audio2.pause();
 			$(".gameImg03").css('display', 'inline');		
 			$(".Quiz02").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+       	 	audio1.load();
+			audio1.play();
           } 
 		  else if(cnt == 3){
+			audio1.pause();
 			$(".gameImg05").css('display', 'none');		
 			$(".Quiz02").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+       	 	audio2.load();
+			audio2.play();
           }
 		  else if(cnt == 4){
+			audio2.pause();
 			$(".gameImg05").css('display', 'inline');		
 			$(".Quiz03").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+       	 	audio1.load();
+       	 	audio1.play();
           } 
 		  else if(cnt == 5){
+			audio1.pause();
 			$(".gameImg07").css('display', 'none');		
 			$(".Quiz03").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+       	 	audio2.load();
+			audio2.play();
           }
 		  else if(cnt == 6){
+			audio2.pause();
 			$(".gameImg07").css('display', 'inline');		
 			$(".Quiz04").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+       	 	audio1.load();
+			audio1.play();
           } 
 		  else if(cnt == 7){
+			audio1.pause();
 			$(".gameImg09").css('display', 'none');		
 			$(".Quiz04").css('display', 'block');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-	      	var audio = new Audio('./audio/Age10/age_10_54_2.wav');
-			audio.play();
+       	 	audio2.load();
+			audio2.play();
           }
 		  else if(cnt == 8){
+			audio2.pause();
 			$(".gameImg09").css('display', 'inline');		
 			$(".Quiz05").css('display', 'none');		
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
-	      	var audio = new Audio('./audio/Age10/age_10_54_1.wav');
-			audio.play();
+       	 	audio1.load();
+			audio1.play();
           }   
 		}
 	
