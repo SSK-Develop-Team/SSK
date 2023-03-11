@@ -115,7 +115,7 @@
 <div class="w3-row">
 	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 	<div class="w3-col w3-container s12 m10 l6">
-		<div style="font-size:1em;font-weight:bold;">직접평가 #52</div>
+		<div style="font-size:1em;font-weight:bold;">직접평가 #51</div>
 		<div>
 			<div class="roomBack">
 				<img class="gameImg01" src="./image/LangGameImg/Age10/age10_1_1.png" width="100%" height="100%" alt="거실의 틀린그림 찾기, 가운데 쇼파가 있고 회색 벽돌로 된 벽에는 세 개의 액자가 걸려있다."/>
