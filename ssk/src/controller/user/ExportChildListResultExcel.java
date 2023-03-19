@@ -1,12 +1,9 @@
 package controller.user;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 
@@ -18,16 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletOutputStream;
 
+import model.dto.export.SskExcel;
 import model.dto.export.SskExcelByUser;
 import model.sevice.ExportChildResultExcelService;
-import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
+import util.process.ZipUtils;
+
 import org.apache.poi.ss.usermodel.Workbook;
 
 
 /**
  * @author Jiwon Lee
  * 아동 결과 엑셀 파일 export
+ * export type = 아동 별(child) / 검사별(test)
  */
 @WebServlet("/ExportChildListResultExcel")
 public class ExportChildListResultExcel extends HttpServlet {
@@ -46,67 +45,41 @@ public class ExportChildListResultExcel extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
 
-		boolean lang = false, sdq=false, esm = false, esmRecord = false;
 		
+		String exportType = request.getParameter("exportType"); // child, test
 		String[] childIdStrList = request.getParameterValues("childId");
 		String[] categoryList = request.getParameterValues("category");
 		
-		for(String x : categoryList) {
-			switch(x) {
-				case "lang":
-					lang=true;
-					break;
-				case "sdq":
-					sdq=true;
-					break;
-				case "esm":
-					esm=true;
-					break;
-				case "esmRecord":
-					esmRecord = true;
-					break;
-			}
-		}
+		
 		try {
 			String dirPath = getServletContext().getRealPath("ssk/");
 			File directory = new File(dirPath);
 			
 			if(!directory.exists()) directory.mkdirs();
 			
-			for(String c : childIdStrList) {
-				int childId = Integer.parseInt(c);
-				if(childId==0) continue;
-				SskExcelByUser sskExcelByUser = ExportChildResultExcelService.getSskExcelByChild(conn, childId, lang, sdq, esm, esmRecord);
-				Workbook wb = sskExcelByUser.getWorkBook();
-
-				String fileName = new String(sskExcelByUser.getFileName().getBytes("KSC5601"), "EUC_KR");//encoding
-
-				File excelFile = new File(dirPath+fileName);
-				FileOutputStream fos = new FileOutputStream(excelFile);
-
-				wb.write(fos);
-				fos.flush();
-				fos.close();
-				wb.close();
+			/*해당하는 .xlsx 파일을 directory에 삽입*/
+			if(!ExportChildResultExcelService.makeSskExcelInDir(conn, exportType, dirPath, childIdStrList, categoryList)) {
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('결과 파일 추출에 실패했습니다. 관리자에게 문의하세요.'); hitory.go(-1);</script>");
+				out.flush();
 			}
-			
 			
 			String[] files = directory.list();
 			
 			if(files != null && files.length > 0) {
-				byte[] zip = zipFiles(directory);
+				byte[] zip = ZipUtils.zipFiles(directory);
 				ServletOutputStream sos = response.getOutputStream();
 	            response.setContentType("application/zip;charset=utf-8");
 	            String headerKey = "Content-Disposition";
 	            
-	            String filename = new String("결과 export(아동별)".getBytes("UTF-8"),StandardCharsets.ISO_8859_1);
+	            String filename = new String(("export by "+exportType).getBytes("UTF-8"),StandardCharsets.ISO_8859_1);
 	            String headerValue = String.format("attachment; filename=\"" + filename + ".zip");
 	            response.setHeader(headerKey, headerValue);
 	            
 	            sos.write(zip);
 	            sos.flush();
 	            
-	            boolean isDel = deleteFiles(directory);
+	            boolean isDel = ZipUtils.deleteFiles(directory);
 	            
 	            if(!isDel)
 	            	throw new Exception("Fail to delete files in server.");
@@ -126,74 +99,6 @@ public class ExportChildListResultExcel extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private byte[] zipFiles(File directory) throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ZipArchiveOutputStream zos = new ZipArchiveOutputStream(baos);
-
-		zos.setEncoding("EUC-KR");
-
-		searchDirectory(directory, directory, zos);
-		
-		zos.flush();
-        baos.flush();
-        zos.close();
-        baos.close();
-        return baos.toByteArray();
-	}
 	
-	private void compressFile(File parentDir, String fileName, ZipArchiveOutputStream zos){
-		byte bytes[] = new byte[2048];
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream(parentDir.getPath() + FILE_SEPARATOR + fileName);
-			BufferedInputStream bis = new BufferedInputStream(fis);
-
-	        zos.putArchiveEntry(new ZipArchiveEntry( parentDir.getName()+ FILE_SEPARATOR + fileName));
-	        int bytesRead;
-            while ((bytesRead = bis.read(bytes)) != -1) {
-                zos.write(bytes, 0, bytesRead);
-            }
-            zos.closeArchiveEntry();
-            bis.close();
-            fis.close();
-	        
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}
-	}
-	
-	public void searchDirectory(File file, File parentDir ,ZipArchiveOutputStream zos) {
-		if( file.isDirectory()) {
-			
-			File[] childrenFile = file.listFiles();
-			
-			for( File child : childrenFile ) {
-				searchDirectory(child, file ,zos);
-			}
-
-		}else {
-			compressFile(parentDir, file.getName(), zos);
-		}
-	}
-	
-	private boolean deleteFiles(File directory) {
-		
-		File[] fileList = directory.listFiles();
-        for(File f : fileList) {
-        	if( f.isDirectory())
-        		deleteFiles(f);
-        	else {
-        		if(!f.delete())
-            		return false;
-        	}
-        }
-        
-        if(directory.delete()) {
-        	return true;
-        }else {
-        	return false;
-        }
-	}
 
 }

@@ -171,4 +171,35 @@ public class EsmRecordDAO {
 		return false;
 	}
 	
+	/*정해진 아동리스트에 대한 전체 정서 다이어리 조회*/
+	public static ArrayList<EsmRecord> getEsmRecordListOfChildList(Connection con, String[] childIdStrList){
+		String SQLST = "select * from esm_record where user_id IN (";
+		
+		for(int i = 0;i<childIdStrList.length;i++) {
+			SQLST+=childIdStrList[i];
+			if(i<childIdStrList.length-1) SQLST+=",";
+			else SQLST+=")";
+		}
+		ArrayList<EsmRecord> esmRecordList = new ArrayList<EsmRecord>();
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST);
+			
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				EsmRecord esmRecordElement = new EsmRecord();
+				esmRecordElement.setEsmRecordId(rs.getInt("esm_record_id"));
+				esmRecordElement.setEsmRecordText(rs.getString("esm_record_text"));
+				esmRecordElement.setEsmRecordDate(rs.getDate("esm_record_date"));
+				esmRecordElement.setEsmRecordTime(rs.getTime("esm_record_time"));
+				esmRecordElement.setUserId(rs.getInt("user_id"));
+				esmRecordList.add(esmRecordElement);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return esmRecordList;
+	}
 }

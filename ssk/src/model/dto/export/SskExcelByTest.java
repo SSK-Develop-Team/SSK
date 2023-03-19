@@ -1,35 +1,36 @@
 package model.dto.export;
 
-import model.dto.EsmResultOfType;
-import model.dto.SdqResultOfType;
-import model.dto.export.column.EsmColumnInfoOfUser;
-import model.dto.export.column.EsmRecordColumnInfoOfUser;
-import model.dto.export.column.LangColumnInfoOfUser;
-import model.dto.export.column.SdqColumnInfoOfUser;
-import model.dto.export.column.UserColumnInfo;
-import model.dto.export.data.EsmExcelDTO;
-import model.dto.export.data.EsmRecordExcelDTO;
-import model.dto.export.data.LangExcelDTO;
-import model.dto.export.data.SdqExcelDTO;
-import model.dto.export.data.UserExcelDTO;
+import static model.dto.export.column.EsmColumnInfoOfTest.*;
+import static model.dto.export.column.EsmRecordColumnInfoOfTest.*;
+import static model.dto.export.column.LangColumnInfoOfTest.*;
+import static model.dto.export.column.SdqColumnInfoOfTest.*;
 
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import static model.dto.export.column.EsmColumnInfoOfUser.*;
-import static model.dto.export.column.EsmRecordColumnInfoOfUser.*;
-import static model.dto.export.column.LangColumnInfoOfUser.*;
-import static model.dto.export.column.SdqColumnInfoOfUser.*;
-import static model.dto.export.column.UserColumnInfo.*;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class SskExcelByUser extends SskExcel{
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import model.dto.EsmResultOfType;
+import model.dto.SdqResultOfType;
+import model.dto.export.column.EsmColumnInfoOfTest;
+import model.dto.export.column.EsmRecordColumnInfoOfTest;
+import model.dto.export.column.LangColumnInfoOfTest;
+import model.dto.export.column.SdqColumnInfoOfTest;
+import model.dto.export.data.EsmExcelDTO;
+import model.dto.export.data.EsmRecordExcelDTO;
+import model.dto.export.data.LangExcelDTO;
+import model.dto.export.data.SdqExcelDTO;
+
+public class SskExcelByTest extends SskExcel{
 
     /*init*/
-    public SskExcelByUser(){
+    public SskExcelByTest(){
         wb = new XSSFWorkbook();
         sheet = wb.createSheet("검사 결과");
 
@@ -38,58 +39,29 @@ public class SskExcelByUser extends SskExcel{
         setBodyCellStyle();
     }
 
-    /*User data export*/
-    public void addUserData(UserExcelDTO userExcelDTO){
-        this.fileName = userExcelDTO.getId() + "_" + userExcelDTO.getLoginId() + "_" + userExcelDTO.getName() + "_" + new Date(System.currentTimeMillis()) +"_아동별.xlsx";
-
-        Row titleRow = sheet.createRow(rowIndex);
-        titleRow.setHeight((short)1000);
-        Cell titleCell = titleRow.createCell(0);
-        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,UserColumnInfo.getAllColumns().size()-1));
-        titleCell.setCellValue("아동 정보");
-        titleCell.setCellStyle(defaultCellStyle);
-        rowIndex++;
-
-        Row headerRow = sheet.createRow(rowIndex++);
-
-        for(UserColumnInfo x : UserColumnInfo.getAllColumns()){
-            createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
-        }
-
-        Row bodyRow  = sheet.createRow(rowIndex++);
-        createCellWithStyleInt(bodyRow, ID.getColumnIndex(), userExcelDTO.getId(), bodyCellStyle);
-        createCellWithStyle(bodyRow, NAME.getColumnIndex(), userExcelDTO.getName(), bodyCellStyle);
-        createCellWithStyle(bodyRow, LOGIN_ID.getColumnIndex(), userExcelDTO.getLoginId(), bodyCellStyle);
-        createCellWithStyle(bodyRow, EMAIL.getColumnIndex(), userExcelDTO.getEmail(), bodyCellStyle);
-        createCellWithStyle(bodyRow, BIRTH.getColumnIndex(), userExcelDTO.getBirthStr(), bodyCellStyle);
-        createCellWithStyle(bodyRow, GENDER.getColumnIndex(), userExcelDTO.getGenderStr(), bodyCellStyle);
-
-        sheet.setColumnWidth(EMAIL.getColumnIndex(), 2000);
-    }
-
     /*Lang Data Export*/
     public void addLangData(ArrayList<LangExcelDTO> langExcelDTOS){
-        sheet.createRow(rowIndex++);
-        sheet.createRow(rowIndex++);
+    	this.fileName = "언어_발달_검사_결과_" + new Date(System.currentTimeMillis()) +".xlsx";
 
         Row titleRow = sheet.createRow(rowIndex);
         titleRow.setHeight((short)1000);
         Cell titleCell = titleRow.createCell(0);
-        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,LangColumnInfoOfUser.getAllColumns().size()-1));
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, LangColumnInfoOfTest.getAllColumns().size()-1));
         titleCell.setCellValue("언어 발달 평가");
         titleCell.setCellStyle(defaultCellStyle);
         rowIndex++;
         
         Row headerRow = sheet.createRow(rowIndex++);
 
-        for(LangColumnInfoOfUser x : LangColumnInfoOfUser.getAllColumns()){
+        for(LangColumnInfoOfTest x : LangColumnInfoOfTest.getAllColumns()){
             createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
             setAutoSizeColumnPlus(sheet,x.getColumnIndex());
         }
 
         for (LangExcelDTO langExcelDTO : langExcelDTOS) {
             Row bodyRow = sheet.createRow(rowIndex++);
-            createCellWithStyleInt(bodyRow, LANG_ID.getColumnIndex(), langExcelDTO.getId(), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, LANG_USER_ID.getColumnIndex(), langExcelDTO.getUserId(), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_USER_NAME.getColumnIndex(), langExcelDTO.getUserName(), bodyCellStyle);
             createCellWithStyle(bodyRow, LANG_DATE.getColumnIndex(), langExcelDTO.getDateStr(), bodyCellStyle);
             createCellWithStyle(bodyRow, LANG_AGE_GROUP.getColumnIndex(), langExcelDTO.getAgeGroupStr(), bodyCellStyle);
             sheet.autoSizeColumn(LANG_DATE.getColumnIndex());
@@ -105,27 +77,27 @@ public class SskExcelByUser extends SskExcel{
 
     /*Sdq Data Export*/
     public void addSdqData(ArrayList<SdqExcelDTO> sdqExcelDTOS){
-        sheet.createRow(rowIndex++);
-        sheet.createRow(rowIndex++);
+    	this.fileName = "SDQ_정서_행동_발달_검사_결과_" + new Date(System.currentTimeMillis()) +".xlsx";
 
         Row titleRow = sheet.createRow(rowIndex);
         titleRow.setHeight((short)1000);
         Cell titleCell = titleRow.createCell(0);
-        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,SdqColumnInfoOfUser.getAllColumns().size()-1));
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,SdqColumnInfoOfTest.getAllColumns().size()-1));
         titleCell.setCellValue("정서/행동 발달 평가");
         titleCell.setCellStyle(defaultCellStyle);
         rowIndex++;
 
         Row headerRow = sheet.createRow(rowIndex++);
 
-        for(SdqColumnInfoOfUser x : SdqColumnInfoOfUser.getAllColumns()){
+        for(SdqColumnInfoOfTest x : SdqColumnInfoOfTest.getAllColumns()){
             createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
             setAutoSizeColumnPlus(sheet,x.getColumnIndex());
         }
 
         for (SdqExcelDTO sdqExcelDTO : sdqExcelDTOS) {
             Row bodyRow = sheet.createRow(rowIndex++);
-            createCellWithStyleInt(bodyRow, SDQ_ID.getColumnIndex(), sdqExcelDTO.getId(), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, SDQ_USER_ID.getColumnIndex(), sdqExcelDTO.getUserId(), bodyCellStyle);
+            createCellWithStyle(bodyRow, SDQ_USER_NAME.getColumnIndex(), sdqExcelDTO.getUserName(), bodyCellStyle);
             createCellWithStyle(bodyRow, SDQ_TARGET.getColumnIndex(), sdqExcelDTO.getTarget(), bodyCellStyle);
             createCellWithStyle(bodyRow, SDQ_DATETIME.getColumnIndex(), sdqExcelDTO.getDateStr(), bodyCellStyle);
             sheet.autoSizeColumn(SDQ_DATETIME.getColumnIndex());
@@ -145,7 +117,7 @@ public class SskExcelByUser extends SskExcel{
             /*match sdq result and type column*/
             for (SdqResultOfType sdqResultOfType : scoreList) {
                 String typeName = sdqResultOfType.getSdqType();
-                int columnIndex = SdqColumnInfoOfUser.findByColumnText(typeName).getColumnIndex();
+                int columnIndex = SdqColumnInfoOfTest.findByColumnText(typeName).getColumnIndex();
 
                 createCellWithStyleInt(bodyRow, columnIndex, sdqResultOfType.getResult(), bodyCellStyle);
                 sheet.autoSizeColumn(columnIndex);
@@ -158,27 +130,27 @@ public class SskExcelByUser extends SskExcel{
 
     /*Esm Data Export*/
     public void addEsmData(ArrayList<EsmExcelDTO> esmExcelDTOS){
-        sheet.createRow(rowIndex++);
-        sheet.createRow(rowIndex++);
+    	this.fileName = "ESM_정서_반복_기록_" + new Date(System.currentTimeMillis()) +".xlsx";
         
         Row titleRow = sheet.createRow(rowIndex);
         titleRow.setHeight((short)1000);
         Cell titleCell = titleRow.createCell(0);
-        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,EsmColumnInfoOfUser.getAllColumns().size()-1));
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,EsmColumnInfoOfTest.getAllColumns().size()-1));
         titleCell.setCellValue("정서 반복 기록");
         titleCell.setCellStyle(defaultCellStyle);
         rowIndex++;
 
         Row headerRow = sheet.createRow(rowIndex++);
 
-        for(EsmColumnInfoOfUser x : EsmColumnInfoOfUser.getAllColumns()){
+        for(EsmColumnInfoOfTest x : EsmColumnInfoOfTest.getAllColumns()){
             createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
             setAutoSizeColumnPlus(sheet,x.getColumnIndex());
         }
 
         for (EsmExcelDTO esmExcelDTO : esmExcelDTOS) {
             Row bodyRow = sheet.createRow(rowIndex++);
-            createCellWithStyleInt(bodyRow, ESM_ID.getColumnIndex(), esmExcelDTO.getId(), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_USER_ID.getColumnIndex(), esmExcelDTO.getUserId(), bodyCellStyle);
+            createCellWithStyle(bodyRow, ESM_USER_NAME.getColumnIndex(), esmExcelDTO.getUserName(), bodyCellStyle);
             createCellWithStyle(bodyRow, ESM_DATETIME.getColumnIndex(), esmExcelDTO.getDateStr(), bodyCellStyle);
             sheet.autoSizeColumn(ESM_DATETIME.getColumnIndex());
             createCellWithStyleInt(bodyRow, ESM_ANSWER1.getColumnIndex(), esmExcelDTO.getReplyList().get(0), bodyCellStyle);
@@ -197,7 +169,7 @@ public class SskExcelByUser extends SskExcel{
             /*match sdq result and type column*/
             for (EsmResultOfType esmResultOfType : scoreList) {
                 String typeName = esmResultOfType.getEsmType();
-                int columnIndex = EsmColumnInfoOfUser.findColumnByEsmType(typeName).getColumnIndex();
+                int columnIndex = EsmColumnInfoOfTest.findColumnByEsmType(typeName).getColumnIndex();
 
                 createCellWithStyleInt(bodyRow, columnIndex, esmResultOfType.getResult(), bodyCellStyle);
             }
@@ -207,27 +179,27 @@ public class SskExcelByUser extends SskExcel{
 
     /*ESM Record Data Export*/
     public void addEsmRecordData(ArrayList<EsmRecordExcelDTO> esmRecordExcelDTOS){
-        sheet.createRow(rowIndex++);
-        sheet.createRow(rowIndex++);
+    	this.fileName = "ESM_정서_다이어리_" + new Date(System.currentTimeMillis()) +".xlsx";
         
         Row titleRow = sheet.createRow(rowIndex);
         titleRow.setHeight((short)1000);
         Cell titleCell = titleRow.createCell(0);
-        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,EsmRecordColumnInfoOfUser.getAllColumns().size()-1));
+        sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,EsmRecordColumnInfoOfTest.getAllColumns().size()-1));
         titleCell.setCellValue("정서 다이어리");
         titleCell.setCellStyle(defaultCellStyle);
         rowIndex++;
 
         Row headerRow = sheet.createRow(rowIndex++);
 
-        for(EsmRecordColumnInfoOfUser x : EsmRecordColumnInfoOfUser.getAllColumns()){
+        for(EsmRecordColumnInfoOfTest x : EsmRecordColumnInfoOfTest.getAllColumns()){
             createCellWithStyle(headerRow,x.getColumnIndex(),x.getColumnText(),headerCellStyle);
             setAutoSizeColumnPlus(sheet,x.getColumnIndex());
         }
 
         for (EsmRecordExcelDTO esmRecordExcelDTO : esmRecordExcelDTOS) {
             Row bodyRow = sheet.createRow(rowIndex++);
-            createCellWithStyleInt(bodyRow, ESM_RECORD_ID.getColumnIndex(), esmRecordExcelDTO.getId(), bodyCellStyle);
+            createCellWithStyleInt(bodyRow, ESM_RECORD_USER_ID.getColumnIndex(), esmRecordExcelDTO.getUserId(), bodyCellStyle);
+            createCellWithStyle(bodyRow, ESM_RECORD_USER_NAME.getColumnIndex(), esmRecordExcelDTO.getUserName(), bodyCellStyle);
             createCellWithStyle(bodyRow, ESM_RECORD_DATETIME.getColumnIndex(), esmRecordExcelDTO.getDateStr(), bodyCellStyle);
             sheet.autoSizeColumn(ESM_RECORD_DATETIME.getColumnIndex());
             createCellWithStyle(bodyRow, ESM_RECORD_TEXT.getColumnIndex(), esmRecordExcelDTO.getText(), bodyCellStyle);

@@ -1,19 +1,15 @@
-package model.dto.export;
-
-import model.dto.AgeGroup;
+package model.dto.export.data;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import java.sql.Time;
 
-public class LangExcelDTO {
+public class EsmRecordExcelDTO {
     private int userId;
     private String userName;
 
     private int id;
     private String dateStr;
-
-    private String ageGroupStr;
-    private ArrayList<Integer> replyList;
+    private String text;
 
     public int getUserId() {
         return userId;
@@ -43,25 +39,18 @@ public class LangExcelDTO {
         return dateStr;
     }
 
-    public void setDateStr(Date date) {
+    public void setDateStr(Date date, Time time) {
         this.dateStr = date.toString();
+        if(time!=null){
+            this.dateStr+=(" "+time.toLocalTime().getHour()+"시 "+time.toLocalTime().getMinute()+"분");
+        }
     }
 
-    public String getAgeGroupStr() {
-        return ageGroupStr;
+    public String getText() {
+        return text;
     }
 
-    public void setAgeGroupStr(int ageGroupId) {
-        this.ageGroupStr = AgeGroup.getAgeGroupStrByAgeGroupId(ageGroupId);
+    public void setText(String text) {
+        this.text = text;
     }
-
-
-    public ArrayList<Integer> getReplyList() {
-        return replyList;
-    }
-
-    public void setReplyList(ArrayList<Integer> replyList) {
-        this.replyList = replyList;
-    }
-
 }

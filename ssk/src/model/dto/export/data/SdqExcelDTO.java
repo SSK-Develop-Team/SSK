@@ -1,4 +1,4 @@
-package model.dto.export;
+package model.dto.export.data;
 
 import model.dto.SdqResultOfType;
 

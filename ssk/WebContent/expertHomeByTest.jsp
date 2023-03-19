@@ -27,12 +27,11 @@
 	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.2em;padding-left:1em;"><img src="./image/research.png" style="width:35px;">     아동별 결과 조회</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 </div>
-<form method="post" action="ExportChildListResultExcel"id="exportFrm">
-<input type="hidden" id="exportType" name="exportType" value="test"/>
+<form method="post" action="ExportChildListResultExcelByTest"id="exportFrm">
 <div class="w3-row">
 	<div class="w3-col w3-hide-small m1 l4">&nbsp;</div>
 	<div class="select-box w3-col s12 m11 l7 w3-padding"style="margin-bottom:0.5em;">
-		<div class="w3-row" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">카테고리<span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 아동 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
+		<div class="w3-row" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">카테고리<span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 검사 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
 		<div class="w3-row w3-padding" style="background-color:#D9D9D9;font-size:0.8em;">
 			<div class="w3-col s8 m10 l10 w3-row">
 				<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="lang" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>
