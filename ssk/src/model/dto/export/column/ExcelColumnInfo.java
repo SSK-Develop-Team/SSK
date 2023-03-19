@@ -1,4 +1,4 @@
-package model.dto.export;
+package model.dto.export.column;
 
 public interface ExcelColumnInfo {
     String getColumnText();

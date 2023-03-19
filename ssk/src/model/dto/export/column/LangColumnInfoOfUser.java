@@ -1,10 +1,10 @@
-package model.dto.export;
+package model.dto.export.column;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum LangColumnInfo implements ExcelColumnInfo{
+public enum LangColumnInfoOfUser implements ExcelColumnInfo{
     LANG_ID("NO.", 0),
     LANG_DATE("검사 실시 날짜",1),
     LANG_AGE_GROUP("검사 연령",2),
@@ -17,11 +17,11 @@ public enum LangColumnInfo implements ExcelColumnInfo{
     private final String columnText;
     private final int columnIndex;
 
-    LangColumnInfo(String columnText, int columnIndex){
+    LangColumnInfoOfUser(String columnText, int columnIndex){
         this.columnText = columnText;
         this.columnIndex = columnIndex;
     }
-    public static List<LangColumnInfo> getAllColumns() {
+    public static List<LangColumnInfoOfUser> getAllColumns() {
         return Arrays.stream(values()).collect(Collectors.toList());
     }
     @Override

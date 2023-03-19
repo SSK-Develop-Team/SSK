@@ -1,10 +1,10 @@
-package model.dto.export;
+package model.dto.export.column;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum SdqColumnInfo implements ExcelColumnInfo {
+public enum SdqColumnInfoOfUser implements ExcelColumnInfo {
     SDQ_ID("NO.", 0),
     SDQ_TARGET("검사종류", 1),
     SDQ_DATETIME("검사시간", 2),
@@ -27,19 +27,19 @@ public enum SdqColumnInfo implements ExcelColumnInfo {
     private final String columnText;
     private final int columnIndex;
 
-    SdqColumnInfo(String columnText, int columnIndex){
+    SdqColumnInfoOfUser(String columnText, int columnIndex){
         this.columnText = columnText;
         this.columnIndex = columnIndex;
     }
 
-    public static SdqColumnInfo findByColumnText(String columnText){
+    public static SdqColumnInfoOfUser findByColumnText(String columnText){
         return Arrays.stream(values())
                 .filter(type -> type.columnText.equals(columnText))
                 .findAny()
                 .orElse(SDQ_socialBehavior);
     }
 
-    public static List<SdqColumnInfo> getAllColumns() {
+    public static List<SdqColumnInfoOfUser> getAllColumns() {
         return Arrays.stream(values()).collect(Collectors.toList());
     }
 

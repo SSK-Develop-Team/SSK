@@ -19,16 +19,11 @@ import model.dto.EsmTestLog;
  *
  */
 public class EsmTestLogDAO {
-	private final static String SQLST_INSERT_ESM_TEST_LOG = "insert esm_test_log(user_id, esm_test_date, esm_test_time) values(?,?,?)";
-	private final static String SQLST_SELECT_ESM_TEST_LOG_BY_USER = "select * from esm_test_log where user_id = ?";
-	private final static String SQLST_SELECT_ESM_TEST_LOG_BY_ID = "select * from esm_test_log where esm_test_log_id = ?";
-	private final static String SQLST_SELECT_ESM_TEST_LOG_BY_USER_AND_DATE = "select * from esm_test_log where user_id = ? and esm_test_date=?";
-	private final static String SQLST_SELECT_ESM_TEST_DATE_BY_USER_GROUP_BY_DATE = "SELECT esm_test_date, COUNT(*) FROM esm_test_log WHERE user_id=? GROUP BY esm_test_date";
 	
 	/*정서 발달 기록 삽입*/
 	public static boolean insertEsmTestLog(Connection con, EsmTestLog esmTestLog) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_INSERT_ESM_TEST_LOG, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstmt = con.prepareStatement("insert esm_test_log(user_id, esm_test_date, esm_test_time) values(?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1,esmTestLog.getUserId());
 			pstmt.setDate(2, esmTestLog.getEsmTestDate());
 			pstmt.setTime(3, esmTestLog.getEsmTestTime());
@@ -49,7 +44,7 @@ public class EsmTestLogDAO {
 	/*사용자별 정서 발달 기록 조회*/
 	public static ArrayList<EsmTestLog> getEsmTestLogListByUserId(Connection con, int userId){
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_LOG_BY_USER);
+			PreparedStatement pstmt = con.prepareStatement("select * from esm_test_log where user_id = ?");
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
 			ArrayList<EsmTestLog> esmTestLogList = new ArrayList<EsmTestLog>();
@@ -70,7 +65,7 @@ public class EsmTestLogDAO {
 	/*사용자별 정서 발달 기록 일자별 조회*/
 	public static ArrayList<EsmTestLog> getEsmTestLogListByUserIdAndDate(Connection con, int userId, Date esmTestDate){
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_LOG_BY_USER_AND_DATE);
+			PreparedStatement pstmt = con.prepareStatement("select * from esm_test_log where user_id = ? and esm_test_date=?");
 			pstmt.setInt(1, userId);
 			pstmt.setDate(2, esmTestDate);
 			ResultSet rs = pstmt.executeQuery();
@@ -93,7 +88,7 @@ public class EsmTestLogDAO {
 	public static ArrayList<Date> getEsmTestLogDateListByUserIdGroupByDate(Connection con, int userId){
 		ArrayList<Date> esmTestDateList = new ArrayList<Date>();
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_DATE_BY_USER_GROUP_BY_DATE);
+			PreparedStatement pstmt = con.prepareStatement("SELECT esm_test_date, COUNT(*) FROM esm_test_log WHERE user_id=? GROUP BY esm_test_date");
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -111,7 +106,7 @@ public class EsmTestLogDAO {
 	/*정서 발달 기록 조회*/
 	public static EsmTestLog getEsmTestLogById(Connection con, int esmTestLogId) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_ESM_TEST_LOG_BY_ID);
+			PreparedStatement pstmt = con.prepareStatement("select * from esm_test_log where esm_test_log_id = ?");
 			pstmt.setInt(1, esmTestLogId);
 			
 			ResultSet rs = pstmt.executeQuery();
@@ -128,5 +123,32 @@ public class EsmTestLogDAO {
 			return null;
 		}
 		
+	}
+	
+	/*정해진 아동리스트에 대한 전체 정서 반복 기록*/
+	public static ArrayList<EsmTestLog> getEsmTestLogListOfChildList(Connection con, String[] childIdStrList){
+		String SQLST = "select * from esm_test_log where user_id IN (";
+		
+		for(int i = 0;i<childIdStrList.length;i++) {
+			SQLST+=childIdStrList[i];
+			if(i<childIdStrList.length-1) SQLST+=",";
+			else SQLST+=")";
+		}
+		try {
+			PreparedStatement pstmt = con.prepareStatement(SQLST);
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<EsmTestLog> esmTestLogList = new ArrayList<EsmTestLog>();
+			while(rs.next()) {
+				EsmTestLog esmTestLog = new EsmTestLog(rs.getInt(2),rs.getDate(3),rs.getTime(4));
+				esmTestLog.setEsmTestLogId(rs.getInt(1));
+				
+				esmTestLogList.add(esmTestLog);
+			}
+			return esmTestLogList;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

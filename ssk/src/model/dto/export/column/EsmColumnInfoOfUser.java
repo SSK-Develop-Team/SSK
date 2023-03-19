@@ -1,10 +1,10 @@
-package model.dto.export;
+package model.dto.export.column;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum EsmColumnInfo implements ExcelColumnInfo {
+public enum EsmColumnInfoOfUser implements ExcelColumnInfo {
     ESM_ID("NO.",0),
     ESM_DATETIME("검사시간", 1),
     ESM_ANSWER1("문항1", 2),
@@ -23,12 +23,12 @@ public enum EsmColumnInfo implements ExcelColumnInfo {
     private final String columnText;
     private final int columnIndex;
 
-    EsmColumnInfo(String columnText, int columnIndex){
+    EsmColumnInfoOfUser(String columnText, int columnIndex){
         this.columnText = columnText;
         this.columnIndex = columnIndex;
     }
 
-    public static List<EsmColumnInfo> getAllColumns() {
+    public static List<EsmColumnInfoOfUser> getAllColumns() {
         return Arrays.stream(values()).collect(Collectors.toList());
     }
 
@@ -42,7 +42,7 @@ public enum EsmColumnInfo implements ExcelColumnInfo {
         return columnIndex;
     }
 
-    public static EsmColumnInfo findColumnByEsmType(String typeName){
+    public static EsmColumnInfoOfUser findColumnByEsmType(String typeName){
         return Arrays.stream(values())
                 .filter(type -> type.columnText.equals(typeName.equals("positive")?"긍정정서":"부정정서"))
                 .findAny()

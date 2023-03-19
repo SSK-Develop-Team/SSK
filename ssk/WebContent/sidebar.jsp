@@ -23,7 +23,7 @@
 			<a href="GetManageChild" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
 		</c:when>
 		<c:when test="${user.userRole eq 'EXPERT'}">
-			<a href="GetExpertHome" class="w3-bar-item w3-button sidebar">&nbsp;아동별 결과 조회</a>
+			<a href="GetExpertHome" class="w3-bar-item w3-button sidebar">&nbsp;아동 결과 조회</a>
 			<a href="GetManageChild" class="w3-bar-item w3-button sidebar">&nbsp;아동 계정 관리</a>
 		</c:when>
 		<c:when test="${user.userRole eq 'CHILD'}">

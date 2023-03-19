@@ -1,4 +1,4 @@
-package model.dto.export;
+package model.dto.export.column;
 
 import java.util.Arrays;
 import java.util.List;
