@@ -224,14 +224,15 @@ public class ExportChildResultExcelService {
         ArrayList<EsmRecord> esmRecordList = EsmRecordDAO.getEsmRecordListOfChildList(con, childIdStrList);
         for(int i=0;i<esmRecordList.size();i++){
             EsmRecordExcelDTO esmRecordData = new EsmRecordExcelDTO();
-            User user = UserDAO.getUserById(con, esmRecordData.getUserId());
+            EsmRecord esmRecord = esmRecordList.get(i);
+            User user = UserDAO.getUserById(con, esmRecord.getUserId());
             
             esmRecordData.setUserId(user.getUserId());
             esmRecordData.setUserName(user.getUserName());
 
             esmRecordData.setId(i+1);
-            esmRecordData.setText(esmRecordList.get(i).getEsmRecordText());
-            esmRecordData.setDateStr(esmRecordList.get(i).getEsmRecordDate(), esmRecordList.get(i).getEsmRecordTime());
+            esmRecordData.setText(esmRecord.getEsmRecordText());
+            esmRecordData.setDateStr(esmRecord.getEsmRecordDate(), esmRecord.getEsmRecordTime());
 
             esmRecordDataList.add(esmRecordData);
         }
