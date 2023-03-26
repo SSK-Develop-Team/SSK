@@ -32,7 +32,7 @@
 <div class="w3-row">
 	<div class="w3-col w3-hide-small m1 l4">&nbsp;</div>
 	<div class="select-box w3-col s12 m11 l7 w3-padding"style="margin-bottom:0.5em;">
-		<div class="w3-row"><span class="w3-right" style="font-weight:100;font-size:0.5em;">아동과 카테고리를 선택하고 excel export 버튼을 누르세요. 아동/검사 별로 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
+		<div class="w3-row"><span class="w3-right" style="font-weight:100;font-size:0.5em;">아동, 파일 추출 단위, 검사 유형을 설정하고 excel export 버튼을 누르세요. 설정에 따라 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
 		<div class="w3-padding"style="background-color:#D9D9D9;">
 			<div class="w3-row w3-margin-top" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">파일 추출 단위</div>
 			<div class="w3-row" style="font-size:0.8em;">
@@ -156,7 +156,7 @@ function exportData(){
 	const categoryCnt = document.querySelectorAll("input[name='category']:checked").length;
 	const childCnt = document.querySelectorAll("input[name='childId']:checked").length;
 	if(categoryCnt==0){//미선택 예외 처리
-		alert("카테고리를 선택해주세요.");
+		alert("검사 유형을 선택해주세요.");
 	}else if(childCnt==0){
 		alert("아동을 선택해주세요.");
 	}else{
