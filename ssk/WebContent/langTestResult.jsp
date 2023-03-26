@@ -222,52 +222,43 @@ ul.tabs li.current{
             
         });
         
-        var chart2 = new Chart(ctx2, {
-            type: 'radar', 
-            data: {
-            	labels: ['<%= selectLangQuestionList.get(0).getLangType()%>', '<%= selectLangQuestionList.get(1).getLangType()%>', '<%= selectLangQuestionList.get(2).getLangType()%>', '<%= selectLangQuestionList.get(3).getLangType()%>', '<%= selectLangQuestionList.get(4).getLangType()%>'],
-                datasets: [{
-                    backgroundColor: 'transparent',
-                    fill : false,
-		            borderColor: 'rgb(109, 109, 176)',
-		            pointBackgroundColor: 'rgb(109, 109, 176)',
-		            pointBorderColor: '#fff',
-		            pointHoverBackgroundColor: '#fff',
-		            pointHoverBorderColor: 'rgb(109, 109, 176)',
-                    data: [<%= selectLangReplyList.get(0).getLangReplyContent()%>, <%= selectLangReplyList.get(1).getLangReplyContent()%>, <%= selectLangReplyList.get(2).getLangReplyContent()%>, <%= selectLangReplyList.get(3).getLangReplyContent()%>, <%= selectLangReplyList.get(4).getLangReplyContent()%>]
-                }]
-            },
-            
-            options: {
-    			scales: {
-    				r: {
-    		            min : -2,
-    		            max : 5,
-    		            beginAtZero : true,
-        				angleLines: {
-      				      display: false,
-      					},
-    		            ticks: {
-    		            	display: false,
-    		                stepSize: 1,
-    		            }
-    		        },
-   		           'legend' : 'none',
-   				},
+        var options = {
+        	    //responsive: false,
+        	    maintainAspectRatio: true,
+        	    scale: {
+        	        ticks: {
+        	            beginAtZero: true,
+        	            min: 0,
+        	            stepSize : 1,
+        	            max: 5
+        	        }
+        	    },
    				legend: {
     		        display: false
-    		    },
-    		    tooltips: {
-    		        callbacks: {
-    		           label: function(tooltipItem) {
-    		                  return tooltipItem.yLabel;
-    		           }
-    		        }
     		    }
-    		}	
-            
-        });
+        	};
 
+        	var dataLiteracy = {
+        			labels: ['<%= selectLangQuestionList.get(0).getLangType()%>', '<%= selectLangQuestionList.get(1).getLangType()%>', '<%= selectLangQuestionList.get(2).getLangType()%>', '<%= selectLangQuestionList.get(3).getLangType()%>', '<%= selectLangQuestionList.get(4).getLangType()%>'],
+        	    datasets: [{
+        	        backgroundColor: "transparent",
+        	        fill : false,
+        	        borderColor: "rgb(109, 109, 176)",
+        	        pointBackgroundColor: "rgb(109, 109, 176)",
+        	        pointBorderColor: "#fff",
+        	        pointHoverBackgroundColor: "#fff",
+        	        pointHoverBorderColor: "rgb(109, 109, 176)",
+        	        data: [<%= selectLangReplyList.get(0).getLangReplyContent()%>, <%= selectLangReplyList.get(1).getLangReplyContent()%>, <%= selectLangReplyList.get(2).getLangReplyContent()%>, <%= selectLangReplyList.get(3).getLangReplyContent()%>, <%= selectLangReplyList.get(4).getLangReplyContent()%>]
+        	    }]
+        	};
+
+        	var myRadarChart = new Chart(ctx2, {
+        	    type: 'radar',
+        	    data: dataLiteracy,
+        	    options: options
+        	});
+        
+        
 </script>
 </body>
 </html>
