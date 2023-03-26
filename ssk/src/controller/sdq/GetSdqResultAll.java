@@ -63,35 +63,37 @@ public class GetSdqResultAll extends HttpServlet {
  			PrintWriter out = response.getWriter();
  			out.println("<script>alert('검사 기록이 없습니다.');history.go(-1);</script>");
  			out.flush();
- 		}
-		SdqTestLog selectedSdqTestLog = null;
-		
-		//선택한 테스트 로그 정보 가져오기
-		if(request.getParameter("sdqTestLogId")==null||request.getParameter("sdqTestLogId").equals("0")) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
-			Comparator<SdqTestLog> comparatorById = Comparator.comparingInt(SdqTestLog::getSdqTestLogId);
-			selectedSdqTestLog = sdqTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
-		}else {
-			selectedSdqTestLog = SdqTestLogDAO.getSdqTestLogById(conn, Integer.parseInt(request.getParameter("sdqTestLogId")));
-		}
-		
-		//선택한 테스트 로그에 대한 응답값을 기준으로 결과 값 가져오기
-		ArrayList<SdqResultOfType> sdqResult = (ArrayList<SdqResultOfType>)SdqReplyDAO.getSdqResultOfTypesBySdqTestLogId(conn, selectedSdqTestLog.getSdqTestLogId());
-		
-		//결과 분석
-		ArrayList<SdqResultAnalysis> sdqResultAnalysisList = new ArrayList<SdqResultAnalysis>();
+ 		}else {
+ 			SdqTestLog selectedSdqTestLog = null;
+ 			
+ 			//선택한 테스트 로그 정보 가져오기
+ 			if(request.getParameter("sdqTestLogId")==null||request.getParameter("sdqTestLogId").equals("0")) {//사용자가 가장 최근에 수행한 검사 기록 가져오기
+ 				Comparator<SdqTestLog> comparatorById = Comparator.comparingInt(SdqTestLog::getSdqTestLogId);
+ 				selectedSdqTestLog = sdqTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
+ 			}else {
+ 				selectedSdqTestLog = SdqTestLogDAO.getSdqTestLogById(conn, Integer.parseInt(request.getParameter("sdqTestLogId")));
+ 			}
+ 			
+ 			//선택한 테스트 로그에 대한 응답값을 기준으로 결과 값 가져오기
+ 			ArrayList<SdqResultOfType> sdqResult = (ArrayList<SdqResultOfType>)SdqReplyDAO.getSdqResultOfTypesBySdqTestLogId(conn, selectedSdqTestLog.getSdqTestLogId());
+ 			
+ 			//결과 분석
+ 			ArrayList<SdqResultAnalysis> sdqResultAnalysisList = new ArrayList<SdqResultAnalysis>();
 
-		for(int i=0;i<sdqResult.size();i++) {
-			sdqResultAnalysisList.add(SdqResultAnalysisDAO.findSdqResultAnalysisByTypeAndValue(conn, sdqResult.get(i).getSdqType(),sdqResult.get(i).getResult()));
-		}
+ 			for(int i=0;i<sdqResult.size();i++) {
+ 				sdqResultAnalysisList.add(SdqResultAnalysisDAO.findSdqResultAnalysisByTypeAndValue(conn, sdqResult.get(i).getSdqType(),sdqResult.get(i).getResult()));
+ 			}
+ 			
+ 			request.setAttribute("focusUser", focusUser);
+ 			request.setAttribute("sdqTestLogList", sdqTestLogList);
+ 			request.setAttribute("selectedSdqTestLog", selectedSdqTestLog);
+ 			request.setAttribute("sdqResult", sdqResult);
+ 			request.setAttribute("sdqResultAnalysisList",sdqResultAnalysisList);
+ 			
+ 			RequestDispatcher rd = request.getRequestDispatcher("/sdqResultAll.jsp");
+ 			rd.forward(request, response);
+ 		}
 		
-		request.setAttribute("focusUser", focusUser);
-		request.setAttribute("sdqTestLogList", sdqTestLogList);
-		request.setAttribute("selectedSdqTestLog", selectedSdqTestLog);
-		request.setAttribute("sdqResult", sdqResult);
-		request.setAttribute("sdqResultAnalysisList",sdqResultAnalysisList);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/sdqResultAll.jsp");
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

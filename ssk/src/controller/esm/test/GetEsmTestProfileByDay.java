@@ -57,54 +57,56 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  			PrintWriter out = response.getWriter();
  			out.println("<script>alert('아직 기록이 없습니다. ');history.go(-1);</script>");
  			out.flush();
- 		}
- 		/**
- 		 * selected week -> graph data
- 		 * */
- 		
- 		Date sdate = null;
- 		
- 		/*선택한 일자의 Date 구하기*/
- 		if(request.getParameter("date")==null) {
- 			sdate = esmTestDateList.stream().map(i->i).max(Date::compareTo).get();//테스트를 수행한 가장 최근 일자 구하기
-		}else{
-			String sdateStr = request.getParameter("date");
-			sdate = Date.valueOf(sdateStr);
-		}
- 		
- 		
-	 	/*선택한 일자에 해당하는 주의 날짜 리스트(그래프 X축)*/
- 		ArrayList<Date> sDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(sdate);
- 		EsmDateWeekType selectedDateWeek = new EsmDateWeekType(sdate,sDateListOfWeek.get(0), sDateListOfWeek.get(6));
- 		
- 		/*해당 주의 모든 기록 - 일별 평균 응답*/
- 		ArrayList<EsmResultWithDate> esmReplyOfDayList = EsmReplyDAO.getEsmReplyListByWeek(conn, focusUser.getUserId(), sDateListOfWeek.get(0), sDateListOfWeek.get(6));
-
- 		/**
- 		 * all week -> drop down data
- 		 * */
-	 	//모든 테스트 로그 데이터 -> 주(week) 데이터 추출 : 중복제거 (드롭다운 표시)
- 		ArrayList<EsmDateWeekType> dateWeekList = new ArrayList<EsmDateWeekType>();
- 		
- 		ArrayList<Date> tmpDateListOfWeek = new ArrayList<Date>();
- 		for(Date date : esmTestDateList) {
- 			if(!tmpDateListOfWeek.contains(date)) {
- 				tmpDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(date);
- 				Date startDate = tmpDateListOfWeek.get(0);
- 				Date endDate = tmpDateListOfWeek.get(6);
- 				dateWeekList.add(new EsmDateWeekType(date,startDate,endDate));
+ 		}else {
+ 			/**
+ 	 		 * selected week -> graph data
+ 	 		 * */
+ 	 		
+ 	 		Date sdate = null;
+ 	 		
+ 	 		/*선택한 일자의 Date 구하기*/
+ 	 		if(request.getParameter("date")==null) {
+ 	 			sdate = esmTestDateList.stream().map(i->i).max(Date::compareTo).get();//테스트를 수행한 가장 최근 일자 구하기
+ 			}else{
+ 				String sdateStr = request.getParameter("date");
+ 				sdate = Date.valueOf(sdateStr);
  			}
+ 	 		
+ 	 		
+ 		 	/*선택한 일자에 해당하는 주의 날짜 리스트(그래프 X축)*/
+ 	 		ArrayList<Date> sDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(sdate);
+ 	 		EsmDateWeekType selectedDateWeek = new EsmDateWeekType(sdate,sDateListOfWeek.get(0), sDateListOfWeek.get(6));
+ 	 		
+ 	 		/*해당 주의 모든 기록 - 일별 평균 응답*/
+ 	 		ArrayList<EsmResultWithDate> esmReplyOfDayList = EsmReplyDAO.getEsmReplyListByWeek(conn, focusUser.getUserId(), sDateListOfWeek.get(0), sDateListOfWeek.get(6));
+
+ 	 		/**
+ 	 		 * all week -> drop down data
+ 	 		 * */
+ 		 	//모든 테스트 로그 데이터 -> 주(week) 데이터 추출 : 중복제거 (드롭다운 표시)
+ 	 		ArrayList<EsmDateWeekType> dateWeekList = new ArrayList<EsmDateWeekType>();
+ 	 		
+ 	 		ArrayList<Date> tmpDateListOfWeek = new ArrayList<Date>();
+ 	 		for(Date date : esmTestDateList) {
+ 	 			if(!tmpDateListOfWeek.contains(date)) {
+ 	 				tmpDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(date);
+ 	 				Date startDate = tmpDateListOfWeek.get(0);
+ 	 				Date endDate = tmpDateListOfWeek.get(6);
+ 	 				dateWeekList.add(new EsmDateWeekType(date,startDate,endDate));
+ 	 			}
+ 	 		}
+ 	 		
+ 	 		request.setAttribute("focusUser", focusUser);
+ 	 		request.setAttribute("esmTestDateList", esmTestDateList);//전체 기록
+ 	 		request.setAttribute("selectedDateWeek", selectedDateWeek);
+ 	 		request.setAttribute("dateWeekList", dateWeekList);//drop down에 표시할 기간 데이터
+ 	 		request.setAttribute("sDateListOfWeek",sDateListOfWeek);//선택한 주의 날짜 리스트(그래프 X축)
+ 	 		request.setAttribute("esmReplyOfDayList",esmReplyOfDayList);//선택한 주의 일별 기록
+ 	 		
+ 		 	RequestDispatcher rd = request.getRequestDispatcher("/esmTestProfileByDay.jsp");
+ 			rd.forward(request, response);
  		}
  		
- 		request.setAttribute("focusUser", focusUser);
- 		request.setAttribute("esmTestDateList", esmTestDateList);//전체 기록
- 		request.setAttribute("selectedDateWeek", selectedDateWeek);
- 		request.setAttribute("dateWeekList", dateWeekList);//drop down에 표시할 기간 데이터
- 		request.setAttribute("sDateListOfWeek",sDateListOfWeek);//선택한 주의 날짜 리스트(그래프 X축)
- 		request.setAttribute("esmReplyOfDayList",esmReplyOfDayList);//선택한 주의 일별 기록
- 		
-	 	RequestDispatcher rd = request.getRequestDispatcher("/esmTestProfileByDay.jsp");
-		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
