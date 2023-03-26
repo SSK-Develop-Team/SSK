@@ -17,8 +17,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <%
+/*
+* 전문가가 아동의 결과를 조회하는 경우 currUser == expert , focusUser == child
+* 아동이 자신의 결과를 조회하는 경우 currUser == focusUser == child
+*/
+	User focusUser = (User)request.getAttribute("focusUser"); 
 	User currUser = (User)session.getAttribute("currUser");
-	String name = currUser.getUserName();
+	String name = focusUser.getUserName();
 
 	ArrayList<LangTestLog> langTestLogList = (ArrayList<LangTestLog>)request.getAttribute("langTestLogList");
 	ArrayList<Integer> langTestLogIDList = (ArrayList<Integer>)request.getAttribute("langTestLogIDList");
