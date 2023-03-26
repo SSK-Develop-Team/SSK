@@ -17,7 +17,13 @@
 	<link href="css/esmRecord.css" rel="stylesheet" type='text/css' >
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-
+	
+	<style>
+	.selectedDate{
+		background-color:#CAFFDC !important;
+	}
+	</style>
+	
 	<script src='fullcalendar/main.js'></script>
 	<script src='fullcalendar/locales-all.js'></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -37,9 +43,11 @@
 	    	displayEventTime:false,
 			timeZone: "local",
 	  		dateClick: function(info) {//날짜 클릭 시 이벤트
-	  			info.dayEl.style.backgroundColor = '#CAFFDC';
-		    	//getDayEsmRecord('GetDayEsmRecord',info.dateStr);//해당 날짜 문자열 반환 -> 해당하는 텍스트 데이터 받아오기
-				//gotoDate(info.dateStr);
+	  			var days = document.querySelectorAll(".selectedDate");
+	  		  	days.forEach(function(day) {
+	  		   	 day.classList.remove("selectedDate");
+	  		  	});
+	  		  	info.dayEl.classList.add("selectedDate");
 				setSelectedDateStrInput(info.dateStr);
 	  		},
 			events: <%=eventsJsonArray%>
