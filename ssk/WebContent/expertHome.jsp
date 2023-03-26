@@ -28,7 +28,7 @@
 	<div class="w3-col s12 m12 l10" style="font-weight:bold;font-size:1.2em;padding-left:1em;"><img src="./image/research.png" style="width:35px;">     아동 결과 조회</div>
 	<div class="w3-col w3-hide-small w3-hide-middle l1">&nbsp;</div>
 </div>
-<form method="post" action="ExportChildListResultExcel"id="exportFrm">
+<form method="post" action="ExportChildListResultExcel" id="exportFrm">
 <div class="w3-row">
 	<div class="w3-col w3-hide-small m1 l4">&nbsp;</div>
 	<div class="select-box w3-col s12 m11 l7 w3-padding"style="margin-bottom:0.5em;">
@@ -51,7 +51,7 @@
 					<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="esmRecord" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
 				</div>
 			</div>
-			<div class="w3-row" style="font-size:0.8em;"><button class="w3-right w3-button w3-padding" style="background-color:#51459E; color:white;" onclick="exportData();" onkeypress="preventEnterKey(e)"> excel export </button></div>
+			<div class="w3-row" style="font-size:0.8em;"><div class="w3-right w3-button w3-padding" style="background-color:#51459E; color:white;" onclick="exportData();"> excel export </div></div>
 		</div>
 		
 	</div>
@@ -147,16 +147,10 @@
 </form>
 <script>
 document.getElementById("exportFrm").onkeypress = function(e) {
-    var key = e.charCode || e.keyCode || 0;     
-    if (key == 13) {
+    if (e.keyCode == 13) {
       e.preventDefault();
     }
   }
-function preventEnterKey(e){
-	if (e.keyCode === 13) {
-	    e.preventDefault();
-	 };
-}
 
 function exportData(){
 	const categoryCnt = document.querySelectorAll("input[name='category']:checked").length;
