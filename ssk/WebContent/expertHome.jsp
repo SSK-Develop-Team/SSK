@@ -49,7 +49,7 @@
 				<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="esmRecord" style="transform:translateY(0.1em);">&nbsp;<label>정서 다이어리</label></div>
 			</div>
 			<div class="w3-col s4 m2 l2">
-				<div class="w3-button w3-padding" style="background-color:#51459E; color:white;" onclick="exportData();"> excel export </div>
+				<button class="w3-button w3-padding" style="background-color:#51459E; color:white;" onclick="exportData();" onkeypress="preventEnterKey(e)"> excel export </button>
 			</div>
 		</div>
 	</div>
@@ -144,6 +144,18 @@
 </div>
 </form>
 <script>
+document.getElementById("exportFrm").onkeypress = function(e) {
+    var key = e.charCode || e.keyCode || 0;     
+    if (key == 13) {
+      e.preventDefault();
+    }
+  }
+function preventEnterKey(e){
+	if (e.keyCode === 13) {
+	    e.preventDefault();
+	 };
+}
+
 function exportData(){
 	const categoryCnt = document.querySelectorAll("input[name='category']:checked").length;
 	const childCnt = document.querySelectorAll("input[name='childId']:checked").length;
