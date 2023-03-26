@@ -61,7 +61,7 @@ public class GetLangResultAll extends HttpServlet {
 		}
 		
 		ArrayList<Integer> langTestLogIDList = new ArrayList<Integer>();
-		for(int i =0 ;i < logListSize; i++) {
+		for(int i = 0 ;i < logListSize; i++) {
 			langTestLogIDList.add(langTestLogList.get(i).getLangTestLogId());
 		}
 		
