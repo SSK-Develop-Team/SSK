@@ -6,107 +6,104 @@
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
-
-<link href="css/langGame.css" rel="stylesheet" type='text/css' >
-<style>
-	.gametext02{ display : none; }
-	.gametext03{ display : none; }
-	
-	.roomBack {
-		display : block;
-		height : 100%;
-		width : 100%;
-		position : relative;
-	}
-	
-	.playBack {
-		display : none;
-		height : 100%;
-		width : 100%;
-		position : relative;
-	}
-	
-	.snowBack {
-		display : none;
-		height : 100%;
-		width : 100%;
-		position : relative;
-	}
-	
-	.selectImg01{
-		position : absolute;
-		left : 15%;
-		top : 23%;
-	}
-	.selectImg02{
-		position : absolute;
-		left : 25%;
-		top : 16%;
-	}
-	.selectImg03{
-		position : absolute;
-		left : 62%;
-		top : 23%;
-	}
-	.selectImg04{
-		position : absolute;
-		left : 72%;
-		top : 16%;
-	}
-	
-	
-	.selectImg05{
-		position : absolute;
-		left : 37%;
-		top : 13%;
-	}
-	.selectImg06{
-		position : absolute;
-		left : 32%;
-		top : 67%;
-	}
-	.selectImg07{
-		position : absolute;
-		left : 83%;
-		top : 13%;
-	}
-	.selectImg08{
-		position : absolute;
-		left : 77%;
-		top : 67%;
-	}
-	
-	
-	.selectImg09{
-		position : absolute;
-		left : 10%;
-		top : 48%;
-	}
-	.selectImg10{
-		position : absolute;
-		left : 25%;
-		top : 55%;
-	}
-	.selectImg11{
-		position : absolute;
-		left : 55%;
-		top : 48%;
-	}
-	.selectImg12{
-		position : absolute;
-		left : 74%;
-		top : 55%;
-	}
-
-	</style>
-	
-</head>
-
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="css/langGame.css" rel="stylesheet" type='text/css' >
+	<style>
+		.roomBack {
+			display : block;
+			height : 100%;
+			width : 100%;
+			position : relative;
+		}
+
+		.playBack {
+			display : none;
+			height : 100%;
+			width : 100%;
+			position : relative;
+		}
+
+		.snowBack {
+			display : none;
+			height : 100%;
+			width : 100%;
+			position : relative;
+		}
+
+		.selectImg01{
+			position : absolute;
+			left : 15%;
+			top : 23%;
+		}
+		.selectImg02{
+			position : absolute;
+			left : 25%;
+			top : 16%;
+		}
+		.selectImg03{
+			position : absolute;
+			left : 62%;
+			top : 23%;
+		}
+		.selectImg04{
+			position : absolute;
+			left : 72%;
+			top : 16%;
+		}
+
+
+		.selectImg05{
+			position : absolute;
+			left : 37%;
+			top : 13%;
+		}
+		.selectImg06{
+			position : absolute;
+			left : 32%;
+			top : 67%;
+		}
+		.selectImg07{
+			position : absolute;
+			left : 83%;
+			top : 13%;
+		}
+		.selectImg08{
+			position : absolute;
+			left : 77%;
+			top : 67%;
+		}
+
+
+		.selectImg09{
+			position : absolute;
+			left : 10%;
+			top : 48%;
+		}
+		.selectImg10{
+			position : absolute;
+			left : 25%;
+			top : 55%;
+		}
+		.selectImg11{
+			position : absolute;
+			left : 55%;
+			top : 48%;
+		}
+		.selectImg12{
+			position : absolute;
+			left : 74%;
+			top : 55%;
+		}
+		#hint-text-2 {
+			display : none;
+		}
+		#hint-text-3 {
+			display : none;
+		}
+	</style>
 	<title>51번 문항 직접 평가</title>
 </head>
 <body>
@@ -153,10 +150,10 @@
 			
 			<div class="playBack">
 				<img class="gameImg02" src="./image/LangGameImg/Age10/age10_1_2.png" width="100%" height="100%" alt="놀이터의 틀린그림 찾기, 가운데 코끼리 모양 미끄럼틀이 있고 여자아이와 남자아이가 놀고 있다."/>
-				<img class="selectImg05" src="./image/LangGameImg/Age10/age10_1_2_icon01.png" height="12%" alt="비행기" onClick="openSelect03();audio02.pause();" />
-				<img class="selectImg06" src="./image/LangGameImg/Age10/age10_1_2_icon02.png" height="20%" alt="모래놀이" onClick="openSelect04();audio02.pause();" />
-				<img class="selectImg07" src="./image/LangGameImg/Age10/age10_1_2_icon03.png" height="12%" alt="파랑새" onclick="openSelect03();audio02.pause();" />
-				<img class="selectImg08" src="./image/LangGameImg/Age10/age10_1_2_icon04.png" height="25%" alt="시소" onclick="openSelect04();audio02.pause();" />
+				<img class="selectImg05" src="./image/LangGameImg/Age10/age10_1_2_icon01.png" height="12%" alt="비행기" onClick="openSelect03();audio01.pause();" />
+				<img class="selectImg06" src="./image/LangGameImg/Age10/age10_1_2_icon02.png" height="20%" alt="모래놀이" onClick="openSelect04();audio01.pause();" />
+				<img class="selectImg07" src="./image/LangGameImg/Age10/age10_1_2_icon03.png" height="12%" alt="파랑새" onclick="openSelect03();audio01.pause();" />
+				<img class="selectImg08" src="./image/LangGameImg/Age10/age10_1_2_icon04.png" height="25%" alt="시소" onclick="openSelect04();audio01.pause();" />
 				
 				<div id="select-modal03" class="w3-modal">
 					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
@@ -186,10 +183,10 @@
 
 			<div class="snowBack">
 				<img class="gameImg03" src="./image/LangGameImg/Age10/age10_1_3.png" width="100%" height="100%" alt="눈 쌓인 언덕의 틀린그림 찾기, 눈이 펑펑 내리고 뒤로는 큰 보름달이 떠있다."/>
-				<img class="selectImg09" src="./image/LangGameImg/Age10/age10_1_3_icon01.png" height="23%" alt="눈사람" onclick="openSelect05();audio03.pause();" />
-				<img class="selectImg10" src="./image/LangGameImg/Age10/age10_1_3_icon02.png" height="23%" alt="썰매와 산타" onclick="openSelect06();audio03.pause();" />
-				<img class="selectImg11" src="./image/LangGameImg/Age10/age10_1_3_icon03.png" height="23%" alt="북극곰" onclick="openSelect05();audio03.pause();" />
-				<img class="selectImg12" src="./image/LangGameImg/Age10/age10_1_3_icon04.png" height="23%" alt="썰매와 산타" onclick="openSelect06();audio03.pause();" />
+				<img class="selectImg09" src="./image/LangGameImg/Age10/age10_1_3_icon01.png" height="23%" alt="눈사람" onclick="openSelect05();audio01.pause();" />
+				<img class="selectImg10" src="./image/LangGameImg/Age10/age10_1_3_icon02.png" height="23%" alt="썰매와 산타" onclick="openSelect06();audio01.pause();" />
+				<img class="selectImg11" src="./image/LangGameImg/Age10/age10_1_3_icon03.png" height="23%" alt="북극곰" onclick="openSelect05();audio01.pause();" />
+				<img class="selectImg12" src="./image/LangGameImg/Age10/age10_1_3_icon04.png" height="23%" alt="썰매와 산타" onclick="openSelect06();audio01.pause();" />
 			
 				<div id="select-modal05" class="w3-modal">
 					<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
@@ -246,9 +243,11 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p>로봇, 로켓, 리본, 빨간색, 분홍색 / 새, 시소, 삽 / 썰매, 산타(싼타), 눈사람</p>
+						<p id="hint-text-1">로봇, 로켓, 리본, 빨간색, 분홍색</p>
+						<p id="hint-text-2">새, 시소, 삽</p>
+						<p id="hint-text-3">썰매, 산타(싼타), 눈사람</p>
 						<audio id="answer-audio" controls>
-							<source src="./audio/Age10/age_10_51_answer.wav">
+							<source id="hint-audio" src="./audio/Age10/age_10_51_answer_1.wav">
 						</audio>
 					</div>
 				</div>
@@ -264,73 +263,88 @@
 
 var cnt = 0;
 var audio01 = new Audio('./audio/Age10/age_10_51_1.wav');
-var audio02 = new Audio('./audio/Age10/age_10_51_1.wav');
-var audio03 = new Audio('./audio/Age10/age_10_51_1.wav');
 	
-	//음성 재생
-	window.onload = function () {
+//음성 재생
+window.onload = function () {
+	audio01.load();
+	audio01.play();
+}
+
+if (performance.navigation.type == 1) {
+$("#rightbtn").css('display', 'inline');
+}
+
+function gameBtnHide(){
+$("#rightbtn").css('display', 'none');
+$("#leftbtn").css('display', 'none');
+}
+
+function content() {
+	if(cnt==4) cnt = 3;
+    else cnt = cnt+1;
+
+	if(cnt == 1){
+	    audio01.pause();
+	    $(".roomBack").css('display', 'none');
+	    $(".playBack").css('display', 'block');
+	    $("#leftbtn").css('display', 'inline');
+	    $("#hint-text-1").css('display', 'none');
+	    $("#hint-text-2").css('display', 'block');
+	    $("#hint-text-3").css('display', 'none');
+		$("#hint-audio").attr("src" , "./audio/Age10/age_10_51_answer_2.wav");
+	    audio01.load();
 		audio01.play();
 	}
-	
-	if (performance.navigation.type == 1) {
-		$("#rightbtn").css('display', 'inline');
+	else if(cnt == 2){
+		audio01.pause();
+	    $(".playBack").css('display', 'none');
+	    $(".snowBack").css('display', 'block');
+	    $("#leftbtn").css('display', 'inline');
+	    $("#answer").css('display', 'inline');
+	    $("#hint-text-1").css('display', 'none');
+	    $("#hint-text-2").css('display', 'none');
+	    $("#hint-text-3").css('display', 'block');
+		$("#hint-audio").attr("src" , "./audio/Age10/age_10_51_answer_3.wav");
+	    audio01.load();
+		audio01.play();
 	}
+	else if(cnt == 3){
+		if(!confirm("51번 문항의 게임을 종료하시겠습니까?")){cnt = 2; return}
+		location.href = './langTest.jsp';
+	}
+}
 
-	function gameBtnHide(){
-		$("#rightbtn").css('display', 'none');
-		$("#leftbtn").css('display', 'none');
-	}
-	
-	function content() {  
-		  
-		  cnt = cnt+1;
-		  
-		  if(cnt == 1){
-  			audio01.pause();
-			$(".roomBack").css('display', 'none');		
-			$(".playBack").css('display', 'block');	
-       	 	$("#leftbtn").css('display', 'inline');
-       	 	audio02.load();
-			audio02.play();
-          }
-		  else if(cnt == 2){
-			  	audio02.pause();
-	      		$(".playBack").css('display', 'none');
-	      		$(".snowBack").css('display', 'block');
-	      		$("#leftbtn").css('display', 'inline');
-	      		$("#answer").css('display', 'inline');
-	       	 	audio03.load();
-				audio03.play();
-	       } 
-          else if(cnt == 3){
-      			if(!confirm("51번 문항의 게임을 종료하시겠습니까?")){cnt = 2; return}
-        	  	location.href = './langTest.jsp';
-          }
-	}     
-	
-	function contentBack() {  
-		  
-		  cnt = cnt-1;
-		  
-		  if(cnt == 0){
-			  	audio02.pause();
-				$(".roomBack").css('display', 'block');			
-				$(".playBack").css('display', 'none');			
-        		$("#answer").css('display', 'none');
-        		$("#leftbtn").css('display', 'none');
-           	 	audio01.load();
-    			audio01.play();
-	          }
-			  else if(cnt == 1){
-				audio03.pause();
-	      		$(".playBack").css('display', 'block');
-	      		$(".snowBack").css('display', 'none');
-	      		$("#answer").css('display', 'none');
-	       	 	audio02.load();
-				audio02.play();
-	       	} 
-	      		
-		}
+function contentBack() {
+	if(cnt==0) cnt = 0;
+	else cnt = cnt-1;
+
+  if(cnt == 0){
+	  audio01.pause();
+	  $(".roomBack").css('display', 'block');
+	  $(".playBack").css('display', 'none');
+	  $("#answer").css('display', 'none');
+	  $("#leftbtn").css('display', 'none');
+	  $("#hint-text-1").css('display', 'block');
+	  $("#hint-text-2").css('display', 'none');
+	  $("#hint-text-3").css('display', 'none');
+	  $("#hint-audio").attr("src" , "./audio/Age10/age_10_51_answer_1.wav");
+	  audio01.load();
+	  audio01.play();
+  }
+  else if(cnt == 1){
+	  audio01.pause();
+	  $(".playBack").css('display', 'block');
+	  $(".snowBack").css('display', 'none');
+	  $("#answer").css('display', 'none');
+	  $("#hint-text-1").css('display', 'none');
+	  $("#hint-text-2").css('display', 'block');
+	  $("#hint-text-3").css('display', 'none');
+	  $("#hint-audio").attr("src" , "./audio/Age10/age_10_51_answer_2.wav");
+	  audio01.load();
+	  audio01.play();
+}
+
+}
 	
 </script>
 <script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>

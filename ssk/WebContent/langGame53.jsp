@@ -6,45 +6,40 @@
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
-<link href="css/langGame.css" rel="stylesheet" type='text/css' >
-<style>
-	.Quiz01 {
-		display : none;
-		height : 100%;
-		width : 100%;
-		position : relative;
-	}
-	
-	.Quiz02 {
-		display : none;
-		height : 100%;
-		width : 100%;
-		position : relative;
-	}
-	
-	#chooseA1 {
-		position : absolute;
-		left : 50%;
-		top : 20%;
-	}
-	
-	#chooseA2 {
-		position : absolute;
-		left : 50%;
-		top : 50%;
-	}
-	
-	.gametext02 { display : none; }
-
-</style>
-	
-</head>
-
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="css/langGame.css" rel="stylesheet" type='text/css' >
+	<style>
+		.Quiz01 {
+			height : 100%;
+			width : 100%;
+			position : relative;
+		}
+
+		.Quiz02 {
+			display : none;
+			height : 100%;
+			width : 100%;
+			position : relative;
+		}
+
+		.chooseA1 {
+			position : absolute;
+			left : 50%;
+			top : 20%;
+		}
+
+		.chooseA2 {
+			position : absolute;
+			left : 50%;
+			top : 50%;
+		}
+		#hint-text-2 {
+			display : none;
+		}
+	</style>
 	<title>53번 문항 직접 평가</title>
 </head>
 <body>
@@ -55,17 +50,16 @@
 	<div class="w3-col w3-container s12 m10 l6">
 		<div style="font-size:1em;font-weight:bold;">직접평가 #53</div>
 		<div>
-			<img class="gameImg01" src="./image/LangGameImg/Age10/age10_3_0.png" width="100%" alt="연필과 연필로 그은 곡선"/>
 			<div class="Quiz01">
 				<img class="gameImg02" src="./image/LangGameImg/Age10/age10_3_1.png" width="100%" alt="고양이가 쥐를 잡고 있는 그림"/>  
-				<button class="w3-button w3-container w3-round-large" id="chooseA1" onclick='wrongA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">고양이는 쥐에게 잡혀요.</button>	
-				<button class="w3-button w3-container w3-round-large" id="chooseA2" onclick='correctA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">고양이는 쥐를 잡아요.</button>	
+				<button class="w3-button w3-container w3-round-large chooseA1" onclick='wrongA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">고양이는 쥐에게 잡혀요.</button>
+				<button class="w3-button w3-container w3-round-large chooseA2" onclick='correctA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">고양이는 쥐를 잡아요.</button>
 			</div>
 			
 			<div class="Quiz02">
 				<img class="gameImg03" src="./image/LangGameImg/Age10/age10_3_2.png" width="100%" alt="고양이가 물고기를 먹고 있는 그림"/>  
-				<button class="w3-button w3-container w3-round-large" id="chooseA1" onclick='correctA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">물고기는 고양이에게 먹혀요.</button>	
-				<button class="w3-button w3-container w3-round-large" id="chooseA2" onclick='wrongA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">물고기는 고양이를 먹어요.</button>	
+				<button class="w3-button w3-container w3-round-large chooseA1" onclick='correctA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">물고기는 고양이에게 먹혀요.</button>
+				<button class="w3-button w3-container w3-round-large chooseA2" onclick='wrongA()' style="background-color:#ffffff; text-align:center;padding:10px; border:2px solid #000000;">물고기는 고양이를 먹어요.</button>
 			</div>
 
 		</div>
@@ -74,8 +68,7 @@
 
 		<div class="w3-container w3-padding-32">
 			<div class="gametext">
-				<div class="gametext01">그림을 보고 정답이라 생각하는 문장 버튼을 눌러보아요!</div>
-				<div class="gametext02">그림을 바르게 설명하는 문장에 짝지어 보아요.</div>
+				<div class="gametext01">그림을 바르게 설명하는 문장에 짝지어 보아요.</div>
 			</div>
 		</div>
 		<div class="w3-container w3-right">
@@ -100,7 +93,8 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p>1) 고양이는 쥐를 잡아요  <br>2) 물고기는 고양이한테 먹혀요 </p>
+						<p id="hint-text-1">1) 고양이는 쥐를 잡아요.</p>
+						<p id="hint-text-2">2) 물고기는 고양이에게 먹혀요.</p>
 					</div>
 				</div>
 			</div>
@@ -115,13 +109,13 @@
 
 var cnt = 0;
 	
-var audio1 = new Audio('./audio/Age10/age_10_53_1.wav');
-var audio2 = new Audio('./audio/Age10/age_10_53_1.wav');
+var audio1 = new Audio();
 	
 	//음성 재생
-/* 	window.onload = function () {
+ 	window.onload = function () {
+		audio1.src='./audio/Age10/age_10_53_1.wav';
 		audio1.play();
-	} */
+	}
 	
 	if (performance.navigation.type == 1) {
 		$("#rightbtn").css('display', 'inline');
@@ -137,57 +131,41 @@ var audio2 = new Audio('./audio/Age10/age_10_53_1.wav');
 		audio.play();
 	}
 	
-	function content() {  
-		  
-		  cnt = cnt+1;
+	function content() {
+		if(cnt==3) cnt = 2;
+		else cnt = cnt+1;
 		  
 		  if(cnt == 1){
-			$(".gameImg01").css('display', 'none');		
-			$(".Quiz01").css('display', 'block');	
-       	 	$("#leftbtn").css('display', 'inline');
-       	 	$(".gametext01").css('display', 'none');
-       	 	$(".gametext02").css('display', 'inline');
-       	 	audio1.load();
-			audio1.play();
-          }
-		  else if(cnt == 2){
 			  	audio1.pause();
 	      		$(".Quiz01").css('display', 'none');
 	      		$(".Quiz02").css('display', 'block');
 	      		$("#leftbtn").css('display', 'inline');
-	      		$("#answer").css('display', 'inline');
-	       	 	audio2.load();
-				audio2.play();
+			    $("#hint-text-1").css('display', 'none');
+			    $("#hint-text-2").css('display', 'block');
+	       	 	audio1.load();
+				audio1.play();
 	       } 
-          else if(cnt == 3){
-      			if(!confirm("53번 문항의 게임을 종료하시겠습니까?")){cnt = 2; return;}
+          else if(cnt == 2){
+      			if(!confirm("53번 문항의 게임을 종료하시겠습니까?")){ cnt = 1;return;}
         	  	location.href = './langTest.jsp';
           }
 	}     
 	
-	function contentBack() {  
+	function contentBack() {
+
+		if(cnt==0) cnt = 0;
+		else cnt = cnt-1;
 		  
-		  cnt = cnt-1;
-		  
-		  if(cnt == 0){
-			  	audio1.pause();
-				$(".gameImg01").css('display', 'inline');			
-				$(".Quiz01").css('display', 'none');			
-        		$("#answer").css('display', 'none');
-        		$("#leftbtn").css('display', 'none');
-           	 	$("#gametext01").css('display', 'inline');
-           	 	$("#gametext02").css('display', 'none');
-	          }
-			  else if(cnt == 1){
-				audio2.pause();
-	      		$(".Quiz01").css('display', 'block');
-	      		$(".Quiz02").css('display', 'none');
-	      		$("#answer").css('display', 'none');
-	       	 	audio1.load();
-				audio1.play();
-	       	} 
-	      		
-		}
+		  if(cnt == 0) {
+			  audio1.pause();
+			  $(".Quiz01").css('display', 'block');
+			  $(".Quiz02").css('display', 'none');
+			  $("#hint-text-1").css('display', 'block');
+			  $("#hint-text-2").css('display', 'none');
+			  audio1.load();
+			  audio1.play();
+		  }
+	}
 	
 </script>
 <script type="text/javascript" src="js/langGame.js" charset="UTF-8"></script>
