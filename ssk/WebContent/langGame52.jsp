@@ -160,9 +160,9 @@
 		$("#rightbtn").css('display', 'inline');
 	}
 	
-	function content() {  
-		  
-		  cnt = cnt+1;
+	function content() {
+		if(cnt==2) cnt = 2;
+		else cnt = cnt+1;
 		  
 		  if(cnt == 1){
 			audio01.pause();
@@ -179,9 +179,9 @@
           }
 	}     
 	
-	function contentBack() {  
-		  
-		  cnt = cnt-1;
+	function contentBack() {
+		if(cnt==0) cnt = 0;
+		else cnt = cnt-1;
 		  
 		  if(cnt == 0){
 			  	audio02.pause();

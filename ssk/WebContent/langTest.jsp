@@ -71,7 +71,7 @@
 						for(int i=0; i < currQuestionList.size(); i++){
 
 							int gameID = currQuestionList.get(i).getLangQuestionId();
-
+							if(gameID == 50) continue;
 							if(gameID < 10) currNumStr = "Q0" + gameID;
 							else currNumStr = "Q" + gameID;
 					%>
@@ -134,6 +134,10 @@
 		var reply3 = "<%=langProgList.get(2)%>";
 		var reply4 = "<%=langProgList.get(3)%>";
 		var reply5 = "<%=langProgList.get(4)%>";
+
+		if(50 == <%=currQuestionList.get(4).getLangQuestionId()%>){
+			reply5 = "0";
+		}
 		
 		$("input[name='reply0']").change(function(){
 			if($("input[name='reply0']:checked")){
@@ -196,8 +200,9 @@
 		var inputReply5 = document.createElement('input');
 		inputReply5.setAttribute('type', 'hidden');
 		inputReply5.setAttribute('name', 'langTestProgress5');
+
 		inputReply5.setAttribute('value', reply5);
-		
+
 		form.appendChild(input);
 		form.appendChild(inputReply1);
 		form.appendChild(inputReply2);

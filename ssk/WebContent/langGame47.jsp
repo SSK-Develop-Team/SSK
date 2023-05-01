@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<%@ page import="model.dto.User" %>
-<%@ page import="model.dto.LangGame" %>
-<%@ page import="util.process.LangGameProcessor" %>
-<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <link href="css/langGame.css" rel="stylesheet" type='text/css' >
@@ -124,7 +120,9 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p>(1) 2개  (2) 4송이  (3) 3마리 </p>
+						<p id="answer-text-1">2개</p>
+						<p id="answer-text-2" style="display: none">4송이</p>
+						<p id="answer-text-3" style="display: none">3마리</p>
 					</div>
 				</div>
 			</div>
@@ -159,9 +157,9 @@ var cnt = 0;
 		audio.play();
 	}
 	
-	function content() {  
-		  
-		  cnt = cnt+1;
+	function content() {
+		if(cnt==3) cnt = 3;
+		else cnt = cnt+1;
 		  
 		  if(cnt == 1){
 			$(".Quiz01").css('display', 'none');
@@ -169,7 +167,9 @@ var cnt = 0;
         	$(".gametext01").css('display', 'none');
     		$(".gametext02").css('display', 'inline');  
      	 	$("#leftbtn").css('display', 'inline');
-
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'block');
+			  $("#answer-text-3").css('display', 'none');
     		var audio = new Audio('./audio/Age09/age_09_47_2.wav');
     		audio.play();
         }
@@ -178,6 +178,9 @@ var cnt = 0;
 				$(".Quiz03").css('display', 'block');
 	      		$("#leftbtn").css('display', 'inline');
 	      		$("#answer").css('display', 'inline');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'block');
 	      		var audio = new Audio('./audio/Age09/age_09_47_2.wav');
 	      		audio.play();
 	       } 
@@ -187,9 +190,9 @@ var cnt = 0;
         }
 	}     
 	
-	function contentBack() {  
-		  
-		  cnt = cnt-1;
+	function contentBack() {
+		if(cnt==0) cnt = 0;
+		else cnt = cnt-1;
 		  
 		  if(cnt == 0){
 			 	$(".Quiz01").css('display', 'block');
@@ -197,6 +200,9 @@ var cnt = 0;
 	          	$(".gametext01").css('display', 'inline');
 	      		$(".gametext02").css('display', 'none');  
 	       	 	$("#leftbtn").css('display', 'none');
+			  $("#answer-text-1").css('display', 'block');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'none');
 	      		var audio = new Audio('./audio/Age09/age_09_47_1.wav');
 	      		audio.play();
 	          }
@@ -205,6 +211,9 @@ var cnt = 0;
 				$(".Quiz03").css('display', 'none');
 	      		$("#leftbtn").css('display', 'none');
 	      		$("#answer").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'block');
+			  $("#answer-text-3").css('display', 'none');
 	      		var audio = new Audio('./audio/Age09/age_09_47_2.wav');
 	      		audio.play();
 	       	} 

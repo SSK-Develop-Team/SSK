@@ -10,7 +10,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link href="css/langGame07_2.css" rel="stylesheet" type='text/css' >
+	<link href="css/langGame07_2.css?ver=4" rel="stylesheet" type='text/css' >
 	<link href="css/langGame.css" rel="stylesheet" type='text/css' >
 	<%
 		User currUser = (User)session.getAttribute("currUser");
@@ -39,10 +39,10 @@
 		<div style="font-size:1em;font-weight:bold;">직접평가 #<%= gameID %></div>
 		<div class="container">
 			<img src="<%=currLangGameElement.getLangGameImg() %>" style="width:100%"/>
-			<img class="numImg" id="numImg01" src="./image/age3_num1.png" alt="1번 엄마 버튼" onClick="clickContent(1)"/>
-			<img class="numImg" id="numImg02" src="./image/age3_num2.png" alt="2번 바나나 버튼" onClick="clickContent(2)"/>
-			<img class="numImg" id="numImg03" src="./image/age3_num3.png" alt="3번 포도 버튼" onClick="clickContent(3)"/>
-			<img class="numImg" id="numImg04" src="./image/age3_num4.png" alt="4번 아빠 버튼" onClick="clickContent(4)"/>
+			<img class="numImg" id="numImg01" src="./image/age3_num1.png" alt="1번 바나나 버튼" onClick="clickContent(1)"/>
+			<img class="numImg" id="numImg02" src="./image/age3_num2.png" alt="2번 엄마 버튼" onClick="clickContent(2)"/>
+			<img class="numImg" id="numImg03" src="./image/age3_num3.png" alt="3번 아빠 버튼" onClick="clickContent(3)"/>
+			<img class="numImg" id="numImg04" src="./image/age3_num4.png" alt="4번 포도 버튼" onClick="clickContent(4)"/>
 			<div id="click-modal" class="w3-modal modal">
 				<div class="w3-modal-content w3-animate-opacity w3-round-large">
 					<div class="w3-container w3-center">
@@ -120,17 +120,17 @@
 		const audio = document.getElementById('click-content-audio');
 		const source = document.getElementById('click-content-audio-source');
 		if(num == 1){
-			text.innerHTML = "잘 듣고 따라해보세요. '엄마'";
-			source.src = "./audio/Age01/age_01_7_3.wav";
-		}else if(num == 2){
 			text.innerHTML = "잘 듣고 따라해보세요. '바나나'";
 			source.src = "./audio/Age01/age_01_7_5.wav";
+		}else if(num == 2){
+			text.innerHTML = "잘 듣고 따라해보세요. '엄마'";
+			source.src = "./audio/Age01/age_01_7_3.wav";
 		}else if(num == 3){
-			text.innerHTML = "잘 듣고 따라해보세요. '포도'";
-			source.src = "./audio/Age01/age_01_7_6_1.wav";
-		}else if(num == 4){
 			text.innerHTML = "잘 듣고 따라해보세요. '아빠'";
 			source.src = "./audio/Age01/age_01_7_7.wav";
+		}else if(num == 4){
+			text.innerHTML = "잘 듣고 따라해보세요. '포도'";
+			source.src = "./audio/Age01/age_01_7_6_1.wav";
 		}
 		
 		document.getElementById('click-modal').style.display='block';

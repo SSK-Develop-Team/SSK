@@ -34,15 +34,15 @@
 	<div class="select-box w3-col s12 m11 l7 w3-padding"style="margin-bottom:0.5em;">
 		<div class="w3-row"><span class="w3-right" style="font-weight:100;font-size:0.5em;">아동, 파일 추출 단위, 검사 유형을 설정하고 excel export 버튼을 누르세요. 설정에 따라 엑셀 파일(.xlsx)이 생성됩니다.</span></div>
 		<div class="w3-padding"style="background-color:#D9D9D9;">
-			<div class="w3-row w3-margin-top" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">파일 추출 단위</div>
+			<div class="w3-row w3-margin-top" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">파일 단위 선택</div>
 			<div class="w3-row" style="font-size:0.8em;">
 				<div class="w3-row">
-					<div class="w3-quarter w3-padding"><input type="radio" name="exportType" value="child" style="transform:translateY(0.1em);" checked>&nbsp;<label>아동별</label></div>
-					<div class="w3-quarter w3-padding"><input type="radio" name="exportType" value="test" style="transform:translateY(0.1em);">&nbsp;<label>검사별</label></div>
+					<div class="w3-quarter w3-padding"><input type="radio" name="exportType" value="child" style="transform:translateY(0.1em);" checked>&nbsp;<label>아동별 파일</label></div>
+					<div class="w3-quarter w3-padding"><input type="radio" name="exportType" value="test" style="transform:translateY(0.1em);">&nbsp;<label>검사별 파일</label></div>
 				</div>
 			</div>
-
-			<div class="w3-row" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">검사 유형</div>
+			<br>
+			<div class="w3-row" style="font-weight:bold;font-size:0.8em;margin-left:0.3em; margin-bottom:0.3em;">검사&기록 선택</div>
 			<div class="w3-row" style="font-size:0.8em;">
 				<div class="w3-col w3-row">
 					<div class="w3-quarter w3-padding"><input type="checkbox" name="category" value="lang" style="transform:translateY(0.1em);">&nbsp;<label>언어 발달 검사</label></div>
