@@ -191,9 +191,9 @@
 		audio.play();
 	}
 	
-	function content() {  
-		  
-		  cnt = cnt+1;
+	function content() {
+		if(cnt==10) cnt = 10;
+		else cnt = cnt+1;
 		  
 		  if(cnt == 1){
 			audio1.pause();
@@ -310,9 +310,9 @@
           }
 	}     
 	
-	function contentBack() {  
-		  
-		  cnt = cnt-1;
+	function contentBack() {
+		if(cnt==0) cnt = 0;
+		else cnt = cnt-1;
 		  
 		  if(cnt == 0){
 			audio2.pause();
