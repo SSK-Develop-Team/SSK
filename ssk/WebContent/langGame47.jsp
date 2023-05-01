@@ -157,9 +157,9 @@ var cnt = 0;
 		audio.play();
 	}
 	
-	function content() {  
-		  
-		  cnt = cnt+1;
+	function content() {
+		if(cnt==3) cnt = 3;
+		else cnt = cnt+1;
 		  
 		  if(cnt == 1){
 			$(".Quiz01").css('display', 'none');
@@ -190,9 +190,9 @@ var cnt = 0;
         }
 	}     
 	
-	function contentBack() {  
-		  
-		  cnt = cnt-1;
+	function contentBack() {
+		if(cnt==0) cnt = 0;
+		else cnt = cnt-1;
 		  
 		  if(cnt == 0){
 			 	$(".Quiz01").css('display', 'block');
