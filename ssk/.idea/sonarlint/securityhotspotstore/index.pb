@@ -1,6 +1,4 @@
 
-X
-(src/controller/expert/GetExpertHome.java,1\6\16b56beb0dce8b3845d108dc3309a70aae8619c9
 O
 WebContent/css/langGame07_2.css,7\d\7d74f81cef4a8c4186750032b0c6cd0e33162e39
 K
