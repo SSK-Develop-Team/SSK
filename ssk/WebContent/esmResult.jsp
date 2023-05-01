@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import ="java.util.*" %>
-<%@ page import="java.util.*, java.sql.*" %>
-<%@page import="java.util.Calendar" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="model.dto.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +10,7 @@
 <%
 	int positive = (int)request.getAttribute("positive");
 	int negative = (int)request.getAttribute("negative");
+
 %>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -27,9 +23,9 @@ $(window).resize(function(){
 
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['정서 반복 기록', 'Result', {role:"style"}],
-      ['긍정', <%=positive%>, "color : #66cc66"],
-      ['부정', <%=negative%>, "color : #ff6666"]
+      ['정서 반복 기록', '정서', {role:"style"}, {type: 'string', role: 'tooltip', p: {'html': true}}],
+      ['긍정 정서', <%=positive%>, "color : #66cc66",'<div style="width:100px;margin:0px;padding:8px;"><b>긍정 정서 : </b>  <%=positive%></div>'],
+      ['부정 정서', <%=negative%>, "color : #ff6666",'<div style="width:100px;margin:0px;padding:8px;"><b>부정 정서 : </b>  <%=negative%></div>']
     ]);
     
     var view = new google.visualization.DataView(data);
@@ -38,7 +34,7 @@ $(window).resize(function(){
                        sourceColumn: 1,
                        type: "string",
                        role: "annotation" },
-                     2]);
+                     2,3]);
 
     var options = {
       chart: {
@@ -53,6 +49,7 @@ $(window).resize(function(){
     			min : 0
     		}
     	},
+		tooltip: {isHtml: true},
     	legend: 'none'
     };
     
