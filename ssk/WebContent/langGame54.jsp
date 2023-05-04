@@ -152,9 +152,13 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p>싸움, 꼬리, 똥, 짜장면, 빵</p>
+						<p id="answer-text-1" style="display: block;">싸움</p>
+						<p id="answer-text-2" style="display: none;">꼬리</p>
+						<p id="answer-text-3" style="display: none;">똥</p>
+						<p id="answer-text-4" style="display: none;">짜장면</p>
+						<p id="answer-text-5" style="display: none;">빵</p>
 						<audio id="answer-audio" controls>
-							<source src="./audio/Age10/age_10_54_answer.wav">
+							<source id="answer-audio-source" src="./audio/Age10/age_10_54_1_answer.wav">
 						</audio>
 					</div>
 				</div>
@@ -202,6 +206,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
        	 	audio2.load();
@@ -214,8 +219,15 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'block');
+			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-text-4").css('display', 'none');
+			  $("#answer-text-5").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_3_answer.wav");
 	      	audio1.load();
 			audio1.play();
           }
@@ -226,6 +238,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
 	      	audio2.load();
@@ -238,8 +251,15 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'block');
+			  $("#answer-text-4").css('display', 'none');
+			  $("#answer-text-5").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_5_answer.wav");
 	      	audio1.load();
 			audio1.play();
           }
@@ -250,6 +270,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
 	      	audio2.load();
@@ -262,8 +283,15 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-text-4").css('display', 'block');
+			  $("#answer-text-5").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_7_answer.wav");
 	      	audio1.load();
 			audio1.play();
           }
@@ -274,6 +302,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
        	 	audio2.load();
@@ -286,8 +315,15 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-text-4").css('display', 'none');
+			  $("#answer-text-5").css('display', 'block');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_9_answer.wav");
 	      	audio1.load();
 			audio1.play();
           }
@@ -298,7 +334,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
-       	 	$("#answer-button").css('display', 'inline');
+       	 	$("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
        	 	audio2.load();
@@ -321,8 +357,15 @@
        	 	$("#leftbtn").css('display', 'none');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'block');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-text-4").css('display', 'none');
+			  $("#answer-text-5").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_1_answer.wav");
 	      	audio1.load();
 			audio1.play();
           } 
@@ -333,6 +376,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
        	 	audio2.load();
@@ -345,8 +389,15 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'block');
+			  $("#answer-text-4").css('display', 'none');
+			  $("#answer-text-5").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_3_answer.wav");
        	 	audio1.load();
 			audio1.play();
           } 
@@ -357,6 +408,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
        	 	audio2.load();
@@ -369,8 +421,15 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'block');
+			  $("#answer-text-4").css('display', 'none');
+			  $("#answer-text-5").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_5_answer.wav");
        	 	audio1.load();
        	 	audio1.play();
           } 
@@ -381,6 +440,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
        	 	audio2.load();
@@ -393,8 +453,15 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'inline');
        	 	$(".gametext02").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-text-4").css('display', 'block');
+			  $("#answer-text-5").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_7_answer.wav");
        	 	audio1.load();
 			audio1.play();
           } 
@@ -405,6 +472,7 @@
        	 	$("#leftbtn").css('display', 'inline');
        	 	$(".gametext01").css('display', 'none');
        	 	$(".gametext02").css('display', 'inline');
+			  $("#answer-button").css('display', 'none');
 			  $("#hint-text-1").css('display', 'none');
 			  $("#hint-text-2").css('display', 'block');
        	 	audio2.load();
@@ -414,12 +482,19 @@
 			audio2.pause();
 			$(".gameImg09").css('display', 'inline');		
 			$(".Quiz05").css('display', 'none');		
-      $("#leftbtn").css('display', 'inline');
-      $(".gametext01").css('display', 'inline');
-      $(".gametext02").css('display', 'none');
-      $("#answer-button").css('display', 'none');
+      		$("#leftbtn").css('display', 'inline');
+     		 $(".gametext01").css('display', 'inline');
+      		$(".gametext02").css('display', 'none');
+      		$("#answer-button").css('display', 'none');
+			  $("#answer-button").css('display', 'inline');
 			  $("#hint-text-1").css('display', 'block');
 			  $("#hint-text-2").css('display', 'none');
+			  $("#answer-text-1").css('display', 'none');
+			  $("#answer-text-2").css('display', 'none');
+			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-text-4").css('display', 'none');
+			  $("#answer-text-5").css('display', 'block');
+			  $("#answer-audio-source").attr("src" , "./audio/Age10/age_10_54_9_answer.wav");
       audio1.load();
       audio1.play();
           }   
