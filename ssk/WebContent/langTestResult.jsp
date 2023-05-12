@@ -84,17 +84,6 @@ ul.tabs li.current{
 	display: inherit;
 }
 
-.btn{
-	border : 1px solid #1a2a3a;
-	border-radius : 10px;
-	background-color:#1a2a3a;
-	color : white;
-	width : 30%;
-	margin-left : 2%;
-	margin-top : 5%;
-	padding : 1%;
-	align : center;
-}
 
 </style>
 
@@ -158,8 +147,7 @@ ul.tabs li.current{
 			</div>
 
 			<div class="btnbox">
-				<input type="button" class="btn" id="share" value="공유하기">
-				<input type="button" class="btn" id="mainBack" value="돌아가기" onClick="javascript:location.href='childHome.jsp'">
+				<input type="button" class="w3-button w3-right w3-round-large w3-margin-top" style="background-color: #1a2a3a;color:white;"id="mainBack" value="돌아가기" onClick="javascript:location.href='childHome.jsp'">
 			</div>
 		</div>
 	</div>
