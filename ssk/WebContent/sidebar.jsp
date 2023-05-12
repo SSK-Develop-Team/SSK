@@ -52,22 +52,19 @@
 					<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:20px;" onclick="location.href='login.jsp';">로그인</button>				
 				</c:when>
 				<c:when test="${user.userRole eq 'CHILD'}">
-		  			<form id="f" name = "post" action = "logout">
-			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='childHome.jsp'">아동 ${user.userName}&nbsp;님</a>				
-		  			</form>				
+		  			<form id="f" name = "post"></form>
+					<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
+					<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='childHome.jsp'">아동 ${user.userName}&nbsp;님</a>
 				</c:when>
 				<c:when test="${user.userRole eq 'EXPERT'}">
-		  			<form id="f" name = "post" action = "logout">
-			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetExpertHome'">${user.userName}&nbsp;님</a>				
-		  			</form>				
+		  			<form id="f" name = "post" ></form>
+					<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
+					<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetExpertHome'">${user.userName}&nbsp;님</a>
 				</c:when>
 	  			<c:otherwise>
-		  			<form id="f" name = "post" action = "logout">
-			  			<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
-		  				<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetAdminHome'">${user.userName}&nbsp;님</a>				
-		  			</form>
+		  			<form id="f" name = "post" ></form>
+					<button class="w3-bar-item w3-button w3-text-white w3-hover-text-black w3-padding-right w3-right w3-round-xlarge w3-margin-top" style="background-color:#1A2A3A;font-size:1rem;margin-right:30px;" href="javascript:void(0);" onclick="doLogout();">로그아웃</button>
+					<a class="w3-bar-item w3-button w3-hover-none w3-text-black w3-hover-text-blue w3-padding-right w3-right w3-margin-right w3-margin-top"style="font-size:1.1rem;" onclick="location.href='GetAdminHome'">${user.userName}&nbsp;님</a>
 	  			</c:otherwise>
 	  		</c:choose>
 	  		<c:remove var="user" scope="page" />

@@ -5,7 +5,7 @@ function  doLogout() {
 	f.action = "DoLogout"; 
 	f.method = "post";
 	f.submit();
-}
+  }
 }
 function  alertLogin() {
   alert("로그인 후 이용해주세요.");

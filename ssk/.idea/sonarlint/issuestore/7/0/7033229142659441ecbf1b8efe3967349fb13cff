@@ -1,0 +1,45 @@
+
+t
+java:S2293I"YReplace the type specification in this constructor call with the diamond operator ("<>").(¾°–äıÿÿÿÿ
+t
+java:S2293N"YReplace the type specification in this constructor call with the diamond operator ("<>").(¹òÓëøÿÿÿÿ
+o
+java:S2293T"YReplace the type specification in this constructor call with the diamond operator ("<>").(¿İö
+o
+java:S2293U"YReplace the type specification in this constructor call with the diamond operator ("<>").(à¨
+o
+java:S2293f"YReplace the type specification in this constructor call with the diamond operator ("<>").(Êª…‡
+t
+java:S2293g"YReplace the type specification in this constructor call with the diamond operator ("<>").(Û®”›ÿÿÿÿÿ
+g
+java:S1192u"LDefine a constant instead of duplicating this literal "selectIndex" 4 times.(»ëŒæüÿÿÿÿ
+m
+java:S3776+"RRefactor this method to reduce its Cognitive Complexity from 41 to the 15 allowed.(Ïû©Öûÿÿÿÿ
+S
+java:S18544"=Remove this useless assignment to local variable "focusUser".(ıÂş©
+U
+java:S1161+":Add the "@Override" annotation above this method signature(Ïû©Öûÿÿÿÿ
+‡
+java:S1989-"lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(áò‰øÿÿÿÿ
+t
+java:S1989;"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(í£İ‰üÿÿÿÿ
+Y
+java:S1155C">Use isEmpty() to check whether the collection is empty or not.(’è¬Äÿÿÿÿÿ
+k
+java:S1989D"PHandle the following exception that could be thrown by "getWriter": IOException.(ïô†úÿÿÿÿ
+s
+java:S1989{"]Handle the following exception that could be thrown by "orElseThrow": NoSuchElementException.(Êòºí
+W	java:S125€"<This block of commented-out lines of code should be removed.(óØŞäûÿÿÿÿ
+W	java:S125‘"<This block of commented-out lines of code should be removed.(óØŞäûÿÿÿÿ
+B
+java:S1905˜"&Remove this unnecessary cast to "int".(ò ŒĞşÿÿÿÿ
+H
+java:S1905™",Remove this unnecessary cast to "ArrayList".(Ä«£Šøÿÿÿÿ
+C
+java:S1905š",Remove this unnecessary cast to "ArrayList".(¿öã
+x
+java:S1989²"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(ãìÄ
+Q
+java:S1161·":Add the "@Override" annotation above this method signature(‹¨¯¿
+{
+java:S1989¸"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿ

@@ -1,8 +1,6 @@
 
 G
 src/model/dto/User.java,d\2\d27b0acf5c08611b22060bdb9431e2b955c8a119
-G
-WebContent/js/logout.js,1\8\182fa4aa822def5797784e4d59203782688af135
 J
 src/model/dao/UserDAO.java,f\7\f7b97e2fbf4cd64cbe7ad293bc287ea0d3880fe2
 N
@@ -17,3 +15,35 @@ S
 #src/controller/user/DoRegister.java,5\7\574197ecf5f086f3351e18fd1765e0ad6d9d809f
 S
 #src/controller/lang/GetLangLog.java,3\8\3867d6ee3cf54c5f2025b06345222aa2e0e88626
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+_
+/src/controller/lang/GetLangGameNextContent.java,e\8\e86581bf3a84ce8696862d83de265a9fa90d39e0
+J
+WebContent/WEB-INF/web.xml,c\5\c510f2eaee6faa7ce096cfb89f5dcfc359c14265
+O
+WebContent/META-INF/context.xml,d\f\df90d381138e5c0db766859d4856b102942ab647
+K
+WebContent/langGame07_2.jsp,a\e\ae0ae8f5af959311e9a90a075f35eecf2d4fd6d3
+F
+WebContent/esmTest.jsp,4\c\4c03155d8f4408bb188ac8954199fa93cebddeaf
+H
+WebContent/esmResult.jsp,d\0\d0644db989b6132fd4e2ffb343e90c73e18b1b08
+N
+WebContent/js/langGameModal.js,7\0\70a0ec34a03858337815d1ec993f383f129af05c
+I
+WebContent/js/langGame.js,4\b\4b64827d9a0cdea0c72633bcf00c13f93ad05b39
+Y
+)src/controller/lang/GetLangResultAll.java,7\0\7033229142659441ecbf1b8efe3967349fb13cff
+G
+WebContent/langTest.jsp,a\6\a643a8df99887998ebc3ee7e41d5ede0112243f2
+S
+#src/controller/lang/DoLangTest.java,3\e\3e17b8d79993465d28b7985968ed0b4627fcaac8
+T
+$src/controller/lang/GetLangGame.java,0\4\043b30ca8e2a6a544eab990787efe0f9a90c4445
+K
+WebContent/sdqResultAll.jsp,4\c\4c6eac1790c207900d2d11223fde0a2f6a500823
+I
+WebContent/langGame52.jsp,d\b\db15f6b17c3203f2d99f53d7d5061fb99ada224e
+I
+WebContent/langGame53.jsp,7\c\7cc58d2d5aa4093226895a654c803643f078e2d5
