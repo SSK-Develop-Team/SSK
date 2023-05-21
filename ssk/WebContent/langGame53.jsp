@@ -93,8 +93,8 @@
 				<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 					<div class="w3-container w3-center">
 						<span onclick="closeAnswer();" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-						<p id="hint-text-1">1) 고양이는 쥐를 잡아요.</p>
-						<p id="hint-text-2">2) 물고기는 고양이에게 먹혀요.</p>
+						<p id="hint-text-1">고양이는 쥐를 잡아요.</p>
+						<p id="hint-text-2">물고기는 고양이에게 먹혀요.</p>
 					</div>
 				</div>
 			</div>

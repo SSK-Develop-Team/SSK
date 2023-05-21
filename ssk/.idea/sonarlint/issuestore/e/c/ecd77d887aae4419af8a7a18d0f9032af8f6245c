@@ -1,0 +1,16 @@
+
+t
+java:S2293""YReplace the type specification in this constructor call with the diamond operator ("<>").(ƒ…¦¥ùÿÿÿÿ
+‹
+java:S1319!"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¸‘¸ªøÿÿÿÿ
+j
+java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ù§íùûÿÿÿÿ
+j
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(×Èð¶üÿÿÿÿ
+U
+java:S1118
+":Add a private constructor to hide the implicit public one.(é¿ûŠÿÿÿÿÿ
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ÍøÚ±
+[
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ÛÐš×

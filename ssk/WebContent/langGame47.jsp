@@ -123,6 +123,9 @@
 						<p id="answer-text-1">2개</p>
 						<p id="answer-text-2" style="display: none">4송이</p>
 						<p id="answer-text-3" style="display: none">3마리</p>
+						<audio id="answer-audio" controls>
+							<source id="answer-audio-source" src="./audio/Age09/age_09_47_answer_1.wav">
+						</audio>
 					</div>
 				</div>
 			</div>
@@ -139,7 +142,8 @@ var cnt = 0;
 	
 	//음성 재생
 	window.onload = function () {
-		var audio = new Audio('./audio/Age10/age_09_47_1.wav');
+		var audio = new Audio('./audio/Age09/age_09_47_1.wav');
+		audio.load();
 		audio.play();
 	}
 	
@@ -170,6 +174,7 @@ var cnt = 0;
 			  $("#answer-text-1").css('display', 'none');
 			  $("#answer-text-2").css('display', 'block');
 			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age09/age_09_47_answer_2.wav");
     		var audio = new Audio('./audio/Age09/age_09_47_2.wav');
     		audio.play();
         }
@@ -181,6 +186,7 @@ var cnt = 0;
 			  $("#answer-text-1").css('display', 'none');
 			  $("#answer-text-2").css('display', 'none');
 			  $("#answer-text-3").css('display', 'block');
+			  $("#answer-audio-source").attr("src" , "./audio/Age09/age_09_47_answer_3.wav");
 	      		var audio = new Audio('./audio/Age09/age_09_47_2.wav');
 	      		audio.play();
 	       } 
@@ -203,6 +209,7 @@ var cnt = 0;
 			  $("#answer-text-1").css('display', 'block');
 			  $("#answer-text-2").css('display', 'none');
 			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age09/age_09_47_answer_1.wav");
 	      		var audio = new Audio('./audio/Age09/age_09_47_1.wav');
 	      		audio.play();
 	          }
@@ -214,6 +221,7 @@ var cnt = 0;
 			  $("#answer-text-1").css('display', 'none');
 			  $("#answer-text-2").css('display', 'block');
 			  $("#answer-text-3").css('display', 'none');
+			  $("#answer-audio-source").attr("src" , "./audio/Age09/age_09_47_answer_2.wav");
 	      		var audio = new Audio('./audio/Age09/age_09_47_2.wav');
 	      		audio.play();
 	       	} 

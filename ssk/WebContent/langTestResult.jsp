@@ -21,30 +21,24 @@
 * 전문가가 아동의 결과를 조회하는 경우 currUser == expert , focusUser == child
 * 아동이 자신의 결과를 조회하는 경우 currUser == focusUser == child
 */
-	User focusUser = (User)request.getAttribute("focusUser"); 
-	User currUser = (User)session.getAttribute("currUser");
+	User focusUser = (User)request.getAttribute("focusUser");
 	String name = focusUser.getUserName();
 
-	ArrayList<LangTestLog> langTestLogList = (ArrayList<LangTestLog>)request.getAttribute("langTestLogList");
-	ArrayList<Integer> langTestLogIDList = (ArrayList<Integer>)request.getAttribute("langTestLogIDList");
-	ArrayList<ArrayList<LangReply>> allLangReplyList = (ArrayList<ArrayList<LangReply>>)request.getAttribute("allLangReplyList");
-	ArrayList<Integer> allAgeGroupIDList = (ArrayList<Integer>)request.getAttribute("allAgeGroupIDList");
 	ArrayList<Integer> ageGroupSet = (ArrayList<Integer>)request.getAttribute("ageGroupSet");
 	
 	boolean isTesting = (boolean)request.getAttribute("isTesting");
 	int selectIndex = 0;
-	
-	LangTestLog selectedLangTestLog = (LangTestLog)request.getAttribute("selectedLangTestLog");
+
 	int selectAgeGroupId = (int)request.getAttribute("selectAgeGroupId");
 	ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)request.getAttribute("selectLangReplyList");
 	ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)request.getAttribute("selectLangQuestionList");
-	
-	ArrayList<ArrayList<LangReply>> langReplyContentListByUser = (ArrayList<ArrayList<LangReply>>)request.getAttribute("langReplyContentListByUser");
+
 	ArrayList<LangTestLog> langLogListByUser = (ArrayList<LangTestLog>)request.getAttribute("langLogListByUser");
 	
 	if(request.getAttribute("selectIndex") != null) selectIndex = (int)request.getAttribute("selectIndex");
-	
-	
+	String[] ageGroupStr = new String[]{"3세 0개월 ~ 3세 3개월", "3세 4개월 ~ 3세 5개월", "3세 6개월 ~ 3세 8개월", "3세 9개월 ~ 3세 11개월", "4세 0개월 ~ 4세 3개월",
+			"4세 4개월 ~ 4세 7개월", "4세 8개월 ~ 4세 11개월", "5세 0개월 ~ 5세 5개월", "5세 6개월 ~ 5세 11개월", "6세 0개월 ~ 6세 5개월", "6세 6개월 ~ 6세 11개월",
+			"7세 0개월 ~ 7세 11개월", "8세 0개월 ~ 8세 11개월", "9세 0개월 ~ 9세 11개월", ""};
 %>
 <style>
 
@@ -84,17 +78,6 @@ ul.tabs li.current{
 	display: inherit;
 }
 
-.btn{
-	border : 1px solid #1a2a3a;
-	border-radius : 10px;
-	background-color:#1a2a3a;
-	color : white;
-	width : 30%;
-	margin-left : 2%;
-	margin-top : 5%;
-	padding : 1%;
-	align : center;
-}
 
 </style>
 
@@ -112,10 +95,10 @@ ul.tabs li.current{
 	<c:when test="${isTesting ne true}">
 		<div class="w3-col s10 m8 l4">
 			<div class="w3-dropdown-hover"style="width:100%;">
-			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=selectAgeGroupId%>단계</button>
+			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=ageGroupStr[selectAgeGroupId]%></button>
 			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
 			      <%for(int i = 0; i < ageGroupSet.size() ; i++){ %>
-			      <a href="GetLangLog?ageGroupId=<%=ageGroupSet.get(i)%>" class="w3-bar-item w3-button"style="width:100%;"><%=ageGroupSet.get(i).toString()%>단계</a>
+			      <a href="GetLangLog?ageGroupId=<%=ageGroupSet.get(i)%>" class="w3-bar-item w3-button"style="width:100%;"><%=ageGroupStr[ageGroupSet.get(i)]%></a>
 			      <%} %>
 			    </div>
 		    </div>
@@ -138,7 +121,7 @@ ul.tabs li.current{
 	</c:otherwise>
 	</c:choose>
 
-	<c:remove var="selectedIndex" scope="page"/>
+	<c:remove var="selectedIndex" scope="page"/>'
 
   </div>
 <div class="w3-row">
@@ -158,8 +141,7 @@ ul.tabs li.current{
 			</div>
 
 			<div class="btnbox">
-				<input type="button" class="btn" id="share" value="공유하기">
-				<input type="button" class="btn" id="mainBack" value="돌아가기" onClick="javascript:location.href='childHome.jsp'">
+				<input type="button" class="w3-button w3-right w3-round-large w3-margin-top" style="background-color: #1a2a3a;color:white;"id="mainBack" value="돌아가기" onClick="javascript:location.href='childHome.jsp'">
 			</div>
 		</div>
 	</div>
@@ -235,7 +217,7 @@ ul.tabs li.current{
         	            beginAtZero: true,
         	            min: 0,
         	            stepSize : 1,
-        	            max: 5
+        	            max: 4
         	        }
         	    },
    				legend: {

@@ -58,9 +58,11 @@ public class DoLangTest extends HttpServlet {
 		// 2. 테스트 결과 저장
 		ArrayList<LangReply> langReplyList = new ArrayList<LangReply>();
 
-		if (request.getParameter("reply0") != null && request.getParameter("reply1") != null
+		if ((request.getParameter("reply0") != null && request.getParameter("reply1") != null
 				&& request.getParameter("reply2") != null && request.getParameter("reply3") != null
-				&& request.getParameter("reply4") != null) {
+				&& request.getParameter("reply4") != null)||(request.getParameter("reply0") != null && request.getParameter("reply1") != null
+				&& request.getParameter("reply2") != null && request.getParameter("reply3") != null && langQuestionList.get(4).getLangQuestionId() == 50)) {
+
 
 			LangTestLogDAO.insertLangTestLog(conn, langTestLog);
 
@@ -68,7 +70,11 @@ public class DoLangTest extends HttpServlet {
 				LangReply langReply = new LangReply();
 				langReply.setLangTestLogId(langTestLog.getLangTestLogId());
 				langReply.setLangQuestionId(langQuestionList.get(i).getLangQuestionId());
-				langReply.setLangReplyContent(Integer.parseInt(request.getParameter("reply" + i)));
+				if(langQuestionList.get(4).getLangQuestionId() == 50 && i == 4){
+					langReply.setLangReplyContent(0);
+				}else{
+					langReply.setLangReplyContent(Integer.parseInt(request.getParameter("reply" + i)));
+				}
 				if (LangReplyDAO.insertLangReply(conn, langReply)) {
 					System.out.println(i + "번째 응답 삽입 성공");
 					langReplyList.add(langReply);

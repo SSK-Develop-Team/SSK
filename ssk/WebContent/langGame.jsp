@@ -87,7 +87,7 @@
 	</div>
 	<div class="w3-col w3-hide-small m1 l3">&nbsp;</div>
 </div>
-
+</div>
 </body>
 <script>
 	window.onload = function () {
@@ -98,6 +98,7 @@
 				setTimeout(() => getNextContent(<%=i%>,<%=gameID%>,<%=langGameList.size()%>),2000);
 			});
 		}
+		audio.load();
 		audio.play();
 	}
 </script>
