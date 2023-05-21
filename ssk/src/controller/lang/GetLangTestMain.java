@@ -1,4 +1,4 @@
-package controller.user;
+package controller.lang;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,22 +13,25 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import model.dto.AgeGroup;
 import model.dto.User;
+import model.sevice.AgeGroupService;
 import util.process.UserInfoProcessor;
 import model.dao.AgeGroupDAO;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
- * 해당 아동의 AgeGroup 구하기
+ * - 해당 아동의 AgeGroup, 전체 AgeGroup 구하기
  */
 
 
-@WebServlet("/GetUserAgeGroup")
-public class getUserAgeGroup extends HttpServlet {
+@WebServlet("/GetLangTestMain")
+public class GetLangTestMain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public getUserAgeGroup() {
+    public GetLangTestMain() {
         super();
     }
 
@@ -43,11 +46,16 @@ public class getUserAgeGroup extends HttpServlet {
 		
 		Date userBirth = currUser.getUserBirth();
 		int nowAge = UserInfoProcessor.getUserBirthToCurrAge(userBirth);
+		System.out.println("nowAge" + nowAge);
 		
-		int curAgeGroup = AgeGroupDAO.getCurrAge(con, nowAge);
+		AgeGroup currAgeGroup = AgeGroupDAO.getCurrAgeGroup(con, nowAge);
+		System.out.println("currAgeGroup : " + currAgeGroup.getAgeGroupId());
+		ArrayList<AgeGroup> selectableAgeGroupList = AgeGroupService.getSelectableAgeGroupList(con, currAgeGroup);
+		System.out.println("selectableAgeGroupList : " + selectableAgeGroupList.size());
 
-		session.setAttribute("curAge", curAgeGroup);
-		
+		session.setAttribute("currAgeGroup", currAgeGroup);
+		session.setAttribute("selectableAgeGroupList", selectableAgeGroupList);
+
 		RequestDispatcher rd = request.getRequestDispatcher("/langTestMain.jsp");
 		rd.forward(request, response);
 	}

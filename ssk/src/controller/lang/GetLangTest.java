@@ -14,6 +14,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 import model.dao.LangQuestionDAO;
+import model.dto.AgeGroup;
 import model.dto.LangQuestion;
 
 /**
@@ -36,26 +37,21 @@ public class GetLangTest extends HttpServlet {
 
 		ServletContext sc = getServletContext();
 		Connection con = (Connection)sc.getAttribute("DBconnection");
-		int nowAge = (int)session.getAttribute("curAge");
 
-		
-		/**
-		 * childHome의 selectModal에서 option값을 받아온 후, value에 맞는 selectAge를 할당, 세션에 저장
-		 * */
-		
-		
-		String selectOption="";
-		int selectAge = 0;
-		
 		session.removeAttribute("langProgList");//이전에 저장된 응답 세션 삭제 
-		
-		if(request.getParameter("ageGroup")!=null) {//ageGroup 선택 
-			selectOption = request.getParameter("ageGroup"); 
 
-			if(selectOption.equals("prev2Age")) selectAge = nowAge - 2;
-			else if(selectOption.equals("prevAge")) selectAge = nowAge - 1;
-			else if(selectOption.equals("curAge")) selectAge = nowAge;		
-		} else selectAge = nowAge;
+		System.out.println("ageGroup"+request.getParameter("ageGroup"));
+
+		AgeGroup currAgeGroup = (AgeGroup) session.getAttribute("currAgeGroup");
+		int selectAge = currAgeGroup.getAgeGroupId();
+		
+		if(selectAge == 14){//13단계에 포함되지 않는 아동인 경우
+			selectAge = 13;
+		}
+		
+		if(request.getParameter("ageGroup")!=null){//다른 연령을 선택한 경우
+			selectAge = Integer.parseInt(request.getParameter("ageGroup"));
+		}
 		
 		ArrayList<LangQuestion> currQuestionList = LangQuestionDAO.getLangQuestionListByAgeGroupId(con, selectAge);
 		

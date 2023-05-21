@@ -47,7 +47,7 @@
 		position : relative;
 	}
 	
-	#answer-button { display : none ;}
+	#answer-button { display : inline ;}
 	
 
 	.select01{

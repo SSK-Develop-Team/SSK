@@ -130,7 +130,7 @@
 		<div style="font-size:1em;font-weight:bold;">직접평가 #<%=gameID%></div>
 		<div>
 			<div class="townBack">
-				<img class="gameImg01" src="./image/LangGameImg/Age11/LangGame11_1_5.png" width="100%" height="100%" alt="마을의 전경, 교차로 네 개가 있고 건물이 아홉개가 있는 구조."/>
+				<img class="gameImg01" src="./image/LangGameImg/Age11/LangGame11_1_6.png" width="100%" height="100%" alt="마을의 전경, 교차로 네 개가 있고 건물이 아홉개가 있는 구조."/>
 				<button class="w3-button" id="select01" onclick='wrongA()'>커피하우스</button>	
 				<button class="w3-button" id="select02" onclick='wrongA()'>멋쟁이이발소</button>	
 				<button class="w3-button" id="select03" onclick='correctA()'>쌍둥이빵집</button>	

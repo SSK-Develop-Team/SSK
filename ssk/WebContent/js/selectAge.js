@@ -13,3 +13,23 @@ function ageSelectClose(){
 	document.getElementById('ageSelect').style.display='none';
 }
 
+function modalOpen(){
+	$(".modal").css('display', 'block');
+	$(".modalLayer").css('display', 'block');
+}
+
+function selectModalOpen(){
+	$(".modal").css('display', 'none');
+	$(".selectModal").css('display', 'block');
+	$(".modalLayer").css('display', 'block');
+}
+
+function modalClose(){
+	$(".modal").css('display', 'none');
+	$(".modalLayer").css('display', 'none');
+}
+
+function selectModalClose(){
+	$(".selectModal").css('display', 'none');
+	$(".modalLayer").css('display', 'none');
+}

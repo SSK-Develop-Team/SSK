@@ -5,7 +5,6 @@
 <%@ page import="model.dto.User"%>
 
 <%
-	User currUser = (User) session.getAttribute("currUser");
 	String currNumStr="";
 
 	ArrayList<LangQuestion> currQuestionList = (ArrayList<LangQuestion>)session.getAttribute("currQuestionList");
@@ -25,13 +24,8 @@
 <meta charset="UTF-8">
 <title>언어 발달 평가</title>
 <style>
-.question {
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
 .select {
-	font-size: 1em;
+	font-size: 1rem;
 	text-align: center;
 }
 
@@ -49,6 +43,12 @@
 .textBox{
 	font-size : 1.2em;
 	text-align: center;
+}
+#reply{
+	margin:0.75em;
+}
+.reply-content{
+	font-size: 0.9rem;
 }
 
 </style>
@@ -81,7 +81,7 @@
 							<div class="testNum"><b><%=currNumStr%></b></div>
 							<div class="w3-row w3-margin">
 								<div class="w3-col s12 m9 l10" style="background: #F4F4F4;">
-									<div class="w3-margin w3-center"><%="우리 아이는 "  + currQuestionList.get(i).getLangQuestionContent() %></div>
+									<div class="w3-margin w3-center question-content"><%="우리 아이는 "  + currQuestionList.get(i).getLangQuestionContent() %></div>
 								</div>
 								<div class="w3-col s5 m3 l2 w3-right" style="padding-top:16px;padding-bottom:16px;padding-left:8px;">
 									<div class="w3-button w3-round-large w3-padding" style="background-color:#51459E;color:white;padding:0px;" onclick="selectGame(<%=gameID%>);">게임하고 오기</div>
@@ -89,25 +89,25 @@
 							</div>
 						</div>
 						<div class="w3-row w3-margin">
-							<div class="w3-col m3 l2">
-								<%if(langProgList.get(i) == 1){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1" checked="checked">
-								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="1"> <%} %>
-								<label>못한다</label>
+							<div class="w3-col m3 l3">
+								<%if(langProgList.get(i) == 1){ %> <input type="radio" class="reply w3-radio" name="reply<%=i%>" value="1" checked="checked">
+								<%} else {%><input type="radio" class="reply w3-radio" name="reply<%=i%>" value="1"> <%} %>
+								<label class="reply-content">전혀 못한다 (0%)</label>
 							</div>
 							<div class="w3-col m3 l3">
-								<%if(langProgList.get(i) == 2){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2" checked="checked">
-								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="2"> <%} %>
-								<label>할 수 있다</label>
+								<%if(langProgList.get(i) == 2){ %> <input type="radio" class="reply w3-radio" name="reply<%=i%>" value="2" checked="checked">
+								<%} else {%><input type="radio" class="reply w3-radio" name="reply<%=i%>" value="2"> <%} %>
+								<label class="reply-content">조금 할 수 있다 (30%)</label>
 							</div>
-							<div class="w3-col m3 l2">
-								<%if(langProgList.get(i) == 3){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3" checked="checked">
-								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="3"> <%} %>
-								<label>잘한다</label>
+							<div class="w3-col m2 l2">
+								<%if(langProgList.get(i) == 3){ %> <input type="radio" class="reply w3-radio" class="reply" name="reply<%=i%>" value="3" checked="checked">
+								<%} else {%><input type="radio" class="reply w3-radio" name="reply<%=i%>" value="3"> <%} %>
+								<label class="reply-content">잘한다 (60%)</label>
 							</div>
 							<div class="w3-col m3 l3">
-								<%if(langProgList.get(i) == 4){ %> <input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4" checked="checked">
-								<%} else {%><input type="radio" class="question w3-radio" id="reply" name="reply<%=i%>" value="4"> <%} %>
-								<label>매우 잘한다</label>
+								<%if(langProgList.get(i) == 4){ %> <input type="radio" class="reply w3-radio" name="reply<%=i%>" value="4" checked="checked">
+								<%} else {%><input type="radio" class="reply w3-radio" name="reply<%=i%>" value="4"> <%} %>
+								<label class="reply-content">매우 잘한다 (100%)</label>
 							</div>
 							<div class="w3-col w3-hide-small m2 l2"></div>
 						</div>

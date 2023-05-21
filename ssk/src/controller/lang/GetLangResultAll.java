@@ -20,10 +20,7 @@ import model.dao.LangQuestionDAO;
 import model.dao.LangReplyDAO;
 import model.dao.LangTestLogDAO;
 import model.dao.UserDAO;
-import model.dto.LangQuestion;
-import model.dto.LangReply;
-import model.dto.LangTestLog;
-import model.dto.User;
+import model.dto.*;
 import util.process.UserInfoProcessor;
 
 /**
@@ -49,12 +46,13 @@ public class GetLangResultAll extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		
-		User focusUser = new User();
+		User focusUser;
 		int curAge = 0;
 	 	
 	 	if(request.getParameter("childId")==null) {//아동이 로그인한 상태 : 자신의 아이디를 parameter로 보내지 않았을 때
-	 		focusUser = (User)session.getAttribute("currUser");
-	 		curAge = (int)session.getAttribute("curAge");
+			 focusUser = (User)session.getAttribute("currUser");
+			 AgeGroup currAgeGroup = (AgeGroup)session.getAttribute("currAgeGroup");
+			 curAge = currAgeGroup.getAgeGroupId();
 		}else{
 			int childId = Integer.parseInt(request.getParameter("childId"));
 		 	focusUser  = UserDAO.getUserById(conn, childId);

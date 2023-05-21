@@ -2,15 +2,13 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="model.dto.User" %>
+<%@ page import="java.util.ArrayList" %>
 
 <% 
 	User currUser = (User)session.getAttribute("currUser"); 
 	String name = currUser.getUserName();	
-	int curAge = (int)session.getAttribute("curAge");
-	
-	int prevAge = 0;
-	int prev2Age = 0;
-
+	AgeGroup currAgeGroup = (AgeGroup)session.getAttribute("currAgeGroup");
+	ArrayList<AgeGroup> selectableAgeGroupList = (ArrayList<AgeGroup>)session.getAttribute("selectableAgeGroupList");
 %>
 
 <!DOCTYPE html>
@@ -18,7 +16,7 @@
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<!-- <link rel="stylesheet" href="css/selectAgeModal.css" type='text/css' > -->
+
 <title>언어 발달 평가</title>
 </head>
 <body>
@@ -49,15 +47,10 @@
 	</button>
 </div>
 
-<%	
-	prevAge = curAge - 1;
-	prev2Age = curAge - 2;
-	
-	if(prevAge < 0) prevAge = 14;
-	if(prev2Age < 0) prev2Age = 14;
+<%
 	
 	String[] ageStr = new String[]{"3세 0개월 ~ 3세 3개월", "3세 4개월 ~ 3세 5개월", "3세 6개월 ~ 3세 8개월", "3세 9개월 ~ 3세 11개월", "4세 0개월 ~ 4세 3개월",
-			"4세 4개월 ~ 4세 7개월", "4세 8개월 ~ 4세 11개월", "5세 0개월 ~ 5세 5개월", "5세 6개월 ~ 5세 11개월", "6세 0개월 ~ 6세 5개월", "6세 0개월 ~ 6세 11개월", 
+			"4세 4개월 ~ 4세 7개월", "4세 8개월 ~ 4세 11개월", "5세 0개월 ~ 5세 5개월", "5세 6개월 ~ 5세 11개월", "6세 0개월 ~ 6세 5개월", "6세 6개월 ~ 6세 11개월", 
 			"7세 0개월 ~ 7세 11개월", "8세 0개월 ~ 8세 11개월", "9세 0개월 ~ 9세 11개월", ""};
 	
 	if(name.length() == 3){
@@ -71,8 +64,6 @@
 	char lastName = name.charAt(name.length() - 1);
 	int index = (lastName - 0xAC00) % 28;
 	if(index > 0) name = name + "이";
-	
-	session.setAttribute("curAge", curAge);
 %>
 
 	<!-- 연령 선택용 모달 -->
@@ -80,72 +71,50 @@
 		<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
 			<div class="w3-container w3-center">
 				<span onclick="ageCheckClose()" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-				<p>현재 <%=name%>의 테스트 단계는 <span><%=curAge%></span>입니다.</p> 
-				<p>(<%=ageStr[curAge] %>)</p>
-				<p>해당 단계를 진행하시겠습니까?</p>
-				<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#4d4d4d;color:white;font-size:1.3em;"onClick="ageSelect()">다른 단계 진행</button>
-				<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"onClick="location.href='GetLangTest'">해당 단계 진행</button>
+				<%if(currAgeGroup.getAgeGroupId()<14){%>
+					<p>현재 <%=name%>의 테스트 단계는 <span><%=currAgeGroup.getAgeGroupId()%></span>입니다.</p>
+					<p>(<%=ageStr[currAgeGroup.getAgeGroupId()] %>)</p>
+					<p>해당 단계를 진행하시겠습니까?</p>
+					<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#4d4d4d;color:white;font-size:1.3em;"onClick="ageSelect()">다른 단계 진행</button>
+					<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"onClick="location.href='GetLangTest'">해당 단계 진행</button>
+				<%}else{%>
+					<p>현재 <%=name%>님은 모든 테스트 단계를 진행할 수 있습니다.</p>
+					<p>(<%=ageStr[13] %>)</p>
+					<p>해당 단계를 진행하시겠습니까?</p>
+					<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#4d4d4d;color:white;font-size:1.3em;"onClick="ageSelect()">다른 단계 진행</button>
+					<button class="w3-button w3-padding-16 w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"onClick="location.href='GetLangTest'">해당 단계 진행</button>
+				<%}%>
 			</div>
 		</div>
 	</div>
 	
 	<form method="get" class = "selectModal" action="GetLangTest">
 		<div id="ageSelect" class="w3-modal">
-		<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
-			<div class="w3-container w3-center">
-				<span onclick="ageSelectClose()" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
-				<p>평가를 진행할 단계를 선택해주세요.</p> 
-				
-				<select id = "ageGroupSelect" name="ageGroup" style="font-size:1.3em;">
-				<%if(prev2Age>=0){ %>
-				    <option value="prev2Age"><%=ageStr[prev2Age] %></option>
-				    <%}
-				if(prevAge>=0){ %>
-				    <option value="prevAge"><%=ageStr[prevAge] %></option>
-				    <%} %>
-				    <option value="curAge" selected="selected"><%=ageStr[curAge] %> (현재 단계)</option>
-				</select>
-				
-				<button class="w3-button w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"type="submit"">확인</button>
+			<div class="w3-modal-content w3-animate-opacity w3-round-large modal-content">
+				<div class="w3-container w3-center">
+					<span onclick="ageSelectClose()" class="w3-button w3-display-topright w3-round-xxlarge">&times;</span>
+					<p>평가를 진행할 단계를 선택해주세요.</p>
+
+					<select id = "ageGroupSelect" name="ageGroup" style="font-size:1.3em;">
+						<%for(AgeGroup a : selectableAgeGroupList){
+							if(a.getAgeGroupId()==currAgeGroup.getAgeGroupId()){
+						%>
+								<option value="<%=currAgeGroup.getAgeGroupId()%>" selected="selected"><%=ageStr[currAgeGroup.getAgeGroupId()] %> (현재 단계)</option>
+							<%}else{%>
+								<option value="<%=a.getAgeGroupId()%>"><%=ageStr[a.getAgeGroupId()] %></option>
+							<%}
+						 }%>
+					</select>
+
+					<button class="w3-button w3-margin w3-round-large" style="background-color:#51459E;color:white;font-size:1.3em;"type="submit">확인</button>
+				</div>
 			</div>
 		</div>
-	</div>
 	</form>
 	
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
 <script type="text/javascript" src="js/selectAge.js" charset="UTF-8"></script>
-<script type="text/javascript">
-
-	function modalOpen(){
-		$(".modal").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-	}
-	
-	function selectModalOpen(){
-		$(".modal").css('display', 'none');
-		$(".selectModal").css('display', 'block');
-		$(".modalLayer").css('display', 'block');
-
-		if(<%=prevAge%> === 14){
-			$('#ageGroupSelect').children("[value='prevAge']").remove();
-		}
-		
-		if(<%=prev2Age%> === 14){
-			$('#ageGroupSelect').children("[value='prev2Age']").remove();
-		}
-	}
-
-	function modalClose(){
-		$(".modal").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}	
-
-	function selectModalClose(){
-		$(".selectModal").css('display', 'none');
-		$(".modalLayer").css('display', 'none');
-	}	
-</script>
 
 </html>

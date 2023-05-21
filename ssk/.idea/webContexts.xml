@@ -5,6 +5,8 @@
       <map>
         <entry key="file://$PROJECT_DIR$/WebContent/esmTestProfileByTime.jsp" value="file://$PROJECT_DIR$/WebContent" />
         <entry key="file://$PROJECT_DIR$/WebContent/langGame.jsp" value="file://$PROJECT_DIR$/WebContent" />
+        <entry key="file://$PROJECT_DIR$/WebContent/langTest.jsp" value="file://$PROJECT_DIR$/WebContent" />
+        <entry key="file://$PROJECT_DIR$/WebContent/langTestMain.jsp" value="file://$PROJECT_DIR$/WebContent" />
       </map>
     </option>
   </component>
