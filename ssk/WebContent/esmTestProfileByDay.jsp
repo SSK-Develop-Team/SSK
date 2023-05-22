@@ -139,24 +139,29 @@
 		<c:remove var="selectedIndex" scope="page"/>
 		<div class="w3-col s1 m2 l4">&nbsp;</div>
    </div>
-
-	<div class="w3-dropdown-hover w3-right">
-		<button class="w3-button"><%=startDayOfWeekOptionList[startDayOfWeek-1]%></button>
-		<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-			<%for(int i=0;i<startDayOfWeekOptionList.length;i++){%>
-			<a href="GetEsmTestProfileByDay?date=<%=dateWeekList.get(indexOfDate).getDate().toString()%>&childId=<%=focusUser.getUserId()%>&startDayOfWeek=<%=i+1%>" class="w3-bar-item w3-button"><%=startDayOfWeekOptionList[i]%></a>
-			<%}%>
+	<div class="w3-row">&nbsp;</div>
+	<div class="w3-row">
+		<div class="w3-col s1 m2 l2">&nbsp;</div>
+		<div class="w3-col s10 m8 l8">
+			<div class="w3-dropdown-hover w3-right" style="border:1px solid #C4C4C4;border-radius:10px;background-color:#EBEBEB;">
+				<button class="w3-button w3-hover-white" style="border:1px solid #C4C4C4;border-radius:10px;background-color:#EBEBEB;font-size:0.9em;"><%=startDayOfWeekOptionList[startDayOfWeek-1]%></button>
+				<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;font-size:0.9em;">
+					<%for(int i=0;i<startDayOfWeekOptionList.length;i++){%>
+					<a href="GetEsmTestProfileByDay?date=<%=dateWeekList.get(indexOfDate).getDate().toString()%>&childId=<%=focusUser.getUserId()%>&startDayOfWeek=<%=i+1%>" class="w3-bar-item w3-button"><%=startDayOfWeekOptionList[i]%></a>
+					<%}%>
+				</div>
+			</div>
 		</div>
+		<div class="w3-col s1 m2 l2">&nbsp;</div>
 	</div>
-
 
 	<!-- 시간별 그래프 뷰 -->
 	<div class="w3-row">
-		<div class="w3-col m1 l1">&nbsp;</div>
+		<div class="w3-col w3-hide-small m1 l1">&nbsp;</div>
 		<div class="w3-col s12 m10 l10">
 			<div id="esmProfileChart" style="width:100%;height: 60vh;"></div>
 		</div>
-		<div class="w3-col m1 l1">&nbsp;</div>
+		<div class="w3-col w3-hide-small m1 l1">&nbsp;</div>
 	</div>
 	
 	<!-- page redirect button -->

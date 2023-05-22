@@ -42,18 +42,30 @@ public class EsmProcessor {
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(currDate);
-		int dayOfTheWeek = cal.get(Calendar.DAY_OF_WEEK);
+		int sdayOfTheWeek = cal.get(Calendar.DAY_OF_WEEK);//현재 일자의 요일 번호
 
-		System.out.println("dayOfTheWeek"+dayOfTheWeek);
-		System.out.println("currDate.toString()"+currDate.toString());
-		for(int i=dayOfWeek ; i<=dayOfWeek+6 ; i++) {
+		//1. 현재 요일이 요구한 요일보다 앞인 경우 ex) 일요일(1), 목요일(5)
+		if(sdayOfTheWeek < dayOfWeek ){
+			for(int i=dayOfWeek-7 ; i<dayOfWeek ; i++) {
+				if(i==sdayOfTheWeek) {
+					dateListOfWeek.add(currDate);
+				}else {
+					cal.add(Calendar.DATE, i-sdayOfTheWeek);
+					dateListOfWeek.add(new Date(cal.getTimeInMillis()));
+					cal.add(Calendar.DATE, -i+sdayOfTheWeek);
+				}
+			}
 
-			if(i==dayOfTheWeek) {
-				dateListOfWeek.add(currDate);
-			}else {
-				cal.add(Calendar.DATE, i-dayOfTheWeek);
-				dateListOfWeek.add(new Date(cal.getTimeInMillis()));
-				cal.add(Calendar.DATE, -i+dayOfTheWeek);
+		}else{//2. 현재 요일이 요구한 요일보다 뒤인 경우 ex) 수요일(4), 월요일(2)
+			for(int i=dayOfWeek ; i<=dayOfWeek+6 ; i++) {
+
+				if(i==sdayOfTheWeek) {
+					dateListOfWeek.add(currDate);
+				}else {
+					cal.add(Calendar.DATE, i-sdayOfTheWeek);
+					dateListOfWeek.add(new Date(cal.getTimeInMillis()));
+					cal.add(Calendar.DATE, -i+sdayOfTheWeek);
+				}
 			}
 		}
 
