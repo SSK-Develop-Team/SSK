@@ -151,4 +151,23 @@ public class EsmTestLogDAO {
 			return null;
 		}
 	}
+
+	/*사용자 최근 정서 발달 기록 조회*/
+	public static EsmTestLog getRecentEsmTestLogListByUserId(Connection con, int userId){
+		EsmTestLog esmTestLog = null;
+		try {
+			PreparedStatement pstmt = con.prepareStatement("select * from esm_test_log where user_id = ? ORDER BY esm_test_date DESC, esm_test_time DESC LIMIT 0, 1;");
+			pstmt.setInt(1, userId);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				esmTestLog = new EsmTestLog(rs.getInt(2),rs.getDate(3),rs.getTime(4));
+				esmTestLog.setEsmTestLogId(rs.getInt(1));
+			}
+			return esmTestLog;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
