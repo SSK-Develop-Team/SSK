@@ -5,24 +5,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EsmProcessor {
-	/**
-	 * 날짜의 요일 번호를 받아오는 함수(Sunday = 1, Monday = 2, ..., Saturday = 7)
-	 * @param currDate
-	 * @return 요일 번호
-	 */
-	public static int getDayOfTheWeek(Date currDate) {
-		Calendar currCal = Calendar.getInstance();
-		currCal.setTime(currDate);
-		int dayOfTheWeek = currCal.get(Calendar.DAY_OF_WEEK);
-		return dayOfTheWeek;
-	}
+
 	
 	/**
 	 * 날짜에 해당하는 주의 모든 날짜 정보를 리스트로 받아오는 함수
 	 * @param currDate
 	 * @return ArrayList<Date>
 	 */
-	public static ArrayList<Date> getDateListOfWeek(Date currDate){
+	/*public static ArrayList<Date> getDateListOfWeek(Date currDate){
 		ArrayList<Date> dateListOfWeek = new ArrayList<Date>();
 		
 		Calendar cal = Calendar.getInstance();
@@ -33,13 +23,68 @@ public class EsmProcessor {
 			if(i==dayOfTheWeek) {
 				dateListOfWeek.add(currDate);
 			}else {
-				cal.add(Calendar.DATE, i-dayOfTheWeek);
-				dateListOfWeek.add(new Date(cal.getTimeInMillis()));
-				cal.add(Calendar.DATE, -i+dayOfTheWeek);
+				cal.add(Calendar.DATE, i-dayOfTheWeek);//해당 요일로 커서 이동
+				dateListOfWeek.add(new Date(cal.getTimeInMillis()));//결과 리스트에 해당 날짜 삽입
+				cal.add(Calendar.DATE, -i+dayOfTheWeek);//커서 원위치
 			}
 		}
 		
 		return dateListOfWeek;
+	}*/
+	/**
+	 * 날짜에 해당하는 주의 모든 날짜 정보를 리스트로 받아오는 함수
+	 * 시작 요일 선택 : 화요일 ~ 월요일, 수요일 ~ 화요일 등 사용자 선택에 따라 요일을 받아옴
+	 * @param currDate, DayOfWeek(Sunday = 1, Monday = 2, ..., Saturday = 7)
+	 * @return ArrayList<Date>
+	 */
+	public static ArrayList<Date> getDateListOfWeek(Date currDate, int dayOfWeek){
+		ArrayList<Date> dateListOfWeek = new ArrayList<Date>();
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(currDate);
+		int sdayOfTheWeek = cal.get(Calendar.DAY_OF_WEEK);//현재 일자의 요일 번호
+
+		//1. 현재 요일이 요구한 요일보다 앞인 경우 ex) 일요일(1), 목요일(5)
+		if(sdayOfTheWeek < dayOfWeek ){
+			for(int i=dayOfWeek-7 ; i<dayOfWeek ; i++) {
+				if(i==sdayOfTheWeek) {
+					dateListOfWeek.add(currDate);
+				}else {
+					cal.add(Calendar.DATE, i-sdayOfTheWeek);
+					dateListOfWeek.add(new Date(cal.getTimeInMillis()));
+					cal.add(Calendar.DATE, -i+sdayOfTheWeek);
+				}
+			}
+
+		}else{//2. 현재 요일이 요구한 요일보다 뒤인 경우 ex) 수요일(4), 월요일(2)
+			for(int i=dayOfWeek ; i<=dayOfWeek+6 ; i++) {
+
+				if(i==sdayOfTheWeek) {
+					dateListOfWeek.add(currDate);
+				}else {
+					cal.add(Calendar.DATE, i-sdayOfTheWeek);
+					dateListOfWeek.add(new Date(cal.getTimeInMillis()));
+					cal.add(Calendar.DATE, -i+sdayOfTheWeek);
+				}
+			}
+		}
+
+		return dateListOfWeek;
+	}
+/**
+ * Example Code for getting day of week
+ */
+
+	/**
+	 * 날짜의 요일 번호를 받아오는 함수(Sunday = 1, Monday = 2, ..., Saturday = 7)
+	 * @param currDate
+	 * @return 요일 번호
+	 */
+	public static int getDayOfTheWeek(Date currDate) {
+		Calendar currCal = Calendar.getInstance();
+		currCal.setTime(currDate);
+		int dayOfTheWeek = currCal.get(Calendar.DAY_OF_WEEK);
+		return dayOfTheWeek;
 	}
 	
 	/**

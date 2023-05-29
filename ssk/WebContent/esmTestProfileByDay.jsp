@@ -24,6 +24,8 @@
 	ArrayList<EsmDateWeekType> dateWeekList = (ArrayList<EsmDateWeekType>)request.getAttribute("dateWeekList");
 	ArrayList<Date> sDateListOfWeek = (ArrayList<Date>)request.getAttribute("sDateListOfWeek");
 	ArrayList<EsmResultWithDate> esmReplyOfDayList = (ArrayList<EsmResultWithDate>)request.getAttribute("esmReplyOfDayList");
+	String[] startDayOfWeekOptionList = {"일요일부터 보기", "월요일부터 보기", "화요일부터 보기", "수요일부터 보기", "목요일부터 보기", "금요일부터 보기", "토요일부터 보기"};
+	int startDayOfWeek = (int)request.getAttribute("startDayOfWeek");
 	
 	LocalDate sdate = sDateListOfWeek.get(0).toLocalDate();
 	LocalDate edate = sDateListOfWeek.get(6).toLocalDate();
@@ -113,7 +115,7 @@
 			<div class="w3-col s1 m1 l1 w3-center"onclick="alert('이전 기록이 없습니다.');"><img src="./image/left-arrow.png" style="width:2.5em; opacity: 0.5;"/></div>
 		</c:when>
 		<c:otherwise>
-			<div class="w3-col s1 m1 l1 w3-center" onclick="location.href='GetEsmTestProfileByDay?date=<%=dateWeekList.get(indexOfDate-1).getDate().toString()%>&childId=<%=focusUser.getUserId()%>'"><img src="./image/left-arrow.png" style="width:2.5em;"/></div>
+			<div class="w3-col s1 m1 l1 w3-center" onclick="location.href='GetEsmTestProfileByDay?date=<%=dateWeekList.get(indexOfDate-1).getDate().toString()%>&childId=<%=focusUser.getUserId()%>&startDayOfWeek=<%=startDayOfWeek%>'"><img src="./image/left-arrow.png" style="width:2.5em;"/></div>
 		</c:otherwise>
 		</c:choose>
 		<div class="w3-col s8 m6 l2" >
@@ -121,7 +123,7 @@
 			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=selectedDateWeek.getWeekStr()%></button>
 			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
 			      <%for(EsmDateWeekType x : dateWeekList){ %>
-			      <a href="GetEsmTestProfileByTime?date=<%=x.getDate().toString()%>&childId=<%=focusUser.getUserId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=x.getWeekStr()%></a>
+			      <a href="GetEsmTestProfileByDay?date=<%=x.getDate().toString()%>&childId=<%=focusUser.getUserId()%>&startDayOfWeek=<%=startDayOfWeek%>" class="w3-bar-item w3-button"style="width:100%;"><%=x.getWeekStr()%></a>
 			      <%} %>
 			    </div>
 		    </div>
@@ -131,20 +133,35 @@
 			<div class="w3-col s1 m1 l1 w3-center"onclick="alert('다음 기록이 없습니다.');"><img src="./image/right-arrow.png" style="width:2.5em; opacity: 0.5;"/></div>
 		</c:when>
 		<c:otherwise>
-			<div class="w3-col s1 m1 l1 w3-center"onclick="location.href='GetEsmTestProfileByDay?date=<%=dateWeekList.get(indexOfDate+1).getDate().toString()%>&childId=<%=focusUser.getUserId()%>'"><img src="./image/right-arrow.png" style="width:2.5em;"/></div>
+			<div class="w3-col s1 m1 l1 w3-center"onclick="location.href='GetEsmTestProfileByDay?date=<%=dateWeekList.get(indexOfDate+1).getDate().toString()%>&childId=<%=focusUser.getUserId()%>&startDayOfWeek=<%=startDayOfWeek%>'"><img src="./image/right-arrow.png" style="width:2.5em;"/></div>
 		</c:otherwise>
 		</c:choose>
 		<c:remove var="selectedIndex" scope="page"/>
 		<div class="w3-col s1 m2 l4">&nbsp;</div>
    </div>
-   
+	<div class="w3-row">&nbsp;</div>
+	<div class="w3-row">
+		<div class="w3-col s1 m2 l2">&nbsp;</div>
+		<div class="w3-col s10 m8 l8">
+			<div class="w3-dropdown-hover w3-right" style="border:1px solid #C4C4C4;border-radius:10px;background-color:#EBEBEB;">
+				<button class="w3-button w3-hover-white" style="border:1px solid #C4C4C4;border-radius:10px;background-color:#EBEBEB;font-size:0.9em;"><%=startDayOfWeekOptionList[startDayOfWeek-1]%></button>
+				<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;font-size:0.9em;">
+					<%for(int i=0;i<startDayOfWeekOptionList.length;i++){%>
+					<a href="GetEsmTestProfileByDay?date=<%=dateWeekList.get(indexOfDate).getDate().toString()%>&childId=<%=focusUser.getUserId()%>&startDayOfWeek=<%=i+1%>" class="w3-bar-item w3-button"><%=startDayOfWeekOptionList[i]%></a>
+					<%}%>
+				</div>
+			</div>
+		</div>
+		<div class="w3-col s1 m2 l2">&nbsp;</div>
+	</div>
+
 	<!-- 시간별 그래프 뷰 -->
 	<div class="w3-row">
-		<div class="w3-col m1 l1">&nbsp;</div>
+		<div class="w3-col w3-hide-small m1 l1">&nbsp;</div>
 		<div class="w3-col s12 m10 l10">
 			<div id="esmProfileChart" style="width:100%;height: 60vh;"></div>
 		</div>
-		<div class="w3-col m1 l1">&nbsp;</div>
+		<div class="w3-col w3-hide-small m1 l1">&nbsp;</div>
 	</div>
 	
 	<!-- page redirect button -->

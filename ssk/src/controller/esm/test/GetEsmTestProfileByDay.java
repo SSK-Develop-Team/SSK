@@ -70,11 +70,19 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  			}else{
  				String sdateStr = request.getParameter("date");
  				sdate = Date.valueOf(sdateStr);
- 			}
- 	 		
+			  }
+			  
+			  
+			/*선택한 DayOfWeek Option 받아오기*/
+			int startDayOfWeek;
+			if(request.getParameter("startDayOfWeek")==null){
+				startDayOfWeek = 1;//SUNDAY를 시작 요일로 세팅
+			}else{
+				startDayOfWeek = Integer.parseInt(request.getParameter("startDayOfWeek"));
+			}
  	 		
  		 	/*선택한 일자에 해당하는 주의 날짜 리스트(그래프 X축)*/
- 	 		ArrayList<Date> sDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(sdate);
+ 	 		ArrayList<Date> sDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(sdate, startDayOfWeek);
  	 		EsmDateWeekType selectedDateWeek = new EsmDateWeekType(sdate,sDateListOfWeek.get(0), sDateListOfWeek.get(6));
  	 		
  	 		/*해당 주의 모든 기록 - 일별 평균 응답*/
@@ -89,19 +97,22 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  	 		ArrayList<Date> tmpDateListOfWeek = new ArrayList<Date>();
  	 		for(Date date : esmTestDateList) {
  	 			if(!tmpDateListOfWeek.contains(date)) {
- 	 				tmpDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(date);
+ 	 				tmpDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(date, startDayOfWeek);
  	 				Date startDate = tmpDateListOfWeek.get(0);
  	 				Date endDate = tmpDateListOfWeek.get(6);
+					  System.out.println("tmpDateListOfWeek :"+startDate.toString() +" ~ " +endDate.toString());
  	 				dateWeekList.add(new EsmDateWeekType(date,startDate,endDate));
  	 			}
  	 		}
- 	 		
+
+
  	 		request.setAttribute("focusUser", focusUser);
  	 		request.setAttribute("esmTestDateList", esmTestDateList);//전체 기록
  	 		request.setAttribute("selectedDateWeek", selectedDateWeek);
  	 		request.setAttribute("dateWeekList", dateWeekList);//drop down에 표시할 기간 데이터
  	 		request.setAttribute("sDateListOfWeek",sDateListOfWeek);//선택한 주의 날짜 리스트(그래프 X축)
  	 		request.setAttribute("esmReplyOfDayList",esmReplyOfDayList);//선택한 주의 일별 기록
+			request.setAttribute("startDayOfWeek", startDayOfWeek);//일별 그래프의 시작요일을 지정하는 변수
  	 		
  		 	RequestDispatcher rd = request.getRequestDispatcher("/esmTestProfileByDay.jsp");
  			rd.forward(request, response);
