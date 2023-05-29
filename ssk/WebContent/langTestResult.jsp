@@ -121,7 +121,7 @@ ul.tabs li.current{
 	</c:otherwise>
 	</c:choose>
 
-	<c:remove var="selectedIndex" scope="page"/>'
+	<c:remove var="selectedIndex" scope="page"/>
 
   </div>
 <div class="w3-row">

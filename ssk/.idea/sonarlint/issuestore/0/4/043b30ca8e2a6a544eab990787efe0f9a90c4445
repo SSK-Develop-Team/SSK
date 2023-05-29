@@ -1,0 +1,29 @@
+
+t
+java:S2293."YReplace the type specification in this constructor call with the diamond operator ("<>").(¬ï®şÿÿÿÿ
+U
+java:S1161"":Add the "@Override" annotation above this method signature(Ïû©Öûÿÿÿÿ
+‡
+java:S1989$"lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(áò‰øÿÿÿÿ
+‚
+java:S1989*"lHandle the following exception that could be thrown by "setCharacterEncoding": UnsupportedEncodingException.(ï‡‹ê
+o
+java:S1989,"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(¡ÿû‹
+t
+java:S1989/"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(à»»ıÿÿÿÿ
+t
+java:S19890"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(úÂÈÜıÿÿÿÿ
+o
+java:S19891"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(Â¡Ş
+o
+java:S19892"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(»è¢×
+o
+java:S19893"YHandle the following exception that could be thrown by "parseInt": NumberFormatException.(öà°ô
+h
+java:S24419"RMake "ArrayList" and its parameters serializable or don't store it in the session.(ƒßŠ–
+w
+java:S1989?"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(ãìÄ
+P
+java:S1161C":Add the "@Override" annotation above this method signature(‹¨¯¿
+z
+java:S1989D"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿ
