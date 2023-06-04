@@ -100,7 +100,6 @@ public class GetEsmTestProfileByDay extends HttpServlet {
  	 				tmpDateListOfWeek = (ArrayList<Date>) EsmProcessor.getDateListOfWeek(date, startDayOfWeek);
  	 				Date startDate = tmpDateListOfWeek.get(0);
  	 				Date endDate = tmpDateListOfWeek.get(6);
-					  System.out.println("tmpDateListOfWeek :"+startDate.toString() +" ~ " +endDate.toString());
  	 				dateWeekList.add(new EsmDateWeekType(date,startDate,endDate));
  	 			}
  	 		}

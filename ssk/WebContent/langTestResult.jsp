@@ -22,6 +22,7 @@
 * 아동이 자신의 결과를 조회하는 경우 currUser == focusUser == child
 */
 	User focusUser = (User)request.getAttribute("focusUser");
+	User currUser = (User)session.getAttribute("currUser");
 	String name = focusUser.getUserName();
 
 	ArrayList<Integer> ageGroupSet = (ArrayList<Integer>)request.getAttribute("ageGroupSet");
@@ -98,7 +99,7 @@ ul.tabs li.current{
 			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=ageGroupStr[selectAgeGroupId]%></button>
 			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
 			      <%for(int i = 0; i < ageGroupSet.size() ; i++){ %>
-			      <a href="GetLangLog?ageGroupId=<%=ageGroupSet.get(i)%>" class="w3-bar-item w3-button"style="width:100%;"><%=ageGroupStr[ageGroupSet.get(i)]%></a>
+			      <a href="GetLangLog?ageGroupId=<%=ageGroupSet.get(i)%>&focusUserId=<%=focusUser.getUserId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=ageGroupStr[ageGroupSet.get(i)]%></a>
 			      <%} %>
 			    </div>
 		    </div>
@@ -108,7 +109,7 @@ ul.tabs li.current{
 			    <button class="w3-button"style="width:100%;background-color:#D9D9D9;"><%=langLogListByUser.get(selectIndex).getLangTestDate().toString()%>&nbsp;<%=langLogListByUser.get(selectIndex).getLangTestTime().toString()%></button>
 			    <div class="w3-dropdown-content w3-bar-block w3-border"style="width:100%;">
 			      <%for(int i = 0; i < langLogListByUser.size() ; i++){ %>
-			      <a href="GetLangLogTime?selectNum=<%=i %>" class="w3-bar-item w3-button"style="width:100%;"><%=langLogListByUser.get(i).getLangTestDate().toString()%>&nbsp;<%=langLogListByUser.get(i).getLangTestTime().toString()%></a>
+			      <a href="GetLangLogTime?selectNum=<%=i %>&focusUserId=<%=focusUser.getUserId()%>" class="w3-bar-item w3-button"style="width:100%;"><%=langLogListByUser.get(i).getLangTestDate().toString()%>&nbsp;<%=langLogListByUser.get(i).getLangTestTime().toString()%></a>
 			      <%} 
 			   } else{ %>
 			      <button class="w3-button"style="width:100%;background-color:#D9D9D9;">X</button>
@@ -141,7 +142,11 @@ ul.tabs li.current{
 			</div>
 
 			<div class="btnbox">
+			<%if(currUser.getUserRole().equals("CHILD")){ %>
 				<input type="button" class="w3-button w3-right w3-round-large w3-margin-top" style="background-color: #1a2a3a;color:white;"id="mainBack" value="돌아가기" onClick="javascript:location.href='childHome.jsp'">
+			<%}else{ %>
+				<input type="button" class="w3-button w3-right w3-round-large w3-margin-top" style="background-color: #1a2a3a;color:white;"id="mainBack" value="돌아가기" onClick="location.href='GoToChildHome?childId=<%=focusUser.getUserId()%>';">
+			<%} %>
 			</div>
 		</div>
 	</div>

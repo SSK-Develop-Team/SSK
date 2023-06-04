@@ -51,7 +51,7 @@
 </head>
 <body>
 	<%@ include file="sidebar.jsp" %>
-	<div class="w3-container w3-center"><h4><b>정서/행동 발달 검사</b></h4></div>
+	<div class="w3-container w3-center"><h4><b>정서 반복 기록</b></h4></div>
 	<div class="w3-row" >
 		<div class="w3-col m3 l4">&nbsp;</div>
 		<div class="w3-col s12 m6 l4" id="sdqChat" style="padding-bottom:6px;padding-top:10px;">

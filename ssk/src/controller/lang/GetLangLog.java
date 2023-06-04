@@ -38,11 +38,14 @@ public class GetLangLog extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		
+
 		User currUser = (User)session.getAttribute("currUser");
-
+		
 		int selectAgeGroup = Integer.parseInt(request.getParameter("ageGroupId"));
-
-		ArrayList<Integer> tmpLogIdList = LangReplyDAO.getLangTestLogIdByAgeGroup(conn, selectAgeGroup, currUser.getUserId());
+		int focusUserId = Integer.parseInt(request.getParameter("focusUserId"));
+		
+		
+		ArrayList<Integer> tmpLogIdList = LangReplyDAO.getLangTestLogIdByAgeGroup(conn, selectAgeGroup, focusUserId);
 		ArrayList<Integer> langLogIdListByUser = new ArrayList<Integer>();
 		
 		for(int i=0; i<tmpLogIdList.size(); i++) {
@@ -54,7 +57,14 @@ public class GetLangLog extends HttpServlet {
 		session.setAttribute("langLogIdListByUser", langLogIdListByUser);
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/GetLangResultAll");
+		String forwardLocation = "/GetLangResultAll";
+		
+		if(currUser.getUserId() != focusUserId) {
+			forwardLocation = forwardLocation + "?childId="+focusUserId;
+		}
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher(forwardLocation);
 		rd.forward(request, response);
 
 	}
@@ -62,5 +72,6 @@ public class GetLangLog extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
 
 }

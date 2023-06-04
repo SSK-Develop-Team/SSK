@@ -123,8 +123,6 @@ public class GetLangResultAll extends HttpServlet {
 			
 			
 			if((request.getParameter("isTesting"))!=null) {//검사 직후 결과보기인 경우 = 가장 최근 결과를 지정
-				//Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
-				//selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
 				isTesting = true;
 			}else {//결과 보기 버튼으로 접속했을 경우 
 				if(langLogIdListByUser != null) {
@@ -139,10 +137,6 @@ public class GetLangResultAll extends HttpServlet {
 				} else {
 					if(allAgeGroupIDList.contains(curAge))
 						selectedLangTestLog = langTestLogList.get(allAgeGroupIDList.lastIndexOf(curAge));
-					else {
-						//Comparator<LangTestLog> comparatorById = Comparator.comparingInt(LangTestLog::getLangTestLogId);
-						//selectedLangTestLog = langTestLogList.stream().max(comparatorById).orElseThrow(NoSuchElementException::new);
-					}
 				}
 			}
 			

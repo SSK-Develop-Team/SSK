@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.dao.UserDAO;
 import model.dto.User;
@@ -31,6 +32,8 @@ public class GoToChildHome extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("UTF-8");
 	    
+	    HttpSession session = request.getSession(true);
+	    
 	    ServletContext sc = getServletContext();
 	 	Connection conn= (Connection) sc.getAttribute("DBconnection");
 	 	
@@ -41,6 +44,12 @@ public class GoToChildHome extends HttpServlet {
 	 	}else {
 	 		System.out.println("user not selected");
 	 	}
+	 	
+	 	//언어 발달 평가 결과 조회 시 생기는 session 삭제 -> 언어 발달 평가 결과 조회 부분 수정 필요
+	 	if(session.getAttribute("langLogIdListByUser")!=null) {
+	 		session.removeAttribute("langLogIdListByUser");
+	 	}
+	 	
 	 	
 	 	request.setAttribute("selectedChild",selectedChild);
 	 	
