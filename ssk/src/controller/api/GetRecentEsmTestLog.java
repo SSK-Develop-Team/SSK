@@ -17,12 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
-import java.util.ArrayList;
 
 import static controller.api.GetUserInfoServlet.getBody;
 
@@ -32,6 +29,9 @@ public class GetRecentEsmTestLog extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+
+        response.setContentType("application/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         ServletContext sc = getServletContext();
         Connection conn= (Connection)sc.getAttribute("DBconnection");
@@ -55,7 +55,7 @@ public class GetRecentEsmTestLog extends HttpServlet {
 
 
         /* 응답 데이터 */
-        String message = "required";
+        String message = "success";
         String date = "";
         String time = "";
 
@@ -80,9 +80,6 @@ public class GetRecentEsmTestLog extends HttpServlet {
 
 
         PrintWriter out = response.getWriter();
-        response.setContentType("application/json;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-
         out.println(result.toJSONString());
         out.flush();
     }

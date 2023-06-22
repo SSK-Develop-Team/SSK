@@ -11,8 +11,6 @@ V
 &src/controller/user/GetUpdateUser.java,a\7\a78fa01d957b4de21e01136983f0a8d055edc298
 S
 #src/controller/user/UpdateUser.java,3\d\3d7f5768b3d201f208fed6a89d62df054fad014f
-S
-#src/controller/user/DoRegister.java,5\7\574197ecf5f086f3351e18fd1765e0ad6d9d809f
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 J
