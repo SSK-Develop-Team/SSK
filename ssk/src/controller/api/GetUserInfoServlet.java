@@ -24,6 +24,7 @@ public class GetUserInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=utf-8");
 
         ServletContext sc = getServletContext();
         Connection conn= (Connection)sc.getAttribute("DBconnection");
@@ -74,10 +75,9 @@ public class GetUserInfoServlet extends HttpServlet {
         }
 
         //String encodingStrResult = new String(result.toJSONString().getBytes(StandardCharsets.ISO_8859_1),"utf-8");
+        System.out.println(result.toString());
 
         PrintWriter out = response.getWriter();
-        response.setContentType("application/json;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
 
         out.println(result.toJSONString());
         out.flush();
