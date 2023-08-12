@@ -1,0 +1,46 @@
+
+t
+java:S22932"YReplace the type specification in this constructor call with the diamond operator ("<>").(¥§æƒúÿÿÿÿ
+t
+java:S2293H"YReplace the type specification in this constructor call with the diamond operator ("<>").(¥§æƒúÿÿÿÿ
+o
+java:S2293Y"YReplace the type specification in this constructor call with the diamond operator ("<>").(×—”¦
+u
+java:S2293Œ"YReplace the type specification in this constructor call with the diamond operator ("<>").(¥§æƒúÿÿÿÿ
+†
+java:S1319-"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ôÛ’ß
+†
+java:S1319B"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(îñŞ
+…
+java:S1319X"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(”ê¥
+Œ
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(åÙñ’üÿÿÿÿ
+f	java:S117‚"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.( éø
+2
+java:S1643…"Use a StringBuilder instead.(óô¢{
+3
+java:S1643†"Use a StringBuilder instead.(½©¢İ
+3
+java:S1643‡"Use a StringBuilder instead.(‰œ§
+j
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¨ï‡¾ûÿÿÿÿ
+e
+java:S2095["OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(½Á¼
+e
+java:S2095m"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Äõ¥§
+j
+java:S2095/"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(”Áãıÿÿÿÿ
+f
+java:S2095Ÿ"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(‚¿§ç
+j
+java:S2095D"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(òùäûùÿÿÿÿ
+f
+java:S2095Š"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¿óô¤
+U
+java:S1118":Add a private constructor to hide the implicit public one.(‡üÉÊşÿÿÿÿ
+A
+java:S1168="+Return an empty collection instead of null.(¥¹ï
+A
+java:S1168S"+Return an empty collection instead of null.(¥¹ï
+B
+java:S1168—"+Return an empty collection instead of null.(¥¹ï
