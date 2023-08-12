@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.dto.User;
 
 /**
  * 
@@ -25,12 +28,29 @@ public class GetLangLogTime extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("UTF-8");
+	    
+	    HttpSession session = request.getSession(true);
+		
+		
 
+		User currUser = (User)session.getAttribute("currUser");
+		int focusUserId = Integer.parseInt(request.getParameter("focusUserId"));
+
+		
 		int selectNum = Integer.parseInt(request.getParameter("selectNum"));
 		request.setAttribute("selectIndex", selectNum);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/GetLangResultAll");
+		
+		String forwardLocation = "/GetLangResultAll";
+		
+		if(currUser.getUserId() != focusUserId) {
+			forwardLocation = forwardLocation + "?childId="+focusUserId;
+		}
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher(forwardLocation);
 		rd.forward(request, response);
+		
 
 	}
 
