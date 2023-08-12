@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="SSK_war">
-    <output-path>$PROJECT_DIR$/out/artifacts/SSK_war</output-path>
-    <root id="archive" name="SSK.war">
-      <element id="artifact" artifact-name="SSK:war exploded" />
-    </root>
-  </artifact>
-</component>
