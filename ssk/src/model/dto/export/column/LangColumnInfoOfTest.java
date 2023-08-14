@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum LangColumnInfoOfTest implements ExcelColumnInfo{
-	LANG_USER_ID("NO.", 0),
+	LANG_USER_ID("ID", 0),
 	LANG_USER_NAME("이름", 1),
     LANG_DATE("검사 실시 날짜",2),
     LANG_AGE_GROUP("검사 연령",3),
-    LANG_ANSWER1("문항1", 4),
-    LANG_ANSWER2("문항2", 5),
-    LANG_ANSWER3("문항3", 6),
-    LANG_ANSWER4("문항4", 7),
-    LANG_ANSWER5("문항5", 8);
+    LANG_ANSWER1("구문", 4),
+    LANG_ANSWER2("문해", 5),
+    LANG_ANSWER3("의미", 6),
+    LANG_ANSWER4("의미1", 7),
+    LANG_ANSWER5("의미2", 8),
+    LANG_ANSWER6("조음", 9),
+
+    LANG_ANSWER7("화용",10);
 	
 	private final String columnText;
     private final int columnIndex;
