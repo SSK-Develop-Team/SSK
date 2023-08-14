@@ -28,7 +28,7 @@
     -->
     <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver"
 			factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
-			name="jdbc/SSK" password="ssk"
+			name="jdbc/SSK" password="honglab403@!"
 			validationQuery="select 1"
 			testOnBorrow="true"
 			testWhileIdle="true"

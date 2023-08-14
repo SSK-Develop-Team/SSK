@@ -3,6 +3,7 @@ package controller.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -31,6 +32,16 @@ public class DoLogin extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String userid = request.getParameter("userid");
 		String userpw = request.getParameter("userpw");
+		
+		//for DB connection
+		ServletContext sc_tmp = getServletContext();
+		Connection conn_tmp = (Connection)sc_tmp.getAttribute("DBconnection");
+		
+		try {//Connection timeout 오류 해결용 코드
+			UserDAO.throwConnection(conn_tmp);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		// for DB Connection
 		ServletContext sc = getServletContext();

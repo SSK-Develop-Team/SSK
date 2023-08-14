@@ -11,6 +11,22 @@ import model.dto.User;
 public class UserDAO {
 	private final static String SQLST_SELECT_USER_BY_LOGIN_ID = "select * from user_profile where user_login_id = ?";
 	
+	/*lose connection 조치*/
+	public static void throwConnection(Connection con) throws SQLException {
+		   PreparedStatement pstmt = null;
+		   try {
+				pstmt = con.prepareStatement("select 1");
+				pstmt.execute();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				 if(pstmt != null) {
+				        pstmt.close(); 
+				 }
+			}
+	   }
+	
 	public static boolean checkId(Connection con, String userId){
 		try {
 			PreparedStatement pstmt = con.prepareStatement(SQLST_SELECT_USER_BY_LOGIN_ID);
