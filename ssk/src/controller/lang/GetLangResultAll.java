@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
@@ -144,8 +145,23 @@ public class GetLangResultAll extends HttpServlet {
 			int langTestAgeGroupId = (int)LangReplyDAO.getLangAgeGroupIdByLogId(conn, selectedLangTestLog.getLangTestLogId());		
 			ArrayList<LangReply> selectLangReplyList = (ArrayList<LangReply>)LangReplyDAO.getLangReplyListByLangTestLogId(conn, selectedLangTestLog.getLangTestLogId());
 			ArrayList<LangQuestion> selectLangQuestionList = (ArrayList<LangQuestion>)LangQuestionDAO.getLangQuestionListByAgeGroupId(conn, langTestAgeGroupId);
-			
-			
+
+
+			Collections.sort(selectLangQuestionList, new Comparator<LangQuestion>() {/*sorting question list by lang type*/
+				@Override
+				public int compare(LangQuestion o1, LangQuestion o2) {
+					return o1.getLangType().compareTo(o2.getLangType());
+				}
+			});
+
+			Collections.sort(selectLangReplyList, new Comparator<LangReply>() {/*sorting reply list by lang type*/
+				@Override
+				public int compare(LangReply o1, LangReply o2) {
+					LangQuestion q1 = LangQuestionDAO.getLangQuestionById(conn, o1.getLangQuestionId());
+					LangQuestion q2 = LangQuestionDAO.getLangQuestionById(conn, o2.getLangQuestionId());
+					return q1.getLangType().compareTo(q2.getLangType());
+				}
+			});
 			
 			request.setAttribute("focusUser", focusUser);
 			
@@ -162,8 +178,8 @@ public class GetLangResultAll extends HttpServlet {
 			request.setAttribute("isTesting", isTesting);
 			
 			request.setAttribute("selectAgeGroupId", langTestAgeGroupId);
-			request.setAttribute("selectLangReplyList",  selectLangReplyList);
-			request.setAttribute("selectLangQuestionList",  selectLangQuestionList);
+			request.setAttribute("selectLangReplyList",  selectLangReplyList); // lang reply list sorted by question type
+			request.setAttribute("selectLangQuestionList",  selectLangQuestionList); // lang question sorted by question type
 			
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/langTestResult.jsp");

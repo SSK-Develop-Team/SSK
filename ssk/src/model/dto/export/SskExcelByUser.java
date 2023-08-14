@@ -95,11 +95,13 @@ public class SskExcelByUser extends SskExcel{
             sheet.autoSizeColumn(LANG_DATE.getColumnIndex());
             sheet.autoSizeColumn(LANG_AGE_GROUP.getColumnIndex());
             System.out.println("langExcelDTO.getReplyList() size : " + langExcelDTO.getReplyList().size());
-            createCellWithStyleInt(bodyRow, LANG_ANSWER1.getColumnIndex(), langExcelDTO.getReplyList().get(0), bodyCellStyle);
-            createCellWithStyleInt(bodyRow, LANG_ANSWER2.getColumnIndex(), langExcelDTO.getReplyList().get(1), bodyCellStyle);
-            createCellWithStyleInt(bodyRow, LANG_ANSWER3.getColumnIndex(), langExcelDTO.getReplyList().get(2), bodyCellStyle);
-            createCellWithStyleInt(bodyRow, LANG_ANSWER4.getColumnIndex(), langExcelDTO.getReplyList().get(3), bodyCellStyle);
-            createCellWithStyleInt(bodyRow, LANG_ANSWER5.getColumnIndex(), langExcelDTO.getReplyList().get(4), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_ANSWER1.getColumnIndex(), langExcelDTO.getReplyList().get(0), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_ANSWER2.getColumnIndex(), langExcelDTO.getReplyList().get(1), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_ANSWER3.getColumnIndex(), langExcelDTO.getReplyList().get(2), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_ANSWER4.getColumnIndex(), langExcelDTO.getReplyList().get(3), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_ANSWER5.getColumnIndex(), langExcelDTO.getReplyList().get(4), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_ANSWER6.getColumnIndex(), langExcelDTO.getReplyList().get(5), bodyCellStyle);
+            createCellWithStyle(bodyRow, LANG_ANSWER7.getColumnIndex(), langExcelDTO.getReplyList().get(6), bodyCellStyle);
         }
     }
 

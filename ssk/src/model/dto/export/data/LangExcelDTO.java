@@ -13,7 +13,7 @@ public class LangExcelDTO {
     private String dateStr;
 
     private String ageGroupStr;
-    private ArrayList<Integer> replyList;
+    private ArrayList<String> replyList;
 
     public int getUserId() {
         return userId;
@@ -56,11 +56,11 @@ public class LangExcelDTO {
     }
 
 
-    public ArrayList<Integer> getReplyList() {
+    public ArrayList<String> getReplyList() {
         return replyList;
     }
 
-    public void setReplyList(ArrayList<Integer> replyList) {
+    public void setReplyList(ArrayList<String> replyList) {
         this.replyList = replyList;
     }
 
