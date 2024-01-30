@@ -163,9 +163,38 @@
 				<input type="text" class="w3-input" id="userEmail" name="userEmail" value="${user.userEmail}" placeholder="Email">
 				<span id="check_email_m" class="msg"></span>
 			</div>
+			<div class="w3-margin-top">
+				<div><span style="color:red; margin-left:-5px;">*</span>정서 반복 기록 설정</div>
+				
+
+				  <div class="w3-third">
+						<div class="w3-col" style="width:40px"><label>시작</label></div>
+						<div class="w3-rest">
+							<input type="text" class="w3-input" id="userAlarmStart" name="userAlarmStart" value="${user.userEmail}" placeholder="Start Time">
+						</div>
+					</div>
+					
+					<div class="w3-third">
+						<div class="w3-col" style="width:40px"><label>종료</label></div></th>
+						<div class="w3-rest">
+							<input type="text" class="w3-input" id="userAlarmEnd" name="userAlarmEnd" value="${user.userEmail}" placeholder="End Time">
+						</div>
+					</div>
+					
+					<div class="w3-third">
+						<div class="w3-col" style="width:40px"><label>간격</label></div>
+						<div class="w3-rest">
+							<input type="text" class="w3-input" id="userAlarmInterval" name="userAlarmInterval" value="${user.userEmail}" placeholder="Interval">
+						</div>
+					</div>
+
+
+
+			</div>
 			<div class="w3-margin-top w3-left">
 				<div class="w3-button" style="color:white;background-color:#51459E;" onclick="history.go(-1);" > 뒤로가기 </div>
 			</div>
+			
 			<div class="w3-margin-top w3-right">
 				<c:choose>
 					<c:when test="${user ne null}">

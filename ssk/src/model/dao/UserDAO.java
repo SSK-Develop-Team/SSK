@@ -255,6 +255,7 @@ public class UserDAO {
 				child.setUserGender(rs.getString(8));
 				child.setUserBirth(rs.getDate(9));
 				child.setUserIcon(rs.getString(10));
+				
 				return child;
 			}
 		} catch (SQLException e) {

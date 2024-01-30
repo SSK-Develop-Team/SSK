@@ -2,12 +2,15 @@ package controller.user;
 
 import model.dao.UserDAO;
 import model.dto.User;
+import model.dao.EsmAlarmDAO;
+import model.dto.EsmAlarm;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 /**
  * @author Jiwon Lee
  * 계정 수정 페이지 가져오기
@@ -37,8 +40,16 @@ public class GetUpdateUser extends HttpServlet {
         }
 
         User user = UserDAO.getUserById(conn,userId);
-
         request.setAttribute("user",user);
+        
+        if("child".equals(user.getUserRole())) {
+        	//사용자의 ESM 알람 정보 불러오기
+        	ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, userId);
+        	//사용자의 ESM 알람 정보를 request attribute로 넘겨주기 
+        	request.setAttribute("esmTime", esmTime);
+        	}
+
+
 
         RequestDispatcher rd = request.getRequestDispatcher(location);
         rd.forward(request, response);

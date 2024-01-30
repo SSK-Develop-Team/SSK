@@ -3,7 +3,7 @@ package model.dto;
 import java.sql.Date;
 
 public class User {
-	
+	 
 	private int userId;
 	private String userLoginId;
 	private String userPassword;
