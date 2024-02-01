@@ -9,13 +9,13 @@ public class EsmAlarm {
 	private int userId;
 	private Time alarmStart;
 	private Time alarmEnd;
-	private Time alarmInterval;
+	private int alarmInterval;
 	
 	public EsmAlarm() {
 
 	}
 	
-	public EsmAlarm(Time alarmStart, Time alarmEnd, Time alarmInterval) {
+	public EsmAlarm(Time alarmStart, Time alarmEnd, int alarmInterval) {
 		super();
 		this.alarmStart=alarmStart;
 		this.alarmEnd=alarmEnd;
@@ -36,10 +36,10 @@ public class EsmAlarm {
 		this.alarmEnd = alarmEnd;
 	}
 	
-	public Time getAlarmInterval() {
+	public int getAlarmInterval() {
 		return alarmInterval;
 	}
-	public void setAlarmInterval(Time alarmInterval) {
+	public void setAlarmInterval(int alarmInterval) {
 		this.alarmInterval = alarmInterval;
 	}
 

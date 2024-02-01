@@ -1,4 +1,6 @@
-<%@ page import="model.dto.User" %>
+<%@ page import="model.dto.User" %>	
+<%@ page import="model.dto.EsmAlarm" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -6,6 +8,7 @@
 <head>
 	<!--user (O):계정 수정, (X):계정 생성-->
 	<c:set var="user" scope="page" value="${requestScope.user}"/>
+	<c:set var="esmTime" scope="page" value="${requestScope.esmTime}"/>
 	<c:choose>
 		<c:when test="${user ne null}">
 			<title>계정 수정</title>
@@ -163,34 +166,75 @@
 				<input type="text" class="w3-input" id="userEmail" name="userEmail" value="${user.userEmail}" placeholder="Email">
 				<span id="check_email_m" class="msg"></span>
 			</div>
+			
 			<div class="w3-margin-top">
 				<div><span style="color:red; margin-left:-5px;">*</span>정서 반복 기록 설정</div>
 				
+ <!-- esmTime이라는 이름으로 전달된 ArrayList를 받음 -->
 
-				  <div class="w3-third">
-						<div class="w3-col" style="width:40px"><label>시작</label></div>
+ <% ArrayList<EsmAlarm> esmTime = (ArrayList<EsmAlarm>) request.getAttribute("esmTime"); %>
+<c:choose>
+    <c:when test="${empty esmTime}">
+        <!-- esmTime이 비어있을 때의 처리 -->
+        <div id="dynamicRowsContainer">
+        <div class="w3-margin-top">
+	        <div class="w3-third">
+	            <div class="w3-col" style="width:40px"><label>시작</label></div></th>
+	            <div class="w3-rest">
+	                <input type="text" class="w3-input" id="alarmStart" name="alarmStart" placeholder="Start Time" required>
+	            </div>
+	        </div>
+	        <div class="w3-third">
+	            <div class="w3-col" style="width:40px"><label>종료</label></div></th>
+	            <div class="w3-rest">
+	                <input type="text" class="w3-input" id="alarmEnd" name="alarmEnd" placeholder="End Time" required>
+	            </div>
+	        </div>
+	        <div class="w3-third">
+	            <div class="w3-col" style="width:40px"><label>간격</label></div>
+	            <div class="w3-rest">
+	                <input type="text" class="w3-input" id="alarmInterval" name="alarmInterval" placeholder="Interval" required>
+	            </div>
+	        </div>
+        </div>
+        </div>
+        
+    </c:when>
+     <c:otherwise>
+        <c:forEach var="alarm" items="${esmTime}">
+        <div class="w3-margin-top">
+        	<div class="w3-third">
+						<div class="w3-col" style="width:40px"><label>시작</label></div></th>
 						<div class="w3-rest">
-							<input type="text" class="w3-input" id="userAlarmStart" name="userAlarmStart" value="${user.userEmail}" placeholder="Start Time">
+							<input type="text" class="w3-input" id="alarmStart" name="alarmStart" value="${alarm.alarmStart}" placeholder="Start Time">
 						</div>
-					</div>
-					
-					<div class="w3-third">
+			</div>
+			<div class="w3-third">
 						<div class="w3-col" style="width:40px"><label>종료</label></div></th>
 						<div class="w3-rest">
-							<input type="text" class="w3-input" id="userAlarmEnd" name="userAlarmEnd" value="${user.userEmail}" placeholder="End Time">
+							<input type="text" class="w3-input" id="alarmEnd" name="alarmEnd" value="${alarm.alarmEnd}" placeholder="End Time">
 						</div>
 					</div>
 					
 					<div class="w3-third">
 						<div class="w3-col" style="width:40px"><label>간격</label></div>
 						<div class="w3-rest">
-							<input type="text" class="w3-input" id="userAlarmInterval" name="userAlarmInterval" value="${user.userEmail}" placeholder="Interval">
+							<input type="text" class="w3-input" id="alarmInterval" name="alarmInterval" value="${alarm.alarmInterval}" placeholder="Interval">
 						</div>
 					</div>
+				</div>
+        </c:forEach>
+ </c:otherwise>
+</c:choose>
 
-
-
+			<div class="w3-margin-top">
+				<input type='button' class="w3-bar w3-gray" style="height:40px;" value='행추가' onclick='addRow()' />
 			</div>
+			
+			</div>
+			
+			
+			
 			<div class="w3-margin-top w3-left">
 				<div class="w3-button" style="color:white;background-color:#51459E;" onclick="history.go(-1);" > 뒤로가기 </div>
 			</div>

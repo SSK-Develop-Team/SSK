@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.dto.User;
@@ -86,10 +87,10 @@ public class UserDAO {
 	}
 	
 	/*회원가입*/
-	public static boolean insertUser(Connection con, User user){
+	public static int insertUser(Connection con, User user){
 		try {
 			PreparedStatement pstmt = con.prepareStatement("insert user_profile(user_login_id, user_password, user_name, "
-					+ "user_email, user_role, registration_date, user_gender, user_birth, user_icon) values(?,?,?,?,?,?,?,?,?)");
+					+ "user_email, user_role, registration_date, user_gender, user_birth, user_icon) values(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, user.getUserLoginId());
 			pstmt.setString(2, user.getUserPassword());
 			pstmt.setString(3, user.getUserName());
@@ -101,15 +102,20 @@ public class UserDAO {
 			pstmt.setString(9, user.getUserIcon());
 			int insertCount = pstmt.executeUpdate();
 			if(insertCount == 1) {
-				return true;
+				 ResultSet generatedKeys = pstmt.getGeneratedKeys();
+		            if (generatedKeys.next()) {
+		                int generatedUserId = generatedKeys.getInt(1);
+		                return generatedUserId;
+					}
+					else {
+						return -1;
+						}
 			}
-			else {
-				return false;
+			return -1;
 			}
-		}
 		catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return -1;
 		}
 	}
 	/*해당 role을 가진 모든 사용자 조회 */

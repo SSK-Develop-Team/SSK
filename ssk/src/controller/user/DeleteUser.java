@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.UserDAO;
+import model.dao.EsmAlarmDAO;
 
 /**
  * @author Lee Ji Won
@@ -46,6 +47,7 @@ public class DeleteUser extends HttpServlet {
 		for(String c : userIdStrList){
 			int deleteUserId = Integer.parseInt(c);
 			UserDAO.deleteUser(conn, deleteUserId);
+			EsmAlarmDAO.deleteUserAlarm(conn, deleteUserId);
 		}
 
 	 	RequestDispatcher rd = request.getRequestDispatcher(location);

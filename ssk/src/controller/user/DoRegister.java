@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.Time;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.dao.UserDAO;
 import model.dto.User;
+import model.dao.EsmAlarmDAO;
+import model.dto.EsmAlarm;
 /**
  * 전문가 회원가입
  */
@@ -32,7 +35,8 @@ public class DoRegister extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
 
-	    String userid = request.getParameter("userId");
+		
+	    String userloginid = request.getParameter("userId");
 	    String userpw = request.getParameter("userPw");
 		String username = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
@@ -53,7 +57,7 @@ public class DoRegister extends HttpServlet {
 		}
 		
 		User user = new User();
-				user.setUserLoginId(userid);
+				user.setUserLoginId(userloginid);
 				user.setUserPassword(userpw);
 				user.setUserName(username);
 				user.setUserEmail(userEmail);
@@ -63,10 +67,31 @@ public class DoRegister extends HttpServlet {
 				user.setUserBirth(birth);
 				user.setUserIcon("");
 				
-		boolean join_result = false;
+		int join_result = -1;
 				
 		join_result = UserDAO.insertUser(conn, user);
-		if(join_result == false) {
+
+		//alarm
+		String alarmStartParam = request.getParameter("alarmStart");
+		String alarmEndParam = request.getParameter("alarmEnd");
+		String alarmIntervalParam = request.getParameter("alarmInterval");
+
+		Time alarmstart = Time.valueOf(alarmStartParam);
+		Time alarmend = Time.valueOf(alarmEndParam);
+		int alarminterval = Integer.parseInt(alarmIntervalParam);
+
+		EsmAlarm alarm = new EsmAlarm();
+			alarm.setAlarmStart(alarmstart);
+			alarm.setAlarmEnd(alarmend);
+			alarm.setAlarmInterval(alarminterval);
+			alarm.setUserId(join_result);
+
+		boolean join_result2 = false;
+		join_result2=EsmAlarmDAO.insertUserAlarm(conn, alarm);
+	
+			
+		
+		if(join_result == -1) {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('계정 정보를 확인해주세요.'); location.href='register.jsp';</script>");
 			out.flush();

@@ -203,3 +203,33 @@ function togglePasswordType(){
 		pwToggleIcon.classList.add("fa-eye");
 	}
 }
+
+ function addRow() {
+        // Create a new div for each row
+        var newRow = document.createElement('div');
+        newRow.className = 'w3-margin-top';
+
+        newRow.innerHTML = `
+            <div class="w3-third">
+                <div class="w3-col" style="width:40px"><label>시작</label></div>
+                <div class="w3-rest">
+                    <input type="text" class="w3-input" name="alarmStart" placeholder="Start Time" value="" required>
+                </div>
+            </div>
+            <div class="w3-third">
+                <div class="w3-col" style="width:40px"><label>종료</label></div>
+                <div class="w3-rest">
+                    <input type="text" class="w3-input" name="alarmEnd" placeholder="End Time" value="" required>
+                </div>
+            </div>
+            <div class="w3-third">
+                <div class="w3-col" style="width:40px"><label>간격</label></div>
+                <div class="w3-rest">
+                    <input type="text" class="w3-input" name="alarmInterval" placeholder="Interval" value="" required>
+                </div>
+            </div>
+        `;
+
+        // Append the new row to the container
+        document.getElementById('dynamicRowsContainer').appendChild(newRow);
+    }

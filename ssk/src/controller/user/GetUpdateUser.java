@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Time;
 import java.util.ArrayList;
 /**
  * @author Jiwon Lee
@@ -42,12 +43,12 @@ public class GetUpdateUser extends HttpServlet {
         User user = UserDAO.getUserById(conn,userId);
         request.setAttribute("user",user);
         
-        if("child".equals(user.getUserRole())) {
-        	//사용자의 ESM 알람 정보 불러오기
-        	ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, userId);
-        	//사용자의 ESM 알람 정보를 request attribute로 넘겨주기 
-        	request.setAttribute("esmTime", esmTime);
-        	}
+
+	        	//사용자의 ESM 알람 정보 불러오기
+	    ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, userId);
+	        	
+	        	//사용자의 ESM 알람 정보를 request attribute로 넘겨주기 
+	    request.setAttribute("esmTime", esmTime);
 
 
 
