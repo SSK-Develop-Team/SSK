@@ -72,13 +72,14 @@ public class DoRegister extends HttpServlet {
 		join_result = UserDAO.insertUser(conn, user);
 
 		//alarm
-		String alarmStartParam = request.getParameter("alarmStart");
-		String alarmEndParam = request.getParameter("alarmEnd");
-		String alarmIntervalParam = request.getParameter("alarmInterval");
-
-		Time alarmstart = Time.valueOf(alarmStartParam);
-		Time alarmend = Time.valueOf(alarmEndParam);
-		int alarminterval = Integer.parseInt(alarmIntervalParam);
+		String[] alarmStartParam = request.getParameterValues("alarmStart");
+		String[] alarmEndParam = request.getParameterValues("alarmEnd");
+		String[] alarmIntervalParam = request.getParameterValues("alarmInterval");
+		
+		for (int i = 0; i < alarmStartParam.length; i++) {
+		Time alarmstart = Time.valueOf(alarmStartParam[i]);
+		Time alarmend = Time.valueOf(alarmEndParam[i]);
+		int alarminterval = Integer.parseInt(alarmIntervalParam[i]);
 
 		EsmAlarm alarm = new EsmAlarm();
 			alarm.setAlarmStart(alarmstart);
@@ -86,9 +87,8 @@ public class DoRegister extends HttpServlet {
 			alarm.setAlarmInterval(alarminterval);
 			alarm.setUserId(join_result);
 
-		boolean join_result2 = false;
-		join_result2=EsmAlarmDAO.insertUserAlarm(conn, alarm);
-	
+		boolean join_result2 = EsmAlarmDAO.insertUserAlarm(conn, alarm);
+		}
 			
 		
 		if(join_result == -1) {

@@ -204,32 +204,31 @@ function togglePasswordType(){
 	}
 }
 
- function addRow() {
-        // Create a new div for each row
-        var newRow = document.createElement('div');
-        newRow.className = 'w3-margin-top';
+ function add_tr(tbodyId) {
+    var tbody = document.getElementById(tbodyId); // tbody 요소 가져오기
+    var newRow = document.createElement("tr"); // 새로운 행 생성
+    // 새로운 행의 HTML 내용
+    newRow.innerHTML = `
+        <td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
+        <td><input type="text" class="w3-input" name="alarmStart" placeholder="Start Time"></td>
+        <td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
+        <td><input type="text" class="w3-input" name="alarmEnd" placeholder="End Time"></td>
+        <td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
+        <td><input type="text" class="w3-input" name="alarmInterval" placeholder="Interval"></td>
+        <td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>
+    `;
 
-        newRow.innerHTML = `
-            <div class="w3-third">
-                <div class="w3-col" style="width:40px"><label>시작</label></div>
-                <div class="w3-rest">
-                    <input type="text" class="w3-input" name="alarmStart" placeholder="Start Time" value="" required>
-                </div>
-            </div>
-            <div class="w3-third">
-                <div class="w3-col" style="width:40px"><label>종료</label></div>
-                <div class="w3-rest">
-                    <input type="text" class="w3-input" name="alarmEnd" placeholder="End Time" value="" required>
-                </div>
-            </div>
-            <div class="w3-third">
-                <div class="w3-col" style="width:40px"><label>간격</label></div>
-                <div class="w3-rest">
-                    <input type="text" class="w3-input" name="alarmInterval" placeholder="Interval" value="" required>
-                </div>
-            </div>
-        `;
-
-        // Append the new row to the container
-        document.getElementById('dynamicRowsContainer').appendChild(newRow);
+    tbody.appendChild(newRow); // tbody에 새로운 행 추가
     }
+    
+
+  
+function deleteRow(This){
+	var tbody = This.closest('tbody'); // 현재 행이 속한 tbody 찾기
+
+    if (tbody.childElementCount == 1) {
+        alert("삭제할 수 없습니다.");
+    } else {
+        This.closest('tr').remove(); // 삭제
+    }
+	}

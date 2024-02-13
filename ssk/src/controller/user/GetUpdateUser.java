@@ -2,6 +2,7 @@ package controller.user;
 
 import model.dao.UserDAO;
 import model.dto.User;
+import model.sevice.UserListService;
 import model.dao.EsmAlarmDAO;
 import model.dto.EsmAlarm;
 
@@ -42,8 +43,8 @@ public class GetUpdateUser extends HttpServlet {
 
         User user = UserDAO.getUserById(conn,userId);
         request.setAttribute("user",user);
-        
-
+       
+		
 	        	//사용자의 ESM 알람 정보 불러오기
 	    ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, userId);
 	        	

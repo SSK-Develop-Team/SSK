@@ -18,7 +18,7 @@ public class EsmAlarmDAO {
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
 			ArrayList<EsmAlarm> alarmList = new ArrayList<EsmAlarm>();
-			if(rs.next()) { 
+			while(rs.next()) { 
 				EsmAlarm esmTime= new EsmAlarm();
 				esmTime.setAlarmId(rs.getInt(1));
 				esmTime.setAlarmStart(rs.getTime(2));
@@ -70,23 +70,6 @@ public class EsmAlarmDAO {
 		}
 	}
 	
-	/*사용자의 ESm 알람 정보 업데이트*/
-	public static boolean updateUserAlarm(Connection con, EsmAlarm esmTime) {
-      boolean flag = false;
-      try {
-         PreparedStatement pstmt = con.prepareStatement("update esm_alarm set start_time=?, end_time=?, interval_time=? where user_id = ?");
-         pstmt.setTime(1, esmTime.getAlarmStart());
-         pstmt.setTime(2, esmTime.getAlarmEnd());
-         pstmt.setInt(3, esmTime.getAlarmInterval());
-         pstmt.setInt(4, esmTime.getUserId());
-         
-         int count = pstmt.executeUpdate();
-         if (count > 0)
-            flag = true;
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return flag;
-   }
 	
 }
+

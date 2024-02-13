@@ -33,6 +33,7 @@ public class UpdateUser extends HttpServlet {
         Connection conn= (Connection) sc.getAttribute("DBconnection");
         
         int userid = Integer.parseInt(request.getParameter("originUserId"));
+        System.out.println("userid1" + userid);
         String userloginid = request.getParameter("userId");
 	    String userpw = request.getParameter("userPw");
 		String username = request.getParameter("userName");
@@ -55,6 +56,7 @@ public class UpdateUser extends HttpServlet {
 					
 		User user = new User();
 				user.setUserId(userid);
+				System.out.println("userid2" + userid);
 				user.setUserLoginId(userloginid);
 				user.setUserPassword(userpw);
 				user.setUserName(username);
@@ -67,38 +69,37 @@ public class UpdateUser extends HttpServlet {
 				
 		boolean update_result = false;
 		update_result = UserDAO.updateUser(conn, user);
-		
-		String alarmStartParam = request.getParameter("alarmStart");
-		String alarmEndParam = request.getParameter("alarmEnd");
-		String alarmIntervalParam = request.getParameter("alarmInterval");
 
-		//alarm
-		if (alarmStartParam != null && alarmEndParam != null && alarmIntervalParam != null) {
-		    int alarmid = Integer.parseInt(request.getParameter("alarmId"));
+		EsmAlarmDAO.deleteUserAlarm(conn, userid);
+
+		
+		String[] alarmIdParm =request.getParameterValues("alarmId");
+		String[] alarmStartParams = request.getParameterValues("alarmStart");
+        String[] alarmEndParams = request.getParameterValues("alarmEnd");
+        String[] alarmIntervalParams = request.getParameterValues("alarmInterval");
 
 
-		    
-		        Time alarmstart = Time.valueOf(alarmStartParam);
-		        Time alarmend = Time.valueOf(alarmEndParam);
-		        int alarminterval = Integer.parseInt(alarmIntervalParam);
+        if (alarmStartParams.length == alarmEndParams.length && alarmEndParams.length == alarmIntervalParams.length) {
+            for (int i = 0; i < alarmStartParams.length; i++) {
+            	int alarmid = Integer.parseInt(alarmIdParm[i]);
+                Time alarmstart = Time.valueOf(alarmStartParams[i]);
+                Time alarmend = Time.valueOf(alarmEndParams[i]);
+                int alarminterval = Integer.parseInt(alarmIntervalParams[i]);
 
-		        EsmAlarm alarm = new EsmAlarm();
-		        alarm.setAlarmId(alarmid);
-		        alarm.setAlarmStart(alarmstart);
-		        alarm.setAlarmEnd(alarmend);
-		        alarm.setAlarmInterval(alarminterval);
-		        alarm.setUserId(userid);
-		        System.out.println(userid);
-		        boolean update_result2 = false;
+                EsmAlarm alarm = new EsmAlarm();
+                alarm.setAlarmId(alarmid); 
+                alarm.setAlarmStart(alarmstart);
+                alarm.setAlarmEnd(alarmend);
+                alarm.setAlarmInterval(alarminterval);
+                alarm.setUserId(userid);
 
-		        update_result2 = EsmAlarmDAO.updateUserAlarm(conn, alarm);
-		    } else {
-		        System.out.println("Invalid time format. Cannot proceed.");
-		    }
-		
-		
-		
-		
+
+		    boolean insertResult = EsmAlarmDAO.insertUserAlarm(conn, alarm);
+		}
+            } else {
+		    System.out.println("Invalid time format. Cannot proceed.");
+		}
+
 
 		String update_msg = update_result?"계정이 수정되었습니다.":"계정 수정에 실패했습니다.";
 
