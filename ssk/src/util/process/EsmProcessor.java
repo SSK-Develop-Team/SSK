@@ -1,37 +1,16 @@
 package util.process;
 
+import model.dto.EsmAlarm;
+
 import java.sql.Date;
 import java.sql.Time;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class EsmProcessor {
-
-	
-	/**
-	 * 날짜에 해당하는 주의 모든 날짜 정보를 리스트로 받아오는 함수
-	 * @param currDate
-	 * @return ArrayList<Date>
-	 */
-	/*public static ArrayList<Date> getDateListOfWeek(Date currDate){
-		ArrayList<Date> dateListOfWeek = new ArrayList<Date>();
-		
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(currDate);
-		int dayOfTheWeek = cal.get(Calendar.DAY_OF_WEEK);
-		
-		for(int i=1;i<=7;i++) {
-			if(i==dayOfTheWeek) {
-				dateListOfWeek.add(currDate);
-			}else {
-				cal.add(Calendar.DATE, i-dayOfTheWeek);//해당 요일로 커서 이동
-				dateListOfWeek.add(new Date(cal.getTimeInMillis()));//결과 리스트에 해당 날짜 삽입
-				cal.add(Calendar.DATE, -i+dayOfTheWeek);//커서 원위치
-			}
-		}
-		
-		return dateListOfWeek;
-	}*/
 	/**
 	 * 날짜에 해당하는 주의 모든 날짜 정보를 리스트로 받아오는 함수
 	 * 시작 요일 선택 : 화요일 ~ 월요일, 수요일 ~ 화요일 등 사용자 선택에 따라 요일을 받아옴
@@ -63,7 +42,7 @@ public class EsmProcessor {
 				if(i==sdayOfTheWeek) {
 					dateListOfWeek.add(currDate);
 				}else {
-					cal.add(Calendar.DATE, i-sdayOfTheWeek);
+					cal.add(Calendar.DATE,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            i-sdayOfTheWeek);
 					dateListOfWeek.add(new Date(cal.getTimeInMillis()));
 					cal.add(Calendar.DATE, -i+sdayOfTheWeek);
 				}
@@ -71,6 +50,46 @@ public class EsmProcessor {
 		}
 
 		return dateListOfWeek;
+	}
+
+	/**
+	 * 사용자의 알람 설정 정보를 실제 알람 시간 리스트로 변환하는 함수 
+	 *  : 알람 시작 시간, 알람 종료 시간, 간격을 기준으로 실제 알람 시각을 산출
+	 * @param esmAlarms
+	 * @return
+	 */
+	public static ArrayList<LocalTime> convertChildEsmAlarmList(ArrayList<EsmAlarm> esmAlarms){
+		ArrayList<LocalTime> childEsmAlarmList = new ArrayList<>();
+
+		if(esmAlarms == null || esmAlarms.size()==0){
+			childEsmAlarmList.add(LocalTime.of(9,0));
+			childEsmAlarmList.add(LocalTime.of(12,0));
+			childEsmAlarmList.add(LocalTime.of(15,0));
+			childEsmAlarmList.add(LocalTime.of(18,0));
+			childEsmAlarmList.add(LocalTime.of(21,0));
+			return childEsmAlarmList;
+		}
+
+		esmAlarms.stream().forEach(e ->{
+			LocalTime startTime = e.getAlarmStart().toLocalTime();
+			LocalTime endTime = e.getAlarmEnd().toLocalTime();
+			Duration interval = Duration.ofHours(e.getAlarmInterval());
+			childEsmAlarmList.addAll(convertTimeIntervalToTimeList(startTime, endTime, interval));
+		});
+		return childEsmAlarmList;
+	}
+
+	private static ArrayList<LocalTime> convertTimeIntervalToTimeList(LocalTime startTime, LocalTime endTime, Duration interval){
+		ArrayList<LocalTime> timeListOfEsmTime = new ArrayList<>();
+
+		LocalTime current = startTime;
+
+		while (current.isBefore(endTime)) {
+			timeListOfEsmTime.add(current);
+			current = current.plus(interval);
+		}
+
+		return timeListOfEsmTime;
 	}
 /**
  * Example Code for getting day of week

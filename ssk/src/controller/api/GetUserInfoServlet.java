@@ -1,17 +1,21 @@
 package controller.api;
 
+import model.dao.EsmAlarmDAO;
 import model.dao.UserDAO;
+import model.dto.EsmAlarm;
 import model.dto.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import util.process.EsmProcessor;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
 import java.sql.Connection;
-
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 
 /**
@@ -66,12 +70,16 @@ public class GetUserInfoServlet extends HttpServlet {
             message = "success";
             result.put("message", message);
 
+            ArrayList<EsmAlarm> esmAlarms = EsmAlarmDAO.getEsmAlarmListByUser(conn, user.getUserId());
+            ArrayList<LocalTime> esmAlarmTimes = EsmProcessor.convertChildEsmAlarmList(esmAlarms);
+
             data.put("id", user.getUserId());
             data.put("loginId",user.getUserLoginId());
             data.put("password", user.getUserPassword());
             data.put("name",user.getUserName());
 
             result.put("user", data);
+            result.put("esmAlarms", esmAlarmTimes);
         }
 
         //String encodingStrResult = new String(result.toJSONString().getBytes(StandardCharsets.ISO_8859_1),"utf-8");

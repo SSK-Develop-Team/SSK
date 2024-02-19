@@ -40,7 +40,7 @@ public class EsmAlarmDAO {
 			PreparedStatement pstmt = con.prepareStatement("insert esm_alarm(start_time, end_time, interval_time,user_id) values(?,?,?,?)");
 			pstmt.setTime(1, userAlarm.getAlarmStart());
 			pstmt.setTime(2, userAlarm.getAlarmEnd());
-			pstmt.setTime(3, userAlarm.getAlarmInterval());
+			pstmt.setInt(3, userAlarm.getAlarmInterval());
 			pstmt.setInt(3, userAlarm.getUserId());
 			int insertCount = pstmt.executeUpdate();
 			if(insertCount == 1) {
