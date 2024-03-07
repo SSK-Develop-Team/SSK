@@ -211,9 +211,7 @@
 					
 						<tr>
 						<!-- Add a hidden input field for alarmId -->
-						<input type="hidden" name="alarmId" value="<%=esmTime.get(i).getAlarmId() %>" />
-						 
-            				
+						      				
 						<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
 							<td><input type="text" class="w3-input" id="alarmStart" name="alarmStart" value="<%=esmTime.get(i).getAlarmStart() %>" placeholder="Start Time"></td>
 							<td><div class="w3-col" style="width:30px"><label>종료</label></div></td>

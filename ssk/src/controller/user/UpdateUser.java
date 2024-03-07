@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Arrays;
 
 /**
  * @author Jiwon Lee
@@ -73,21 +74,18 @@ public class UpdateUser extends HttpServlet {
 		EsmAlarmDAO.deleteUserAlarm(conn, userid);
 
 		
-		String[] alarmIdParm =request.getParameterValues("alarmId");
 		String[] alarmStartParams = request.getParameterValues("alarmStart");
         String[] alarmEndParams = request.getParameterValues("alarmEnd");
         String[] alarmIntervalParams = request.getParameterValues("alarmInterval");
 
-
         if (alarmStartParams.length == alarmEndParams.length && alarmEndParams.length == alarmIntervalParams.length) {
             for (int i = 0; i < alarmStartParams.length; i++) {
-            	int alarmid = Integer.parseInt(alarmIdParm[i]);
+
                 Time alarmstart = Time.valueOf(alarmStartParams[i]);
                 Time alarmend = Time.valueOf(alarmEndParams[i]);
                 int alarminterval = Integer.parseInt(alarmIntervalParams[i]);
 
                 EsmAlarm alarm = new EsmAlarm();
-                alarm.setAlarmId(alarmid); 
                 alarm.setAlarmStart(alarmstart);
                 alarm.setAlarmEnd(alarmend);
                 alarm.setAlarmInterval(alarminterval);

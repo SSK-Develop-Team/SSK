@@ -68,7 +68,7 @@
 					<%if(currUserList.size()!=0){
 						for (int i =0;i<currUserList.size();i++){
 					%>
-						<tr>
+						<tr onclick="getChild(<%=currUserList.get(i).getUserId()%>)">
 							<td><input type="checkbox" name="childId" value="<%=currUserList.get(i).getUserId()%>" id="check" onclick="setLatestChildId(<%=currUserList.get(i).getUserId()%>)"/></td>
 							<td><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
 							<td><%=currUserList.get(i).getUserName() %></td>
@@ -78,6 +78,7 @@
 							<td><%=currUserList.get(i).getRegistrationDate() %></td>
 							<td><%=currUserList.get(i).getUserEmail() %></td>
 						</tr>
+
 					<% }
 					}%>
 				</table>
@@ -197,6 +198,16 @@
 			
 			frm.submit();
 		}
+	}
+	function getChild(childId){
+
+		const latestChildIdInput = document.getElementById("latestChildId");
+		latestChildIdInput.value = childId;
+		
+		const updateFrm = document.getElementById('manageFrm');
+		updateFrm.setAttribute("action", "GetUserInfo")
+		updateFrm.submit();
+
 	}
 </script>
 </body>
