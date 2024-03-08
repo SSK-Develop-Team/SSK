@@ -31,9 +31,10 @@ public class GetUserInfo extends HttpServlet {
         ServletContext sc = getServletContext();
         Connection conn= (Connection) sc.getAttribute("DBconnection");
 
-        int userId = 0;
-        userId = Integer.parseInt(request.getParameter("latestChildId"));
-        String location = null;
+        int childId = 0;
+        childId = Integer.parseInt(request.getParameter("childId"));
+        /*
+        System.out.println(location);
         if(request.getParameter("latestChildId")!=null){
             userId = Integer.parseInt(request.getParameter("latestChildId"));
             location="/childInformation.jsp?role=child";
@@ -41,23 +42,21 @@ public class GetUserInfo extends HttpServlet {
             userId = Integer.parseInt(request.getParameter("latestExpertId"));
             location="/childInformation.jsp?role=expert";
         }
+        */
 
-            System.out.println("유저 아이디"+userId);
-
-        User user = UserDAO.getUserById(conn,userId);
-        request.setAttribute("user",user);
+        User child = UserDAO.getUserById(conn,childId);
+        request.setAttribute("child",child);
        
-		
 	        	//사용자의 ESM 알람 정보 불러오기
-	    ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, userId);
+	    ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, childId);
 	        	
 	        	//사용자의 ESM 알람 정보를 request attribute로 넘겨주기 
 	    request.setAttribute("esmTime", esmTime);
 
 
-
-        RequestDispatcher rd = request.getRequestDispatcher(location);
-        rd.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/childInformation.jsp");
+		rd.forward(request, response);
+		
     }
 
     @Override

@@ -30,9 +30,10 @@ public class GetUpdateUser extends HttpServlet {
 
         ServletContext sc = getServletContext();
         Connection conn= (Connection) sc.getAttribute("DBconnection");
-
+        
         int userId = 0;
         String location = null;
+
         if(request.getParameter("latestChildId")!=null){
             userId = Integer.parseInt(request.getParameter("latestChildId"));
             location="/register.jsp?role=child";
@@ -40,6 +41,7 @@ public class GetUpdateUser extends HttpServlet {
             userId = Integer.parseInt(request.getParameter("latestExpertId"));
             location="/register.jsp?role=expert";
         }
+        
 
         User user = UserDAO.getUserById(conn,userId);
         request.setAttribute("user",user);
@@ -51,8 +53,7 @@ public class GetUpdateUser extends HttpServlet {
 	        	//사용자의 ESM 알람 정보를 request attribute로 넘겨주기 
 	    request.setAttribute("esmTime", esmTime);
 
-
-
+	    
         RequestDispatcher rd = request.getRequestDispatcher(location);
         rd.forward(request, response);
     }

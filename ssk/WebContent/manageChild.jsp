@@ -68,15 +68,15 @@
 					<%if(currUserList.size()!=0){
 						for (int i =0;i<currUserList.size();i++){
 					%>
-						<tr onclick="getChild(<%=currUserList.get(i).getUserId()%>)">
-							<td><input type="checkbox" name="childId" value="<%=currUserList.get(i).getUserId()%>" id="check" onclick="setLatestChildId(<%=currUserList.get(i).getUserId()%>)"/></td>
-							<td><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
-							<td><%=currUserList.get(i).getUserName() %></td>
-							<td><%=currUserList.get(i).getUserLoginId() %></td>
-							<td><%=currUserList.get(i).getUserBirth() %></td>
-							<td><%=currUserList.get(i).getUserGenderKr() %></td>
-							<td><%=currUserList.get(i).getRegistrationDate() %></td>
-							<td><%=currUserList.get(i).getUserEmail() %></td>
+						<tr>
+							<td><input type="checkbox" name="childId" value="<%= currUserList.get(i).getUserId() %>" id="check<%= i %>"/></td>
+							<td onclick="getChild(<%=currUserList.get(i).getUserId()%>)"><%=(currPageNum-1)*UserPaging.getListRange()+i+1%></td>
+							<td onclick="getChild(<%=currUserList.get(i).getUserId()%>)"><%=currUserList.get(i).getUserName() %></td>
+							<td onclick="getChild(<%=currUserList.get(i).getUserId()%>)"><%=currUserList.get(i).getUserLoginId() %></td>
+							<td onclick="getChild(<%=currUserList.get(i).getUserId()%>)"><%=currUserList.get(i).getUserBirth() %></td>
+							<td onclick="getChild(<%=currUserList.get(i).getUserId()%>)"><%=currUserList.get(i).getUserGenderKr() %></td>
+							<td onclick="getChild(<%=currUserList.get(i).getUserId()%>)"><%=currUserList.get(i).getRegistrationDate() %></td>
+							<td onclick="getChild(<%=currUserList.get(i).getUserId()%>)"><%=currUserList.get(i).getUserEmail() %></td>
 						</tr>
 
 					<% }
@@ -201,14 +201,29 @@
 	}
 	function getChild(childId){
 
-		const latestChildIdInput = document.getElementById("latestChildId");
+		/*const latestChildIdInput = document.getElementById("latestChildId");
 		latestChildIdInput.value = childId;
 		
 		const updateFrm = document.getElementById('manageFrm');
 		updateFrm.setAttribute("action", "GetUserInfo")
-		updateFrm.submit();
+		updateFrm.submit();*/
+		
+		//Get UserInfo로 가는 폼 생성 
+		var form= document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action","GetUserInfo");
+		//childId를 이름으로 하는 input(parameter) 태그 생성 후, childId를 value로 넣어준다. 
+		var childIdInput  = document.createElement("input");
+		childIdInput .setAttribute("type", "hidden");
+		childIdInput .setAttribute("name", "childId");
+		childIdInput .setAttribute("value", childId);
+	    form.appendChild(childIdInput);
+		//폼 제출
+		document.body.appendChild(form);		
+		form.submit();
 
 	}
+
 </script>
 </body>
 </html>
