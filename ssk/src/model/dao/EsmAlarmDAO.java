@@ -18,14 +18,15 @@ public class EsmAlarmDAO {
 			pstmt.setInt(1, userId);
 			ResultSet rs = pstmt.executeQuery();
 			ArrayList<EsmAlarm> alarmList = new ArrayList<EsmAlarm>();
-			if(rs.next()) { 
-				EsmAlarm alarm= new EsmAlarm();
-				alarm.setAlarmId(rs.getInt(1));
-				alarm.setAlarmStart(rs.getTime(2));
-				alarm.setAlarmEnd(rs.getTime(3));
-				alarm.setUserId(rs.getInt(5));
+			while(rs.next()) { 
+				EsmAlarm esmTime= new EsmAlarm();
+				esmTime.setAlarmId(rs.getInt(1));
+				esmTime.setAlarmStart(rs.getTime(2));
+				esmTime.setAlarmEnd(rs.getTime(3));
+				esmTime.setAlarmInterval(rs.getInt(4));
+				esmTime.setUserId(rs.getInt(5));
 				
-				alarmList.add(alarm);
+				alarmList.add(esmTime);
 			}
 			return alarmList;
 		} catch (SQLException e) {
@@ -35,15 +36,16 @@ public class EsmAlarmDAO {
 	}
 	
 	//사용자의 ESm 알람 정보 저장하기 (Connection con, int userId)
-	public static boolean insertUserAlarm(Connection con, EsmAlarm userAlarm ){
+	public static boolean insertUserAlarm(Connection con, EsmAlarm esmAlarm ){
 		try {
 			PreparedStatement pstmt = con.prepareStatement("insert esm_alarm(start_time, end_time, interval_time,user_id) values(?,?,?,?)");
-			pstmt.setTime(1, userAlarm.getAlarmStart());
-			pstmt.setTime(2, userAlarm.getAlarmEnd());
-			pstmt.setInt(3, userAlarm.getAlarmInterval());
-			pstmt.setInt(3, userAlarm.getUserId());
+			pstmt.setTime(1, esmAlarm.getAlarmStart());
+			pstmt.setTime(2, esmAlarm.getAlarmEnd());
+			pstmt.setInt(3, esmAlarm.getAlarmInterval());
+			pstmt.setInt(3, esmAlarm.getUserId());
+
 			int insertCount = pstmt.executeUpdate();
-			if(insertCount == 1) {
+			if(insertCount >= 1) {
 				return true;
 			}
 			else {
@@ -68,4 +70,7 @@ public class EsmAlarmDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
+

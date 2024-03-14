@@ -1,4 +1,6 @@
-<%@ page import="model.dto.User" %>
+<%@ page import="model.dto.User" %>	
+<%@ page import="model.dto.EsmAlarm" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -6,6 +8,7 @@
 <head>
 	<!--user (O):계정 수정, (X):계정 생성-->
 	<c:set var="user" scope="page" value="${requestScope.user}"/>
+	<c:set var="esmTime" scope="page" value="${requestScope.esmTime}"/>
 	<c:choose>
 		<c:when test="${user ne null}">
 			<title>계정 수정</title>
@@ -163,34 +166,77 @@
 				<input type="text" class="w3-input" id="userEmail" name="userEmail" value="${user.userEmail}" placeholder="Email">
 				<span id="check_email_m" class="msg"></span>
 			</div>
+			
 			<div class="w3-margin-top">
 				<div><span style="color:red; margin-left:-5px;">*</span>정서 반복 기록 설정</div>
 				
+ <!-- esmTime이라는 이름으로 전달된 ArrayList를 받음 -->
 
-				  <div class="w3-third">
-						<div class="w3-col" style="width:40px"><label>시작</label></div>
-						<div class="w3-rest">
-							<input type="text" class="w3-input" id="userAlarmStart" name="userAlarmStart" value="${user.userEmail}" placeholder="Start Time">
-						</div>
-					</div>
+ <% ArrayList<EsmAlarm> esmTime = (ArrayList<EsmAlarm>) request.getAttribute("esmTime"); %>
+<c:choose>
+    <c:when test="${empty esmTime}">
+        <!-- esmTime이 비어있을 때의 처리 -->
+        <div class="w3-container w3-margin-top" style="padding:0;">
+        <table class="w3-table" style="font-size:0.8em;">
+					<tbody id="table_body">
+						<tr>
+						<!-- Add a hidden input field for alarmId --> 
+            				<input type="hidden" name="alarmId" value="0"/>
+						<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
+							<td><input type="text" class="w3-input" id="alarmStart" name="alarmStart" placeholder="Start Time"></td>
+							<td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
+							<td><input type="text" class="w3-input" id="alarmEnd" name="alarmEnd" placeholder="End Time"></td>
+							<td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
+							<td><input type="text" class="w3-input" id="alarmInterval" name="alarmInterval" placeholder="Interval"></td>
+							<td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>
+						</tr>
+					</tbody>
+        	
+					</table>
+				</div>
+        
+    </c:when>
+     <c:otherwise>
+     <!-- esmTime이 값이 있을 때의 처리 -->
+      
+        <div class="w3-container w3-margin-top" style="padding:0;">
+        
+        
+        
+        <table class="w3-table" style="font-size:0.8em;">
+        <tbody id="table_body">
+        <%if(esmTime.size()!=0){
+						for (int i =0;i<esmTime.size();i++){
+					%>
 					
-					<div class="w3-third">
-						<div class="w3-col" style="width:40px"><label>종료</label></div></th>
-						<div class="w3-rest">
-							<input type="text" class="w3-input" id="userAlarmEnd" name="userAlarmEnd" value="${user.userEmail}" placeholder="End Time">
-						</div>
-					</div>
-					
-					<div class="w3-third">
-						<div class="w3-col" style="width:40px"><label>간격</label></div>
-						<div class="w3-rest">
-							<input type="text" class="w3-input" id="userAlarmInterval" name="userAlarmInterval" value="${user.userEmail}" placeholder="Interval">
-						</div>
-					</div>
+						<tr>
+						<!-- Add a hidden input field for alarmId -->
+						      				
+						<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
+							<td><input type="text" class="w3-input alarmStart" name="alarmStart" value="<%=esmTime.get(i).getAlarmStart() %>" placeholder="Start Time"></td>
+							<td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
+							<td><input type="text" class="w3-input alarmEnd" name="alarmEnd" value="<%=esmTime.get(i).getAlarmEnd() %>" placeholder="End Time"></td>
+							<td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
+							<td><input type="text" class="w3-input" id="alarmInterval" name="alarmInterval" value="<%=esmTime.get(i).getAlarmInterval() %>" placeholder="Interval"></td>
+							<td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>
+						</tr>
+						<div class="check_alarm_m""></div>
+					<% }
+					}%>
+        	</tbody>
+					</table>
+				</div>
+        
+ </c:otherwise>
+</c:choose>
 
-
-
+			<div class="w3-margin-top">
+				<input type='button' class="w3-bar w3-gray" style="height:40px;" value='행추가' onclick="add_tr('table_body')" />
+			</div>	
 			</div>
+			
+			
+			
 			<div class="w3-margin-top w3-left">
 				<div class="w3-button" style="color:white;background-color:#51459E;" onclick="history.go(-1);" > 뒤로가기 </div>
 			</div>

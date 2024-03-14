@@ -19,8 +19,8 @@ import java.util.ArrayList;
  * - 관리자, 전문가가 아동 계정을 수정하는 경우
  * - 관리자가 전문가 계정을 수정하는 경우
  */
-@WebServlet(name = "GetUpdateUser", value = "/GetUpdateUser")
-public class GetUpdateUser extends HttpServlet {
+@WebServlet(name = "GetUserInfo", value = "/GetUserInfo")
+public class GetUserInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -30,32 +30,33 @@ public class GetUpdateUser extends HttpServlet {
 
         ServletContext sc = getServletContext();
         Connection conn= (Connection) sc.getAttribute("DBconnection");
-        
-        int userId = 0;
-        String location = null;
 
+        int childId = 0;
+        childId = Integer.parseInt(request.getParameter("childId"));
+        /*
+        System.out.println(location);
         if(request.getParameter("latestChildId")!=null){
             userId = Integer.parseInt(request.getParameter("latestChildId"));
-            location="/register.jsp?role=child";
+            location="/childInformation.jsp?role=child";
         }else if(request.getParameter("latestExpertId")!=null){
             userId = Integer.parseInt(request.getParameter("latestExpertId"));
-            location="/register.jsp?role=expert";
+            location="/childInformation.jsp?role=expert";
         }
-        
+        */
 
-        User user = UserDAO.getUserById(conn,userId);
-        request.setAttribute("user",user);
+        User child = UserDAO.getUserById(conn,childId);
+        request.setAttribute("child",child);
        
-		
 	        	//사용자의 ESM 알람 정보 불러오기
-	    ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, userId);
+	    ArrayList<EsmAlarm> esmTime = EsmAlarmDAO.getEsmAlarmListByUser(conn, childId);
 	        	
 	        	//사용자의 ESM 알람 정보를 request attribute로 넘겨주기 
 	    request.setAttribute("esmTime", esmTime);
 
-	    
-        RequestDispatcher rd = request.getRequestDispatcher(location);
-        rd.forward(request, response);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/childInformation.jsp");
+		rd.forward(request, response);
+		
     }
 
     @Override
