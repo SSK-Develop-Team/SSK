@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Date;
 
@@ -33,9 +34,6 @@ public class GetRecentEsmTestLog extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        ServletContext sc = getServletContext();
-        Connection conn= (Connection)sc.getAttribute("DBconnection");
-
         JSONParser jsonParser = new JSONParser();
         JSONObject requestBody = null;
 
@@ -48,9 +46,18 @@ public class GetRecentEsmTestLog extends HttpServlet {
 
         int userId = Integer.parseInt(requestBody.get("id").toString());//식별 아이디 가져오기
 
-        Date currDate = Date.valueOf(requestBody.get("currDate").toString());//현재 날짜
-        Time currTime = Time.valueOf(requestBody.get("currTime").toString());//현재 시간
 
+        //for DB connection
+        ServletContext sc = getServletContext();
+        Connection conn_tmp = (Connection)sc.getAttribute("DBconnection");
+
+        try {//Connection timeout 오류 해결용 코드
+            UserDAO.throwConnection(conn_tmp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Connection conn= (Connection)sc.getAttribute("DBconnection");
         EsmTestLog recentEsmTestLog = EsmTestLogDAO.getRecentEsmTestLogListByUserId(conn,userId);//사용자의 최근 검사 기록
 
 
