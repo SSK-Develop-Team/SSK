@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -58,27 +59,53 @@ public class EsmProcessor {
 	 * @param esmAlarms
 	 * @return
 	 */
-	public static ArrayList<LocalTime> convertChildEsmAlarmList(ArrayList<EsmAlarm> esmAlarms){
+	public static ArrayList<String> convertChildEsmAlarmList(ArrayList<EsmAlarm> esmAlarms){
 		ArrayList<LocalTime> childEsmAlarmList = new ArrayList<>();
+		ArrayList<String> childEsmAlarmStrList = new ArrayList<>();
 
+		//사용자에게 설정된 알람 값이 없는 경우 -> 디폴트 알람 시간 값 설정
 		if(esmAlarms == null || esmAlarms.size()==0){
+			/*
 			childEsmAlarmList.add(LocalTime.of(9,0));
 			childEsmAlarmList.add(LocalTime.of(12,0));
 			childEsmAlarmList.add(LocalTime.of(15,0));
 			childEsmAlarmList.add(LocalTime.of(18,0));
 			childEsmAlarmList.add(LocalTime.of(21,0));
 			return childEsmAlarmList;
+			 */
+			childEsmAlarmStrList.add("21:55:00");
+			childEsmAlarmStrList.add("22:00:00");
+			childEsmAlarmStrList.add("22:05:00");
+
+
+			return childEsmAlarmStrList;
+
 		}
 
+		//알람 리스트를 순회하면서 알람 시간을 변환하여 하나의 리스트로 add
 		esmAlarms.stream().forEach(e ->{
 			LocalTime startTime = e.getAlarmStart().toLocalTime();
 			LocalTime endTime = e.getAlarmEnd().toLocalTime();
 			Duration interval = Duration.ofHours(e.getAlarmInterval());
 			childEsmAlarmList.addAll(convertTimeIntervalToTimeList(startTime, endTime, interval));
 		});
-		return childEsmAlarmList;
+
+		//String 리스트로 변환
+		childEsmAlarmList.stream().forEach(e ->{
+			childEsmAlarmStrList.add(e.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+		});
+
+		return childEsmAlarmStrList;
 	}
 
+
+	/**
+	 * 하나의 알람 설정 값을 알람 시간 리스트로 변환
+	 * @param startTime
+	 * @param endTime
+	 * @param interval
+	 * @return
+	 */
 	private static ArrayList<LocalTime> convertTimeIntervalToTimeList(LocalTime startTime, LocalTime endTime, Duration interval){
 		ArrayList<LocalTime> timeListOfEsmTime = new ArrayList<>();
 
