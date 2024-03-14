@@ -183,13 +183,14 @@
 						<!-- Add a hidden input field for alarmId --> 
             				<input type="hidden" name="alarmId" value="0"/>
 						<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
-							<td><input type="text" class="w3-input" id="alarmStart" name="alarmStart" placeholder="Start Time"></td>
+							<td><input type="text" class="w3-input" id="alarmStart" name="alarmStart" value= "19:00:00" placeholder="Start Time"></td>
 							<td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
-							<td><input type="text" class="w3-input" id="alarmEnd" name="alarmEnd" placeholder="End Time"></td>
+							<td><input type="text" class="w3-input" id="alarmEnd" name="alarmEnd" value= "21:00:00" placeholder="End Time"></td>
 							<td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
-							<td><input type="text" class="w3-input" id="alarmInterval" name="alarmInterval" placeholder="Interval"></td>
+							<td><input type="text" class="w3-input" id="alarmInterval" name="alarmInterval" value= "3" placeholder="Interval"></td>
 							<td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>
 						</tr>
+						<div class="check_alarm_m""></div>
 					</tbody>
         	
 					</table>
@@ -212,11 +213,11 @@
 						<tr>
 						<!-- Add a hidden input field for alarmId -->
 						      				
-						<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
+						<td style="padding-left: 0px;"><div class="w3-col" style="width:20px"><label>시작</label></div></td>
 							<td><input type="text" class="w3-input alarmStart" name="alarmStart" value="<%=esmTime.get(i).getAlarmStart() %>" placeholder="Start Time"></td>
-							<td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
+							<td><div class="w3-col" style="width:20px"><label>종료</label></div></td>
 							<td><input type="text" class="w3-input alarmEnd" name="alarmEnd" value="<%=esmTime.get(i).getAlarmEnd() %>" placeholder="End Time"></td>
-							<td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
+							<td><div class="w3-col" style="width:20px"><label>간격</label></div></td>
 							<td><input type="text" class="w3-input alarmInterval" name="alarmInterval" value="<%=esmTime.get(i).getAlarmInterval() %>" placeholder="Interval"></td>
 							<td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>
 						</tr>

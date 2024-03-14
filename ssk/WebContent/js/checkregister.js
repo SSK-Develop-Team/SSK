@@ -10,6 +10,7 @@
 let checkedId = false;//아이디 확인
 let checkedEmail = false;//이메일 확인
 let checkedPW = false;//비밀번호 확인
+let checkedEsmTimes= false; //알람 정보 확인
 
 const idInput = document.getElementById("userId");
 const checkIdBtn = document.getElementById("checkId");
@@ -177,37 +178,60 @@ function checkName(){
 
 /*알람시간 검사*/
 function checkEsmTimes() {
-  const starts = document.querySelectorAll('input[name="alarmStart"]');
-  const ends = document.querySelectorAll('input[name="alarmEnd"]');
-  const intervals = document.querySelectorAll('input[name="alarmInterval"]');
-  const alarmMsg = document.getElementsByClassName('check_alarm_m')[0];
-  alarmMsg.style.color = 'red';
-
-
-  for (let i = 0; i < starts.length; i++) {
-    if (starts[i].value.trim() === "" || ends[i].value.trim() === "") {
-      alarmMsg.innerHTML = "알람 설정 시간을 모두 입력하세요."; 
-      return false;
-    }else if( parseInt(starts[i].value-ends[i].value) < intervals[i].value ){
-		//데이터마다  종료 시간 - 시작 시간 >= 간격 -> false일 경우 notify 
-		alarmMsg.innerHTML = "알람 간격이 설정 시간을 넘어가지 않도록 입력하세요."; 
-      	return false;
+	const starts = document.querySelectorAll('input[name="alarmStart"]');
+	const ends = document.querySelectorAll('input[name="alarmEnd"]');
+	const intervals = document.querySelectorAll('input[name="alarmInterval"]');
+	const alarmMsg = document.getElementsByClassName('check_alarm_m')[0];
+	alarmMsg.style.color = 'red';
+	
+	//유효성 검사
+	for (let i = 0; i < starts.length; i++) {
+		var startsInt=parseInt(starts[i].value);
+		var endsInt=parseInt(ends[i].value);
+		  
+	    if (starts[i].value.trim() === "" || ends[i].value.trim() === "" || intervals[i].value.trim()=== "") {
+			alarmMsg.innerHTML = "알람 설정 시간을 모두 입력하세요."; 
+			checkedEsmTimes=false;
+			return false;
+	    }else if(endsInt-startsInt < intervals[i].value){
+			//데이터마다  종료 시간 - 시작 시간 > 간격 -> false일 경우 notify 
+			alarmMsg.innerHTML = "알람 간격이 설정 시간을 넘어가지 않도록 입력하세요."; 
+			console.log(endsInt-startsInt);
+			checkedEsmTimes=false;
+	      	return false;
+		}else{
+			alarmMsg.innerHTML = '';
+		}
+	  } 
+	// 알람 설정 시간 겹치지 않게 
+	//1.[시작시간, 종료 시간][시작 시간, ...]] -> 2.시작 시간 기준으로 정렬 -> 3.이전 종료 시간이 curr 시작 시간 이전인가? false라면 notify    
+	
+	//1.배열 시작시간,종료시간 넣기
+	var arr = [];
+	for (let i = 0; i < starts.length; i++) {
+		var startsInt=parseInt(starts[i].value);
+		var endsInt=parseInt(ends[i].value);
+		  
+		arr.push([startsInt,endsInt]); 
 	}
-    else{
-		alarmMsg.innerHTML = '';
+	//2.시작 시간을 기준으로 정렬
+	arr.sort(function(a, b) {
+		return a[0] - b[0];
+	});
+	//3.이전 종료 시간이 curr 시작 시간 이전인가? false라면 notify    
+	for (let i = 0; i < starts.length; i++) {
+		if(i>0){
+			if(arr[i-1][1]>arr[i][0]){
+				alarmMsg.innerHTML = "알람 설정 시간이 겹치치 않도록 입력하세요."; 
+				checkedEsmTimes=false;
+	      		return false;
+			}	
+		}
 	}
-  }
-  
-  
-  
-  // 알람 설정 시간 겹치지 않게 
-  
-  
-  //[시작시간, 종료 시간][시작 시간, ...]] -> 시작 시간 기준으로 정렬 -> 이전 종료 시간이 curr 시작 시간 이전인가? false라면 notify  
-  
-
-  return true;
+	checkedEsmTimes=true;
+	return true;
 }
+
 
 /* 빈칸 검사 */
 function checkValue(){
@@ -217,6 +241,7 @@ function checkValue(){
 	 - 비밀번호 : checkedPw
 	 - 이름 : checkedName
 	*/
+
 	if(!checkedId) {
 		alert('아이디를 중복 확인해주세요!');
 	    return false;
@@ -226,8 +251,8 @@ function checkValue(){
 	}else if(!checkedEmail){
 		alert('이메일을 확인해주세요!');
 		return false;
-	}else if(!checkEsmTimes){
-		alert('이메일을 확인해주세요!');
+	}else if(!checkedEsmTimes){
+		alert('알람을 확인해주세요!');
 		return false;
 	}
 	if (checkName()) {
