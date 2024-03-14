@@ -36,13 +36,14 @@ public class EsmAlarmDAO {
 	}
 	
 	//사용자의 ESm 알람 정보 저장하기 (Connection con, int userId)
-	public static boolean insertUserAlarm(Connection con, EsmAlarm esmTime ){
+	public static boolean insertUserAlarm(Connection con, EsmAlarm esmAlarm ){
 		try {
-			PreparedStatement pstmt = con.prepareStatement("insert esm_alarm(start_time, end_time, interval_time, user_id) values(?,?,?,?)");
-			pstmt.setTime(1, esmTime.getAlarmStart());
-			pstmt.setTime(2, esmTime.getAlarmEnd());
-			pstmt.setInt(3, esmTime.getAlarmInterval());
-			pstmt.setInt(4, esmTime.getUserId());
+			PreparedStatement pstmt = con.prepareStatement("insert esm_alarm(start_time, end_time, interval_time,user_id) values(?,?,?,?)");
+			pstmt.setTime(1, esmAlarm.getAlarmStart());
+			pstmt.setTime(2, esmAlarm.getAlarmEnd());
+			pstmt.setInt(3, esmAlarm.getAlarmInterval());
+			pstmt.setInt(3, esmAlarm.getUserId());
+
 			int insertCount = pstmt.executeUpdate();
 			if(insertCount >= 1) {
 				return true;

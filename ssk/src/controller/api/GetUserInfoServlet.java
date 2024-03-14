@@ -1,17 +1,22 @@
 package controller.api;
 
+import model.dao.EsmAlarmDAO;
 import model.dao.UserDAO;
+import model.dto.EsmAlarm;
 import model.dto.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import util.process.EsmProcessor;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
 import java.sql.Connection;
-
+import java.sql.SQLException;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 
 /**
@@ -25,9 +30,6 @@ public class GetUserInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
-
-        ServletContext sc = getServletContext();
-        Connection conn= (Connection)sc.getAttribute("DBconnection");
 
         JSONParser jsonParser = new JSONParser();
         JSONObject requestBody = null;
@@ -44,7 +46,19 @@ public class GetUserInfoServlet extends HttpServlet {
         System.out.println("POST /user --- ID: "+userLoginId);
         System.out.println("POST /user --- PW: "+userLoginId);
 
+        //for DB connection
+        ServletContext sc = getServletContext();
+        Connection conn_tmp = (Connection)sc.getAttribute("DBconnection");
+
+        try {//Connection timeout 오류 해결용 코드
+            UserDAO.throwConnection(conn_tmp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Connection conn= (Connection)sc.getAttribute("DBconnection");
         User user = UserDAO.findUser(conn,userLoginId, userPw);
+
 
         String message = "";
         JSONObject result = new JSONObject();//전체 result
@@ -66,12 +80,16 @@ public class GetUserInfoServlet extends HttpServlet {
             message = "success";
             result.put("message", message);
 
+            ArrayList<EsmAlarm> esmAlarms = EsmAlarmDAO.getEsmAlarmListByUser(conn, user.getUserId());
+            ArrayList<String> esmAlarmTimes = EsmProcessor.convertChildEsmAlarmList(esmAlarms);
+
             data.put("id", user.getUserId());
             data.put("loginId",user.getUserLoginId());
             data.put("password", user.getUserPassword());
             data.put("name",user.getUserName());
 
             result.put("user", data);
+            result.put("esmAlarms", esmAlarmTimes);
         }
 
         //String encodingStrResult = new String(result.toJSONString().getBytes(StandardCharsets.ISO_8859_1),"utf-8");
