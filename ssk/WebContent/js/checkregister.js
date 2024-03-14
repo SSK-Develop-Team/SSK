@@ -17,12 +17,23 @@ const pwInput = document.getElementById("userPw");
 const pwChkInput = document.getElementById("userPwChk");
 const emailInput = document.getElementById("userEmail");
 const nameInput = document.getElementById("userName");
+const alarmSt = document.getElementsByClassName("alarmStart");
+const alarmEd = document.getElementsByClassName("alarmEnd");
+
+
 
 checkIdBtn.addEventListener('click', checkId);
 pwInput.addEventListener('change', checkPW);
 pwChkInput.addEventListener('change', checkPW);
 emailInput.addEventListener('change', checkEmail);
 nameInput.addEventListener('change', checkName);
+Array.from(alarmSt).forEach(element => {
+    element.addEventListener('change', CheckEsmTimes);
+});
+
+Array.from(alarmEd).forEach(element => {
+    element.addEventListener('change', CheckEsmTimes);
+});
 
 window.onload = function(){
 	const id = document.getElementById("userId").value;
@@ -150,7 +161,6 @@ function checkPW() {
 function checkName(){
 	const name = document.getElementById("userName").value;
  	const nameMsg = document.getElementById('check_name_m');
-
 	nameMsg.style.color = 'red';
 
 	//입력 값이 있는지 확인
@@ -161,6 +171,47 @@ function checkName(){
 		nameMsg.innerHTML = '';
 	}
 	return true;
+}
+
+/* 알람 형식 검사  */
+function checkAlarmForm(str) {
+  const emailForm = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+  if (!emailForm.test(str)) {
+    return false;
+  } else {
+    return true;
+  }
+}
+/*알람시간 검사*/
+function CheckEsmTimes() {
+  const starts = document.querySelectorAll('input[name="alarmStart"]');
+  const ends = document.querySelectorAll('input[name="alarmEnd"]');
+  const alarmMsg = document.getElementsByClassName('check_alarm_m')[0];
+  alarmMsg.style.color = 'red';
+
+
+  for (let i = 0; i < starts.length; i++) {
+    if (starts[i].value.trim() === "" || ends[i].value.trim() === "") {
+     
+      alarmMsg.innerHTML = "알람 시작 시간과 종료 시간을 모두 입력해주세요."; 
+      return false;
+    }
+    else{
+		alarmMsg.innerHTML = '';
+	}
+  }
+  
+  //데이터마다  종료 시간 - 시작 시간 > 간격 -> false일 경우 notify 
+  
+  
+  // 알람 설정 시간 겹치지 않게 
+  
+  
+  //[시작시간, 종료 시간][시작 시간, ...]] -> 시작 시간 기준으로 정렬 -> 이전 종료 시간이 curr 시작 시간 이전인가? false라면 notify  
+  
+
+  return true;
 }
 
 /* 빈칸 검사 */
@@ -178,6 +229,9 @@ function checkValue(){
 	    alert('비밀번호 확인을 해주세요!');
 	    return false;
 	}else if(!checkedEmail){
+		alert('이메일을 확인해주세요!');
+		return false;
+	}else if(!CheckEsmTimes){
 		alert('이메일을 확인해주세요!');
 		return false;
 	}
@@ -204,21 +258,29 @@ function togglePasswordType(){
 	}
 }
 
+
+
+
+
  function add_tr(tbodyId) {
     var tbody = document.getElementById(tbodyId); // tbody 요소 가져오기
     var newRow = document.createElement("tr"); // 새로운 행 생성
     // 새로운 행의 HTML 내용
     newRow.innerHTML = `
         <td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
-        <td><input type="text" class="w3-input" name="alarmStart" placeholder="Start Time"></td>
+        <td><input type="text" class="w3-input alarmStart" name="alarmStart" placeholder="Start Time"></td>
         <td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
-        <td><input type="text" class="w3-input" name="alarmEnd" placeholder="End Time"></td>
+        <td><input type="text" class="w3-input alarmEnd" name="alarmEnd" placeholder="End Time"></td>
         <td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
-        <td><input type="text" class="w3-input" name="alarmInterval" placeholder="Interval"></td>
+        <td><input type="text" class="w3-input alarmInterval" name="alarmInterval" placeholder="Interval"></td>
         <td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>
     `;
 
     tbody.appendChild(newRow); // tbody에 새로운 행 추가
+    
+    newRow.querySelector('.alarmStart').addEventListener('change', CheckEsmTimes);
+    newRow.querySelector('.alarmEnd').addEventListener('change', CheckEsmTimes);
+    CheckEsmTimes();
     }
     
 
@@ -230,5 +292,7 @@ function deleteRow(This){
         alert("삭제할 수 없습니다.");
     } else {
         This.closest('tr').remove(); // 삭제
+        CheckEsmTimes();
     }
+   
 	}
