@@ -73,10 +73,11 @@ public class EsmProcessor {
 			childEsmAlarmList.add(LocalTime.of(21,0));
 			return childEsmAlarmList;
 			 */
-			childEsmAlarmStrList.add("21:55:00");
-			childEsmAlarmStrList.add("22:00:00");
-			childEsmAlarmStrList.add("22:05:00");
-
+			childEsmAlarmStrList.add("09:00:00");
+			childEsmAlarmStrList.add("12:00:00");
+			childEsmAlarmStrList.add("15:00:00");
+			childEsmAlarmStrList.add("18:00:00");
+			childEsmAlarmStrList.add("21:00:00");
 
 			return childEsmAlarmStrList;
 
