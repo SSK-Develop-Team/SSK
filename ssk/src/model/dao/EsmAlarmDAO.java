@@ -42,7 +42,7 @@ public class EsmAlarmDAO {
 			pstmt.setTime(1, esmAlarm.getAlarmStart());
 			pstmt.setTime(2, esmAlarm.getAlarmEnd());
 			pstmt.setInt(3, esmAlarm.getAlarmInterval());
-			pstmt.setInt(3, esmAlarm.getUserId());
+			pstmt.setInt(4, esmAlarm.getUserId());
 
 			int insertCount = pstmt.executeUpdate();
 			if(insertCount >= 1) {

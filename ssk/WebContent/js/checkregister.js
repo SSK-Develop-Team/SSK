@@ -45,6 +45,7 @@ window.onload = function(){
 		checkId();
 		checkEmail();
 		checkName();
+		checkEsmTimes();
 	}
 }
 /* 아이디 중복 검사 */
@@ -181,39 +182,37 @@ function checkEsmTimes() {
 	const starts = document.querySelectorAll('input[name="alarmStart"]');
 	const ends = document.querySelectorAll('input[name="alarmEnd"]');
 	const intervals = document.querySelectorAll('input[name="alarmInterval"]');
+	  
 	const alarmMsg = document.getElementsByClassName('check_alarm_m')[0];
 	alarmMsg.style.color = 'red';
+	var arr=[];
 	
 	//유효성 검사
 	for (let i = 0; i < starts.length; i++) {
-		var startsInt=parseInt(starts[i].value);
-		var endsInt=parseInt(ends[i].value);
+        var startHours = parseInt(starts[i].value.split(':')[0], 10);
+        var endHours = parseInt(ends[i].value.split(':')[0], 10);
 		  
 	    if (starts[i].value.trim() === "" || ends[i].value.trim() === "" || intervals[i].value.trim()=== "") {
 			alarmMsg.innerHTML = "알람 설정 시간을 모두 입력하세요."; 
 			checkedEsmTimes=false;
 			return false;
-	    }else if(endsInt-startsInt < intervals[i].value){
+	    }else if(endHours-startHours < intervals[i].value){
 			//데이터마다  종료 시간 - 시작 시간 > 간격 -> false일 경우 notify 
 			alarmMsg.innerHTML = "알람 간격이 설정 시간을 넘어가지 않도록 입력하세요."; 
-			console.log(endsInt-startsInt);
 			checkedEsmTimes=false;
 	      	return false;
 		}else{
+			checkedEsmTimes=true;
 			alarmMsg.innerHTML = '';
 		}
+		//1.배열 시작시간,종료시간 넣기
+		arr.push([startHours,endHours]); 
 	  } 
 	// 알람 설정 시간 겹치지 않게 
 	//1.[시작시간, 종료 시간][시작 시간, ...]] -> 2.시작 시간 기준으로 정렬 -> 3.이전 종료 시간이 curr 시작 시간 이전인가? false라면 notify    
 	
-	//1.배열 시작시간,종료시간 넣기
-	var arr = [];
-	for (let i = 0; i < starts.length; i++) {
-		var startsInt=parseInt(starts[i].value);
-		var endsInt=parseInt(ends[i].value);
-		  
-		arr.push([startsInt,endsInt]); 
-	}
+	
+
 	//2.시작 시간을 기준으로 정렬
 	arr.sort(function(a, b) {
 		return a[0] - b[0];
@@ -288,9 +287,9 @@ function togglePasswordType(){
     // 새로운 행의 HTML 내용
     newRow.innerHTML = `
         <td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
-        <td><input type="text" class="w3-input alarmStart" name="alarmStart" placeholder="Start Time"></td>
+        <td><input type="time" class="w3-input alarmStart" name="alarmStart" placeholder="Start Time"></td>
         <td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
-        <td><input type="text" class="w3-input alarmEnd" name="alarmEnd" placeholder="End Time"></td>
+        <td><input type="time" class="w3-input alarmEnd" name="alarmEnd" placeholder="End Time"></td>
         <td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
         <td><input type="text" class="w3-input alarmInterval" name="alarmInterval" placeholder="Interval"></td>
         <td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>

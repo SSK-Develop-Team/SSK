@@ -81,10 +81,16 @@ public class UpdateUser extends HttpServlet {
         if (alarmStartParams.length == alarmEndParams.length && alarmEndParams.length == alarmIntervalParams.length) {
             for (int i = 0; i < alarmStartParams.length; i++) {
 
-                Time alarmstart = Time.valueOf(alarmStartParams[i]);
-                Time alarmend = Time.valueOf(alarmEndParams[i]);
+            	 // HH:MM 형식을 HH:MM:SS 형식으로 변환
+                String alarmStartFormatted = alarmStartParams[i].length() == 5 ? alarmStartParams[i] + ":00" : alarmStartParams[i];
+                String alarmEndFormatted = alarmEndParams[i].length() == 5 ? alarmEndParams[i] + ":00" : alarmEndParams[i];
+                
+                Time alarmstart = Time.valueOf(alarmStartFormatted);
+                Time alarmend = Time.valueOf(alarmEndFormatted);
                 int alarminterval = Integer.parseInt(alarmIntervalParams[i]);
 
+                
+                
                 EsmAlarm alarm = new EsmAlarm();
                 alarm.setAlarmStart(alarmstart);
                 alarm.setAlarmEnd(alarmend);
