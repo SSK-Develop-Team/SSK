@@ -286,13 +286,10 @@ function togglePasswordType(){
     var newRow = document.createElement("tr"); // 새로운 행 생성
     // 새로운 행의 HTML 내용
     newRow.innerHTML = `
-        <td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
-        <td><input type="time" class="w3-input alarmStart" name="alarmStart" placeholder="Start Time"></td>
-        <td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
-        <td><input type="time" class="w3-input alarmEnd" name="alarmEnd" placeholder="End Time"></td>
-        <td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
-        <td><input type="text" class="w3-input alarmInterval" name="alarmInterval" placeholder="Interval"></td>
-        <td><input type='button' class="w3-bar w3-gray" style="height:34px; width:40px;" value='-' onclick='deleteRow(this)' /></td>
+        <td style="padding-left:0;padding-top:0;"><input type="time" class="w3-input alarmStart" name="alarmStart" placeholder="Start Time"></td>
+							<td style="padding-top:0;"><input type="time" class="w3-input alarmEnd" name="alarmEnd" placeholder="End Time"></td>
+							<td style="padding-top:0;"><input type="text" class="w3-input alarmInterval" style="min-width: 25px;" name="alarmInterval" placeholder="Interval"></td>
+							<td style="padding-top:0; width: 12%; padding-right:0;"><input type='button' class="w3-bar w3-gray" style="height: 34px;" value='-' onclick='deleteRow(this)' /></td>
     `;
 
     tbody.appendChild(newRow); // tbody에 새로운 행 추가

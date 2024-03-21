@@ -97,12 +97,13 @@
 										<tr>
 										<!-- Add a hidden input field for alarmId --> 
 				            				<input type="hidden" name="alarmId" value="0"/>
-										<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
-											<td><input type="text" class="w3-input alarmStart" name="alarmStart" placeholder="Start Time"></td>
+				            				<td>[1]</td>
+											<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
+											<td>9시</td>
 											<td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
-											<td><input type="text" class="w3-input alarmEnd"name="alarmEnd" placeholder="End Time"></td>
+											<td>21시</td>
 											<td><div class="w3-col" style="width:30px"><label>간격</label></div></td>
-											<td><input type="text" class="w3-input alarmInterval" name="alarmInterval" placeholder="Interval"></td>
+											<td>3시간 간격</td>
 										</tr>
 									</tbody>
 				        	
