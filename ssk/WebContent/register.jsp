@@ -28,10 +28,6 @@
 			position: relative;
 			z-index: 2;
 		}
-		.w3-table {
-    width: 100%; /* 부모 요소의 너비에 맞추기 */
-    max-width: 100%; /* 너비를 부모 요소를 넘지 않도록 제한 */
-}
 	</style>
 </head>
 

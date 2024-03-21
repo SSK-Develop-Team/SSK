@@ -17,13 +17,22 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<script src="https://kit.fontawesome.com/b2739fdad0.js" crossorigin="anonymous"></script>
 	<style>
-		.field-icon {
-			float: right;
-			padding-right:1.75em;
-			margin-top: -25px;
-			position: relative;
-			z-index: 2;
+		 .info-row {
+		    border: 1px solid #e0e0e0;
+		    display: flex;
+		  }
+		.label{
+			font-weight: bold;
+			background-color: #f1f1f1;
+		    padding: 1em;
+		    flex: 0 0 30%;
+		    text-align: right;
+		    margin-right: 1em;
 		}
+		 .value {
+		    padding: 1em;
+		    overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+		  }
 	</style>
 </head>
 <%
@@ -38,60 +47,47 @@
 	<div class="w3-row" style="height:100%;, width:100%;">
 		<div class="w3-col s1 m2 l4">&nbsp;</div>
 		<div class="w3-col s10 m8 l4 w3-padding-large">
-			<div class="w3-margin-top">
-				<div class="w3-row" style="margin-bottom:2.5em;">
-					<label style="margin-right: 2.5em;font-weight: bold;">아이디:</label>
-					${child.userLoginId}
-				</div>
-			</div>
-			
-			<div class="w3-margin-top">
-				<div class="w3-row" style="margin-bottom: 2.5em;">
-					<label style="margin-right: 2.5em;font-weight: bold;">아동 이름:</label>
-				    ${child.userName}
-				</div>
-			</div>
-			<div class="w3-margin-top">
-				<div class="w3-row"style="margin-bottom:2.5em;">
-					<label style="margin-right: 2.5em;font-weight: bold;">생년월일:</label>
-				    ${child.userBirth}
-				</div>
-			</div>
+			<div class="info-row">
+			    <label class="label">아이디</label>
+			    <span class="value">${child.userLoginId}</span>
+		  	</div>
+		  	<div class="info-row">
+			    <label class="label">아동 이름</label>
+			    <span class="value">${child.userName}</span>
+		  	</div>
+		  	<div class="info-row">
+			    <label class="label">생년월일</label>
+			    <span class="value">${child.userBirth}</span>
+		  	</div>
+		  	<div class="info-row">
+			    <label class="label">이메일</label>
+			    <span class="value">${child.userEmail}</span>
+		  	</div>
+			<c:choose>
+				<c:when test="${child.userGender eq 'male'}">
+					<div class="info-row">
+						<label class="label">성별</label>
+			    		<span class="value">남자</span>
+					</div>	
+				</c:when>
+				<c:when test="${child.userGender eq 'female'}">
+					<div class="info-row">
+						<label class="label">성별</label>
+			    		<span class="value">여자</span>
+					</div>
+				</c:when>
+			</c:choose>
 
-			<div class="w3-margin-top">
-			<div class="w3-row"style="margin-bottom:2.5em;">
-				<label style="margin-right: 2.5em;font-weight: bold;">이메일:</label>
-				${child.userEmail}
-			</div>
-			</div>
-			<div class="w3-margin-top">
-				<c:choose>
-					<c:when test="${child.userGender eq 'male'}">
-						<div class="w3-row"style="margin-bottom:2.5em;">
-							<label style="margin-right: 2.5em;font-weight: bold;">성별:</label>
-				    		남자
-						</div>	
-					</c:when>
-					<c:when test="${child.userGender eq 'female'}">
-						<div class="w3-row"style="margin-bottom:2.5em;">
-							<label style="margin-right: 2.5em;font-weight: bold;">성별:</label>
-				    		여자
-						</div>
-					</c:when>
-				</c:choose>
-			</div>
-
-			
-			<div class="w3-margin-top"style="margin-bottom:2.5em;">
-				<label style="font-weight: bold;">정서 반복 기록 설정</label>
-				
+			<div style="margin-bottom:2.5em;">
+			<div class="info-row">
+				<label class="label">정서 반복 기록<br>설정 시간</label>
 				 <!-- esmTime이라는 이름으로 전달된 ArrayList를 받음 -->
 
 				 <% ArrayList<EsmAlarm> esmTime = (ArrayList<EsmAlarm>) request.getAttribute("esmTime"); %>
 				<c:choose>
 				    <c:when test="${empty esmTime}">
 				        <!-- esmTime이 비어있을 때의 처리 -->
-				        <div class="w3-container w3-margin-top" style="padding:0;">
+				        <div class="w3-container" style="padding:0;">
 				        <table class="w3-table" style="font-size:0.8em;">
 									<tbody id="table_body">
 										<tr>
@@ -114,7 +110,8 @@
 				     <c:otherwise>
 				     <!-- esmTime이 값이 있을 때의 처리 -->
 				      
-				        <div class="w3-container w3-margin-top" style="padding:0;">         
+
+				        <span class="value">         
 				        <table class="w3-table" style="font-size:0.8em;">
 					        <tbody id="table_body">
 					        <%if(esmTime.size()!=0){
@@ -124,11 +121,11 @@
 											<tr>
 											<!-- Add a hidden input field for alarmId -->
 											<input type="hidden" name="alarmId" value="<%=esmTime.get(i).getAlarmId() %>" />
-											 <td>[<%=(i+1)%>]</td>
+											 <td style="padding-left:0">[<%=(i+1)%>]</td>
 					            				
-											<td style="padding-left: 0px;"><div class="w3-col" style="width:30px"><label>시작</label></div></td>
+											<td style="padding:8px 0px;">시작:</td>
 												<td><%=esmTime.get(i).getAlarmStart().getHours()%>시</td>
-												<td><div class="w3-col" style="width:30px"><label>종료</label></div></td>
+												<td style="padding-right:0px;">종료:</td>
 												<td><%=esmTime.get(i).getAlarmEnd().getHours() %>시</td>
 												<td><%=esmTime.get(i).getAlarmInterval() %>시간 간격</td>
 											</tr>
@@ -137,10 +134,10 @@
 										}%>
 					        	</tbody>
 							</table>
-						</div>        
+						</span>      
 				 </c:otherwise>
 				</c:choose>
-
+			</div>
 			</div>
 			
 			
@@ -157,16 +154,6 @@
 </div>
 <script>
 	function deleteChild(childId){
-		/*const childCnt = document.querySelectorAll('input[name="childId"]:checked').length;
-		if(childCnt==0){
-			alert("아동을 선택해주세요.");
-		}else{
-			if(confirm("선택한 모든 아동을 삭제합니다.")){
-				const deleteFrm = document.getElementById('manageFrm');
-				deleteFrm.setAttribute("action", "DeleteUser");
-				deleteFrm.submit();
-			}
-		}*/
 		// Delete user form 만들기 
 		// 해당 Controller에 맞는 응답 형식으로 보내주기 (childId로 설정. text 형식으로 보내주어야함. );
 		//폼 제출
@@ -183,21 +170,6 @@
 		deleteFrm.submit();
 	}
 	function updateChild(childId){
-		/*const childCnt = document.querySelectorAll('input[name="childId"]:checked').length;
-		if(childCnt==0){
-			alert("아동을 선택해주세요.");
-		}else if(childCnt==1){
-			const updateFrm = document.getElementById('frm');
-			updateFrm.setAttribute("action", "GetUpdateUser")
-			updateFrm.submit();
-		}else{
-			if(confirm("마지막으로 선택한 아동의 계정을 수정합니다.")){
-				const updateFrm = document.getElementById('frm');
-				updateFrm.setAttribute("action", "GetUpdateUser")
-				updateFrm.submit();
-				}
-		}*/
-		
 		// GetUpdateUser form 만들기 
 		var updatefrm = document.createElement("form");
 		updatefrm.setAttribute("method","post");
